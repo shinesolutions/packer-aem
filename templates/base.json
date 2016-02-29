@@ -1,0 +1,29 @@
+{
+  "variables": {
+    "aws_source_ami": "ami-12345678"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "ssh_username": "{{user `aws_user`}}",
+      "ami_description": "Packer AEM bootstrap AMI {{user `component`}}-{{user `version`}}",
+      "ami_name": "{{user `component`}}-{{user `version`}}",
+      "instance_type": "t2.small",
+      "region": "{{user `aws_region`}}",
+      "source_ami": "{{user `aws_source_ami`}}",
+      "tags": {
+        "component": "{{user `component`}}",
+        "version": "{{user `version`}}"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "manifest_file": "provisioners/{{user `component`}}.pp",
+      "module_paths": [
+        "modules"
+      ],
+      "type": "puppet-masterless"
+    }
+  ]
+}
