@@ -3,9 +3,9 @@ package { 'wget':
   provider => 'yum',
 }
 
-file { "${app_dir}":
+file { "/app":
   ensure => 'directory',
-  owner  => "${aws_user}",
-  group  => "${aws_group}",
+  owner  => "ec2-user",
+  group  => "ec2-user",
   mode   => '0775',
 }
