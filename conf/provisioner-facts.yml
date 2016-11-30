@@ -1,5 +1,0 @@
----
-aws_user: 'ec2-user'
-aws_group: 'ec2-user'
-
-app_dir: '/app'

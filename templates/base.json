@@ -6,8 +6,8 @@
     {
       "type":"amazon-ebs",
       "ssh_username":"{{user `aws_user`}}",
-      "ami_description":"Packer AEM bootstrap AMI {{user `component`}}-{{user `version`}}",
-      "ami_name":"{{user `component`}}-{{user `version`}}",
+      "ami_description":"Packer AEM bootstrap AMI {{user `component`}}-{{user `version`}}-{{timestamp}}",
+      "ami_name":"{{user `component`}}-{{user `version`}}-{{timestamp}}",
       "instance_type":"t2.small",
       "region":"{{user `aws_region`}}",
       "source_ami":"{{user `aws_source_ami`}}",
@@ -23,8 +23,14 @@
       "script":"provisioners/rhel7.sh"
     },
     {
+      "type":"file",
+      "source":"conf/hieradata",
+      "destination":"/tmp/hieradata"
+    },
+    {
       "type":"puppet-masterless",
       "manifest_file":"provisioners/{{user `component`}}.pp",
+      "hiera_config_path":"conf/hiera.yaml",
       "module_paths":[
         "modules"
       ]

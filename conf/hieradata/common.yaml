@@ -1,0 +1,4 @@
+---
+base::app_dir: '/app'
+base::aws_user: 'ec2-user'
+base::aws_group: 'ec2-user'

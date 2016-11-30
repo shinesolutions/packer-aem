@@ -1,11 +1,21 @@
-package { 'wget':
-  ensure   => 'installed',
-  provider => 'yum',
+class base (
+  $app_dir,
+  $aws_user,
+  $aws_group
+){
+
+  package { 'wget':
+    ensure   => 'installed',
+    provider => 'yum',
+  }
+
+  file { $app_dir:
+    ensure => 'directory',
+    owner  => $aws_user,
+    group  => $aws_group,
+    mode   => '0775',
+  }
+
 }
 
-file { "/app":
-  ensure => 'directory',
-  owner  => "ec2-user",
-  group  => "ec2-user",
-  mode   => '0775',
-}
+include base
