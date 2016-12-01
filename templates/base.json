@@ -14,8 +14,7 @@
       "tags": {
         "component": "{{user `component`}}",
         "version": "{{user `version`}}"
-      },
-      "encrypted": true
+      }
     }
   ],
   "provisioners": [
