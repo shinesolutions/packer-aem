@@ -34,6 +34,14 @@
       "module_paths":[
         "modules"
       ]
-    }
-  ]
+    },
+    {
+      "type": "file",
+      "source": "tests",
+      "destination": "/tmp"
+    },
+    {
+      "type": "shell",
+      "script": "provisioners/serverspec.sh"
+    }]
 }
