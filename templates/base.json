@@ -42,6 +42,7 @@
     },
     {
       "type": "shell",
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} '{{.Path}}' '{{user `component`}}'",
       "script": "provisioners/serverspec.sh"
     },
     {
