@@ -2,3 +2,5 @@
 .tmp
 modules
 templates/_archive/
+*.iml
+.idea

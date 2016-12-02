@@ -1,13 +1,13 @@
 {
   "variables": {
-    "aws_source_ami": "ami-12345678"
+    "aws_source_ami": "ami-39ac915a"
   },
   "builders": [
     {
       "type": "amazon-ebs",
       "ssh_username": "{{user `aws_user`}}",
-      "ami_description": "Packer AEM bootstrap AMI {{user `component`}}-{{user `version`}}",
-      "ami_name": "{{user `component`}}-{{user `version`}}",
+      "ami_description": "Packer AEM bootstrap AMI {{user `component`}}-{{user `version`}}-{{timestamp}}",
+      "ami_name": "{{user `component`}}-{{user `version`}}-{{timestamp}}",
       "instance_type": "t2.small",
       "region": "{{user `aws_region`}}",
       "source_ami": "{{user `aws_source_ami`}}",
@@ -19,11 +19,35 @@
   ],
   "provisioners": [
     {
+      "type": "shell",
+      "script": "provisioners/rhel7.sh"
+    },
+    {
+      "type": "file",
+      "source": "conf/hieradata",
+      "destination": "/tmp"
+    },
+    {
+      "type": "puppet-masterless",
       "manifest_file": "provisioners/{{user `component`}}.pp",
+      "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [
         "modules"
-      ],
-      "type": "puppet-masterless"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "test/serverspec",
+      "destination": "/tmp"
+    },
+    {
+      "type": "shell",
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} '{{.Path}}' '{{user `component`}}'",
+      "script": "provisioners/serverspec.sh"
+    },
+    {
+      "type": "shell",
+      "script": "provisioners/cleanup.sh"
     }
   ]
 }
