@@ -37,7 +37,7 @@
     },
     {
       "type": "file",
-      "source": "tests",
+      "source": "test/serverspec",
       "destination": "/tmp"
     },
     {
