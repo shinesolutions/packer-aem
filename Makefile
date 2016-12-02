@@ -1,4 +1,4 @@
-AMIS = base
+AMIS = base java
 
 ci: tools deps clean lint validate
 
