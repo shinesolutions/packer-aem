@@ -47,11 +47,7 @@
     },
     {
       "type": "shell",
-      "inline": [
-        "rm -rf /tmp/hieradata",
-        "rm -rf /tmp/packer-puppet-masterless",
-        "rm -rf /tmp/tests"
-      ]
+      "script": "provisioners/cleanup.sh"
     }
   ]
 }
