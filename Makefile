@@ -1,4 +1,4 @@
-AMIS = base java
+AMIS = base java httpd
 
 ci: tools deps clean lint validate
 
