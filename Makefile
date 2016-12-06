@@ -1,4 +1,4 @@
-AMIS = base
+AMIS = base java httpd
 
 ci: tools deps clean lint validate
 
@@ -16,7 +16,7 @@ lint:
 		--no-documentation-check \
 		--no-only_variable_string-check \
 		--no-selector_inside_resource-check \
-		provisioners/*.pp
+		provisioners/puppet/manifests/*.pp
 
 validate:
 	for AMI in $(AMIS); do \
