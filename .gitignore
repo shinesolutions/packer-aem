@@ -1,6 +1,6 @@
 .librarian
 .tmp
-modules
+modules/
 templates/_archive/
 *.iml
 .idea

@@ -17,7 +17,7 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "provisioners/rhel7.sh"
+      "script": "provisioners/install_puppet.sh"
     },
     {
       "type": "file",
@@ -25,22 +25,18 @@
       "destination": "/tmp"
     },
     {
-      "type": "puppet-masterless",
-      "manifest_file": "provisioners/{{user `component`}}.pp",
-      "hiera_config_path": "conf/hiera.yaml",
-      "module_paths": [
-        "modules"
-      ]
-    },
-    {
       "type": "file",
       "source": "test/serverspec",
       "destination": "/tmp"
     },
     {
-      "type": "shell",
-      "execute_command": "{{ .Vars }} '{{.Path}}' '{{user `component`}}'",
-      "script": "provisioners/serverspec.sh"
+      "type": "puppet-masterless",
+      "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
+      "hiera_config_path": "conf/hiera.yaml",
+      "module_paths": [
+        "modules",
+        "provisioners/puppet/modules"
+      ]
     },
     {
       "type": "shell",

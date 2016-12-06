@@ -11,3 +11,6 @@ jdk_oracle::version_build: '15'
 jdk_oracle::install_dir: '/opt'
 jdk_oracle::default_java: true
 jdk_oracle::create_symlink: true
+
+serverspec::owner: 'ec2-user'
+serverspec::group: 'ec2-user'
