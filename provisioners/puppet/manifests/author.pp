@@ -30,10 +30,10 @@ class author (
     require     => File["${app_dir}/aem/author"],
   } ->
   file { "${app_dir}/aem/author/license.properties":
-    ensure  => file,
-    mode    => '0440',
-    owner   => 'aem',
-    group   => 'aem',
+    ensure => file,
+    mode   => '0440',
+    owner  => 'aem',
+    group  => 'aem',
   }
 
   wget::fetch { $aem_quickstart_source:
@@ -43,10 +43,10 @@ class author (
     require     => File["${app_dir}/aem/author"],
   } ->
   file { "${app_dir}/aem/author/aem-author-4502.jar":
-    ensure  => file,
-    mode    => '0775',
-    owner   => 'aem',
-    group   => 'aem',
+    ensure => file,
+    mode   => '0775',
+    owner  => 'aem',
+    group  => 'aem',
   }
 
   aem::instance { 'aem' :
