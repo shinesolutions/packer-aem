@@ -6,5 +6,7 @@
   "java_ami_version": "1.0.0",
   "java_ami_source_ami": "ami-656f5706",
   "httpd_ami_version": "1.0.0",
-  "httpd_ami_source_ami": "ami-656f5706"
+  "httpd_ami_source_ami": "ami-656f5706",
+  "author_ami_version": "1.0.0",
+  "author_ami_source_ami": "ami-8f6159ec"
 }
