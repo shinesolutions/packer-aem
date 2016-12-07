@@ -14,19 +14,23 @@ class serverspec (
   }
 
   file { '/tmp/serverspec/serverspec.sh' :
-    ensure => present,
-    mode   => '0775',
-    owner  => $owner,
-    group  => $group,
-    source => 'puppet:///modules/serverspec/serverspec.sh',
-    require   => File['/tmp/serverspec/'],
+    ensure  => present,
+    mode    => '0775',
+    owner   => $owner,
+    group   => $group,
+    source  => 'puppet:///modules/serverspec/serverspec.sh',
+    require => File['/tmp/serverspec/'],
+  }
+
+  package { 'ruby':
+    ensure  => installed,
   }
 
   exec { "/tmp/serverspec/serverspec.sh ${component}":
     path      => ':/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin',
     tries     => $tries,
     try_sleep => $try_sleep,
-    require   => File['/tmp/serverspec/serverspec.sh'],
+    require   => [File['/tmp/serverspec/serverspec.sh'], Package['ruby']],
     user      => $owner,
   }
 
