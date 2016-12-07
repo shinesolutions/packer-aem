@@ -1,4 +1,4 @@
-AMIS = base java httpd
+AMIS = base java httpd author publish
 
 ci: tools deps clean lint validate
 
