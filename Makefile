@@ -16,7 +16,8 @@ lint:
 		--no-documentation-check \
 		--no-only_variable_string-check \
 		--no-selector_inside_resource-check \
-		provisioners/puppet/manifests/*.pp
+		provisioners/puppet/manifests/*.pp \
+		provisioners/puppet/modules/*/manifests/*.pp
 
 validate:
 	for AMI in $(AMIS); do \

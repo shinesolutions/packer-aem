@@ -4,7 +4,7 @@
   "base_ami_version": "1.0.0",
   "base_ami_source_ami": "ami-39ac915a",
   "java_ami_version": "1.0.0",
-  "java_ami_source_ami": "ami-eb85bc88",
+  "java_ami_source_ami": "ami-656f5706",
   "httpd_ami_version": "1.0.0",
-  "httpd_ami_source_ami": "ami-eb85bc88"
+  "httpd_ami_source_ami": "ami-656f5706"
 }

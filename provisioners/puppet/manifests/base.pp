@@ -15,6 +15,10 @@ class base (
     mode   => '0775',
   }
 
+  package { 'ruby':
+    ensure  => installed,
+  }
+
   class { 'serverspec':
     stage     => 'test',
     component => 'base',
