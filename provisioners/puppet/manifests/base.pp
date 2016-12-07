@@ -15,6 +15,8 @@ class base (
     mode   => '0775',
   }
 
+  class { 'timezone': }
+
   class { 'serverspec':
     stage     => 'test',
     component => 'base',
