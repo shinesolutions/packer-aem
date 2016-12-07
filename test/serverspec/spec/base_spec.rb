@@ -11,6 +11,8 @@ describe file(app_dir) do
   it { should be_grouped_into "#{aws_group}" }
 end
 
+
+# the serverspec module installs the ruby package
 describe package('ruby') do
   it { should be_installed }
 end
