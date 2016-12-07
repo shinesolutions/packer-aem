@@ -15,9 +15,13 @@ jdk_oracle::create_symlink: true
 serverspec::owner: 'ec2-user'
 serverspec::group: 'ec2-user'
 
-author::aem_quickstart_source: 'https:/someurl/AEM-quickstart-6.2.0.jar'
-author::aem_license_source: 'https:/someurl/license.properties'
+author::aem_quickstart_source: 'https://someurl/AEM-quickstart-6.2.0.jar'
+author::aem_license_source: 'https://someurl/license.properties'
 author::app_dir: '/app'
+
+publish::aem_quickstart_source: 'https://someurl/AEM-quickstart-6.2.0.jar'
+publish::aem_license_source: 'https://someurl/license.properties'
+publish::app_dir: '/app'
 
 timezone::region: 'Australia'
 timezone::locality: 'Melbourne'
