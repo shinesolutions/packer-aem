@@ -1,8 +1,8 @@
-class { 'apache': }
-
 stage { 'test':
   require => Stage['main']
 }
+
+class { 'apache': }
 
 class { 'serverspec':
   stage     => 'test',

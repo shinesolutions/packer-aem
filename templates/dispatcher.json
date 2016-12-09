@@ -1,0 +1,43 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "ssh_username": "{{user `aws_user`}}",
+      "ami_description": "Packer AEM bootstrap AMI {{user `component`}}-{{user `dispatcher_ami_version`}}-{{timestamp}}",
+      "ami_name": "{{user `component`}}-{{user `dispatcher_ami_version`}}-{{timestamp}}",
+      "instance_type": "t2.micro",
+      "region": "{{user `aws_region`}}",
+      "source_ami": "{{user `dispatcher_ami_source_ami`}}",
+      "tags": {
+        "component": "{{user `component`}}",
+        "version": "{{user `dispatcher_ami_version`}}"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "conf/hieradata",
+      "destination": "/tmp"
+    },
+    {
+      "type": "file",
+      "source": "test/serverspec",
+      "destination": "/tmp"
+    },
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
+      "hiera_config_path": "conf/hiera.yaml",
+      "module_paths": [
+        "modules",
+        "provisioners/puppet/modules"
+      ],
+      "puppet_bin_dir": "/opt/puppetlabs/bin"
+    },
+    {
+      "type": "shell",
+      "script": "provisioners/cleanup.sh"
+    }
+  ]
+}
