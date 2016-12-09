@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 language: ruby
 install:
   - sudo apt-get install unzip puppet
