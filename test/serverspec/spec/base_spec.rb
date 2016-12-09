@@ -14,13 +14,23 @@ describe file(app_dir) do
   it { should be_grouped_into "#{aws_group}" }
 end
 
+if os[:family] == 'redhat'
+
+  describe file('/etc/selinux/config') do
+    it { should exist }
+    it { should be_file }
+    it { should contain 'SELINUX=disabled' }
+  end
+
+  describe file('/etc/sysconfig/clock') do
+    it { should exist }
+    it { should be_file }
+    it { should contain "ZONE=\"#{region}/#{locality}\"" }
+  end
+
+end
 
 # the serverspec module installs the ruby package
 describe package('ruby') do
   it { should be_installed }
-end
-
-describe command('grep ZONE /etc/sysconfig/clock'), :if => os[:family] == 'redhat' do
-  its(:stdout) { should match "ZONE=\"#{region}/#{locality}\"" }
-  its(:exit_status) { should eq 0 }
 end
