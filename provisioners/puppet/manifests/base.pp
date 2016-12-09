@@ -19,7 +19,7 @@ class base (
 
   # issue with selinux stopping aem:dispatcher to start. https://github.com/bstopp/puppet-aem/issues/73
   if $::osfamily == 'redhat' {
-    class { selinux:
+    class { 'selinux':
       mode => 'disabled',
     }
   }
