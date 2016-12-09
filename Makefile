@@ -39,6 +39,6 @@ $(AMIS):
 amis-all: $(AMIS)
 
 tools:
-	gem install puppet-lint librarian-puppet
+	gem install puppet puppet-lint librarian-puppet
 
 .PHONY: $(AMIS) amis-all ci clean deps lint tools validate
