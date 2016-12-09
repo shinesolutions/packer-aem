@@ -17,6 +17,13 @@ class base (
 
   class { 'timezone': }
 
+  # issue with selinux stopping aem:dispatcher to start. https://github.com/bstopp/puppet-aem/issues/73
+  if $::osfamily == 'redhat' {
+    class { selinux:
+      mode => 'disabled',
+    }
+  }
+
   class { 'serverspec':
     stage     => 'test',
     component => 'base',

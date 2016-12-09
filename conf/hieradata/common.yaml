@@ -25,3 +25,10 @@ publish::app_dir: '/app'
 
 timezone::region: 'Australia'
 timezone::locality: 'Melbourne'
+
+dispatcher::installation_source: 'https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_8/file.res/dispatcher-apache2.4-linux-x86-64-4.2.1.tar.gz'
+dispatcher::filename: 'dispatcher-apache2.4-linux-x86-64-4.2.1.tar.gz'
+dispatcher::tmp_dir: '/tmp/dispatcher-apache2.4-linux-x86-64-4.2.1'
+dispatcher::module_filename: 'dispatcher-apache2.4-4.2.1.so'
+dispatcher::aws_user: 'ec2-user'
+dispatcher::aws_group: 'ec2-user'
