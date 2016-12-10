@@ -12,6 +12,33 @@ Simply use these templates as a baseline and customise them to suit your infrast
 
 ## Installation
 
+Requirements
+* [Ruby](https://www.ruby-lang.org/en/)
+* [GNU Make](https://www.gnu.org/software/make/) (optional, see Makefile to use commands instead)
+
+
+Install [Puppet](https://puppet.com/), [puppet-lint](http://puppet-lint.com/) and [Librarian-puppet](https://github.com/voxpupuli/librarian-puppet):
+```
+make tools
+```
+
+Install puppet dependencies:
+```
+make deps
+```
+
+
+Puppet Modules used for Provisioning
+
+See [Puppetfile](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/Puppetfile)
+
+* [bstopp/aem](https://github.com/bstopp/puppet-aem)
+* [puppet/archive](https://github.com/voxpupuli/puppet-archive)
+* [maestrodev/wget](https://github.com/maestrodev/puppet-wget)
+* [puppetlabs/apache](https://github.com/puppetlabs/puppetlabs-apache)
+* [tylerwalts/jdk_oracle](https://github.com/tylerwalts/puppet-jdk_oracle)
+* [bashtoni/timezone](https://github.com/BashtonLtd/puppet-timezone)
+* [jfryman/selinux](https://github.com/voxpupuli/puppet-selinux)
 
 
 
@@ -21,4 +48,8 @@ Simply use these templates as a baseline and customise them to suit your infrast
 
 
 
+
 ## Configuration
+
+
+
