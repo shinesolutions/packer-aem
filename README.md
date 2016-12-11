@@ -28,9 +28,7 @@ make deps
 ```
 
 
-Puppet Modules used for Provisioning
-
-See [Puppetfile](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/Puppetfile)
+Puppet Modules used for installing and configuring the software in the images (See [Puppetfile](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/Puppetfile))
 
 * [bstopp/aem](https://github.com/bstopp/puppet-aem)
 * [puppet/archive](https://github.com/voxpupuli/puppet-archive)
@@ -44,12 +42,46 @@ See [Puppetfile](https://github.com/shinesolutions/packer-aem-bootstrap/blob/mas
 
 ## Usage
 
+Execute the make command with the name of the packer template you want build.
 
+Example:
 
+To build the base machine image:
 
+```
+make base
+```
+
+_todo: add ability to specify the packer builder to use_ 
 
 
 ## Configuration
 
+_todo: simplify, and tidy up configuration_
+
+Packer can be configured in [conf/template-vars.json](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/template-vars.json).
+
+| Name                | Description   |
+| -------------       |:-------------:|
+| base_ami_version    |               |
+| base_ami_source_ami |               |
 
 
+Puppet can be configured in [conf/hieradata/common.yaml](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/hieradata/common.yaml).
+
+
+| Name            | Description   |
+| -------------   |:-------------:|
+| base::aws_user  |               |
+| base::aws_group |               |
+
+
+
+
+## Development
+
+Validate the packer templates and run the puppet manifests through lint:
+
+```
+make validate lint
+```
