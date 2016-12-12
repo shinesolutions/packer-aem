@@ -1,8 +1,8 @@
-include jdk_oracle
-
 stage { 'test':
   require => Stage['main']
 }
+
+include jdk_oracle
 
 class { 'serverspec':
   stage     => 'test',
