@@ -1,8 +1,6 @@
 require 'spec_helper'
 
-app_dir = @properties['base::app_dir']
-
-describe file("#{app_dir}/aem") do
+describe file('/opt/aem') do
   it { should be_directory }
   it { should exist }
   it { should be_mode 775 }
@@ -10,7 +8,7 @@ describe file("#{app_dir}/aem") do
   it { should be_grouped_into 'aem' }
 end
 
-describe file("#{app_dir}/aem/author") do
+describe file('/opt/aem/author') do
   it { should be_directory }
   it { should exist }
   it { should be_mode 775 }
@@ -18,7 +16,7 @@ describe file("#{app_dir}/aem/author") do
   it { should be_grouped_into 'aem' }
 end
 
-describe file("#{app_dir}/aem/author/license.properties") do
+describe file('/opt/aem/author/license.properties') do
   it { should be_file }
   it { should exist }
   it { should be_mode 440 }
@@ -26,7 +24,7 @@ describe file("#{app_dir}/aem/author/license.properties") do
   it { should be_grouped_into 'aem' }
 end
 
-describe file("#{app_dir}/aem/author/aem-author-4502.jar") do
+describe file('/opt/aem/author/aem-author-4502.jar') do
   it { should be_file }
   it { should exist }
   it { should be_mode 775 }

@@ -1,35 +1,34 @@
 class publish (
   $aem_quickstart_source,
-  $aem_license_source,
-  $app_dir
+  $aem_license_source
 ){
 
   stage { 'test':
     require => Stage['main']
   }
 
-  file { "${app_dir}/aem":
+  file { '/opt/aem':
     ensure => directory,
     mode   => '0775',
     owner  => 'aem',
     group  => 'aem',
   }
 
-  file { "${app_dir}/aem/publish":
+  file { '/opt/aem/publish':
     ensure  => directory,
     mode    => '0775',
     owner   => 'aem',
     group   => 'aem',
-    require => File["${app_dir}/aem"],
+    require => File['/opt/aem'],
   }
 
   wget::fetch { $aem_license_source:
-    destination => "${app_dir}/aem/publish/license.properties",
+    destination => '/opt/aem/publish/license.properties',
     timeout     => 0,
     verbose     => false,
-    require     => File["${app_dir}/aem/publish"],
+    require     => File['/opt/aem/publish'],
   } ->
-  file { "${app_dir}/aem/publish/license.properties":
+  file { '/opt/aem/publish/license.properties':
     ensure => file,
     mode   => '0440',
     owner  => 'aem',
@@ -37,12 +36,12 @@ class publish (
   }
 
   wget::fetch { $aem_quickstart_source:
-    destination => "${app_dir}/aem/publish/aem-publish-4503.jar",
+    destination => '/opt/aem/publish/aem-publish-4503.jar',
     timeout     => 0,
     verbose     => false,
-    require     => File["${app_dir}/aem/publish"],
+    require     => File['/opt/aem/publish'],
   } ->
-  file { "${app_dir}/aem/publish/aem-publish-4503.jar":
+  file { '/opt/aem/publish/aem-publish-4503.jar':
     ensure => file,
     mode   => '0775',
     owner  => 'aem',
@@ -50,8 +49,8 @@ class publish (
   }
 
   aem::instance { 'aem' :
-    source         => "${app_dir}/aem/publish/aem-publish-4503.jar",
-    home           => "${app_dir}/aem/publish",
+    source         => '/opt/aem/publish/aem-publish-4503.jar',
+    home           => '/opt/aem/publish',
     type           => 'publish',
     port           => 4503,
     sample_content => false,
