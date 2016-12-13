@@ -1,6 +1,12 @@
 require 'spec_helper'
 
-describe file('/opt/aem') do
+aem_base = @properties['publish::aem_base']
+aem_base ||= '/opt'
+
+aem_port = @properties['publish::aem_port']
+aem_port ||= '4503'
+
+describe file("#{aem_base}/aem") do
   it { should be_directory }
   it { should exist }
   it { should be_mode 775 }
@@ -8,7 +14,7 @@ describe file('/opt/aem') do
   it { should be_grouped_into 'aem' }
 end
 
-describe file('/opt/aem/publish') do
+describe file("#{aem_base}/aem/publish") do
   it { should be_directory }
   it { should exist }
   it { should be_mode 775 }
@@ -16,7 +22,7 @@ describe file('/opt/aem/publish') do
   it { should be_grouped_into 'aem' }
 end
 
-describe file('/opt/aem/publish/license.properties') do
+describe file("#{aem_base}/aem/publish/license.properties") do
   it { should be_file }
   it { should exist }
   it { should be_mode 440 }
@@ -24,7 +30,7 @@ describe file('/opt/aem/publish/license.properties') do
   it { should be_grouped_into 'aem' }
 end
 
-describe file('/opt/aem/publish/aem-publish-4503.jar') do
+describe file("#{aem_base}/aem/publish/aem-publish-#{aem_port}.jar") do
   it { should be_file }
   it { should exist }
   it { should be_mode 775 }
@@ -38,6 +44,6 @@ describe service('aem-aem') do
   it { should be_running }
 end
 
-describe port(4503) do
+describe port(aem_port) do
   it { should be_listening }
 end

@@ -1,34 +1,37 @@
 class publish (
   $aem_quickstart_source,
-  $aem_license_source
+  $aem_license_source,
+  $aem_base = '/opt',
+  $aem_jvm_mem_opts = '-Xmx4096m',
+  $aem_port = '4503'
 ){
 
   stage { 'test':
     require => Stage['main']
   }
 
-  file { '/opt/aem':
+  file { "${aem_base}/aem":
     ensure => directory,
     mode   => '0775',
     owner  => 'aem',
     group  => 'aem',
   }
 
-  file { '/opt/aem/publish':
+  file { "${aem_base}/aem/publish":
     ensure  => directory,
     mode    => '0775',
     owner   => 'aem',
     group   => 'aem',
-    require => File['/opt/aem'],
+    require => File["${aem_base}/aem"],
   }
 
   wget::fetch { $aem_license_source:
-    destination => '/opt/aem/publish/license.properties',
+    destination => "${aem_base}/aem/publish/license.properties",
     timeout     => 0,
     verbose     => false,
-    require     => File['/opt/aem/publish'],
+    require     => File["${aem_base}/aem/publish"],
   } ->
-  file { '/opt/aem/publish/license.properties':
+  file { "${aem_base}/aem/publish/license.properties":
     ensure => file,
     mode   => '0440',
     owner  => 'aem',
@@ -36,12 +39,12 @@ class publish (
   }
 
   wget::fetch { $aem_quickstart_source:
-    destination => '/opt/aem/publish/aem-publish-4503.jar',
+    destination => "${aem_base}/aem/publish/aem-publish-${aem_port}.jar",
     timeout     => 0,
     verbose     => false,
-    require     => File['/opt/aem/publish'],
+    require     => File["${aem_base}/aem/publish"],
   } ->
-  file { '/opt/aem/publish/aem-publish-4503.jar':
+  file { "${aem_base}/aem/publish/aem-publish-${aem_port}.jar":
     ensure => file,
     mode   => '0775',
     owner  => 'aem',
@@ -49,12 +52,12 @@ class publish (
   }
 
   aem::instance { 'aem' :
-    source         => '/opt/aem/publish/aem-publish-4503.jar',
-    home           => '/opt/aem/publish',
+    source         => "${aem_base}/aem/publish/aem-publish-${aem_port}.jar",
+    home           => "${aem_base}/aem/publish",
     type           => 'publish',
-    port           => 4503,
+    port           => $aem_port,
     sample_content => false,
-    jvm_mem_opts   => '-Xmx4096m',
+    jvm_mem_opts   => $aem_jvm_mem_opts,
     jvm_opts       => '-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -XX:+HeapDumpOnOutOfMemoryError',
   }
 
