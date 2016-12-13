@@ -1,12 +1,11 @@
 ---
 classes:
   - 'jdk_oracle'
+  - 'rhn_register'
+
 jdk_oracle::version: '8'
 jdk_oracle::version_update: '112'
 jdk_oracle::version_build: '15'
-jdk_oracle::install_dir: '/opt'
-jdk_oracle::default_java: true
-jdk_oracle::create_symlink: true
 
 serverspec::owner: 'ec2-user'
 serverspec::group: 'ec2-user'
@@ -26,3 +25,7 @@ dispatcher::tmp_dir: '/tmp/dispatcher-apache2.4-linux-x86-64-4.2.1'
 dispatcher::module_filename: 'dispatcher-apache2.4-4.2.1.so'
 dispatcher::aws_user: 'ec2-user'
 dispatcher::aws_group: 'ec2-user'
+
+base::rhn_register: false
+rhn_register::username: 'username'
+rhn_register::password: 'password'
