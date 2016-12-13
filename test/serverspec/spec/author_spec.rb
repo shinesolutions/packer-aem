@@ -1,6 +1,13 @@
 require 'spec_helper'
 
-describe file('/opt/aem') do
+aem_base = @properties['author::aem_base']
+aem_base ||= '/opt'
+
+aem_port = @properties['author::aem_port']
+aem_port ||= '4502'
+
+
+describe file("#{aem_base}/aem") do
   it { should be_directory }
   it { should exist }
   it { should be_mode 775 }
@@ -8,7 +15,7 @@ describe file('/opt/aem') do
   it { should be_grouped_into 'aem' }
 end
 
-describe file('/opt/aem/author') do
+describe file("#{aem_base}/aem/author") do
   it { should be_directory }
   it { should exist }
   it { should be_mode 775 }
@@ -16,7 +23,7 @@ describe file('/opt/aem/author') do
   it { should be_grouped_into 'aem' }
 end
 
-describe file('/opt/aem/author/license.properties') do
+describe file("#{aem_base}/aem/author/license.properties") do
   it { should be_file }
   it { should exist }
   it { should be_mode 440 }
@@ -24,7 +31,7 @@ describe file('/opt/aem/author/license.properties') do
   it { should be_grouped_into 'aem' }
 end
 
-describe file('/opt/aem/author/aem-author-4502.jar') do
+describe file("#{aem_base}/aem/author/aem-author-#{aem_port}.jar") do
   it { should be_file }
   it { should exist }
   it { should be_mode 775 }
@@ -38,6 +45,6 @@ describe service('aem-aem') do
   it { should be_running }
 end
 
-describe port(4502) do
+describe port(aem_port) do
   it { should be_listening }
 end
