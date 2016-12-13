@@ -12,5 +12,8 @@
   "publish_ami_version": "1.0.0",
   "publish_ami_source_ami": "ami-31241c52",
   "dispatcher_ami_version": "1.0.0",
-  "dispatcher_ami_source_ami": "ami-bd251dde"
+  "dispatcher_ami_source_ami": "ami-bd251dde",
+  "vm_name": "rhel-7.2-vbox",
+  "iso_url": "file:///some-path/rhel-server-7.2-x86_64-dvd.iso",
+  "iso_sha256": "03f3a0291634335f6995534d829bd21ffaa0d000004dfeb1b2fb81052d64a4d5"
 }
