@@ -1,6 +1,11 @@
-.librarian
-.tmp
+.librarian/
+.tmp/
 modules/
 templates/_archive/
 *.iml
-.idea
+.idea/
+Vagrantfile
+output-virtualbox-iso/
+*.box
+.vagrant/
+packer_cache/
