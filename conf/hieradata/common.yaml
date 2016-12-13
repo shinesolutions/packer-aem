@@ -1,30 +1,12 @@
 ---
-classes:
-  - 'jdk_oracle'
-  - 'rhn_register'
-
-jdk_oracle::version: '8'
-jdk_oracle::version_update: '112'
-jdk_oracle::version_build: '15'
+packer_user: 'ec2-user'
+packer_group: 'ec2-user'
 
 serverspec::owner: 'ec2-user'
 serverspec::group: 'ec2-user'
 
-author::aem_quickstart_source: 'https://someurl/AEM-quickstart-6.2.0.jar'
-author::aem_license_source: 'https://someurl/license.properties'
-
-publish::aem_quickstart_source: 'https://someurl/AEM-quickstart-6.2.0.jar'
-publish::aem_license_source: 'https://someurl/license.properties'
-
-timezone::region: 'Australia'
-timezone::locality: 'Melbourne'
-
-dispatcher::installation_source: 'https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_8/file.res/dispatcher-apache2.4-linux-x86-64-4.2.1.tar.gz'
-dispatcher::filename: 'dispatcher-apache2.4-linux-x86-64-4.2.1.tar.gz'
-dispatcher::tmp_dir: '/tmp/dispatcher-apache2.4-linux-x86-64-4.2.1'
-dispatcher::module_filename: 'dispatcher-apache2.4-4.2.1.so'
-dispatcher::aws_user: 'ec2-user'
-dispatcher::aws_group: 'ec2-user'
+aem_quickstart_source: 'https://some-url/AEM-quickstart-6.2.0.jar'
+aem_license_source: 'https://some-url/license.properties'
 
 base::rhn_register: false
 rhn_register::username: 'username'
