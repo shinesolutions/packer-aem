@@ -5,5 +5,5 @@ packer_group: 'ec2-user'
 serverspec::owner: "%{hiera('packer_user')}"
 serverspec::group: "%{hiera('packer_group')}"
 
-aem_quickstart_source: 'https://s3-ap-southeast-2.amazonaws.com/michaeld-aem-artifacts2/AEM-quickstart-6.2.0.jar'
-aem_license_source: 'https://s3-ap-southeast-2.amazonaws.com/michaeld-aem-artifacts2/license.properties'
+aem_quickstart_source: 'https://some-url/AEM-quickstart-6.2.0.jar'
+aem_license_source: 'https://some-url/license.properties'
