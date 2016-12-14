@@ -6,7 +6,7 @@ deps:
 	librarian-puppet install --path modules --verbose
 
 clean:
-	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules
+	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache
 
 lint:
 	puppet-lint \
