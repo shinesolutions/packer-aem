@@ -3,6 +3,7 @@
 :yaml:
   :datadir: "/tmp/hieradata"
 :hierarchy:
+  - "%{::packer_build_name}"
   - "common"
 :logger: console
 :merge_behavior: native

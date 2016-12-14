@@ -1,7 +1,7 @@
 {
   "builders": [
     {
-      "name": "aem-dispatcher",
+      "name": "dispatcher",
       "type": "amazon-ebs",
       "ssh_username": "{{user `aws_user`}}",
       "ami_description": "Packer AEM bootstrap AMI {{user `component`}}-{{user `dispatcher_ami_version`}}-{{timestamp}}",

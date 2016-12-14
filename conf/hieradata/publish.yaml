@@ -1,0 +1,3 @@
+---
+publish::aem_quickstart_source: "%{hiera('aem_quickstart_source')}"
+publish::aem_license_source: "%{hiera('aem_license_source')}"

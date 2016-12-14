@@ -85,3 +85,9 @@ Validate the packer templates and run the puppet manifests through lint:
 ```
 make validate lint
 ```
+
+
+## Acknowledgements
+
+
+[jmassara/packer-rhel7-vms](https://github.com/jmassara/packer-rhel7-vms) - packer templates for building rhel7 virtual machines.

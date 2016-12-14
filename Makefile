@@ -1,12 +1,12 @@
-AMIS = base java httpd author publish dispatcher
+AMIS = base java httpd author publish dispatcher all-in-one
 
-ci: tools deps clean lint validate
+ci: clean tools deps lint validate
 
 deps:
 	librarian-puppet install --path modules --verbose
 
 clean:
-	rm -rf .librarian .tmp Puppetfile.lock
+	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache
 
 lint:
 	puppet-lint \
