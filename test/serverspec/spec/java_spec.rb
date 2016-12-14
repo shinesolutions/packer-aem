@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-version = @properties['jdk_oracle::version']
-version_update = @properties['jdk_oracle::version_update']
+version = @hiera.lookup('jdk_oracle::version', nil, @scope)
+version_update = @hiera.lookup('jdk_oracle::version_update', nil, @scope)
 
 java_version = "1.#{version}.0_#{version_update}"
 

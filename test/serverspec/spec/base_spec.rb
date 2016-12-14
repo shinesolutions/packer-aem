@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-region = @properties['timezone::region']
-locality = @properties['timezone::locality']
+region = @hiera.lookup('timezone::region', nil, @scope)
+locality = @hiera.lookup('timezone::locality', nil, @scope)
 
 if os[:family] == 'redhat'
 

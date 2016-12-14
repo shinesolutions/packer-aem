@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-aem_base = @properties['publish::aem_base']
+aem_base = @hiera.lookup('publish::aem_base', nil, @scope)
 aem_base ||= '/opt'
 
-aem_port = @properties['publish::aem_port']
+aem_port = @hiera.lookup('publish::aem_port', nil, @scope)
 aem_port ||= '4503'
 
 describe file("#{aem_base}/aem") do

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-aem_base = @properties['author::aem_base']
+aem_base = @hiera.lookup('author::aem_base', nil, @scope)
 aem_base ||= '/opt'
 
-aem_port = @properties['author::aem_port']
+aem_port = @hiera.lookup('author::aem_port', nil, @scope)
 aem_port ||= '4502'
 
 
