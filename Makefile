@@ -1,6 +1,6 @@
 AMIS = base java httpd author publish dispatcher all-in-one
 
-ci: tools deps clean lint validate
+ci: clean tools deps lint validate
 
 deps:
 	librarian-puppet install --path modules --verbose
