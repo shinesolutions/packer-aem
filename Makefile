@@ -20,8 +20,7 @@ lint:
 		provisioners/puppet/modules/*/manifests/*.pp
 	shellcheck \
 	  provisioners/*.sh \
-	  scripts/*.sh \
-		provisioners/puppet/modules/serverspec/files/*.sh
+	  scripts/*.sh
 
 validate:
 	for AMI in $(AMIS); do \
