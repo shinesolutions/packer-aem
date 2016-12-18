@@ -18,6 +18,10 @@ lint:
 		--no-selector_inside_resource-check \
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
+	shellcheck \
+	  provisioners/*.sh \
+	  scripts/*.sh \
+		provisioners/puppet/modules/serverspec/files/*.sh
 
 validate:
 	for AMI in $(AMIS); do \
