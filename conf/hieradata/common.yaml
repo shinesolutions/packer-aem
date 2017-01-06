@@ -7,3 +7,4 @@ serverspec::group: 'ec2-user'
 
 aem_quickstart_source: 'https://some-url/AEM-quickstart-6.2.0.jar'
 aem_license_source: 'https://some-url/license.properties'
+aem_sample_content: false
