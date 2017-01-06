@@ -1,6 +1,7 @@
 class base (
   $rhn_register = false,
-  $disable_selinux = true
+  $disable_selinux = true,
+  $install_aws_cli = true
 ){
 
   stage { 'test':
@@ -23,6 +24,23 @@ class base (
         mode => 'disabled',
       }
     }
+  }
+
+  if $install_aws_cli {
+
+    class { 'python' :
+      version    => 'system',
+      pip        => 'present'
+    }
+
+    python::pip { 'awscli' :
+      pkgname       => 'awscli',
+      ensure        => 'present',
+      virtualenv    => 'system',
+      owner         => 'root',
+      timeout       => 1800,
+    }
+
   }
 
   class { 'serverspec':
