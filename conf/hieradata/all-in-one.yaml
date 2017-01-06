@@ -8,6 +8,8 @@ serverspec::group: 'vagrant'
 timezone::region: 'Australia'
 timezone::locality: 'Melbourne'
 
+cloudwatchlogs::region: 'ap-southeast-2'
+
 base::rhn_register: true
 
 rhn_register::username: 'username'

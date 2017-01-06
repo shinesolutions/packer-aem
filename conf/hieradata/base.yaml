@@ -1,3 +1,5 @@
 ---
 timezone::region: 'Australia'
 timezone::locality: 'Melbourne'
+
+cloudwatchlogs::region: 'ap-southeast-2'

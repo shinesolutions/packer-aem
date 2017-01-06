@@ -6,6 +6,10 @@ locality = @hiera.lookup('timezone::locality', nil, @scope)
 install_aws_cli = @hiera.lookup('base::install_aws_cli', nil, @scope)
 install_aws_cli ||= 'true'
 
+install_cloudwatchlogs = @hiera.lookup('base::install_cloudwatchlogs', nil, @scope)
+install_cloudwatchlogs ||= 'true'
+
+
 if os[:family] == 'redhat'
 
   describe file('/etc/selinux/config') do
@@ -47,6 +51,14 @@ if install_aws_cli == 'true'
 
 end
 
+if install_cloudwatchlogs == 'true'
+
+  describe service('awslogs') do
+    it { should be_enabled }
+    it { should be_running }
+  end
+
+end
 
 # the serverspec module installs the ruby package
 describe package('ruby') do

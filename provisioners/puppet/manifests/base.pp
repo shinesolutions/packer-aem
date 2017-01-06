@@ -1,7 +1,8 @@
 class base (
   $rhn_register = false,
   $disable_selinux = true,
-  $install_aws_cli = true
+  $install_aws_cli = true,
+  $install_cloudwatchlogs = true
 ){
 
   stage { 'test':
@@ -40,6 +41,12 @@ class base (
       owner         => 'root',
       timeout       => 1800,
     }
+
+  }
+
+  if $install_cloudwatchlogs {
+
+    class { '::cloudwatchlogs': }
 
   }
 
