@@ -2,7 +2,9 @@ class base (
   $rhn_register = false,
   $disable_selinux = true,
   $install_aws_cli = true,
-  $install_cloudwatchlogs = true
+  $install_cloudwatchlogs = true,
+  $install_aws_agents = true,
+  $aws_agents_install_url = 'https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install'
 ){
 
   stage { 'test':
@@ -47,6 +49,28 @@ class base (
   if $install_cloudwatchlogs {
 
     class { '::cloudwatchlogs': }
+
+  }
+
+  if $install_aws_agents {
+
+    #TODO: create a puppet module for installing the aws agent.
+    file { "/tmp/awsagent":
+      ensure => directory,
+      mode   => '0775',
+    } ->
+    wget::fetch { $aws_agents_install_url:
+      destination => "/tmp/awsagent/install",
+      timeout     => 0,
+      verbose     => false,
+    } ->
+    file { '/tmp/awsagent/install':
+      ensure => file,
+      mode   => '0755',
+    } ->
+    exec { '/tmp/awsagent/install':
+      path    => '/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/bin/bash',
+    }
 
   }
 

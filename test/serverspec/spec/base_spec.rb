@@ -9,6 +9,9 @@ install_aws_cli ||= 'true'
 install_cloudwatchlogs = @hiera.lookup('base::install_cloudwatchlogs', nil, @scope)
 install_cloudwatchlogs ||= 'true'
 
+install_aws_agents = @hiera.lookup('base::install_aws_agents', nil, @scope)
+install_aws_agents ||= 'true'
+
 
 if os[:family] == 'redhat'
 
@@ -54,6 +57,15 @@ end
 if install_cloudwatchlogs == 'true'
 
   describe service('awslogs') do
+    it { should be_enabled }
+    it { should be_running }
+  end
+
+end
+
+if install_aws_agents == 'true'
+
+  describe service('awsagent') do
     it { should be_enabled }
     it { should be_running }
   end
