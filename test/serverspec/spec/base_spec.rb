@@ -61,6 +61,8 @@ if install_cloudwatchlogs == 'true'
     it { should be_running }
   end
 
+  # TODO: check that the region is the region specified by the cloudwatchlogs::region property
+
 end
 
 if install_aws_agents == 'true'

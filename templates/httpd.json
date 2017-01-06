@@ -11,7 +11,8 @@
       "source_ami": "{{user `httpd_ami_source_ami`}}",
       "tags": {
         "component": "{{user `component`}}",
-        "version": "{{user `httpd_ami_version`}}"
+        "version": "{{user `httpd_ami_version`}}",
+        "Name": "AEM Apache HTTP Server {{user `httpd_ami_version`}} AMI"
       }
     }
   ],

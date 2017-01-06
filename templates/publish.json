@@ -11,7 +11,8 @@
       "source_ami": "{{user `publish_ami_source_ami`}}",
       "tags": {
         "component": "{{user `component`}}",
-        "version": "{{user `publish_ami_version`}}"
+        "version": "{{user `publish_ami_version`}}",
+        "Name": "AEM Publish {{user `publish_ami_version`}} AMI"
       }
     }
   ],

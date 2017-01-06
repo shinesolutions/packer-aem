@@ -3,8 +3,8 @@ class dispatcher (
   $filename,
   $tmp_dir,
   $module_filename,
-  $aws_user,
-  $aws_group
+  $packer_user,
+  $packer_group
 ){
 
   stage { 'test':
@@ -13,8 +13,8 @@ class dispatcher (
 
   file { $tmp_dir:
     ensure => directory,
-    owner  => $aws_user,
-    group  => $aws_group,
+    owner  => $packer_user,
+    group  => $packer_group,
     mode   => '0775',
   }
 
@@ -29,8 +29,8 @@ class dispatcher (
     source       => $installation_source,
     cleanup      => true,
     require      => File[$tmp_dir],
-    user         => $aws_user,
-    group        => $aws_group,
+    user         => $packer_user,
+    group        => $packer_group,
   }
 
   class { 'aem::dispatcher' :

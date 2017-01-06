@@ -4,7 +4,9 @@ class base (
   $install_aws_cli = true,
   $install_cloudwatchlogs = true,
   $install_aws_agents = true,
-  $aws_agents_install_url = 'https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install'
+  $aws_agents_install_url = 'https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install',
+  $packer_user,
+  $packer_group
 ){
 
   stage { 'test':
@@ -32,16 +34,16 @@ class base (
   if $install_aws_cli {
 
     class { 'python' :
-      version    => 'system',
-      pip        => 'present'
+      version => 'system',
+      pip     => 'present'
     }
 
     python::pip { 'awscli' :
-      pkgname       => 'awscli',
-      ensure        => 'present',
-      virtualenv    => 'system',
-      owner         => 'root',
-      timeout       => 1800,
+      ensure     => 'present',
+      pkgname    => 'awscli',
+      virtualenv => 'system',
+      owner      => 'root',
+      timeout    => 1800,
     }
 
   }
@@ -54,19 +56,23 @@ class base (
 
   if $install_aws_agents {
 
-    #TODO: create a puppet module for installing the aws agent.
-    file { "/tmp/awsagent":
+    #TODO: create a puppet module for installing the aws agent. push it up to puppet forge.
+    file { '/tmp/awsagent':
       ensure => directory,
       mode   => '0775',
+      owner  => $packer_user,
+      group  => $packer_group
     } ->
     wget::fetch { $aws_agents_install_url:
-      destination => "/tmp/awsagent/install",
+      destination => '/tmp/awsagent/install',
       timeout     => 0,
       verbose     => false,
     } ->
     file { '/tmp/awsagent/install':
       ensure => file,
       mode   => '0755',
+      owner  => $packer_user,
+      group  => $packer_group
     } ->
     exec { '/tmp/awsagent/install':
       path    => '/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/bin/bash',

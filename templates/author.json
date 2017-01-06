@@ -11,7 +11,8 @@
       "source_ami": "{{user `author_ami_source_ami`}}",
       "tags": {
         "component": "{{user `component`}}",
-        "version": "{{user `author_ami_version`}}"
+        "version": "{{user `author_ami_version`}}",
+        "Name": "AEM Author {{user `author_ami_version`}} AMI"
       }
     }
   ],
