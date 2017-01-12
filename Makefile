@@ -1,4 +1,5 @@
 AMIS = base java httpd author publish dispatcher all-in-one
+var_file ?= conf/template-vars.json
 
 ci: clean tools deps lint validate
 
@@ -34,7 +35,7 @@ $(AMIS):
 	PACKER_LOG_PATH=/tmp/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
-		-var-file conf/template-vars.json \
+		-var-file $(var_file) \
 		-var 'component=$@' \
 		-var 'version=$(version)' \
 		templates/$@.json
