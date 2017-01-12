@@ -1,12 +1,13 @@
 class base (
+  $packer_user,
+  $packer_group,
   $rhn_register = false,
   $disable_selinux = true,
   $install_aws_cli = true,
   $install_cloudwatchlogs = true,
   $install_aws_agents = true,
-  $aws_agents_install_url = 'https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install',
-  $packer_user,
-  $packer_group
+  $aws_agents_install_url = 'https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install'
+
 ){
 
   stage { 'test':
