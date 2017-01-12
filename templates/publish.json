@@ -4,15 +4,15 @@
       "name": "publish",
       "type": "amazon-ebs",
       "ssh_username": "{{user `aws_user`}}",
-      "ami_description": "Packer AEM bootstrap AMI {{user `component`}}-{{user `publish_ami_version`}}-{{timestamp}}",
-      "ami_name": "{{user `component`}}-{{user `publish_ami_version`}}-{{timestamp}}",
+      "ami_description": "Packer AEM bootstrap AMI {{user `component`}}-{{user `version`}}-{{timestamp}}",
+      "ami_name": "{{user `component`}}-{{user `version`}}-{{timestamp}}",
       "instance_type": "m4.large",
       "region": "{{user `aws_region`}}",
       "source_ami": "{{user `publish_ami_source_ami`}}",
       "tags": {
         "component": "{{user `component`}}",
-        "version": "{{user `publish_ami_version`}}",
-        "Name": "AEM Publish {{user `publish_ami_version`}} AMI"
+        "version": "{{user `version`}}",
+        "Name": "AEM {{user `component`}} AMI {{user `version`}} "
       }
     }
   ],
