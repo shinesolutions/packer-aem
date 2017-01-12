@@ -1,3 +1,9 @@
 ---
 timezone::region: 'Australia'
 timezone::locality: 'Melbourne'
+
+cloudwatchlogs::region: 'ap-southeast-2'
+
+base::aws_agents_install_url: 'https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install'
+base::packer_user: "%{hiera('packer_user')}"
+base::packer_group: "%{hiera('packer_group')}"

@@ -3,5 +3,5 @@ dispatcher::installation_source: 'https://www.adobeaemcloud.com/content/companie
 dispatcher::filename: 'dispatcher-apache2.4-linux-x86-64-4.2.1.tar.gz'
 dispatcher::tmp_dir: '/tmp/dispatcher-apache2.4-linux-x86-64-4.2.1'
 dispatcher::module_filename: 'dispatcher-apache2.4-4.2.1.so'
-dispatcher::aws_user: "%{hiera('packer_user')}"
-dispatcher::aws_group: "%{hiera('packer_group')}"
+dispatcher::packer_user: "%{hiera('packer_user')}"
+dispatcher::packer_group: "%{hiera('packer_group')}"

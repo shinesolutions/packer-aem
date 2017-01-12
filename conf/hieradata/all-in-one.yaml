@@ -8,7 +8,12 @@ serverspec::group: 'vagrant'
 timezone::region: 'Australia'
 timezone::locality: 'Melbourne'
 
+cloudwatchlogs::region: 'ap-southeast-2'
+
 base::rhn_register: true
+base::aws_agents_install_url: 'https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install'
+base::packer_user: 'vagrant'
+base::packer_group: 'vagrant'
 
 rhn_register::username: 'username'
 rhn_register::password: 'password'
@@ -21,15 +26,19 @@ jdk_oracle::version_build: '15'
 
 author::aem_quickstart_source: "%{hiera('aem_quickstart_source')}"
 author::aem_license_source: "%{hiera('aem_license_source')}"
+# TODO: how do we load a boolean value? "%{hiera('aem_sample_content')}"
+author::aem_sample_content: false
 author::aem_jvm_mem_opts: '-Xmx1024m'
 
 publish::aem_quickstart_source: "%{hiera('aem_quickstart_source')}"
 publish::aem_license_source: "%{hiera('aem_license_source')}"
+# TODO: how do we load a boolean value? "%{hiera('aem_sample_content')}"
+publish::aem_sample_content: false
 publish::aem_jvm_mem_opts: '-Xmx1024m'
 
 dispatcher::installation_source: 'https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_8/file.res/dispatcher-apache2.4-linux-x86-64-4.2.1.tar.gz'
 dispatcher::filename: 'dispatcher-apache2.4-linux-x86-64-4.2.1.tar.gz'
 dispatcher::tmp_dir: '/tmp/dispatcher-apache2.4-linux-x86-64-4.2.1'
 dispatcher::module_filename: 'dispatcher-apache2.4-4.2.1.so'
-dispatcher::aws_user: "vagrant"
-dispatcher::aws_group: "vagrant"
+dispatcher::packer_user: 'vagrant'
+dispatcher::packer_group: 'vagrant'

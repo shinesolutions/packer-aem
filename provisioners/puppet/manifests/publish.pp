@@ -3,7 +3,8 @@ class publish (
   $aem_license_source,
   $aem_base = '/opt',
   $aem_jvm_mem_opts = '-Xmx4096m',
-  $aem_port = '4503'
+  $aem_port = '4503',
+  $aem_sample_content = false
 ){
 
   stage { 'test':
@@ -56,7 +57,7 @@ class publish (
     home           => "${aem_base}/aem/publish",
     type           => 'publish',
     port           => $aem_port,
-    sample_content => false,
+    sample_content => $aem_sample_content,
     jvm_mem_opts   => $aem_jvm_mem_opts,
     jvm_opts       => '-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -XX:+HeapDumpOnOutOfMemoryError',
   }
