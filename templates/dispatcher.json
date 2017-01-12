@@ -12,7 +12,7 @@
       "tags": {
         "component": "{{user `component`}}",
         "version": "{{user `version`}}",
-        "Name": "AEM {{user `component`}} AMI {{user `version`}} "
+        "Name": "AEM {{user `component`}} AMI ({{user `version`}})"
       }
     }
   ],
