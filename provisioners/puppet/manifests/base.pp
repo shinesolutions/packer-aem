@@ -81,14 +81,25 @@ class base (
 
   }
 
+  # require gcc, ruby-devel and zlib-devel to install nokogiri and ruby_aem gem
+  # a requirement for the author and publish ami
   yumrepo { 'rhui-REGION-rhel-server-optional':
     enabled => true,
-  } ->
+  }
 
-  # require ruby-devel to install the nokogiri gem required by the ruby-aem gem required
-  # by the author and publish ami
+  package { 'gcc':
+    ensure  => 'installed',
+    require => Yumrepo['rhui-REGION-rhel-server-optional'],
+  }
+
   package { 'ruby-devel':
-    ensure => 'installed',
+    ensure  => 'installed',
+    require => Yumrepo['rhui-REGION-rhel-server-optional'],
+  }
+
+  package { 'zlib-devel':
+    ensure  => 'installed',
+    require => Yumrepo['rhui-REGION-rhel-server-optional'],
   }
 
   class { 'serverspec':

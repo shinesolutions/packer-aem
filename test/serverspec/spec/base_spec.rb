@@ -74,7 +74,15 @@ if install_aws_agents == 'true'
 
 end
 
+describe package('gcc') do
+  it { should be_installed }
+end
+
 describe package('ruby-devel') do
+  it { should be_installed }
+end
+
+describe package('zlib-devel') do
   it { should be_installed }
 end
 

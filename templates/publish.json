@@ -29,6 +29,18 @@
     },
     {
       "type": "puppet-masterless",
+      "staging_directory": "/tmp/packer-puppet-masterless-0",
+      "manifest_file": "provisioners/puppet/manifests/ruby_aem.pp",
+      "hiera_config_path": "conf/hiera.yaml",
+      "module_paths": [
+        "modules",
+        "provisioners/puppet/modules"
+      ],
+      "puppet_bin_dir": "/opt/puppetlabs/bin"
+    },
+    {
+      "type": "puppet-masterless",
+      "staging_directory": "/tmp/packer-puppet-masterless",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [
