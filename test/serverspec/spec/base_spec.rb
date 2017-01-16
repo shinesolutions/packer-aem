@@ -74,6 +74,10 @@ if install_aws_agents == 'true'
 
 end
 
+describe package('ruby-devel') do
+  it { should be_installed }
+end
+
 # the serverspec module installs the ruby package
 describe package('ruby') do
   it { should be_installed }

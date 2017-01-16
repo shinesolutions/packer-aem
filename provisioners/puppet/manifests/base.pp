@@ -81,6 +81,16 @@ class base (
 
   }
 
+  yumrepo { 'rhui-REGION-rhel-server-optional':
+    enabled => true,
+  } ->
+
+  # require ruby-devel to install the nokogiri gem required by the ruby-aem gem required
+  # by the author and publish ami
+  package { 'ruby-devel':
+    ensure => 'installed',
+  }
+
   class { 'serverspec':
     stage     => 'test',
     component => 'base',
