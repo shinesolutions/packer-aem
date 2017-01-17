@@ -6,7 +6,7 @@
       "ssh_username": "{{user `aws_user`}}",
       "ami_description": "Packer AEM bootstrap AMI {{user `component`}}-{{user `version`}}-{{timestamp}}",
       "ami_name": "{{user `component`}}-{{user `version`}}-{{timestamp}}",
-      "instance_type": "t2.small",
+      "instance_type": "{{user `java_instance_type`}}",
       "region": "{{user `aws_region`}}",
       "source_ami": "{{user `java_ami_source_ami`}}",
       "tags": {

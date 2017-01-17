@@ -84,6 +84,7 @@ class author (
   class { 'serverspec':
     stage     => 'test',
     component => 'author',
+    staging_directory => '/tmp/packer-puppet-masterless-1',
     tries     => 5,
     try_sleep => 3,
   }

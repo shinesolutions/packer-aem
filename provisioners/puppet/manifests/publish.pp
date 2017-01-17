@@ -62,9 +62,29 @@ class publish (
     jvm_opts       => '-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -XX:+HeapDumpOnOutOfMemoryError',
   }
 
+  # Confirm AEM Starts up and the login page is ready.
+  aem_aem { 'Wait until login page is ready':
+    ensure  => login_page_is_ready,
+    require => Aem::Instance['aem'],
+  }
+
+  # TODO: Install the Health Check Package
+  # aem_package { 'Install AEM Healthcheck Content Package':
+  #   ensure    => present,
+  #   name      => 'aem-healthcheck-content',
+  #   group     => 'shinesolutions',
+  #   version   => '1.2',
+  #   path      => '/tmp/',
+  #   replicate => false,
+  #   activate  => true,
+  #   force     => true,
+  #   require   => Aem_aem['Wait until login page is ready'],
+  # }
+
   class { 'serverspec':
     stage     => 'test',
     component => 'publish',
+    staging_directory => '/tmp/packer-puppet-masterless-1',
     tries     => 5,
     try_sleep => 3,
   }

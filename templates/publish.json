@@ -6,7 +6,7 @@
       "ssh_username": "{{user `aws_user`}}",
       "ami_description": "Packer AEM bootstrap AMI {{user `component`}}-{{user `version`}}-{{timestamp}}",
       "ami_name": "{{user `component`}}-{{user `version`}}-{{timestamp}}",
-      "instance_type": "m4.large",
+      "instance_type": "{{user `publish_instance_type`}}",
       "region": "{{user `aws_region`}}",
       "source_ami": "{{user `publish_ami_source_ami`}}",
       "tags": {
@@ -40,7 +40,7 @@
     },
     {
       "type": "puppet-masterless",
-      "staging_directory": "/tmp/packer-puppet-masterless",
+      "staging_directory": "/tmp/packer-puppet-masterless-1",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [
