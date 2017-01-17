@@ -11,7 +11,7 @@
   "author_instance_type": "m3.large",
   "publish_ami_source_ami": "ami-e3c4c080",
   "publish_instance_type": "m3.large",
-  "dispatcher_ami_source_ami": "ami-f80b0e9b",
+  "dispatcher_ami_source_ami": "ami-bfc6c2dc",
   "dispatcher_instance_type": "t2.small",
   "vm_name": "rhel-7.2-vbox",
   "iso_url": "file:///some-path/rhel-server-7.2-x86_64-dvd.iso",

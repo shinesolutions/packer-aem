@@ -1,6 +1,8 @@
 class author (
   $aem_quickstart_source,
   $aem_license_source,
+  $packer_user,
+  $packer_group,
   $aem_base = '/opt',
   $aem_jvm_mem_opts = '-Xmx4096m',
   $aem_port = '4502',
@@ -62,31 +64,52 @@ class author (
     jvm_opts       => '-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -XX:+HeapDumpOnOutOfMemoryError',
   }
 
+  file { '/etc/puppetlabs/puppet/aem.yaml':
+    ensure  => file,
+    content => epp('/tmp/templates/aem.yaml.epp', {'port' => $aem_port}),
+  }
+
   # Confirm AEM Starts up and the login page is ready.
   aem_aem { 'Wait until login page is ready':
     ensure  => login_page_is_ready,
-    require => Aem::Instance['aem'],
+    require => [Aem::Instance['aem'], File['/etc/puppetlabs/puppet/aem.yaml']],
   }
 
-  # TODO: Install the Health Check Package
-  # aem_package { 'Install AEM Healthcheck Content Package':
-  #   ensure    => present,
-  #   name      => 'aem-healthcheck-content',
-  #   group     => 'shinesolutions',
-  #   version   => '1.2',
-  #   path      => '/tmp/',
-  #   replicate => false,
-  #   activate  => true,
-  #   force     => true,
-  #   require   => Aem_aem['Wait until login page is ready'],
-  # }
+  file { '/tmp/aem-healthcheck-content':
+    ensure => directory,
+    mode   => '0775',
+    owner  => $packer_user,
+    group  => $packer_group,
+  } ->
+  wget::fetch { 'https://github.com/shinesolutions/aem-healthcheck/releases/download/v1.2/aem-healthcheck-content-1.2.zip':
+    destination => '/tmp/aem-healthcheck-content/aem-healthcheck-content-1.2.zip',
+    timeout     => 0,
+    verbose     => false,
+  } ->
+  file { '/tmp/aem-healthcheck-content/aem-healthcheck-content-1.2.zip':
+    ensure => file,
+    owner  => $packer_user,
+    group  => $packer_group,
+  }
+
+  aem_package { 'Install AEM Healthcheck Content Package':
+    ensure    => present,
+    name      => 'aem-healthcheck-content',
+    group     => 'shinesolutions',
+    version   => '1.2',
+    path      => '/tmp/aem-healthcheck-content/',
+    replicate => false,
+    activate  => false,
+    force     => true,
+    require   => [File['/tmp/aem-healthcheck-content/aem-healthcheck-content-1.2.zip'], Aem_aem['Wait until login page is ready']],
+  }
 
   class { 'serverspec':
-    stage     => 'test',
-    component => 'author',
+    stage             => 'test',
+    component         => 'author',
     staging_directory => '/tmp/packer-puppet-masterless-1',
-    tries     => 5,
-    try_sleep => 3,
+    tries             => 5,
+    try_sleep         => 3,
   }
 
 }

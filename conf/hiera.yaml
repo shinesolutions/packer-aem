@@ -4,6 +4,7 @@
   :datadir: "/tmp/hieradata"
 :hierarchy:
   - "%{::packer_build_name}"
+  - "serverspec"
   - "common"
 :logger: console
 :merge_behavior: native

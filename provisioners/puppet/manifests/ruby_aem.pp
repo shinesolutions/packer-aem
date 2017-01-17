@@ -12,9 +12,9 @@ package { 'ruby_aem':
 }
 
 class { 'serverspec':
-  stage     => 'test',
-  component => 'ruby_aem',
+  stage             => 'test',
+  component         => 'ruby_aem',
   staging_directory => '/tmp/packer-puppet-masterless-0',
-  tries     => 15,
-  try_sleep => 3,
+  tries             => 15,
+  try_sleep         => 3,
 }

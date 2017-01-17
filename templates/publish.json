@@ -39,6 +39,11 @@
       "puppet_bin_dir": "/opt/puppetlabs/bin"
     },
     {
+      "type": "file",
+      "source": "provisioners/puppet/templates",
+      "destination": "/tmp"
+    },
+    {
       "type": "puppet-masterless",
       "staging_directory": "/tmp/packer-puppet-masterless-1",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",

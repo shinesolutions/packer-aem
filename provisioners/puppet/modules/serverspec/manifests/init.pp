@@ -27,7 +27,7 @@ class serverspec (
     path      => ':/opt/puppetlabs/puppet/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin',
     tries     => $tries,
     try_sleep => $try_sleep,
-    require   => [File['/tmp/serverspec/serverspec.sh']],
+    require   => File['/tmp/serverspec/serverspec.sh'],
     user      => $owner,
   }
 
