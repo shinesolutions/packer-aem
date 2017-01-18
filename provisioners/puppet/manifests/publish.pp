@@ -67,6 +67,9 @@ class publish (
   file { '/etc/puppetlabs/puppet/aem.yaml':
     ensure  => file,
     content => epp('/tmp/templates/aem.yaml.epp', {'port' => $aem_port}),
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
   }
 
   # Confirm AEM Starts up and the login page is ready.

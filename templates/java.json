@@ -1,4 +1,13 @@
 {
+  "variables": {
+    "aws_region": "ap-southeast-2",
+    "aws_user": "ec2-user",
+    "component": "java",
+    "version": "x.x.x",
+    "java_instance_type": "t2.micro",
+    "java_ami_source_ami": "ami-xxxxxxxx",
+    "var_file": "conf/template-vars.json"
+  },
   "builders": [
     {
       "name": "java",
@@ -40,6 +49,17 @@
     {
       "type": "shell",
       "script": "provisioners/cleanup.sh"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "json-updater",
+      "ami_id": {
+        "{{user `var_file`}}": [
+          "author_ami_source_ami",
+          "publish_ami_source_ami"
+        ]
+      }
     }
   ]
 }

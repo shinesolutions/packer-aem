@@ -1,4 +1,13 @@
 {
+  "variables": {
+    "aws_region": "ap-southeast-2",
+    "aws_user": "ec2-user",
+    "component": "publish",
+    "version": "x.x.x",
+    "publish_instance_type": "m3.large",
+    "publish_ami_source_ami": "ami-xxxxxxxx",
+    "var_file": "conf/template-vars.json"
+  },
   "builders": [
     {
       "name": "publish",
