@@ -2,6 +2,7 @@
   "variables": {
     "aws_region": "ap-southeast-2",
     "aws_user": "ec2-user",
+    "iam_instance_profile": "IAMInstanceProfile",
     "aws_vpc_id": "vpc-xxxxxxxx",
     "aws_subnet_id": "subnet-xxxxxxxx",
     "aws_security_group_id": "sg-xxxxxxxx",
@@ -20,6 +21,7 @@
       "ami_name": "{{user `component`}}-{{user `version`}}-{{timestamp}}",
       "instance_type": "{{user `base_instance_type`}}",
       "region": "{{user `aws_region`}}",
+      "iam_instance_profile": "{{ user `iam_instance_profile` }}",
       "vpc_id": "{{user `aws_vpc_id`}}",
       "subnet_id": "{{user `aws_subnet_id`}}",
       "security_group_id": "{{user `aws_security_group_id`}}",
