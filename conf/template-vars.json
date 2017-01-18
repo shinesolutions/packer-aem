@@ -4,6 +4,8 @@
     "aws_region": "ap-southeast-2",
     "aws_user": "ec2-user",
     "aws_vpc_id": "vpc-b3ad53d6",
+    "aws_subnet_id": "subnet-4ba5702e",
+    "aws_security_group_id": "sg-60cb1005",
     "base_ami_source_ami": "ami-39ac915a",
     "base_instance_type": "t2.micro",
     "dispatcher_ami_source_ami": "ami-dad9ddb9",
