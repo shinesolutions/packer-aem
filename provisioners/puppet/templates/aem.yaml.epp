@@ -4,4 +4,4 @@
 :host: 'localhost'
 :port: <%= $port %>
 :debug: False
-:protocal: 'http'
+:protocol: 'http'

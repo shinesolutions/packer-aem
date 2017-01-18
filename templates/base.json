@@ -2,15 +2,17 @@
   "variables": {
     "aws_region": "ap-southeast-2",
     "aws_user": "ec2-user",
-    "iam_instance_profile": "IAMInstanceProfile",
-    "aws_vpc_id": "vpc-xxxxxxxx",
-    "aws_subnet_id": "subnet-xxxxxxxx",
-    "aws_security_group_id": "sg-xxxxxxxx",
+    "iam_instance_profile": "",
+    "aws_vpc_id": "",
+    "aws_subnet_id": "",
+    "aws_security_group_id": "",
     "component": "base",
     "version": "x.x.x",
     "base_instance_type": "t2.micro",
     "base_ami_source_ami": "ami-39ac915a",
-    "var_file": "conf/template-vars.json"
+    "var_file": "conf/template-vars.json",
+    "http_proxy": "",
+    "https_proxy": ""
   },
   "builders": [
     {
@@ -34,6 +36,14 @@
     }
   ],
   "provisioners": [
+    {
+      "type": "shell",
+      "script": "provisioners/add_http_proxy.sh",
+      "environment_vars" : [
+        "HTTP_PROXY={{user `http_proxy`}}",
+        "HTTPS_PROXY={{user `https_proxy`}}"
+      ]
+    },
     {
       "type": "shell",
       "script": "provisioners/install_puppet.sh"

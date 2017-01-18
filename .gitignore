@@ -11,3 +11,4 @@ output-virtualbox-iso/
 packer_cache/
 Puppetfile.lock
 Gemfile.lock
+.DS_Store

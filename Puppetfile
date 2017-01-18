@@ -10,7 +10,4 @@ mod 'jfryman/selinux'
 mod 'pcfens/rhn_register'
 mod 'stankevich/python'
 mod 'kemra102/cloudwatchlogs'
-
-# TODO: pull from github until it is pushed to puppet forge
-mod 'shinesolutions/aem_resources',
-  :git => 'https://github.com/shinesolutions/puppet-aem-resources'
+mod 'shinesolutions/aem_resources'
