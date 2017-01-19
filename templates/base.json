@@ -66,7 +66,8 @@
       "module_paths": [
         "modules",
         "provisioners/puppet/modules"
-      ]
+      ],
+      "puppet_bin_dir": "/opt/puppetlabs/bin"
     },
     {
       "type": "shell",
