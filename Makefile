@@ -28,6 +28,7 @@ validate:
 		packer validate \
 			-var-file conf/template-vars.json \
 			-var "component=$$AMI" \
+			--syntax-only \
 			templates/$$AMI.json; \
 	done
 

@@ -23,5 +23,6 @@
   "http_proxy": "",
   "https_proxy": "",
   "aem_quickstart_source": "/some-path/AEM-quickstart-6.2.0.jar",
-  "aem_license_source": "/some-path/license.properties"
+  "aem_license_source": "/some-path/license.properties",
+  "puppet_bin_dir": "/opt/puppetlabs/bin"
 }

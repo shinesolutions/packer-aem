@@ -10,7 +10,8 @@
     "version": "x.x.x",
     "dispatcher_instance_type": "t2.micro",
     "dispatcher_ami_source_ami": "ami-xxxxxxxx",
-    "var_file": "conf/template-vars.json"
+    "var_file": "conf/template-vars.json",
+    "puppet_bin_dir": "/opt/puppetlabs/bin"
   },
   "builders": [
     {
@@ -52,7 +53,7 @@
         "modules",
         "provisioners/puppet/modules"
       ],
-      "puppet_bin_dir": "/opt/puppetlabs/bin"
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}"
     },
     {
       "type": "shell",

@@ -13,6 +13,8 @@ Simply use these templates as a baseline and customise them to suit your infrast
 ## Installation
 
 Requirements
+* [Packer](https://www.packer.io/)
+* [Packer Post-Processor JSON Updater](https://github.com/cliffano/packer-post-processor-json-updater)
 * [Ruby](https://www.ruby-lang.org/en/)
 * [GNU Make](https://www.gnu.org/software/make/) (optional, see Makefile to use commands instead)
 
@@ -37,7 +39,10 @@ Puppet Modules used for installing and configuring the software in the images (S
 * [tylerwalts/jdk_oracle](https://github.com/tylerwalts/puppet-jdk_oracle)
 * [bashtoni/timezone](https://github.com/BashtonLtd/puppet-timezone)
 * [jfryman/selinux](https://github.com/voxpupuli/puppet-selinux)
-
+* [pcfens/rhn_register](https://github.com/pcfens/puppet-rhn_register)
+* [stankevich/python](https://github.com/stankevich/puppet-python)
+* [kemra102/cloudwatchlogs](https://github.com/kemra102/puppet-cloudwatchlogs)
+* [shinesolutions/aem_resources](https://github.com/shinesolutions/puppet-aem-resources)
 
 
 ## Usage

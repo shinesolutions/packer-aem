@@ -14,7 +14,8 @@
     "aem_quickstart_source": "",
     "aem_quickstart_destination": "/tmp/cq-quickstart.jar",
     "aem_license_source": "",
-    "aem_license_destination": "/tmp/license.properties"
+    "aem_license_destination": "/tmp/license.properties",
+    "puppet_bin_dir": "/opt/puppetlabs/bin"
   },
   "builders": [
     {
@@ -67,7 +68,7 @@
         "modules",
         "provisioners/puppet/modules"
       ],
-      "puppet_bin_dir": "/opt/puppetlabs/bin"
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}"
     },
     {
       "type": "file",
@@ -83,7 +84,7 @@
         "modules",
         "provisioners/puppet/modules"
       ],
-      "puppet_bin_dir": "/opt/puppetlabs/bin"
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}"
     },
     {
       "type": "shell",

@@ -12,7 +12,8 @@
     "base_ami_source_ami": "ami-39ac915a",
     "var_file": "conf/template-vars.json",
     "http_proxy": "",
-    "https_proxy": ""
+    "https_proxy": "",
+    "puppet_bin_dir": "/opt/puppetlabs/bin"
   },
   "builders": [
     {
@@ -47,7 +48,10 @@
     {
       "type": "shell",
       "script": "provisioners/install_puppet.sh",
-      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E {{ .Path }}"
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E {{ .Path }}",
+      "environment_vars" : [
+        "PUPPET_BIN_DIR={{user `puppet_bin_dir`}}"
+      ]
     },
     {
       "type": "file",
@@ -67,7 +71,7 @@
         "modules",
         "provisioners/puppet/modules"
       ],
-      "puppet_bin_dir": "/opt/puppetlabs/bin"
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}"
     },
     {
       "type": "shell",
