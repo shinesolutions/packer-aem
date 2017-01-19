@@ -1,16 +1,12 @@
 #!/bin/bash
-sudo yum check-update
 
-sudo -E wget http://google.com
+which puppet
+puppet --version
 
-sudo -E wget https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+yum install puppet-agent -y
+/opt/puppetlabs/bin/puppet resource package puppet ensure=latest
+yum update -y
 
-ls
-
-sudo -E rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
-
-
-sudo -E yum install puppet-agent -y
-
-sudo -E /opt/puppetlabs/bin/puppet resource package puppet ensure=latest
-sudo -E yum update -y
+which puppet
+puppet --version

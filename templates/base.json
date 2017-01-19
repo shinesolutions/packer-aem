@@ -46,7 +46,8 @@
     },
     {
       "type": "shell",
-      "script": "provisioners/install_puppet.sh"
+      "script": "provisioners/install_puppet.sh",
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E {{ .Path }}"
     },
     {
       "type": "file",
