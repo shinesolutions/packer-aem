@@ -1,8 +1,8 @@
 class author (
-  $aem_quickstart_source,
-  $aem_license_source,
   $packer_user,
   $packer_group,
+  $aem_quickstart_source = 'file:///tmp/cq-quickstart.jar',
+  $aem_license_source = 'file:///tmp/license.properties',
   $aem_base = '/opt',
   $aem_jvm_mem_opts = '-Xmx4096m',
   $aem_port = '4502',
@@ -28,30 +28,22 @@ class author (
     require => File["${aem_base}/aem"],
   }
 
-  wget::fetch { $aem_license_source:
-    destination => "${aem_base}/aem/author/license.properties",
-    timeout     => 0,
-    verbose     => false,
-    require     => File["${aem_base}/aem/author"],
-  } ->
   file { "${aem_base}/aem/author/license.properties":
-    ensure => file,
-    mode   => '0440',
-    owner  => 'aem',
-    group  => 'aem',
+    ensure  => file,
+    source  => "${aem_license_source}",
+    mode    => '0440',
+    owner   => 'aem',
+    group   => 'aem',
+    require => File["${aem_base}/aem/author"],
   }
 
-  wget::fetch { $aem_quickstart_source:
-    destination => "${aem_base}/aem/author/aem-author-${aem_port}.jar",
-    timeout     => 0,
-    verbose     => false,
-    require     => File["${aem_base}/aem/author"],
-  } ->
   file { "${aem_base}/aem/author/aem-author-${aem_port}.jar":
-    ensure => file,
-    mode   => '0775',
-    owner  => 'aem',
-    group  => 'aem',
+    ensure  => file,
+    source  => "${aem_quickstart_source}",
+    mode    => '0775',
+    owner   => 'aem',
+    group   => 'aem',
+    require => File["${aem_base}/aem/author"],
   }
 
   aem::instance { 'aem' :

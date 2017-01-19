@@ -10,7 +10,11 @@
     "version": "x.x.x",
     "author_instance_type": "m3.large",
     "author_ami_source_ami": "ami-xxxxxxxx",
-    "var_file": "conf/template-vars.json"
+    "var_file": "conf/template-vars.json",
+    "aem_quickstart_source": "",
+    "aem_quickstart_destination": "/tmp/cq-quickstart.jar",
+    "aem_license_source": "",
+    "aem_license_destination": "/tmp/license.properties"
   },
   "builders": [
     {
@@ -43,6 +47,16 @@
       "type": "file",
       "source": "test/serverspec",
       "destination": "/tmp"
+    },
+    {
+      "type": "file",
+      "source": "{{user `aem_quickstart_source`}}",
+      "destination": "{{user `aem_quickstart_destination`}}"
+    },
+    {
+      "type": "file",
+      "source": "{{user `aem_license_source`}}",
+      "destination": "{{user `aem_license_destination`}}"
     },
     {
       "type": "puppet-masterless",

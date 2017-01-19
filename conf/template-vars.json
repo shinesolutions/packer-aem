@@ -20,6 +20,8 @@
   "publish_ami_source_ami": "ami-64d8dc07",
   "publish_instance_type": "m3.large",
   "vm_name": "rhel-7.2-vbox",
-  "http_proxy": "http://forwardproxy:3128",
-  "https_proxy": "http://forwardproxy:3128"
+  "http_proxy": "",
+  "https_proxy": "",
+  "aem_quickstart_source": "/some-path/AEM-quickstart-6.2.0.jar",
+  "aem_license_source": "/some-path/license.properties"
 }
