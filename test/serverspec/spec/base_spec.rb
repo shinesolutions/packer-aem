@@ -65,14 +65,14 @@ if install_cloudwatchlogs == 'true'
 
 end
 
-if install_aws_agents == 'true'
-
-  describe service('awsagent') do
-    it { should be_enabled }
-    it { should be_running }
-  end
-
-end
+# if install_aws_agents == 'true'
+#
+#   describe service('awsagent') do
+#     it { should be_enabled }
+#     it { should be_running }
+#   end
+#
+# end
 
 describe package('gcc') do
   it { should be_installed }
