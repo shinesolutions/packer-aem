@@ -1,9 +1,9 @@
 #!/bin/bash
 sudo yum check-update
 
-wget http://google.com
+sudo wget http://google.com
 
-wget https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+sudo wget https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 
 ls
 
