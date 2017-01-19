@@ -8,7 +8,7 @@
 #echo "export proxy=$HTTP_PROXY" | sudo tee --append /etc/yum.comf
 
 
-sudo cat /etc/yum.comf
+sudo cat /etc/yum.conf
 
 sudo ls -ltr /etc/profile.d/
 
