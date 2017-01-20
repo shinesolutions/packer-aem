@@ -2,7 +2,6 @@
 packer_user: 'ec2-user'
 packer_group: 'ec2-user'
 
-aem_quickstart_source: 'file:///tmp/cq-quickstart.jar'
 aem_license_source: 'file:///tmp/license.properties'
 
 aem_sample_content: false

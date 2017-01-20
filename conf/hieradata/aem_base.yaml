@@ -1,0 +1,5 @@
+---
+aem_base::aem_quickstart_source: "file:///tmp/cq-quickstart.jar"
+
+aem_base::packer_user: "%{hiera('packer_user')}"
+aem_base::packer_group: "%{hiera('packer_group')}"

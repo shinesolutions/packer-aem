@@ -1,4 +1,4 @@
-AMIS = base java httpd author publish dispatcher all-in-one
+AMIS = base java httpd aem_base author publish dispatcher all-in-one
 var_file ?= conf/template-vars.json
 
 ci: clean tools deps lint validate
@@ -28,7 +28,6 @@ validate:
 		packer validate \
 			-var-file conf/template-vars.json \
 			-var "component=$$AMI" \
-			--syntax-only \
 			templates/$$AMI.json; \
 	done
 

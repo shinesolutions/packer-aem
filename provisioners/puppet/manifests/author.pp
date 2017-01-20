@@ -1,7 +1,7 @@
 class author (
   $packer_user,
   $packer_group,
-  $aem_quickstart_source = 'file:///tmp/cq-quickstart.jar',
+  $aem_quickstart_source = '/opt/aem/cq-quickstart.jar',
   $aem_license_source = 'file:///tmp/license.properties',
   $aem_base = '/opt',
   $aem_jvm_mem_opts = '-Xmx4096m',
@@ -46,6 +46,11 @@ class author (
     require => File["${aem_base}/aem/author"],
   }
 
+  file { "${aem_quickstart_source}":
+    ensure  => absent,
+    require => File["${aem_base}/aem/author/aem-author-${aem_port}.jar"],
+  }
+
   aem::instance { 'aem' :
     source         => "${aem_base}/aem/author/aem-author-${aem_port}.jar",
     home           => "${aem_base}/aem/author",
@@ -70,33 +75,21 @@ class author (
     require => [Aem::Instance['aem'], File['/etc/puppetlabs/puppet/aem.yaml']],
   }
 
-  file { '/tmp/aem-healthcheck-content':
-    ensure => directory,
-    mode   => '0775',
-    owner  => $packer_user,
-    group  => $packer_group,
-  } ->
-  wget::fetch { 'https://github.com/shinesolutions/aem-healthcheck/releases/download/v1.2/aem-healthcheck-content-1.2.zip':
-    destination => '/tmp/aem-healthcheck-content/aem-healthcheck-content-1.2.zip',
-    timeout     => 0,
-    verbose     => false,
-  } ->
-  file { '/tmp/aem-healthcheck-content/aem-healthcheck-content-1.2.zip':
-    ensure => file,
-    owner  => $packer_user,
-    group  => $packer_group,
-  }
-
   aem_package { 'Install AEM Healthcheck Content Package':
     ensure    => present,
     name      => 'aem-healthcheck-content',
     group     => 'shinesolutions',
     version   => '1.2',
-    path      => '/tmp/aem-healthcheck-content/',
+    path      => "${aem_base}/aem",
     replicate => false,
     activate  => false,
     force     => true,
-    require   => [File['/tmp/aem-healthcheck-content/aem-healthcheck-content-1.2.zip'], Aem_aem['Wait until login page is ready']],
+    require   => [Aem_aem['Wait until login page is ready']],
+  }
+
+  file { "${aem_base}/aem/aem-healthcheck-content-1.2.zip":
+    ensure  => absent,
+    require => Aem_package['Install AEM Healthcheck Content Package'],
   }
 
   class { 'serverspec':
