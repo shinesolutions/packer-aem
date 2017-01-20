@@ -21,8 +21,8 @@ class aem_base (
     ensure  => file,
     source  => "${aem_quickstart_source}",
     mode    => '0775',
-    owner  => $packer_user,
-    group  => $packer_group,
+    owner   => $packer_user,
+    group   => $packer_group,
     require => File["${aem_base}/aem"],
   }
 
@@ -42,8 +42,8 @@ class aem_base (
     ensure  => file,
     source  => '/tmp/aem-healthcheck-content/aem-healthcheck-content-1.2.zip',
     mode    => '0664',
-    owner  => $packer_user,
-    group  => $packer_group,
+    owner   => $packer_user,
+    group   => $packer_group,
     require => File["${aem_base}/aem"],
   }
 
