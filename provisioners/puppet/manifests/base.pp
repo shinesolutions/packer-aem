@@ -7,7 +7,6 @@ class base (
   $install_cloudwatchlogs = true,
   $install_aws_agents = true,
   $aws_agents_install_url = 'https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install'
-
 ){
 
   stage { 'test':

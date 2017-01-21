@@ -11,7 +11,9 @@
     "java_instance_type": "t2.micro",
     "java_ami_source_ami": "ami-xxxxxxxx",
     "var_file": "conf/template-vars.json",
-    "puppet_bin_dir": "/opt/puppetlabs/bin"
+    "puppet_bin_dir": "/opt/puppetlabs/bin",
+    "owner": "",
+    "cost_center": ""
   },
   "builders": [
     {
@@ -27,10 +29,21 @@
       "subnet_id": "{{user `aws_subnet_id`}}",
       "security_group_id": "{{user `aws_security_group_id`}}",
       "source_ami": "{{user `java_ami_source_ami`}}",
+      "run_tags": {
+        "Application Id": "Adobe Experience Manager (AEM)",
+        "Application Role": "{{user `component`}}",
+        "Version": "{{user `version`}}",
+        "Name": "Packer Builder - AEM {{user `component`}} AMI ({{user `version`}})",
+        "Owner": "{{user `owner`}}",
+        "Cost Center": "{{user `cost_center`}}"
+      },
       "tags": {
-        "component": "{{user `component`}}",
-        "version": "{{user `version`}}",
-        "Name": "AEM {{user `component`}} AMI ({{user `version`}})"
+        "Application Id": "Adobe Experience Manager (AEM)",
+        "Application Role": "{{user `component`}}",
+        "Version": "{{user `version`}}",
+        "Name": "AEM {{user `component`}} AMI ({{user `version`}})",
+        "Owner": "{{user `owner`}}",
+        "Cost Center": "{{user `cost_center`}}"
       }
     }
   ],
@@ -65,8 +78,7 @@
       "type": "json-updater",
       "ami_id": {
         "{{user `var_file`}}": [
-          "author_ami_source_ami",
-          "publish_ami_source_ami"
+          "aem_base_ami_source_ami"
         ]
       }
     }
