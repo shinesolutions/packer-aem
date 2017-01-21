@@ -13,7 +13,8 @@
     "var_file": "conf/template-vars.json",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "owner": "",
-    "cost_center": ""
+    "cost_center": "",
+    "ami_users": ""
   },
   "builders": [
     {
@@ -28,6 +29,7 @@
       "vpc_id": "{{user `aws_vpc_id`}}",
       "subnet_id": "{{user `aws_subnet_id`}}",
       "security_group_id": "{{user `aws_security_group_id`}}",
+      "ami_users": "{{user `ami_users`}}",
       "source_ami": "{{user `httpd_ami_source_ami`}}",
       "run_tags": {
         "Application Id": "Adobe Experience Manager (AEM)",
