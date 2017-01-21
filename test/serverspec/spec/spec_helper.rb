@@ -8,4 +8,4 @@ set :backend, :exec
 
 @scope = {'::packer_build_name' => Facter.value(:packer_build_name)}
 
-@hiera = Hiera.new(:config => '/tmp/packer-puppet-masterless/hiera.yaml')
+@hiera = Hiera.new(:config => Facter.value(:packer_staging_directory) + '/hiera.yaml')

@@ -6,13 +6,13 @@
     "aws_vpc_id": "",
     "aws_subnet_id": "",
     "aws_security_group_id": "",
-    "component": "author",
+    "component": "aem_base",
     "version": "x.x.x",
-    "author_instance_type": "m3.large",
-    "author_ami_source_ami": "ami-xxxxxxxx",
+    "aem_base_instance_type": "m3.large",
+    "aem_base_ami_source_ami": "ami-xxxxxxxx",
     "var_file": "conf/template-vars.json",
-    "aem_license_source": "",
-    "aem_license_destination": "/tmp/license.properties",
+    "aem_quickstart_source": "",
+    "aem_quickstart_destination": "/tmp/cq-quickstart.jar",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "owner": "",
     "cost_center": "",
@@ -20,7 +20,7 @@
   },
   "builders": [
     {
-      "name": "author",
+      "name": "aem_base",
       "type": "amazon-ebs",
       "ssh_username": "{{user `aws_user`}}",
       "ami_description": "Packer AEM bootstrap AMI {{user `component`}}-{{user `version`}}-{{timestamp}}",
@@ -64,28 +64,11 @@
     },
     {
       "type": "file",
-      "source": "{{user `aem_license_source`}}",
-      "destination": "{{user `aem_license_destination`}}"
+      "source": "{{user `aem_quickstart_source`}}",
+      "destination": "{{user `aem_quickstart_destination`}}"
     },
     {
       "type": "puppet-masterless",
-      "staging_directory": "/tmp/packer-puppet-masterless-0",
-      "manifest_file": "provisioners/puppet/manifests/ruby_aem.pp",
-      "hiera_config_path": "conf/hiera.yaml",
-      "module_paths": [
-        "modules",
-        "provisioners/puppet/modules"
-      ],
-      "puppet_bin_dir": "{{user `puppet_bin_dir`}}"
-    },
-    {
-      "type": "file",
-      "source": "provisioners/puppet/templates",
-      "destination": "/tmp"
-    },
-    {
-      "type": "puppet-masterless",
-      "staging_directory": "/tmp/packer-puppet-masterless-1",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [
@@ -97,6 +80,17 @@
     {
       "type": "shell",
       "script": "provisioners/cleanup.sh"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "json-updater",
+      "ami_id": {
+        "{{user `var_file`}}": [
+          "author_ami_source_ami",
+          "publish_ami_source_ami"
+        ]
+      }
     }
   ]
 }

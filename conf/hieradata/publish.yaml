@@ -1,5 +1,6 @@
 ---
-publish::aem_quickstart_source: "%{hiera('aem_quickstart_source')}"
 publish::aem_license_source: "%{hiera('aem_license_source')}"
 # TODO: how do we load a boolean value? "%{hiera('aem_sample_content')}"
 publish::aem_sample_content: false
+publish::packer_user: "%{hiera('packer_user')}"
+publish::packer_group: "%{hiera('packer_group')}"

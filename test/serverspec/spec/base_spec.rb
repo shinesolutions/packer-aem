@@ -65,13 +65,25 @@ if install_cloudwatchlogs == 'true'
 
 end
 
-if install_aws_agents == 'true'
+# if install_aws_agents == 'true'
+#
+#   describe service('awsagent') do
+#     it { should be_enabled }
+#     it { should be_running }
+#   end
+#
+# end
 
-  describe service('awsagent') do
-    it { should be_enabled }
-    it { should be_running }
-  end
+describe package('gcc') do
+  it { should be_installed }
+end
 
+describe package('ruby-devel') do
+  it { should be_installed }
+end
+
+describe package('zlib-devel') do
+  it { should be_installed }
 end
 
 # the serverspec module installs the ruby package
