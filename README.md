@@ -54,15 +54,13 @@ Example:
 To build the base machine image:
 
 ```
-make base
+make base version=1.0.1
 ```
 
 _todo: add ability to specify the packer builder to use_ 
 
 
 ## Configuration
-
-_todo: simplify, and tidy up configuration_
 
 Packer Building can be configured in the [conf/template-vars.json](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/template-vars.json) file.
 
