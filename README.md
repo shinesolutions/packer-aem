@@ -2,7 +2,7 @@
 
 # Packer AEM Bootstrap
 
-Packer AEM Bootstrap is a set of [Packer](https://www.packer.io/) templates for creating [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) machine images.
+Packer AEM Bootstrap is a set of [Packer](https://www.packer.io/) templates for creating [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) machine and container images.
 
 Simply use these templates as a baseline and customise them to suit your infrastructure.
 
@@ -64,15 +64,46 @@ _todo: add ability to specify the packer builder to use_
 
 _todo: simplify, and tidy up configuration_
 
-Packer can be configured in [conf/template-vars.json](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/template-vars.json).
+Packer Building can be configured in the [conf/template-vars.json](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/template-vars.json) file.
+
+Packer amazon-ebs reference: https://www.packer.io/docs/builders/amazon-ebs.html
 
 | Name                | Description   |
 | -------------       |:-------------:|
-| base_ami_version    |               |
-| base_ami_source_ami |               |
+| aem_base_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the java build) |
+| aem_base_instance_type | The EC2 instance type to use while building the aem_base AMI (m3.large) |
+| aem_license_source | The location of the aem license file to uploaded to the author and publish ami |
+| aem_quickstart_source | The location of the aem cq quickstart file to uploaded to the aem_base for use in the author and publish ami |
+| ami_users | A list of account IDs that have access to launch the resulting AMI(s) |
+| author_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the aem_base build) |
+| author_instance_type | The EC2 instance type to use while building the author AMI (m3.large) |
+| aws_region | The name of the region, such as us-east-1, in which to launch the EC2 instance to create the AMI |
+| aws_security_group_id | The ID (not the name) of the security group to assign to the instance. By default this is not set and Packer will automatically create a new temporary security group to allow SSH access |
+| aws_subnet_id | If using VPC, the ID of the subnet, such as subnet-12345def, where Packer will launch the EC2 instance |
+| aws_user | The ssh_username to use when building the ami using the amazon-ebs builder |
+| aws_vpc_id | If launching into a VPC subnet, Packer needs the VPC ID in order to create a temporary security group within the VPC |
+| base_ami_source_ami | The initial AMI used as a base for the newly created machine (e.g the Red Hat Enterprise Linux 7 AMI provider by Amazon) |
+| base_instance_type | The EC2 instance type to use while building the base AMI (t2.micro) |
+| base_provisioner_script | The path to a script to upload and execute in the base machine. This path can be absolute or relative. (provisioners/base.sh) |
+| cost_center | Tag Value - Used to identify the cost center or business unit associated with a resource; typically for cost allocation and tracking |
+| dispatcher_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the httpd build) |
+| dispatcher_instance_type | The EC2 instance type to use while building the dispatcher AMI (t2.micro) |
+| httpd_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the base build) |
+| httpd_instance_type | The EC2 instance type to use while building the httpd AMI (t2.micro) |
+| iam_instance_profile | The name of an IAM instance profile to launch the EC2 instance with. |
+| iso_sha256 | The checksum for the OS ISO file. Because ISO files are so large, this is required and Packer will verify it prior to booting a virtual machine with the ISO attached |
+| iso_url | A URL to the ISO containing the installation image. This URL can be either an HTTP URL or a file URL (or path to a file) |
+| java_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the base build) |
+| java_instance_type | The EC2 instance type to use while building the java AMI (t2.micro) |
+| owner | Tag Value - Used to identify who is responsible for the resource |
+| publish_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the aem_base build) |
+| publish_instance_type | The EC2 instance type to use while building the publish AMI (m3.large) |
+| puppet_bin_dir | The location where puppet exists within the AMI (/opt/puppetlabs/bin) |
+| vm_name | This is the name of the OVF file for the new virtual machine, without the file extension |
 
 
-Puppet can be configured in [conf/hieradata/common.yaml](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/hieradata/common.yaml).
+
+Puppet Provisioning can be configured in the [conf/hieradata/common.yaml](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/hieradata/common.yaml) file.
 
 
 | Name            | Description   |
