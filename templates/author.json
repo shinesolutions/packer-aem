@@ -68,24 +68,12 @@
       "destination": "{{user `aem_license_destination`}}"
     },
     {
-      "type": "puppet-masterless",
-      "staging_directory": "/tmp/packer-puppet-masterless-0",
-      "manifest_file": "provisioners/puppet/manifests/ruby_aem.pp",
-      "hiera_config_path": "conf/hiera.yaml",
-      "module_paths": [
-        "modules",
-        "provisioners/puppet/modules"
-      ],
-      "puppet_bin_dir": "{{user `puppet_bin_dir`}}"
-    },
-    {
       "type": "file",
       "source": "provisioners/puppet/templates",
       "destination": "/tmp"
     },
     {
       "type": "puppet-masterless",
-      "staging_directory": "/tmp/packer-puppet-masterless-1",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [

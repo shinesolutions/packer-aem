@@ -47,6 +47,15 @@ class aem_base (
     require => File["${aem_base}/aem"],
   }
 
+  package { 'nokogiri':
+    ensure   => '1.6.8.1',
+    provider => 'puppet_gem',
+  } ->
+  package { 'ruby_aem':
+    ensure   => '1.0.6',
+    provider => 'puppet_gem',
+  }
+
   class { 'serverspec':
     stage     => 'test',
     component => 'aem_base',

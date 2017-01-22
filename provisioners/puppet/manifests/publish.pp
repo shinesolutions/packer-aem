@@ -95,7 +95,6 @@ class publish (
   class { 'serverspec':
     stage             => 'test',
     component         => 'publish',
-    staging_directory => '/tmp/packer-puppet-masterless-1',
     tries             => 5,
     try_sleep         => 3,
   }
