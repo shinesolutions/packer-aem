@@ -1,5 +1,6 @@
 AMIS = base java httpd aem_base author publish dispatcher all-in-one
 var_file ?= conf/template-vars.json
+version ?= 1.0.0
 
 ci: clean tools deps lint validate
 

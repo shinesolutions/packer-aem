@@ -23,7 +23,7 @@
       "name": "author",
       "type": "amazon-ebs",
       "ssh_username": "{{user `aws_user`}}",
-      "ami_description": "Packer AEM bootstrap AMI {{user `component`}}-{{user `version`}}-{{timestamp}}",
+      "ami_description": "Packer AEM Bootstrap - AEM Author AMI ({{user `version`}})",
       "ami_name": "{{user `component`}}-{{user `version`}}-{{timestamp}}",
       "instance_type": "{{user `author_instance_type`}}",
       "region": "{{user `aws_region`}}",
@@ -35,17 +35,17 @@
       "source_ami": "{{user `author_ami_source_ami`}}",
       "run_tags": {
         "Application Id": "Adobe Experience Manager (AEM)",
-        "Application Role": "{{user `component`}}",
+        "Application Role": "AEM Author AMI",
         "Version": "{{user `version`}}",
-        "Name": "Packer Builder - AEM {{user `component`}} AMI ({{user `version`}})",
+        "Name": "Packer Builder - AEM Author AMI ({{user `version`}})",
         "Owner": "{{user `owner`}}",
         "Cost Center": "{{user `cost_center`}}"
       },
       "tags": {
         "Application Id": "Adobe Experience Manager (AEM)",
-        "Application Role": "{{user `component`}}",
+        "Application Role": "AEM Author AMI",
         "Version": "{{user `version`}}",
-        "Name": "AEM {{user `component`}} AMI ({{user `version`}})",
+        "Name": "AEM Author AMI ({{user `version`}})",
         "Owner": "{{user `owner`}}",
         "Cost Center": "{{user `cost_center`}}"
       }

@@ -42,7 +42,7 @@
     },
     {
       "type": "shell",
-      "script": "provisioners/install_puppet.sh"
+      "script": "provisioners/base.sh"
     },
     {
       "type": "file",
