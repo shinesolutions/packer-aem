@@ -103,11 +103,12 @@ Packer amazon-ebs reference: https://www.packer.io/docs/builders/amazon-ebs.html
 
 Puppet Provisioning can be configured in the [conf/hieradata/common.yaml](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/hieradata/common.yaml) file.
 
+_todo: populate configuration items. specify items in hieradata yaml files. mention how to configure 3rd party puppet modules_ 
 
 | Name            | Description   |
 | -------------   |:-------------:|
-| base::aws_user  |               |
-| base::aws_group |               |
+| packer_user  |               |
+| packer_group |               |
 
 
 
