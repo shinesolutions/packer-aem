@@ -2,7 +2,7 @@ class publish (
   $packer_user,
   $packer_group,
   $aem_quickstart_source = '/opt/aem/cq-quickstart.jar',
-  $aem_license_source = 'file:///tmp/license.properties',
+  $aem_license_source = '/tmp/license.properties',
   $aem_base = '/opt',
   $aem_jvm_mem_opts = '-Xmx4096m',
   $aem_port = '4503',
