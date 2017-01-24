@@ -32,6 +32,7 @@ validate:
 			templates/$$AMI.json; \
 	done
 
+#TODO: consider having a var-file for each component - which should include the ami_users variable
 $(AMIS):
 	PACKER_LOG_PATH=/tmp/packer-$@.log \
 		PACKER_LOG=1 \
