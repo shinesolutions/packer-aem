@@ -93,10 +93,10 @@ class author (
   }
 
   class { 'serverspec':
-    stage             => 'test',
-    component         => 'author',
-    tries             => 5,
-    try_sleep         => 3,
+    stage     => 'test',
+    component => 'author',
+    tries     => 5,
+    try_sleep => 3,
   }
 
 }

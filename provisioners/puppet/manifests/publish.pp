@@ -93,10 +93,10 @@ class publish (
   }
 
   class { 'serverspec':
-    stage             => 'test',
-    component         => 'publish',
-    tries             => 5,
-    try_sleep         => 3,
+    stage     => 'test',
+    component => 'publish',
+    tries     => 5,
+    try_sleep => 3,
   }
 
 }

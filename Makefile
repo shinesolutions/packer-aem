@@ -40,6 +40,7 @@ $(AMIS):
 		-var 'var_file=$(var_file)' \
 		-var 'component=$@' \
 		-var 'version=$(version)' \
+		-var 'ami_users=$(ami_users)' \
 		templates/$@.json
 
 amis-all: $(AMIS)
