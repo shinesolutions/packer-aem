@@ -2,7 +2,7 @@ class author (
   $packer_user,
   $packer_group,
   $aem_quickstart_source = '/opt/aem/cq-quickstart.jar',
-  $aem_license_source = 'file:///tmp/license.properties',
+  $aem_license_source = '/tmp/license.properties',
   $aem_base = '/opt',
   $aem_jvm_mem_opts = '-Xmx4096m',
   $aem_port = '4502',
@@ -93,11 +93,10 @@ class author (
   }
 
   class { 'serverspec':
-    stage             => 'test',
-    component         => 'author',
-    staging_directory => '/tmp/packer-puppet-masterless-1',
-    tries             => 5,
-    try_sleep         => 3,
+    stage     => 'test',
+    component => 'author',
+    tries     => 5,
+    try_sleep => 3,
   }
 
 }

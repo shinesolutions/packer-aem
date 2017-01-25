@@ -29,3 +29,11 @@ describe file("#{aem_base}/aem/aem-healthcheck-content-1.2.zip") do
   it { should be_owned_by "#{packer_user}" }
   it { should be_grouped_into "#{packer_group}" }
 end
+
+describe package('nokogiri') do
+  it { should be_installed.by('gem').with_version('1.6.8.1') }
+end
+
+describe package('ruby_aem') do
+  it { should be_installed.by('gem').with_version('1.0.6') }
+end

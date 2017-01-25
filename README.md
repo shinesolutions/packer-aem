@@ -2,7 +2,7 @@
 
 # Packer AEM Bootstrap
 
-Packer AEM Bootstrap is a set of [Packer](https://www.packer.io/) templates for creating [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) machine images.
+Packer AEM Bootstrap is a set of [Packer](https://www.packer.io/) templates for creating [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) machine and container images.
 
 Simply use these templates as a baseline and customise them to suit your infrastructure.
 
@@ -54,7 +54,7 @@ Example:
 To build the base machine image:
 
 ```
-make base
+make base version=1.0.1
 ```
 
 _todo: add ability to specify the packer builder to use_ 
@@ -62,23 +62,150 @@ _todo: add ability to specify the packer builder to use_
 
 ## Configuration
 
-_todo: simplify, and tidy up configuration_
+### Packer 
 
-Packer can be configured in [conf/template-vars.json](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/template-vars.json).
+Packer Building can be configured in the [conf/template-vars.json](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/template-vars.json) file.
+
+#### amazon-ebs builder
+
+Packer amazon-ebs reference: https://www.packer.io/docs/builders/amazon-ebs.html
+
 
 | Name                | Description   |
 | -------------       |:-------------:|
-| base_ami_version    |               |
-| base_ami_source_ami |               |
+| aem_base_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the java build) |
+| aem_base_instance_type | The EC2 instance type to use while building the aem_base AMI (m3.large) |
+| aem_license_source | The location of the aem license file to uploaded to the author and publish ami |
+| aem_quickstart_source | The location of the aem cq quickstart file to uploaded to the aem_base for use in the author and publish ami |
+| ami_users | A list of account IDs that have access to launch the resulting AMI(s) |
+| author_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the aem_base build) |
+| author_instance_type | The EC2 instance type to use while building the author AMI (m3.large) |
+| aws_region | The name of the region, such as us-east-1, in which to launch the EC2 instance to create the AMI |
+| aws_security_group_id | The ID (not the name) of the security group to assign to the instance. By default this is not set and Packer will automatically create a new temporary security group to allow SSH access |
+| aws_subnet_id | If using VPC, the ID of the subnet, such as subnet-12345def, where Packer will launch the EC2 instance |
+| aws_user | The ssh_username to use when building the ami using the amazon-ebs builder |
+| aws_vpc_id | If launching into a VPC subnet, Packer needs the VPC ID in order to create a temporary security group within the VPC |
+| base_ami_source_ami | The initial AMI used as a base for the newly created machine (e.g the Red Hat Enterprise Linux 7 AMI provider by Amazon) |
+| base_instance_type | The EC2 instance type to use while building the base AMI (t2.micro) |
+| base_provisioner_script | The path to a script to upload and execute in the base machine. This path can be absolute or relative. (provisioners/base.sh) |
+| cost_center | Tag Value - Used to identify the cost center or business unit associated with a resource; typically for cost allocation and tracking |
+| dispatcher_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the httpd build) |
+| dispatcher_instance_type | The EC2 instance type to use while building the dispatcher AMI (t2.micro) |
+| httpd_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the base build) |
+| httpd_instance_type | The EC2 instance type to use while building the httpd AMI (t2.micro) |
+| iam_instance_profile | The name of an IAM instance profile to launch the EC2 instance with. |
+| java_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the base build) |
+| java_instance_type | The EC2 instance type to use while building the java AMI (t2.micro) |
+| owner | Tag Value - Used to identify who is responsible for the resource |
+| publish_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the aem_base build) |
+| publish_instance_type | The EC2 instance type to use while building the publish AMI (m3.large) |
+| puppet_bin_dir | The location where puppet exists within the AMI (/opt/puppetlabs/bin) |
+
+#### virtualbox-iso builder
+
+| Name                | Description   |
+| -------------       |:-------------:|
+| iso_sha256 | The checksum for the OS ISO file. Because ISO files are so large, this is required and Packer will verify it prior to booting a virtual machine with the ISO attached |
+| iso_url | A URL to the ISO containing the installation image. This URL can be either an HTTP URL or a file URL (or path to a file) |
+| vm_name | This is the name of the OVF file for the new virtual machine, without the file extension |
 
 
-Puppet can be configured in [conf/hieradata/common.yaml](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/hieradata/common.yaml).
 
+### Puppet Configuration
 
-| Name            | Description   |
+Puppet Provisioning can be configured in the [conf/hieradata/common.yaml](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/hieradata/common.yaml) file.
+
+_todo: populate configuration items. specify items in hieradata yaml files. mention how to configure 3rd party puppet modules_ 
+
+#### common.yaml
+
+| Name            | Default Value   |
 | -------------   |:-------------:|
-| base::aws_user  |               |
-| base::aws_group |               |
+| packer_user:  | 'ec2-user' |
+| packer_group: | 'ec2-user' |
+| aem_license_source: | '/tmp/license.properties' |
+| aem_sample_content: | false |  
+
+
+#### base.yaml
+
+| Name            | Default Value   |
+| -------------   |:-------------:|
+| timezone::region: | 'Australia' |
+| timezone::locality: | 'Melbourne' |
+| cloudwatchlogs::region: | 'ap-southeast-2' |
+| base::packer_user: | "%{hiera('packer_user')}" |
+| base::packer_group: | "%{hiera('packer_group')}" |
+| base::aws_agents_install_url: | 'https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install' |
+
+
+
+#### java.yaml
+
+| Name            | Default Value   |
+| -------------   |:-------------:|
+| jdk_oracle::version: | '8' |
+| jdk_oracle::version_update: | '112' |
+| jdk_oracle::version_build: | '15' |
+
+
+
+#### base_aem.yaml
+
+| Name            | Default Value   |
+| -------------   |:-------------:|
+| aem_base::aem_quickstart_source: | "file:///tmp/cq-quickstart.jar" |
+| aem_base::packer_user: | "%{hiera('packer_user')}" |
+| aem_base::packer_group: | "%{hiera('packer_group')}" |
+
+
+
+#### author.yaml
+
+| Name            | Default Value   |
+| -------------   |:-------------:|
+| author::aem_license_source: | "%{hiera('aem_license_source')}" |
+| author::aem_sample_content: |  false |
+| author::packer_user: | "%{hiera('packer_user')}" |
+| author::packer_group: | "%{hiera('packer_group')}" |
+
+
+
+
+#### publish.yaml
+
+| Name            | Default Value   |
+| -------------   |:-------------:|
+| publish::aem_license_source: |  "%{hiera('aem_license_source')}" |
+| publish::aem_sample_content: | false |
+| publish::packer_user: | "%{hiera('packer_user')}" |
+| publish::packer_group: | "%{hiera('packer_group')}" |
+
+
+#### httpd.yaml
+
+Does not contain configuration at this time.
+
+| Name            | Default Value   |
+| -------------   |:-------------:|
+
+
+
+
+#### dispatcher.yaml
+
+| Name            | Default Value   |
+| -------------   |:-------------:|
+| dispatcher::installation_source: | 'https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_8/file.res/dispatcher-apache2.4-linux-x86-64-4.2.1.tar.gz' |
+| dispatcher::filename: | 'dispatcher-apache2.4-linux-x86-64-4.2.1.tar.gz' |
+| dispatcher::tmp_dir: | '/tmp/dispatcher-apache2.4-linux-x86-64-4.2.1' |
+| dispatcher::module_filename: | 'dispatcher-apache2.4-4.2.1.so' |
+| dispatcher::packer_user: | "%{hiera('packer_user')}" |
+| dispatcher::packer_group: | "%{hiera('packer_group')}" |
+
+
+
+#### 3rd party puppet module configuration
 
 
 

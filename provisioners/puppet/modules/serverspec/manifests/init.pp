@@ -4,7 +4,8 @@ class serverspec (
   $try_sleep,
   $owner,
   $group,
-  $staging_directory = '/tmp/packer-puppet-masterless'
+  $staging_directory = '/tmp/packer-puppet-masterless',
+  $puppet_bin_dir = '/opt/puppetlabs/puppet/bin'
 ){
 
   file { '/tmp/serverspec/':
@@ -24,7 +25,7 @@ class serverspec (
   }
 
   exec { "/tmp/serverspec/serverspec.sh ${component} ${staging_directory}":
-    path      => ':/opt/puppetlabs/puppet/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin',
+    path      => ":${puppet_bin_dir}:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin",
     tries     => $tries,
     try_sleep => $try_sleep,
     require   => File['/tmp/serverspec/serverspec.sh'],
