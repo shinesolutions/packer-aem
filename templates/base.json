@@ -15,7 +15,9 @@
     "owner": "",
     "cost_center": "",
     "ami_users": "",
-    "base_provisioner_script": "provisioners/base.sh"
+    "base_provisioner_script": "provisioners/base.sh",
+    "pre_puppet_provisioner_script": "provisioners/pre_puppet.sh",
+    "post_puppet_provisioner_script": "provisioners/post_puppet.sh"
   },
   "builders": [
     {
@@ -53,6 +55,10 @@
   "provisioners": [
     {
       "type": "shell",
+      "script": "{{user `pre_puppet_provisioner_script`}}"
+    },
+    {
+      "type": "shell",
       "script": "{{user `base_provisioner_script`}}",
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E {{ .Path }}",
       "environment_vars" : [
@@ -81,7 +87,7 @@
     },
     {
       "type": "shell",
-      "script": "provisioners/cleanup.sh"
+      "script": "{{user `post_puppet_provisioner_script`}}"
     }
   ],
   "post-processors": [
