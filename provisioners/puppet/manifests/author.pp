@@ -75,6 +75,10 @@ class author (
     require => [Aem::Instance['aem'], File['/etc/puppetlabs/puppet/aem.yaml']],
   }
 
+  class { 'aem_resources::author_remove_default_agents':
+    require => [Aem_aem['Wait until login page is ready']],
+  }
+
   aem_package { 'Install AEM Healthcheck Content Package':
     ensure    => present,
     name      => 'aem-healthcheck-content',
