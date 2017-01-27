@@ -79,7 +79,6 @@ class base (
   #   }
   #
   # }
-  }
 
   package { 'gcc':
     ensure  => 'installed',
