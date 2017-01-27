@@ -15,9 +15,9 @@
     "owner": "",
     "cost_center": "",
     "ami_users": "",
-    "base_provisioner_script": "provisioners/base.sh",
-    "pre_puppet_provisioner_script": "provisioners/pre_puppet.sh",
-    "post_puppet_provisioner_script": "provisioners/post_puppet.sh"
+    "base_provisioner_script": "provisioners/aws/rhel7/base.sh",
+    "post_puppet_provisioner_script": "provisioners/aws/rhel7/post_puppet.sh",
+    "pre_puppet_provisioner_script": "provisioners/aws/rhel7/pre_puppet.sh"
   },
   "builders": [
     {
