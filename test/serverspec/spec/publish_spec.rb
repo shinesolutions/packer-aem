@@ -38,14 +38,15 @@ describe file("#{aem_base}/aem/publish/aem-publish-#{aem_port}.jar") do
   it { should be_grouped_into 'aem' }
 end
 
-# there is a commit to change the service to aem. https://github.com/bstopp/puppet-aem/commit/a28d87fbf6bafc81ff00dec1759d8848708f32af
+# Service will be renamed to 'aem' on next puppet-aem release.
+# https://github.com/bstopp/puppet-aem/commit/a28d87fbf6bafc81ff00dec1759d8848708f32af
 describe service('aem-aem') do
-  it { should be_enabled }
-  it { should be_running }
+  it { should_not be_enabled }
+  it { should_not be_running }
 end
 
 describe port(aem_port) do
-  it { should be_listening }
+  it { should_not be_listening }
 end
 
 describe file('/etc/puppetlabs/puppet/aem.yaml') do
@@ -60,3 +61,4 @@ end
 # describe command('curl -sL -w "%{http_code}\\n" "localhost:4503/system/health?tags=devops" -o /dev/null | sed "s/200/OK/"') do
 #   its(:stdout) { should match 'OK' }
 # end
+
