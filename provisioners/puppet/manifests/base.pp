@@ -101,6 +101,18 @@ class base (
     require => Yumrepo['rhui-REGION-rhel-server-optional'],
   }
 
+  # cloud-init's preferred rendering engine
+  package { 'python-cheetah':
+    ensure  => installed,
+    require => Yumrepo['rhui-REGION-rhel-server-optional'],
+  }
+
+  # needed to run Serverspec to test the provisioned CloudFormation stack
+  package { 'rake':
+    ensure   => '12.0.0',
+    provider => 'gem',
+  }
+
   class { 'serverspec':
     stage     => 'test',
     component => 'base',
