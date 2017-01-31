@@ -97,9 +97,17 @@ class base (
     ensure  => installed,
   }
 
-  # needed to run Serverspec to test the provisioned CloudFormation stack
+  # needed to run Serverspec for testing the provisioned CloudFormation stack
   package { 'rake':
     ensure   => '12.0.0',
+    provider => 'gem',
+  }
+  package { 'rspec':
+    ensure   => '3.5.0',
+    provider => 'gem',
+  }
+  package { 'serverspec':
+    ensure   => '2.38.0',
     provider => 'gem',
   }
 
