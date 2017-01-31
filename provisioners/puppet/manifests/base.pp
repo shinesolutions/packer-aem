@@ -80,25 +80,27 @@ class base (
   #
   # }
 
-  # require gcc, ruby-devel and zlib-devel to install nokogiri and ruby_aem gem
-  # a requirement for the author and publish ami
-  yumrepo { 'rhui-REGION-rhel-server-optional':
-    enabled => true,
-  }
-
   package { 'gcc':
     ensure  => 'installed',
-    require => Yumrepo['rhui-REGION-rhel-server-optional'],
   }
 
   package { 'ruby-devel':
     ensure  => 'installed',
-    require => Yumrepo['rhui-REGION-rhel-server-optional'],
   }
 
   package { 'zlib-devel':
     ensure  => 'installed',
-    require => Yumrepo['rhui-REGION-rhel-server-optional'],
+  }
+
+  # cloud-init's preferred rendering engine
+  package { 'python-cheetah':
+    ensure  => installed,
+  }
+
+  # needed to run Serverspec to test the provisioned CloudFormation stack
+  package { 'rake':
+    ensure   => '12.0.0',
+    provider => 'gem',
   }
 
   class { 'serverspec':

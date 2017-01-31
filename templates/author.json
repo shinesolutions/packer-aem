@@ -10,13 +10,15 @@
     "version": "x.x.x",
     "author_instance_type": "m3.large",
     "author_ami_source_ami": "ami-xxxxxxxx",
-    "var_file": "conf/template-vars.json",
+    "var_file": "",
     "aem_license_source": "",
     "aem_license_destination": "/tmp/license.properties",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "owner": "",
     "cost_center": "",
-    "ami_users": ""
+    "ami_users": "",
+    "post_puppet_provisioner_script": "provisioners/aws/rhel7/post_puppet.sh",
+    "pre_puppet_provisioner_script": "provisioners/aws/rhel7/pre_puppet.sh"
   },
   "builders": [
     {
@@ -53,6 +55,10 @@
   ],
   "provisioners": [
     {
+      "type": "shell",
+      "script": "{{user `pre_puppet_provisioner_script`}}"
+    },
+    {
       "type": "file",
       "source": "conf/hieradata",
       "destination": "/tmp"
@@ -74,6 +80,7 @@
     },
     {
       "type": "puppet-masterless",
+      "extra_arguments": "--debug",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [
@@ -84,7 +91,7 @@
     },
     {
       "type": "shell",
-      "script": "provisioners/cleanup.sh"
+      "script": "{{user `post_puppet_provisioner_script`}}"
     }
   ]
 }

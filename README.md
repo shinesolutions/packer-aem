@@ -13,37 +13,22 @@ Simply use these templates as a baseline and customise them to suit your infrast
 ## Installation
 
 Requirements
-* [Packer](https://www.packer.io/)
+* [Packer](https://www.packer.io/) version 0.12.2 or later
 * [Packer Post-Processor JSON Updater](https://github.com/cliffano/packer-post-processor-json-updater)
 * [Ruby](https://www.ruby-lang.org/en/)
 * [GNU Make](https://www.gnu.org/software/make/) (optional, see Makefile to use commands instead)
-
 
 Install [Puppet](https://puppet.com/), [puppet-lint](http://puppet-lint.com/) and [Librarian-puppet](https://github.com/voxpupuli/librarian-puppet):
 ```
 make tools
 ```
 
-Install puppet dependencies:
+Install Puppet modules dependencies:
 ```
 make deps
 ```
 
-
-Puppet Modules used for installing and configuring the software in the images (See [Puppetfile](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/Puppetfile))
-
-* [bstopp/aem](https://github.com/bstopp/puppet-aem)
-* [puppet/archive](https://github.com/voxpupuli/puppet-archive)
-* [maestrodev/wget](https://github.com/maestrodev/puppet-wget)
-* [puppetlabs/apache](https://github.com/puppetlabs/puppetlabs-apache)
-* [tylerwalts/jdk_oracle](https://github.com/tylerwalts/puppet-jdk_oracle)
-* [bashtoni/timezone](https://github.com/BashtonLtd/puppet-timezone)
-* [jfryman/selinux](https://github.com/voxpupuli/puppet-selinux)
-* [pcfens/rhn_register](https://github.com/pcfens/puppet-rhn_register)
-* [stankevich/python](https://github.com/stankevich/puppet-python)
-* [kemra102/cloudwatchlogs](https://github.com/kemra102/puppet-cloudwatchlogs)
-* [shinesolutions/aem_resources](https://github.com/shinesolutions/puppet-aem-resources)
-
+See [Puppetfile](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/Puppetfile) for the list of modules.
 
 ## Usage
 

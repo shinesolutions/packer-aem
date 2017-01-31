@@ -1,5 +1,5 @@
 AMIS = base java httpd aem_base author publish dispatcher all-in-one
-var_file ?= conf/template-vars.json
+var_file ?= conf/aws/rhel7jdk8.json
 version ?= 1.0.0
 
 ci: clean tools deps lint validate
@@ -21,13 +21,14 @@ lint:
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
 	shellcheck \
-	  provisioners/*.sh \
+	  provisioners/*/*/*.sh \
 	  scripts/*.sh
 
 validate:
 	for AMI in $(AMIS); do \
 		packer validate \
-			-var-file conf/template-vars.json \
+                        -syntax-only \
+			-var-file $(var_file) \
 			-var "component=$$AMI" \
 			templates/$$AMI.json; \
 	done

@@ -59,6 +59,7 @@ class publish (
     sample_content => $aem_sample_content,
     jvm_mem_opts   => $aem_jvm_mem_opts,
     jvm_opts       => '-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -XX:+HeapDumpOnOutOfMemoryError',
+    status         => 'running',
   }
 
   file { '/etc/puppetlabs/puppet/aem.yaml':
@@ -73,6 +74,10 @@ class publish (
   aem_aem { 'Wait until login page is ready':
     ensure  => login_page_is_ready,
     require => [Aem::Instance['aem'], File['/etc/puppetlabs/puppet/aem.yaml']],
+  }
+
+  class { 'aem_resources::create_system_users':
+    require => [Aem_aem['Wait until login page is ready']],
   }
 
   aem_package { 'Install AEM Healthcheck Content Package':
@@ -90,6 +95,19 @@ class publish (
   file { "${aem_base}/aem/aem-healthcheck-content-1.2.zip":
     ensure  => absent,
     require => Aem_package['Install AEM Healthcheck Content Package'],
+  }
+
+  # Ensure login page is still ready after all provisioning steps and before stopping AEM.
+  aem_aem { 'Ensure login page is ready':
+    ensure  => login_page_is_ready,
+    require => [
+      Class['aem_resources::create_system_users'],
+      File["${aem_base}/aem/aem-healthcheck-content-1.2.zip"],
+    ]
+  } ->
+  exec { 'service aem-aem stop':
+    cwd  => '/tmp',
+    path => ['/usr/bin', '/usr/sbin'],
   }
 
   class { 'serverspec':
