@@ -42,7 +42,7 @@
     },
     {
       "type": "shell",
-      "script": "provisioners/base.sh"
+      "script": "provisioners/aws/rhel7/base.sh"
     },
     {
       "type": "file",
@@ -116,7 +116,7 @@
     },
     {
       "type": "shell",
-      "script": "provisioners/post_puppet.sh"
+      "script": "provisioners/aws/rhel7/post_puppet.sh"
     }
   ],
   "post-processors": [{
