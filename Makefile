@@ -21,7 +21,7 @@ lint:
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
 	shellcheck \
-	  provisioners/*.sh \
+	  provisioners/*/*/*.sh \
 	  scripts/*.sh
 
 validate:
