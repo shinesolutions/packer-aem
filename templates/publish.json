@@ -16,7 +16,9 @@
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "owner": "",
     "cost_center": "",
-    "ami_users": ""
+    "ami_users": "",
+    "post_puppet_provisioner_script": "provisioners/aws/rhel7/post_puppet.sh",
+    "pre_puppet_provisioner_script": "provisioners/aws/rhel7/pre_puppet.sh"
   },
   "builders": [
     {
@@ -53,6 +55,10 @@
   ],
   "provisioners": [
     {
+      "type": "shell",
+      "script": "{{user `pre_puppet_provisioner_script`}}"
+    },
+    {
       "type": "file",
       "source": "conf/hieradata",
       "destination": "/tmp"
@@ -85,7 +91,7 @@
     },
     {
       "type": "shell",
-      "script": "provisioners/cleanup.sh"
+      "script": "{{user `post_puppet_provisioner_script`}}"
     }
   ]
 }

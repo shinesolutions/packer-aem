@@ -116,7 +116,7 @@
     },
     {
       "type": "shell",
-      "script": "provisioners/cleanup.sh"
+      "script": "provisioners/post_puppet.sh"
     }
   ],
   "post-processors": [{
