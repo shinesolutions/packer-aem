@@ -10,7 +10,7 @@
     "version": "x.x.x",
     "author_instance_type": "m3.large",
     "author_ami_source_ami": "ami-xxxxxxxx",
-    "var_file": "conf/template-vars.json",
+    "var_file": "",
     "aem_license_source": "",
     "aem_license_destination": "/tmp/license.properties",
     "puppet_bin_dir": "/opt/puppetlabs/bin",

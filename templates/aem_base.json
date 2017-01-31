@@ -10,7 +10,7 @@
     "version": "x.x.x",
     "aem_base_instance_type": "m3.large",
     "aem_base_ami_source_ami": "ami-xxxxxxxx",
-    "var_file": "conf/template-vars.json",
+    "var_file": "",
     "aem_quickstart_source": "",
     "aem_quickstart_destination": "/tmp/cq-quickstart.jar",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
