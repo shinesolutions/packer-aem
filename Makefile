@@ -27,7 +27,8 @@ lint:
 validate:
 	for AMI in $(AMIS); do \
 		packer validate \
-			-var-file conf/template-vars.json \
+                        -syntax-only \
+			-var-file $(var_file) \
 			-var "component=$$AMI" \
 			templates/$$AMI.json; \
 	done
