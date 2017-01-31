@@ -95,7 +95,6 @@ class base (
   # cloud-init's preferred rendering engine
   package { 'python-cheetah':
     ensure  => installed,
-    require => Yumrepo['rhui-REGION-rhel-server-optional'],
   }
 
   # needed to run Serverspec to test the provisioned CloudFormation stack
