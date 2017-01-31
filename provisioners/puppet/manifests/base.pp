@@ -92,6 +92,17 @@ class base (
     ensure  => 'installed',
   }
 
+  # cloud-init's preferred rendering engine
+  package { 'python-cheetah':
+    ensure  => installed,
+  }
+
+  # needed to run Serverspec to test the provisioned CloudFormation stack
+  package { 'rake':
+    ensure   => '12.0.0',
+    provider => 'gem',
+  }
+
   class { 'serverspec':
     stage     => 'test',
     component => 'base',

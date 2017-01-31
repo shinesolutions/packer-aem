@@ -10,7 +10,7 @@
     "version": "1.0.0",
     "java_instance_type": "t2.micro",
     "java_ami_source_ami": "ami-xxxxxxxx",
-    "var_file": "conf/template-vars.json",
+    "var_file": "",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "owner": "",
     "cost_center": "",
