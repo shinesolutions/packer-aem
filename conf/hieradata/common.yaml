@@ -3,5 +3,6 @@ packer_user: 'ec2-user'
 packer_group: 'ec2-user'
 
 aem_license_source: 'file:///tmp/license.properties'
+aem_healthcheck_version: 1.2
 
 aem_sample_content: false
