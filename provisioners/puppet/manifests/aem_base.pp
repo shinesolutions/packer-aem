@@ -1,6 +1,7 @@
 class aem_base (
   $packer_user,
   $packer_group,
+  $aem_healthcheck_version,
   $aem_quickstart_source = 'file:///tmp/cq-quickstart.jar',
   $aem_base = '/opt'
 ){
@@ -33,14 +34,14 @@ class aem_base (
     owner  => $packer_user,
     group  => $packer_group,
   } ->
-  wget::fetch { 'https://github.com/shinesolutions/aem-healthcheck/releases/download/v1.2/aem-healthcheck-content-1.2.zip':
-    destination => '/tmp/aem-healthcheck-content/aem-healthcheck-content-1.2.zip',
+  wget::fetch { "https://github.com/shinesolutions/aem-healthcheck/releases/download/v${aem_healthcheck_version}/aem-healthcheck-content-${aem_healthcheck_version}.zip":
+    destination => "/tmp/aem-healthcheck-content/aem-healthcheck-content-${aem_healthcheck_version}.zip",
     timeout     => 0,
     verbose     => false,
   } ->
-  file { "${aem_base}/aem/aem-healthcheck-content-1.2.zip":
+  file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
     ensure  => file,
-    source  => '/tmp/aem-healthcheck-content/aem-healthcheck-content-1.2.zip',
+    source  => "/tmp/aem-healthcheck-content/aem-healthcheck-content-${aem_healthcheck_version}.zip",
     mode    => '0664',
     owner   => $packer_user,
     group   => $packer_group,
