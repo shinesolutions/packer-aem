@@ -86,6 +86,10 @@ describe package('zlib-devel') do
   it { should be_installed }
 end
 
+describe package('python-cheetah') do
+  it { should be_installed }
+end
+
 # the serverspec module installs the ruby package
 describe package('ruby') do
   it { should be_installed }
