@@ -31,12 +31,35 @@ class base (
     }
   }
 
-  if $install_aws_cli {
+  class { 'python' :
+    version => 'system',
+    pip     => 'present'
+  }
 
-    class { 'python' :
-      version => 'system',
-      pip     => 'present'
-    }
+  # needed for running various aem-aws scripts
+  python::pip { 'boto3' :
+    ensure     => 'present',
+    pkgname    => 'boto3',
+    virtualenv => 'system',
+    owner      => 'root',
+    timeout    => 1800,
+  }
+  python::pip { 'request' :
+    ensure     => 'present',
+    pkgname    => 'request',
+    virtualenv => 'system',
+    owner      => 'root',
+    timeout    => 1800,
+  }
+  python::pip { 'retrying' :
+    ensure     => 'present',
+    pkgname    => 'retrying',
+    virtualenv => 'system',
+    owner      => 'root',
+    timeout    => 1800,
+  }
+
+  if $install_aws_cli {
 
     python::pip { 'awscli' :
       ensure     => 'present',
@@ -95,20 +118,6 @@ class base (
   # cloud-init's preferred rendering engine
   package { 'python-cheetah':
     ensure  => installed,
-  }
-
-  # needed for running various aem-aws scripts
-  package { 'boto3':
-    ensure   => '1.4.4',
-    provider => 'pip',
-  }
-  package { 'request':
-    ensure   => '0.0.12',
-    provider => 'pip',
-  }
-  package { 'retrying':
-    ensure   => '1.3.3',
-    provider => 'pip',
   }
 
   # needed for running Serverspec, used for testing the provisioned CloudFormation stack
