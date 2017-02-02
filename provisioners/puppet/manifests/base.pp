@@ -97,7 +97,21 @@ class base (
     ensure  => installed,
   }
 
-  # needed to run Serverspec for testing the provisioned CloudFormation stack
+  # needed for running various aem-aws scripts
+  package { 'boto3':
+    ensure   => '1.4.4',
+    provider => 'pip',
+  }
+  package { 'request':
+    ensure   => '0.0.12',
+    provider => 'pip',
+  }
+  package { 'retrying':
+    ensure   => '1.3.3',
+    provider => 'pip',
+  }
+
+  # needed for running Serverspec, used for testing the provisioned CloudFormation stack
   package { 'rake':
     ensure   => '12.0.0',
     provider => 'gem',
