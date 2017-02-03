@@ -31,12 +31,35 @@ class base (
     }
   }
 
-  if $install_aws_cli {
+  class { 'python' :
+    version => 'system',
+    pip     => 'present'
+  }
 
-    class { 'python' :
-      version => 'system',
-      pip     => 'present'
-    }
+  # needed for running various aem-aws scripts
+  python::pip { 'boto3' :
+    ensure     => 'present',
+    pkgname    => 'boto3',
+    virtualenv => 'system',
+    owner      => 'root',
+    timeout    => 1800,
+  }
+  python::pip { 'request' :
+    ensure     => 'present',
+    pkgname    => 'request',
+    virtualenv => 'system',
+    owner      => 'root',
+    timeout    => 1800,
+  }
+  python::pip { 'retrying' :
+    ensure     => 'present',
+    pkgname    => 'retrying',
+    virtualenv => 'system',
+    owner      => 'root',
+    timeout    => 1800,
+  }
+
+  if $install_aws_cli {
 
     python::pip { 'awscli' :
       ensure     => 'present',
@@ -97,9 +120,17 @@ class base (
     ensure  => installed,
   }
 
-  # needed to run Serverspec to test the provisioned CloudFormation stack
+  # needed for running Serverspec, used for testing the provisioned CloudFormation stack
   package { 'rake':
     ensure   => '12.0.0',
+    provider => 'gem',
+  }
+  package { 'rspec':
+    ensure   => '3.5.0',
+    provider => 'gem',
+  }
+  package { 'serverspec':
+    ensure   => '2.38.0',
     provider => 'gem',
   }
 

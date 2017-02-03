@@ -35,6 +35,10 @@ class dispatcher (
 
   class { 'aem::dispatcher' :
     module_file => "${tmp_dir}/${module_filename}",
+  } ->
+  exec { 'httpd -k graceful':
+    cwd  => '/tmp',
+    path => ['/sbin'],
   }
 
   class { 'serverspec':

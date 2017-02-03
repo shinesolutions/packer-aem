@@ -1,6 +1,7 @@
 class publish (
   $packer_user,
   $packer_group,
+  $aem_healthcheck_version,
   $aem_quickstart_source = '/opt/aem/cq-quickstart.jar',
   $aem_license_source = '/tmp/license.properties',
   $aem_base = '/opt',
@@ -84,7 +85,7 @@ class publish (
     ensure    => present,
     name      => 'aem-healthcheck-content',
     group     => 'shinesolutions',
-    version   => '1.2',
+    version   => "${aem_healthcheck_version}",
     path      => "${aem_base}/aem",
     replicate => false,
     activate  => false,
@@ -92,7 +93,7 @@ class publish (
     require   => [Aem_aem['Wait until login page is ready']],
   }
 
-  file { "${aem_base}/aem/aem-healthcheck-content-1.2.zip":
+  file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
     ensure  => absent,
     require => Aem_package['Install AEM Healthcheck Content Package'],
   }
@@ -102,7 +103,7 @@ class publish (
     ensure  => login_page_is_ready,
     require => [
       Class['aem_resources::create_system_users'],
-      File["${aem_base}/aem/aem-healthcheck-content-1.2.zip"],
+      File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
     ]
   } ->
   exec { 'service aem-aem stop':

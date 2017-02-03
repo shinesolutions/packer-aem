@@ -22,14 +22,6 @@ describe file("#{aem_base}/aem/cq-quickstart.jar") do
   it { should be_grouped_into "#{packer_group}" }
 end
 
-describe file("#{aem_base}/aem/aem-healthcheck-content-1.2.zip") do
-  it { should be_file }
-  it { should exist }
-  it { should be_mode 664 }
-  it { should be_owned_by "#{packer_user}" }
-  it { should be_grouped_into "#{packer_group}" }
-end
-
 describe package('nokogiri') do
   it { should be_installed.by('gem').with_version('1.6.8.1') }
 end
