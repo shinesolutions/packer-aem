@@ -8,11 +8,8 @@
     "aws_security_group_id": "",
     "component": "author",
     "version": "x.x.x",
-    "author_instance_type": "m3.large",
+    "author_instance_type": "m4.large",
     "author_ami_source_ami": "ami-xxxxxxxx",
-    "var_file": "",
-    "aem_license_source": "",
-    "aem_license_destination": "/tmp/license.properties",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "owner": "",
     "cost_center": "",
@@ -70,17 +67,24 @@
     },
     {
       "type": "file",
-      "source": "{{user `aem_license_source`}}",
-      "destination": "{{user `aem_license_destination`}}"
-    },
-    {
-      "type": "file",
       "source": "provisioners/puppet/templates",
       "destination": "/tmp"
     },
     {
       "type": "puppet-masterless",
+      "staging_directory": "/tmp/packer-puppet-masterless-0",
+      "manifest_file": "provisioners/puppet/manifests/aem_base.pp",
+      "hiera_config_path": "conf/hiera.yaml",
+      "module_paths": [
+        "modules",
+        "provisioners/puppet/modules"
+      ],
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}"
+    },
+    {
+      "type": "puppet-masterless",
       "extra_arguments": "--debug",
+      "staging_directory": "/tmp/packer-puppet-masterless-1",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [

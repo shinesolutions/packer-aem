@@ -1,5 +1,5 @@
 class dispatcher (
-  $installation_source,
+  $aem_dispatcher_source,
   $filename,
   $tmp_dir,
   $module_filename,
@@ -26,7 +26,7 @@ class dispatcher (
     path         => "/tmp/${filename}",
     extract      => true,
     extract_path => $tmp_dir,
-    source       => $installation_source,
+    source       => $aem_dispatcher_source,
     cleanup      => true,
     require      => File[$tmp_dir],
     user         => $packer_user,

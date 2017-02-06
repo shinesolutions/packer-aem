@@ -59,12 +59,10 @@ Packer amazon-ebs reference: https://www.packer.io/docs/builders/amazon-ebs.html
 | Name                | Description   |
 | -------------       |:-------------:|
 | aem_base_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the java build) |
-| aem_base_instance_type | The EC2 instance type to use while building the aem_base AMI (m3.large) |
-| aem_license_source | The location of the aem license file to uploaded to the author and publish ami |
-| aem_quickstart_source | The location of the aem cq quickstart file to uploaded to the aem_base for use in the author and publish ami |
+| aem_base_instance_type | The EC2 instance type to use while building the aem_base AMI (m4.large) |
 | ami_users | A list of account IDs that have access to launch the resulting AMI(s) |
 | author_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the aem_base build) |
-| author_instance_type | The EC2 instance type to use while building the author AMI (m3.large) |
+| author_instance_type | The EC2 instance type to use while building the author AMI (m4.large) |
 | aws_region | The name of the region, such as us-east-1, in which to launch the EC2 instance to create the AMI |
 | aws_security_group_id | The ID (not the name) of the security group to assign to the instance. By default this is not set and Packer will automatically create a new temporary security group to allow SSH access |
 | aws_subnet_id | If using VPC, the ID of the subnet, such as subnet-12345def, where Packer will launch the EC2 instance |
@@ -83,7 +81,7 @@ Packer amazon-ebs reference: https://www.packer.io/docs/builders/amazon-ebs.html
 | java_instance_type | The EC2 instance type to use while building the java AMI (t2.micro) |
 | owner | Tag Value - Used to identify who is responsible for the resource |
 | publish_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the aem_base build) |
-| publish_instance_type | The EC2 instance type to use while building the publish AMI (m3.large) |
+| publish_instance_type | The EC2 instance type to use while building the publish AMI (m4.large) |
 | puppet_bin_dir | The location where puppet exists within the AMI (/opt/puppetlabs/bin) |
 
 #### virtualbox-iso builder
@@ -135,24 +133,15 @@ _todo: populate configuration items. specify items in hieradata yaml files. ment
 
 
 
-#### base_aem.yaml
-
-| Name            | Default Value   |
-| -------------   |:-------------:|
-| aem_base::aem_quickstart_source: | "file:///tmp/cq-quickstart.jar" |
-| aem_base::packer_user: | "%{hiera('packer_user')}" |
-| aem_base::packer_group: | "%{hiera('packer_group')}" |
-
-
-
 #### author.yaml
 
 | Name            | Default Value   |
 | -------------   |:-------------:|
+| author::aem_quickstart_source: | "%{hiera('aem_quickstart_source')}" |
 | author::aem_license_source: | "%{hiera('aem_license_source')}" |
+| author::aem_healthcheck_version: | "%{hiera('aem_healthcheck_version')}" |
 | author::aem_sample_content: |  false |
-| author::packer_user: | "%{hiera('packer_user')}" |
-| author::packer_group: | "%{hiera('packer_group')}" |
+| aem_base::aem_healthcheck_version: | "%{hiera('aem_healthcheck_version')}" |
 
 
 
@@ -161,10 +150,12 @@ _todo: populate configuration items. specify items in hieradata yaml files. ment
 
 | Name            | Default Value   |
 | -------------   |:-------------:|
+| publish::aem_quickstart_source: | "%{hiera('aem_quickstart_source')}" |
 | publish::aem_license_source: |  "%{hiera('aem_license_source')}" |
+| publish::aem_healthcheck_version: | "%{hiera('aem_healthcheck_version')}" |
 | publish::aem_sample_content: | false |
-| publish::packer_user: | "%{hiera('packer_user')}" |
-| publish::packer_group: | "%{hiera('packer_group')}" |
+| aem_base::aem_healthcheck_version: | "%{hiera('aem_healthcheck_version')}" |
+
 
 
 #### httpd.yaml
@@ -181,7 +172,7 @@ Does not contain configuration at this time.
 
 | Name            | Default Value   |
 | -------------   |:-------------:|
-| dispatcher::installation_source: | 'https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_8/file.res/dispatcher-apache2.4-linux-x86-64-4.2.1.tar.gz' |
+| dispatcher::aem_dispatcher_source: | 'https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_8/file.res/dispatcher-apache2.4-linux-x86-64-4.2.1.tar.gz' |
 | dispatcher::filename: | 'dispatcher-apache2.4-linux-x86-64-4.2.1.tar.gz' |
 | dispatcher::tmp_dir: | '/tmp/dispatcher-apache2.4-linux-x86-64-4.2.1' |
 | dispatcher::module_filename: | 'dispatcher-apache2.4-4.2.1.so' |
