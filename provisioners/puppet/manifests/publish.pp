@@ -1,14 +1,12 @@
 class publish (
-  $packer_user,
-  $packer_group,
+  $aem_quickstart_source,
+  $aem_license_source,
   $aem_healthcheck_version,
-  $aem_quickstart_source = '/opt/aem/cq-quickstart.jar',
-  $aem_license_source = '/tmp/license.properties',
-  $aem_base = '/opt',
-  $aem_jvm_mem_opts = '-Xmx4096m',
-  $aem_port = '4503',
+  $aem_base           = '/opt',
+  $aem_jvm_mem_opts   = '-Xmx4096m',
+  $aem_port           = '4503',
   $aem_sample_content = false
-){
+) {
 
   stage { 'test':
     require => Stage['main']
@@ -29,30 +27,36 @@ class publish (
     require => File["${aem_base}/aem"],
   }
 
-  file { "${aem_base}/aem/publish/license.properties":
-    ensure  => file,
+  # Retrieve the cq-quickstart jar and move into aem/publish directory
+  archive { "${aem_base}/aem/publish/aem-publish-${aem_port}.jar":
+    ensure  => present,
+    source  => $aem_quickstart_source,
+    cleanup => false,
+    require => File["${aem_base}/aem/publish"],
+  } ->
+    file { "${aem_base}/aem/publish/aem-publish-${aem_port}.jar":
+      ensure  => file,
+      mode    => '0775',
+      owner   => 'aem',
+      group   => 'aem',
+      require => File["${aem_base}/aem/publish"],
+    }
+
+  # Retrieve the license file and move into aem/publish directory
+  archive { "${aem_base}/aem/publish/license.properties":
+    ensure  => present,
     source  => "${aem_license_source}",
-    mode    => '0440',
-    owner   => 'aem',
-    group   => 'aem',
+    cleanup => false,
     require => File["${aem_base}/aem/publish"],
-  }
+  } ->
+    file { "${aem_base}/aem/publish/license.properties":
+      ensure => file,
+      mode   => '0440',
+      owner  => 'aem',
+      group  => 'aem',
+    }
 
-  file { "${aem_base}/aem/publish/aem-publish-${aem_port}.jar":
-    ensure  => file,
-    source  => "${aem_quickstart_source}",
-    mode    => '0775',
-    owner   => 'aem',
-    group   => 'aem',
-    require => File["${aem_base}/aem/publish"],
-  }
-
-  file { "${aem_quickstart_source}":
-    ensure  => absent,
-    require => File["${aem_base}/aem/publish/aem-publish-${aem_port}.jar"],
-  }
-
-  aem::instance { 'aem' :
+  aem::instance { 'aem':
     source         => "${aem_base}/aem/publish/aem-publish-${aem_port}.jar",
     home           => "${aem_base}/aem/publish",
     type           => 'publish',
@@ -65,7 +69,7 @@ class publish (
 
   file { '/etc/puppetlabs/puppet/aem.yaml':
     ensure  => file,
-    content => epp('/tmp/templates/aem.yaml.epp', {'port' => $aem_port}),
+    content => epp('/tmp/templates/aem.yaml.epp', { 'port' => $aem_port }),
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
@@ -106,16 +110,17 @@ class publish (
       File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
     ]
   } ->
-  exec { 'service aem-aem stop':
-    cwd  => '/tmp',
-    path => ['/usr/bin', '/usr/sbin'],
-  }
+    exec { 'service aem-aem stop':
+      cwd  => '/tmp',
+      path => ['/usr/bin', '/usr/sbin'],
+    }
 
   class { 'serverspec':
-    stage     => 'test',
-    component => 'publish',
-    tries     => 5,
-    try_sleep => 3,
+    stage             => 'test',
+    component         => 'publish',
+    staging_directory => '/tmp/packer-puppet-masterless-1',
+    tries             => 5,
+    try_sleep         => 3,
   }
 
 }

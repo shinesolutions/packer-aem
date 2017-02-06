@@ -86,7 +86,8 @@
       "type": "json-updater",
       "ami_id": {
         "{{user `var_file`}}": [
-          "aem_base_ami_source_ami"
+          "author_ami_source_ami",
+          "publish_ami_source_ami"
         ]
       }
     }
