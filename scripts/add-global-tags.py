@@ -26,7 +26,7 @@ def read_global_tags(file_name):
     tags = ruamel.yaml.load(file, Loader=ruamel.yaml.SafeLoader)
     file.close()
 
-    return [(entry['Key'], entry['Value']) for entry in global_tags['Tags']]
+    return [(entry['Key'], entry['Value']) for entry in tags['Tags']]
 
 
 def add_tags(global_tags, template, tag_key):
