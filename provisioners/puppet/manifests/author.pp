@@ -11,6 +11,9 @@ class author (
   stage { 'test':
     require => Stage['main']
   }
+  stage { 'shutdown':
+    require => Stage['test'],
+  }
 
   file { "${aem_base}/aem":
     ensure => directory,
@@ -114,11 +117,7 @@ class author (
       Class['aem_resources::create_system_users'],
       File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
     ]
-  } ->
-    exec { 'service aem-aem stop':
-      cwd  => '/tmp',
-      path => ['/usr/bin', '/usr/sbin'],
-    }
+  }
 
   class { 'serverspec':
     stage             => 'test',
@@ -126,6 +125,19 @@ class author (
     staging_directory => '/tmp/packer-puppet-masterless-1',
     tries             => 5,
     try_sleep         => 3,
+  }
+
+  class { 'author_shutdown':
+    stage => 'shutdown',
+  }
+
+}
+
+class author_shutdown {
+
+  exec { 'service aem-aem stop':
+    cwd  => '/tmp',
+    path => ['/usr/bin', '/usr/sbin'],
   }
 
 }
