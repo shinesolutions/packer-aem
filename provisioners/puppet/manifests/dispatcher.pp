@@ -10,6 +10,9 @@ class dispatcher (
   stage { 'test':
     require => Stage['main']
   }
+  stage { 'shutdown':
+    require => Stage['test'],
+  }
 
   file { $tmp_dir:
     ensure => directory,
@@ -46,6 +49,19 @@ class dispatcher (
     component => 'dispatcher',
     tries     => 15,
     try_sleep => 3,
+  }
+
+  class { 'dispatcher_shutdown':
+    stage => 'shutdown',
+  }
+
+}
+
+class dispatcher_shutdown {
+
+  exec { 'service httpd stop':
+    cwd  => '/tmp',
+    path => ['/usr/bin', '/usr/sbin'],
   }
 
 }
