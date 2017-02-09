@@ -19,19 +19,19 @@ class aem_base (
     cleanup => false,
     require => File["${aem_base}/aem"],
   } ->
-    file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
-      ensure => file,
-      mode   => '0664',
-    }
+  file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
+    ensure => file,
+    mode   => '0664',
+  }
 
   package { 'nokogiri':
     ensure   => '1.6.8.1',
     provider => 'puppet_gem',
   } ->
-    package { 'ruby_aem':
-      ensure   => '1.0.6',
-      provider => 'puppet_gem',
-    }
+  package { 'ruby_aem':
+    ensure   => '1.0.7',
+    provider => 'puppet_gem',
+  }
 
   class { 'serverspec':
     stage             => 'test',

@@ -43,11 +43,11 @@ end
 # https://github.com/bstopp/puppet-aem/commit/a28d87fbf6bafc81ff00dec1759d8848708f32af
 describe service('aem-aem') do
   it { should_not be_enabled }
-  it { should_not be_running }
+  it { should be_running }
 end
 
 describe port(aem_port) do
-  it { should_not be_listening }
+  it { should be_listening }
 end
 
 describe file('/etc/puppetlabs/puppet/aem.yaml') do
@@ -62,4 +62,3 @@ end
 # describe command('curl -sL -w "%{http_code}\\n" "localhost:4502/system/health?tags=devops" -o /dev/null | sed "s/200/OK/"') do
 #   its(:stdout) { should match 'OK' }
 # end
-

@@ -11,6 +11,9 @@ class author (
   stage { 'test':
     require => Stage['main']
   }
+  stage { 'shutdown':
+    require => Stage['test'],
+  }
 
   file { "${aem_base}/aem":
     ensure => directory,
@@ -108,17 +111,16 @@ class author (
 
   # Ensure login page is still ready after all provisioning steps and before stopping AEM.
   aem_aem { 'Ensure login page is ready':
-    ensure  => login_page_is_ready,
-    require => [
+    ensure                     => login_page_is_ready,
+    retries_max_tries          => 30,
+    retries_base_sleep_seconds => 5,
+    retries_max_sleep_seconds  => 5,
+    require                    => [
       Class['aem_resources::author_remove_default_agents'],
       Class['aem_resources::create_system_users'],
       File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
     ]
-  } ->
-    exec { 'service aem-aem stop':
-      cwd  => '/tmp',
-      path => ['/usr/bin', '/usr/sbin'],
-    }
+  }
 
   class { 'serverspec':
     stage             => 'test',
@@ -126,6 +128,19 @@ class author (
     staging_directory => '/tmp/packer-puppet-masterless-1',
     tries             => 5,
     try_sleep         => 3,
+  }
+
+  class { 'author_shutdown':
+    stage => 'shutdown',
+  }
+
+}
+
+class author_shutdown {
+
+  exec { 'service aem-aem stop':
+    cwd  => '/tmp',
+    path => ['/usr/bin', '/usr/sbin'],
   }
 
 }
