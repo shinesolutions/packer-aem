@@ -1,4 +1,7 @@
 {
+  "variables": {
+    "tmp_dir": "/tmp/shinesolutions/packer-aem"
+  },
   "builders": [{
     "name": "all-in-one",
     "type": "virtualbox-iso",
@@ -47,15 +50,16 @@
     {
       "type": "file",
       "source": "conf/hieradata",
-      "destination": "/tmp"
+      "destination": "{{user `tmp_dir`}}"
     },
     {
       "type": "file",
       "source": "test/serverspec",
-      "destination": "/tmp"
+      "destination": "{{user `tmp_dir`}}"
     },
     {
       "type": "puppet-masterless",
+      "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-base",
       "manifest_file": "provisioners/puppet/manifests/base.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [
@@ -66,6 +70,7 @@
     },
     {
       "type": "puppet-masterless",
+      "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-java",
       "manifest_file": "provisioners/puppet/manifests/java.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [
@@ -76,6 +81,7 @@
     },
     {
       "type": "puppet-masterless",
+      "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-httpd",
       "manifest_file": "provisioners/puppet/manifests/httpd.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [
@@ -86,6 +92,7 @@
     },
     {
       "type": "puppet-masterless",
+      "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-author",
       "manifest_file": "provisioners/puppet/manifests/author.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [
@@ -96,6 +103,7 @@
     },
     {
       "type": "puppet-masterless",
+      "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-publish",
       "manifest_file": "provisioners/puppet/manifests/publish.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [
@@ -106,6 +114,7 @@
     },
     {
       "type": "puppet-masterless",
+      "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-dispatcher",
       "manifest_file": "provisioners/puppet/manifests/dispatcher.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [

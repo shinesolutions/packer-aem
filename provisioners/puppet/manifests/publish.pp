@@ -1,4 +1,5 @@
 class publish (
+  $tmp_dir,
   $aem_quickstart_source,
   $aem_license_source,
   $aem_healthcheck_version,
@@ -72,7 +73,7 @@ class publish (
 
   file { '/etc/puppetlabs/puppet/aem.yaml':
     ensure  => file,
-    content => epp('/tmp/templates/aem.yaml.epp', { 'port' => $aem_port }),
+    content => epp("${tmp_dir}/templates/aem.yaml.epp", { 'port' => $aem_port }),
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
@@ -120,7 +121,7 @@ class publish (
   class { 'serverspec':
     stage             => 'test',
     component         => 'publish',
-    staging_directory => '/tmp/packer-puppet-masterless-1',
+    staging_directory => "${tmp_dir}/packer-puppet-masterless-publish",
     tries             => 5,
     try_sleep         => 3,
   }
@@ -134,7 +135,7 @@ class publish (
 class publish_shutdown {
 
   exec { 'service aem-aem stop':
-    cwd  => '/tmp',
+    cwd  => "${publish::tmp_dir}",
     path => ['/usr/bin', '/usr/sbin'],
   }
 

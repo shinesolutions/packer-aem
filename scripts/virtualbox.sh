@@ -2,7 +2,7 @@
 set -x
 
 VBOX_ISO=/home/vagrant/VBoxGuestAdditions.iso
-VBOX_MNTDIR=$(mktemp --tmpdir=/tmp -q -d -t vbox_mnt_XXXXXX)
+VBOX_MNTDIR=$(mktemp --tmpdir=/tmp/shinesolutions/packer-aem -q -d -t vbox_mnt_XXXXXX)
 
 # Install tools
 mount -o loop "$VBOX_ISO" "$VBOX_MNTDIR"

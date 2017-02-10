@@ -1,4 +1,5 @@
 class author (
+  $tmp_dir,
   $aem_quickstart_source,
   $aem_license_source,
   $aem_healthcheck_version,
@@ -72,7 +73,7 @@ class author (
 
   file { '/etc/puppetlabs/puppet/aem.yaml':
     ensure  => file,
-    content => epp('/tmp/templates/aem.yaml.epp', { 'port' => $aem_port }),
+    content => epp("${tmp_dir}/templates/aem.yaml.epp", { 'port' => $aem_port }),
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
@@ -125,7 +126,7 @@ class author (
   class { 'serverspec':
     stage             => 'test',
     component         => 'author',
-    staging_directory => '/tmp/packer-puppet-masterless-1',
+    staging_directory => "${tmp_dir}/packer-puppet-masterless-author",
     tries             => 5,
     try_sleep         => 3,
   }
@@ -139,7 +140,7 @@ class author (
 class author_shutdown {
 
   exec { 'service aem-aem stop':
-    cwd  => '/tmp',
+    cwd  => "${author::tmp_dir}",
     path => ['/usr/bin', '/usr/sbin'],
   }
 

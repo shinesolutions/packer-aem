@@ -27,7 +27,7 @@ lint:
 validate:
 	for AMI in $(AMIS); do \
 		packer validate \
-                        -syntax-only \
+      -syntax-only \
 			-var-file $(var_file) \
 			-var "component=$$AMI" \
 			templates/$$AMI.json; \
@@ -35,7 +35,8 @@ validate:
 
 #TODO: consider having a var-file for each component - which should include the ami_users variable
 $(AMIS):
-	PACKER_LOG_PATH=/tmp/packer-$@.log \
+	mkdir -p logs/
+	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
 		-var-file $(var_file) \

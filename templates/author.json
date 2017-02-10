@@ -15,7 +15,8 @@
     "cost_center": "",
     "ami_users": "",
     "post_puppet_provisioner_script": "provisioners/aws/rhel7/post_puppet.sh",
-    "pre_puppet_provisioner_script": "provisioners/aws/rhel7/pre_puppet.sh"
+    "pre_puppet_provisioner_script": "provisioners/aws/rhel7/pre_puppet.sh",
+    "tmp_dir": "/tmp/shinesolutions/packer-aem"
   },
   "builders": [
     {
@@ -58,21 +59,21 @@
     {
       "type": "file",
       "source": "conf/hieradata",
-      "destination": "/tmp"
+      "destination": "{{user `tmp_dir`}}"
     },
     {
       "type": "file",
       "source": "test/serverspec",
-      "destination": "/tmp"
+      "destination": "{{user `tmp_dir`}}"
     },
     {
       "type": "file",
       "source": "provisioners/puppet/templates",
-      "destination": "/tmp"
+      "destination": "{{user `tmp_dir`}}"
     },
     {
       "type": "puppet-masterless",
-      "staging_directory": "/tmp/packer-puppet-masterless-0",
+      "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-aem_base",
       "manifest_file": "provisioners/puppet/manifests/aem_base.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [
@@ -84,7 +85,7 @@
     {
       "type": "puppet-masterless",
       "extra_arguments": "--debug",
-      "staging_directory": "/tmp/packer-puppet-masterless-1",
+      "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-{{user `component`}}",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "hiera_config_path": "conf/hiera.yaml",
       "module_paths": [
