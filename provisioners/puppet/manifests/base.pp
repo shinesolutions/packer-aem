@@ -31,6 +31,11 @@ class base (
     }
   }
 
+  file_line { 'sudo_rule_keep_proxy_vairables':
+    path => '/etc/sudoers',
+    line => 'Defaults    env_keep += "ftp_proxy http_proxy https_proxy no_proxy"',
+  }
+
   class { 'python' :
     version => 'system',
     pip     => 'present'
