@@ -1,4 +1,5 @@
 class aem_base (
+  $tmp_dir,
   $aem_healthcheck_version,
   $aem_base = '/opt'
 ) {
@@ -36,7 +37,7 @@ class aem_base (
   class { 'serverspec':
     stage             => 'test',
     component         => 'aem_base',
-    staging_directory => '/tmp/packer-puppet-masterless-0',
+    staging_directory => "${tmp_dir}/packer-puppet-masterless-aem_base",
     tries             => 5,
     try_sleep         => 3,
   }

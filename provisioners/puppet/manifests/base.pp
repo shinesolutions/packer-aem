@@ -1,4 +1,5 @@
 class base (
+  $tmp_dir,
   $packer_user,
   $packer_group,
   $rhn_register = false,
@@ -80,24 +81,24 @@ class base (
   # if $install_aws_agents {
   #
   #   #TODO: create a puppet module for installing the aws agent. push it up to puppet forge.
-  #   file { '/tmp/awsagent':
+  #   file { "${tmp_dir}/awsagent":
   #     ensure => directory,
   #     mode   => '0775',
   #     owner  => $packer_user,
   #     group  => $packer_group
   #   } ->
   #   wget::fetch { $aws_agents_install_url:
-  #     destination => '/tmp/awsagent/install',
+  #     destination => "${tmp_dir}/awsagent/install",
   #     timeout     => 0,
   #     verbose     => false,
   #   } ->
-  #   file { '/tmp/awsagent/install':
+  #   file { "${tmp_dir}/awsagent/install":
   #     ensure => file,
   #     mode   => '0755',
   #     owner  => $packer_user,
   #     group  => $packer_group
   #   } ->
-  #   exec { '/tmp/awsagent/install':
+  #   exec { "${tmp_dir}/awsagent/install":
   #     path    => '/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/bin/bash',
   #   }
   #
@@ -135,10 +136,11 @@ class base (
   }
 
   class { 'serverspec':
-    stage     => 'test',
-    component => 'base',
-    tries     => 5,
-    try_sleep => 3,
+    stage             => 'test',
+    component         => 'base',
+    staging_directory => "${tmp_dir}/packer-puppet-masterless-base",
+    tries             => 5,
+    try_sleep         => 3,
   }
 
 }

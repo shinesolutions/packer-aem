@@ -7,3 +7,5 @@ aem_license_source: 's3://aem-artifacts/adobeaemcloud/license-6.2.properties'
 aem_healthcheck_version: 1.3
 
 aem_sample_content: false
+
+tmp_dir: /tmp/shinesolutions/packer-aem

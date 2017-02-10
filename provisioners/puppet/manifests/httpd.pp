@@ -1,28 +1,36 @@
-stage { 'test':
-  require => Stage['main']
-}
-stage { 'shutdown':
-  require => Stage['test'],
-}
+class httpd (
+  $tmp_dir,
+) {
 
-class { 'apache': }
+  stage { 'test':
+    require => Stage['main']
+  }
+  stage { 'shutdown':
+    require => Stage['test'],
+  }
 
-class { 'serverspec':
-  stage     => 'test',
-  component => 'httpd',
-  tries     => 15,
-  try_sleep => 3,
-}
+  class { 'apache': }
 
-class { 'httpd_shutdown':
-  stage => 'shutdown',
+  class { 'serverspec':
+    stage             => 'test',
+    component         => 'httpd',
+    staging_directory => "${tmp_dir}/packer-puppet-masterless-httpd",
+    tries             => 15,
+    try_sleep         => 3,
+  }
+
+  class { 'httpd_shutdown':
+    stage => 'shutdown',
+  }
 }
 
 class httpd_shutdown {
 
   exec { 'service httpd stop':
-    cwd  => '/tmp',
+    cwd  => "${httpd::tmp_dir}",
     path => ['/usr/bin', '/usr/sbin'],
   }
 
 }
+
+include httpd

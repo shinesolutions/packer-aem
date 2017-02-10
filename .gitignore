@@ -13,3 +13,5 @@ Puppetfile.lock
 Gemfile.lock
 .DS_Store
 stage/
+*.pem
+logs/
