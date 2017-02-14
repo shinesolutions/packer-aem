@@ -7,7 +7,7 @@
     "aws_subnet_id": "",
     "aws_security_group_id": "",
     "component": "java",
-    "version": "1.0.0",
+    "version": "x.x.x",
     "java_instance_type": "t2.micro",
     "java_ami_source_ami": "ami-xxxxxxxx",
     "var_file": "",
