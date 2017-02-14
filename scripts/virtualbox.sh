@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -x
+set -o nounset
+set -o errexit
 
 VBOX_ISO=/home/vagrant/VBoxGuestAdditions.iso
 VBOX_MNTDIR=$(mktemp --tmpdir=/tmp/shinesolutions/packer-aem -q -d -t vbox_mnt_XXXXXX)

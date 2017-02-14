@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -x
+set -o nounset
+set -o errexit
 
 echo "Modifying /etc/ssh/sshd_config..."
 echo "UseDNS no" >> /etc/ssh/sshd_config
