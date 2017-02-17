@@ -109,24 +109,21 @@ class base (
   #
   # }
 
-  package { 'gcc':
-    ensure  => 'installed',
-  }
-
-  package { 'ruby-devel':
-    ensure  => 'installed',
-  }
-
-  package { 'zlib-devel':
-    ensure  => 'installed',
-  }
-
   # cloud-init's preferred rendering engine
   package { 'python-cheetah':
     ensure  => installed,
   }
 
-  # needed for running Serverspec, used for testing the provisioned CloudFormation stack
+  # needed for running Serverspec, used for testing baked AMIs and provisioned EC instances
+  package { 'gcc':
+    ensure  => 'installed',
+  }
+  package { 'ruby-devel':
+    ensure  => 'installed',
+  }
+  package { 'zlib-devel':
+    ensure  => 'installed',
+  }
   package { 'rake':
     ensure   => '12.0.0',
     provider => 'gem',

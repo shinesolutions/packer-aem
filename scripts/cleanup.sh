@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -x
+set -o nounset
+set -o errexit
 
 # Remove traces of MAC address and UUID from network configuration
 sed -E -i '/^(HWADDR|UUID)/d' /etc/sysconfig/network-scripts/ifcfg-e*

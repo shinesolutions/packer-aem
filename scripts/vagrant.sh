@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -x
+set -o nounset
+set -o errexit
 
 echo "Adding the vagrant ssh public key..."
 
