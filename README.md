@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/travis/shinesolutions/packer-aem-bootstrap.svg)](http://travis-ci.org/shinesolutions/packer-aem-bootstrap)
+[![Build Status](https://img.shields.io/travis/shinesolutions/packer-aem.svg)](http://travis-ci.org/shinesolutions/packer-aem)
 
 # Packer AEM Bootstrap
 
