@@ -1,8 +1,9 @@
 AMIS = base java httpd author publish dispatcher all-in-one
 var_file ?= conf/aws/rhel7jdk8.json
 version ?= 1.0.0
+packer_aem_version ?= 0.9.0
 
-ci: clean tools deps lint validate
+ci: clean tools deps lint validate package
 
 deps:
 	librarian-puppet install --path modules --verbose
@@ -55,5 +56,22 @@ create-ami-ids-yaml:
 
 tools:
 	gem install puppet puppet-lint librarian-puppet
+
+package:
+	rm -rf stage
+	mkdir -p stage
+	tar \
+	    --exclude='.git*' \
+	    --exclude='.librarian*' \
+	    --exclude='.tmp*' \
+	    --exclude='stage*' \
+	    --exclude='.idea*' \
+	    --exclude='.DS_Store*' \
+	    --exclude='logs*' \
+	    --exclude='*.retry' \
+	    --exclude='*.iml' \
+	    -cvf \
+	    stage/packer-aem-$(packer_aem_version).tar ./
+	gzip stage/packer-aem-$(packer_aem_version).tar
 
 .PHONY: $(AMIS) amis-all ci clean deps lint tools validate create-ami-ids-yaml
