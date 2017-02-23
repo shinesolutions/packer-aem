@@ -6,6 +6,7 @@ ci: clean tools deps lint validate
 
 deps:
 	librarian-puppet install --path modules --verbose
+	pip install -r requirements.txt
 
 clean:
 	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage
