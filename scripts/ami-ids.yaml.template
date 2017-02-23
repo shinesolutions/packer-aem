@@ -1,8 +1,0 @@
-ami_ids:
-  author: '{{ author_ami_id }}'
-  author_dispatcher: '{{ dispatcher_ami_id }}'
-  chaos_monkey: '{{ java_ami_id }}'
-  orchestrator: '{{ java_ami_id }}'
-  publish: '{{ publish_ami_id }}'
-  publish_dispatcher: '{{ dispatcher_ami_id }}'
-
