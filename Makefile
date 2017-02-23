@@ -1,5 +1,5 @@
 AMIS = base java httpd author publish dispatcher all-in-one
-var_file ?= conf/aws/rhel7jdk8.json
+var_file ?= conf/aws/aem62rhel7jdk8.json
 version ?= 1.0.0
 packer_aem_version ?= 0.9.0
 
