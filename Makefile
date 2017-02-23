@@ -8,7 +8,7 @@ deps:
 	librarian-puppet install --path modules --verbose
 
 clean:
-	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache
+	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage
 
 lint:
 	puppet-lint \
@@ -48,7 +48,11 @@ $(AMIS):
 
 amis-all: $(AMIS)
 
+create-ami-ids-yaml:
+	mkdir -p stage/
+	scripts/create-ami-ids-yaml.py
+
 tools:
 	gem install puppet puppet-lint librarian-puppet
 
-.PHONY: $(AMIS) amis-all ci clean deps lint tools validate
+.PHONY: $(AMIS) amis-all ci clean deps lint tools validate create-ami-ids-yaml

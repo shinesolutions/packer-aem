@@ -2,7 +2,6 @@
 .tmp/
 modules/
 templates/_archive/
-*.iml
 .idea/
 Vagrantfile
 output-virtualbox-iso/
