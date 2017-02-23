@@ -8,7 +8,6 @@ output-virtualbox-iso/
 *.box
 .vagrant/
 packer_cache/
-Puppetfile.lock
 Gemfile.lock
 .DS_Store
 stage/
