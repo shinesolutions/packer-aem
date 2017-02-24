@@ -10,7 +10,7 @@
     "version": "x.x.x",
     "base_instance_type": "t2.micro",
     "base_ami_source_ami": "ami-39ac915a",
-    "var_file": "",
+    "ami_var_file": "vars/00_amis.json",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "owner": "",
     "cost_center": "",
@@ -96,7 +96,7 @@
     {
       "type": "json-updater",
       "ami_id": {
-        "{{user `var_file`}}": [
+        "{{user `ami_var_file`}}": [
           "java_ami_source_ami",
           "httpd_ami_source_ami"
         ]

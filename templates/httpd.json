@@ -10,7 +10,7 @@
     "version": "x.x.x",
     "httpd_instance_type": "t2.micro",
     "httpd_ami_source_ami": "ami-xxxxxxxx",
-    "var_file": "",
+    "ami_var_file": "",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "owner": "",
     "cost_center": "",
@@ -87,7 +87,7 @@
     {
       "type": "json-updater",
       "ami_id": {
-        "{{user `var_file`}}": [
+        "{{user `ami_var_file`}}": [
           "dispatcher_ami_source_ami"
         ]
       }

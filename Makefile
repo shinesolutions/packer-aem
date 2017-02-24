@@ -1,5 +1,5 @@
 AMIS = base java httpd author publish dispatcher all-in-one
-var_file ?= conf/aws/rhel7jdk8.json
+ami_var_file ?= vars/00_amis.json
 version ?= 1.0.0
 
 ci: clean tools deps lint validate
@@ -28,7 +28,7 @@ validate:
 	for AMI in $(AMIS); do \
 		packer validate \
       -syntax-only \
-			-var-file $(var_file) \
+			$(foreach var_file,$(sort $(wildcard vars/*)),-var-file $(var_file)) \
 			-var "component=$$AMI" \
 			templates/$$AMI.json; \
 	done
@@ -39,8 +39,8 @@ $(AMIS):
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
-		-var-file $(var_file) \
-		-var 'var_file=$(var_file)' \
+		$(foreach var_file,$(sort $(wildcard vars/*)),-var-file $(var_file)) \
+		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'component=$@' \
 		-var 'version=$(version)' \
 		-var 'ami_users=$(ami_users)' \
