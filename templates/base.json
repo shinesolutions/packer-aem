@@ -78,6 +78,9 @@
     },
     {
       "type": "puppet-masterless",
+      "extra_arguments": [
+        "--debug"
+      ],
       "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-{{user `component`}}",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "hiera_config_path": "conf/hiera.yaml",
