@@ -16,7 +16,7 @@ class base (
 
   class { 'timezone': }
 
-  if $::osfamily == 'redhat' {
+  if ($::osfamily == 'redhat') and ($::operatingsystem != 'Amazon') {
 
     if $rhn_register {
       class { 'rhn_register':
