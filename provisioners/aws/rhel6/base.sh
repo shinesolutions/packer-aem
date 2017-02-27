@@ -8,8 +8,3 @@ yum install puppet-agent -y
 
 # Enable the rhui-REGION-rhel-server-optional to install ruby-devel
 yum-config-manager --enable rhui-REGION-rhel-server-optional
-
-sleep 30
-while pgrep -f yum; do
-    sleep 5
-done

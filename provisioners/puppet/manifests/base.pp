@@ -136,6 +136,9 @@ class base (
     ensure   => '2.38.0',
     provider => 'gem',
   }
+  package { 'io-console':
+    provider => 'gem',
+  }
 
   class { 'serverspec':
     stage             => 'test',
