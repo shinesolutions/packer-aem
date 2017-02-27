@@ -32,7 +32,12 @@ end
 
 if install_aws_cli == 'true'
 
-  describe package('python') do
+  python_package = case os[:family]
+    when 'amazon' then 'python27'
+    else 'python'
+  end
+
+  describe package(python_package) do
     it { should be_installed }
   end
 
@@ -41,7 +46,7 @@ if install_aws_cli == 'true'
     it { should be_executable }
     it { should be_owned_by 'root' }
     it { should be_grouped_into 'root' }
-    it { should be_mode 755 }
+    it { should be_executable }
   end
 
   describe file('/usr/bin/aws') do
@@ -86,7 +91,12 @@ describe package('zlib-devel') do
   it { should be_installed }
 end
 
-describe package('python-cheetah') do
+python_cheetah_package = case os[:family]
+  when 'amazon' then 'python27-cheetah'
+  else 'python-cheetah'
+end
+
+describe package(python_cheetah_package) do
   it { should be_installed }
 end
 
