@@ -149,11 +149,11 @@ class author_shutdown {
     path => '/usr/bin',
   } ->
   file { "${author::aem_base}/aem/author/crx-quickstart/repository/":
-    ensure  => 'link',
-    owner   => 'aem',
-    group   => 'aem',
-    force   => true,
-    target  => "${author::aem_repo_mount_point}",
+    ensure => 'link',
+    owner  => 'aem',
+    group  => 'aem',
+    force  => true,
+    target => "${author::aem_repo_mount_point}",
   }
 }
 

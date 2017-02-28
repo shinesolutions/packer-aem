@@ -39,10 +39,10 @@ class publish (
     require => File["${aem_base}/aem/publish"],
   } ->
   file { "${aem_base}/aem/publish/aem-publish-${aem_port}.jar":
-    ensure  => file,
-    mode    => '0775',
-    owner   => 'aem',
-    group   => 'aem',
+    ensure => file,
+    mode   => '0775',
+    owner  => 'aem',
+    group  => 'aem',
   }
 
   archive { "${aem_base}/aem/publish/license.properties":
@@ -144,11 +144,11 @@ class publish_shutdown {
     path => '/usr/bin',
   } ->
   file { "${publish::aem_base}/aem/publish/crx-quickstart/repository/":
-    ensure  => 'link',
-    owner   => 'aem',
-    group   => 'aem',
-    force   => true,
-    target  => "${publish::aem_repo_mount_point}",
+    ensure => 'link',
+    owner  => 'aem',
+    group  => 'aem',
+    force  => true,
+    target => "${publish::aem_repo_mount_point}",
   }
 }
 
