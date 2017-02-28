@@ -1,11 +1,30 @@
 class aem_base (
   $tmp_dir,
+  $aem_repo_device,
   $aem_healthcheck_version,
+  $aem_repo_mount_point,
   $aem_base = '/opt'
 ) {
 
   stage { 'test':
     require => Stage['main']
+  }
+
+  exec { 'Prepare device for AEM repository':
+    command => "mkfs -t ext4 ${aem_repo_device}",
+    path    => ['/sbin'],
+  } ->
+  file { "${aem_repo_mount_point}":
+    ensure => directory,
+    mode   => '0755',
+  } ->
+  mount { "${aem_repo_mount_point}":
+    ensure   => mounted,
+    device   => $aem_repo_device,
+    fstype   => 'ext4',
+    options  => 'nofail,defaults,noatime',
+    remounts => false,
+    atboot   => false,
   }
 
   file { "${aem_base}/aem":

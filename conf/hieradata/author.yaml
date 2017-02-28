@@ -8,4 +8,7 @@ author::aem_sample_content: false
 aem_base::aem_healthcheck_version: "%{hiera('aem_healthcheck_version')}"
 
 author::tmp_dir: "%{hiera('tmp_dir')}"
+author::aem_repo_mount_point: /mnt/ebs1
 aem_base::tmp_dir: "%{hiera('tmp_dir')}"
+aem_base::aem_repo_device: /dev/xvdb
+aem_base::aem_repo_mount_point: /mnt/ebs1
