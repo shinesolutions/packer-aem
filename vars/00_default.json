@@ -16,8 +16,6 @@
     "iso_url": "file:///some-path/rhel-server-7.2-x86_64-dvd.iso",
     "java_instance_type": "t2.micro",
     "owner": "",
-    "post_puppet_provisioner_script": "provisioners/aws/rhel7/post_puppet.sh",
-    "pre_puppet_provisioner_script": "provisioners/aws/rhel7/pre_puppet.sh",
     "publish_instance_type": "m4.large",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "vm_name": "rhel-7.2-vbox"

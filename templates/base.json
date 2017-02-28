@@ -16,8 +16,6 @@
     "cost_center": "",
     "ami_users": "",
     "base_provisioner_script": "provisioners/aws/rhel7/base.sh",
-    "post_puppet_provisioner_script": "provisioners/aws/rhel7/post_puppet.sh",
-    "pre_puppet_provisioner_script": "provisioners/aws/rhel7/pre_puppet.sh",
     "tmp_dir": "/tmp/shinesolutions/packer-aem"
   },
   "builders": [
@@ -56,7 +54,9 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "{{user `pre_puppet_provisioner_script`}}"
+      "inline": [
+        "mkdir -p {{user `tmp_dir`}}"
+      ]
     },
     {
       "type": "shell",
@@ -92,7 +92,13 @@
     },
     {
       "type": "shell",
-      "script": "{{user `post_puppet_provisioner_script`}}"
+      "inline": [
+        "rm -rf {{user `tmp_dir`}}",
+        "sudo -E find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete"
+      ],
+      "environment_vars" : [
+        "HISTFILE=/dev/null"
+      ]
     }
   ],
   "post-processors": [
