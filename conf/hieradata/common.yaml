@@ -1,4 +1,6 @@
 ---
+base::python_cheetah_package: python-cheetah
+
 packer_user: 'ec2-user'
 packer_group: 'ec2-user'
 

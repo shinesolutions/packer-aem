@@ -96,7 +96,7 @@ python_cheetah_package = case os[:family]
   else 'python-cheetah'
 end
 
-describe package(python_cheetah_package) do
+describe package(@hiera.lookup('base::python_cheetah_package', 'python-cheetah', @scope)) do
   it { should be_installed }
 end
 

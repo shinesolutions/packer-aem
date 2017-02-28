@@ -3,6 +3,7 @@
 :yaml:
   :datadir: "/tmp/shinesolutions/packer-aem/hieradata"
 :hierarchy:
+  - "%{::os.family}/%{::os.name}"
   - "%{::packer_build_name}"
   - "serverspec"
   - "common"

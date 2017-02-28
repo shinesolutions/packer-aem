@@ -4,14 +4,14 @@ version ?= 1.0.0
 
 ci: clean tools deps lint validate
 
-deps:
-	librarian-puppet install --path modules --verbose
+deps: Gemfile.lock
+	bundle exec librarian-puppet install --path modules --verbose
 
 clean:
 	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache
 
-lint:
-	puppet-lint \
+lint: Gemfile.lock
+	bundle exec puppet-lint \
 		--fail-on-warnings \
 		--no-140chars-check \
 		--no-autoloader_layout-check \
@@ -27,7 +27,7 @@ lint:
 validate:
 	for AMI in $(AMIS); do \
 		packer validate \
-      -syntax-only \
+			-syntax-only \
 			$(foreach var_file,$(sort $(wildcard vars/*)),-var-file $(var_file)) \
 			-var "component=$$AMI" \
 			templates/$$AMI.json; \
@@ -50,5 +50,8 @@ amis-all: $(AMIS)
 
 tools:
 	gem install puppet puppet-lint librarian-puppet
+
+Gemfile.lock: Gemfile
+	bundle install
 
 .PHONY: $(AMIS) amis-all ci clean deps lint tools validate

@@ -2,12 +2,13 @@ class base (
   $tmp_dir,
   $packer_user,
   $packer_group,
+  $python_cheetah_package,
   $rhn_register = false,
   $disable_selinux = true,
   $install_aws_cli = true,
   $install_cloudwatchlogs = true,
   $install_aws_agents = true,
-  $aws_agents_install_url = 'https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install'
+  $aws_agents_install_url = 'https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install',
 ){
 
   stage { 'test':
@@ -110,7 +111,7 @@ class base (
   # }
 
   # cloud-init's preferred rendering engine
-  package { 'python-cheetah':
+  package { $python_cheetah_package:
     ensure  => installed,
   }
 
