@@ -69,7 +69,7 @@
     },
     {
       "type": "file",
-      "source": "conf/hieradata",
+      "source": "conf/",
       "destination": "{{user `tmp_dir`}}"
     },
     {
@@ -100,7 +100,7 @@
         "cd {{user `tmp_dir`}}/serverspec",
         "bundle install --path=vendor",
         "export FACTER_packer_build_name={{user `component`}}",
-        "export FACTER_packer_staging_dir={{user `tmp_dir`}}/packer-puppet-masterless",
+        "export FACTER_packer_staging_dir={{user `tmp_dir`}}",
         "bundle exec rake spec SPEC=spec/{{user `component`}}_spec.rb"
       ]
     },
