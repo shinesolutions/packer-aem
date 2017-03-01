@@ -107,15 +107,6 @@ class base (
   package { 'io-console':
     provider => 'gem',
   }
-
-  class { 'serverspec':
-    stage             => 'test',
-    component         => 'base',
-    staging_directory => "${tmp_dir}/packer-puppet-masterless-base",
-    tries             => 5,
-    try_sleep         => 3,
-  }
-
 }
 
 include base

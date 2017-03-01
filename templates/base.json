@@ -73,11 +73,6 @@
       "destination": "{{user `tmp_dir`}}"
     },
     {
-      "type": "file",
-      "source": "test/serverspec",
-      "destination": "{{user `tmp_dir`}}"
-    },
-    {
       "type": "puppet-masterless",
       "extra_arguments": [
         "--debug"
@@ -90,6 +85,24 @@
         "provisioners/puppet/modules"
       ],
       "puppet_bin_dir": "{{user `puppet_bin_dir`}}"
+    },
+    {
+      "type": "file",
+      "source": "test/serverspec",
+      "destination": "{{user `tmp_dir`}}"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "#!/bin/bash -ue",
+        "set -o nounset",
+        "set -o errexit",
+        "cd {{user `tmp_dir`}}/serverspec",
+        "bundle install --path=vendor",
+        "export FACTER_packer_build_name={{user `component`}}",
+        "export FACTER_packer_staging_dir={{user `tmp_dir`}}/packer-puppet-masterless",
+        "bundle exec rake spec SPEC=spec/{{user `component`}}_spec.rb"
+      ]
     },
     {
       "type": "shell",
