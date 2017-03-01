@@ -13,4 +13,5 @@ Gemfile.lock
 stage/
 *.pem
 logs/
+crash.log
 !/provisioners/puppet/modules/

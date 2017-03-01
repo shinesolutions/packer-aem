@@ -56,8 +56,3 @@ describe file('/etc/puppetlabs/puppet/aem.yaml') do
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
 end
-
-# TODO: work in progress
-# describe command('curl -sL -w "%{http_code}\\n" "localhost:4503/system/health?tags=devops" -o /dev/null | sed "s/200/OK/"') do
-#   its(:stdout) { should match 'OK' }
-# end

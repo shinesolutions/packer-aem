@@ -33,6 +33,22 @@
       "security_group_id": "{{user `aws_security_group_id`}}",
       "ami_users": "{{user `ami_users`}}",
       "source_ami": "{{user `author_ami_source_ami`}}",
+      "ami_block_device_mappings": [
+        {
+          "delete_on_termination": true,
+          "device_name": "/dev/sdb",
+          "volume_size": 10,
+          "volume_type": "gp2"
+        }
+      ],
+      "launch_block_device_mappings": [
+        {
+          "delete_on_termination": true,
+          "device_name": "/dev/sdb",
+          "volume_size": 10,
+          "volume_type": "gp2"
+        }
+      ],
       "run_tags": {
         "Application Id": "Adobe Experience Manager (AEM)",
         "Application Role": "AEM Author AMI",
