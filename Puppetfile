@@ -2,7 +2,7 @@ forge 'https://forgeapi.puppetlabs.com'
 
 mod 'bashtoni/timezone'
 mod 'bstopp/aem'
-mod 'jfryman/selinux'
+mod 'puppet/selinux', '0.7.1'
 mod 'kemra102/cloudwatchlogs'
 mod 'maestrodev/wget'
 mod 'pcfens/rhn_register'
