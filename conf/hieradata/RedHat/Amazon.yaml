@@ -1,3 +1,5 @@
 ---
 # Values that should only be applied to Amazon Linux
+base::python_package: python27
+base::python_pip_package: python27-pip
 base::python_cheetah_package: python27-cheetah

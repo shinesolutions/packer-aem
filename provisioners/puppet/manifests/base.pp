@@ -2,6 +2,8 @@ class base (
   $tmp_dir,
   $packer_user,
   $packer_group,
+  $python_package,
+  $python_pip_package,
   $python_cheetah_package,
   $rhn_register = false,
   $disable_selinux = true,
@@ -38,44 +40,20 @@ class base (
     line => 'Defaults    env_keep += "ftp_proxy http_proxy https_proxy no_proxy"',
   }
 
-  class { 'python' :
-    version => 'system',
-    pip     => 'present'
+  package { [ $python_package, $python_pip_package, $python_cheetah_package ]:
+    ensure => latest,
   }
 
-  # needed for running various aem-aws scripts
-  python::pip { 'boto3' :
-    ensure     => 'present',
-    pkgname    => 'boto3',
-    virtualenv => 'system',
-    owner      => 'root',
-    timeout    => 1800,
-  }
-  python::pip { 'request' :
-    ensure     => 'present',
-    pkgname    => 'request',
-    virtualenv => 'system',
-    owner      => 'root',
-    timeout    => 1800,
-  }
-  python::pip { 'retrying' :
-    ensure     => 'present',
-    pkgname    => 'retrying',
-    virtualenv => 'system',
-    owner      => 'root',
-    timeout    => 1800,
+  package { [ 'boto3', 'requests', 'retrying' ]:
+    ensure   => latest,
+    provider => 'pip',
   }
 
   if $install_aws_cli {
-
-    python::pip { 'awscli' :
-      ensure     => 'present',
-      pkgname    => 'awscli',
-      virtualenv => 'system',
-      owner      => 'root',
-      timeout    => 1800,
+    package { 'awscli':
+      ensure   => latest,
+      provider => 'pip',
     }
-
   }
 
   if $install_cloudwatchlogs {
@@ -109,11 +87,6 @@ class base (
   #   }
   #
   # }
-
-  # cloud-init's preferred rendering engine
-  package { $python_cheetah_package:
-    ensure  => installed,
-  }
 
   # needed for running Serverspec, used for testing baked AMIs and provisioned EC instances
   package { 'gcc':

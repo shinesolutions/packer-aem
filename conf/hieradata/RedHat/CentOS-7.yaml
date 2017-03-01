@@ -1,0 +1,5 @@
+---
+# Values that should only be applied to CentOS 7
+base::python_pip_package: python2-pip
+packer_user: centos
+packer_group: centos
