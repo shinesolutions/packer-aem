@@ -92,7 +92,7 @@ class base (
   package { [ 'gcc', 'ruby-devel', 'zlib-devel' ]:
     ensure  => 'installed',
   }
-  package { 'bundler':
+  package { [ 'bundler', 'io-console' ]:
     provider => 'gem',
   }
 }
