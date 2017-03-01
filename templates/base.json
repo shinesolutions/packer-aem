@@ -15,7 +15,6 @@
     "owner": "",
     "cost_center": "",
     "ami_users": "",
-    "base_provisioner_script": "provisioners/aws/rhel7/base.sh",
     "tmp_dir": "/tmp/shinesolutions/packer-aem"
   },
   "builders": [
@@ -33,6 +32,8 @@
       "security_group_id": "{{user `aws_security_group_id`}}",
       "ami_users": "{{user `ami_users`}}",
       "source_ami": "{{user `base_ami_source_ami`}}",
+      "communicator": "ssh",
+      "ssh_pty": true,
       "run_tags": {
         "Application Id": "Adobe Experience Manager (AEM)",
         "Application Role": "Base AMI",
@@ -60,8 +61,8 @@
     },
     {
       "type": "shell",
-      "script": "{{user `base_provisioner_script`}}",
-      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E {{ .Path }}",
+      "script": "provisioners/bash/{{user `base_ami_source_ami`}}.sh",
+      "execute_command": "{{ .Vars }} sudo -E bash {{ .Path }}",
       "environment_vars" : [
         "PUPPET_BIN_DIR={{user `puppet_bin_dir`}}"
       ]
