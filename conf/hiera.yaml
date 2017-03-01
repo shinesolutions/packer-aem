@@ -9,6 +9,6 @@
   - "%{::packer_build_name}"
   - serverspec
   - common
-:logger: console
+:logger: noop
 :merge_behavior: native
 :deep_merge_options: {}
