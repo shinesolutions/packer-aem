@@ -97,6 +97,8 @@
         "#!/bin/bash -ue",
         "set -o nounset",
         "set -o errexit",
+        "export PATH=${PATH}:/sbin:/usr/sbin:/usr/local/sbin",
+
         "cd {{user `tmp_dir`}}/serverspec",
         "bundle install --path=vendor",
         "export FACTER_packer_build_name={{user `component`}}",
