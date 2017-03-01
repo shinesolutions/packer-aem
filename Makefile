@@ -1,4 +1,5 @@
 AMIS = base java httpd author publish dispatcher all-in-one
+VAR_FILES = $(foreach var_file,$(sort $(wildcard vars/*.json)),-var-file $(var_file))
 ami_var_file ?= vars/00_amis.json
 version ?= 1.0.0
 
@@ -28,7 +29,7 @@ validate:
 	for AMI in $(AMIS); do \
 		packer validate \
 			-syntax-only \
-			$(foreach var_file,$(sort $(wildcard vars/*)),-var-file $(var_file)) \
+			$(VAR_FILES) \
 			-var "component=$$AMI" \
 			templates/$$AMI.json; \
 	done
@@ -39,7 +40,7 @@ $(AMIS):
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
-		$(foreach var_file,$(sort $(wildcard vars/*)),-var-file $(var_file)) \
+		$(VAR_FILES) \
 		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'component=$@' \
 		-var 'version=$(version)' \
