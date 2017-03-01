@@ -92,19 +92,7 @@ class base (
   package { [ 'gcc', 'ruby-devel', 'zlib-devel' ]:
     ensure  => 'installed',
   }
-  package { 'rake':
-    ensure   => '12.0.0',
-    provider => 'gem',
-  }
-  package { 'rspec':
-    ensure   => '3.5.0',
-    provider => 'gem',
-  }
-  package { 'serverspec':
-    ensure   => '2.38.0',
-    provider => 'gem',
-  }
-  package { 'io-console':
+  package { 'bundler':
     provider => 'gem',
   }
 }
