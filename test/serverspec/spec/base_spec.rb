@@ -32,29 +32,19 @@ end
 
 if install_aws_cli == 'true'
 
-  python_package = case os[:family]
-    when 'amazon' then 'python27'
-    else 'python'
-  end
-
-  describe package(python_package) do
+  describe package(@hiera.lookup('base::python_package', 'python', @scope)) do
     it { should be_installed }
   end
 
-  describe file('/usr/bin/pip') do
-    it { should exist }
-    it { should be_executable }
-    it { should be_owned_by 'root' }
-    it { should be_grouped_into 'root' }
-    it { should be_executable }
-  end
+  executables = [ '/usr/bin/pip', '/usr/bin/aws' ]
 
-  describe file('/usr/bin/aws') do
-    it { should exist }
-    it { should be_executable }
-    it { should be_owned_by 'root' }
-    it { should be_grouped_into 'root' }
-    it { should be_mode 755 }
+  executables.each do |exe|
+    describe file(exe) do
+      it { should exist }
+      it { should be_executable }
+      it { should be_owned_by 'root' }
+      it { should be_grouped_into 'root' }
+    end
   end
 
 end
@@ -79,28 +69,16 @@ end
 #
 # end
 
-describe package('gcc') do
-  it { should be_installed }
-end
+packages = [
+  'gcc',
+  'ruby-devel',
+  'zlib-devel',
+  'ruby',
+  @hiera.lookup('base::python_cheetah_package', 'python-cheetah', @scope),
+]
 
-describe package('ruby-devel') do
-  it { should be_installed }
-end
-
-describe package('zlib-devel') do
-  it { should be_installed }
-end
-
-python_cheetah_package = case os[:family]
-  when 'amazon' then 'python27-cheetah'
-  else 'python-cheetah'
-end
-
-describe package(@hiera.lookup('base::python_cheetah_package', 'python-cheetah', @scope)) do
-  it { should be_installed }
-end
-
-# the serverspec module installs the ruby package
-describe package('ruby') do
-  it { should be_installed }
+packages.each do |pkg|
+  describe package(pkg) do
+    it { should be_installed }
+  end
 end

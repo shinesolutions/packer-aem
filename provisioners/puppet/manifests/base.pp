@@ -89,13 +89,7 @@ class base (
   # }
 
   # needed for running Serverspec, used for testing baked AMIs and provisioned EC instances
-  package { 'gcc':
-    ensure  => 'installed',
-  }
-  package { 'ruby-devel':
-    ensure  => 'installed',
-  }
-  package { 'zlib-devel':
+  package { [ 'gcc', 'ruby-devel', 'zlib-devel' ]:
     ensure  => 'installed',
   }
   package { 'rake':
