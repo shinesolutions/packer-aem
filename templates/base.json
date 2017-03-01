@@ -75,7 +75,6 @@
     {
       "type": "puppet-masterless",
       "extra_arguments": [
-        "--debug"
       ],
       "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-{{user `component`}}",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
@@ -94,16 +93,17 @@
     {
       "type": "shell",
       "inline": [
-        "#!/bin/bash -ue",
         "set -o nounset",
         "set -o errexit",
         "export PATH=${PATH}:/sbin:/usr/sbin:/usr/local/sbin",
 
         "cd {{user `tmp_dir`}}/serverspec",
         "bundle install --path=vendor",
-        "export FACTER_packer_build_name={{user `component`}}",
-        "export FACTER_packer_staging_dir={{user `tmp_dir`}}",
         "bundle exec rake spec SPEC=spec/{{user `component`}}_spec.rb"
+      ],
+      "environment_vars" : [
+        "FACTER_packer_build_name={{user `component`}}",
+        "FACTER_packer_staging_dir={{user `tmp_dir`}}"
       ]
     },
     {
