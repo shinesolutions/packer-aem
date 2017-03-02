@@ -136,7 +136,7 @@ class publish_shutdown {
 
   exec { 'service aem-aem stop':
     cwd  => "${publish::tmp_dir}",
-    path => ['/usr/bin', '/usr/sbin'],
+    path => ['/sbin','/usr/bin', '/usr/sbin'],
   }
 
 }

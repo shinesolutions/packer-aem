@@ -141,7 +141,7 @@ class author_shutdown {
 
   exec { 'service aem-aem stop':
     cwd  => "${author::tmp_dir}",
-    path => ['/usr/bin', '/usr/sbin'],
+    path => ['/sbin','/usr/bin', '/usr/sbin'],
   }
 
 }
