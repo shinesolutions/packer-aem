@@ -1,0 +1,119 @@
+{
+  "variables": {
+    "aws_region": "ap-southeast-2",
+    "aws_user": "ec2-user",
+    "iam_instance_profile": "",
+    "aws_vpc_id": "",
+    "aws_subnet_id": "",
+    "aws_security_group_id": "",
+    "component": "",
+    "version": "x.x.x",
+    "instance_type": "t2.large",
+    "source_ami": "",
+    "puppet_bin_dir": "/opt/puppetlabs/bin",
+    "owner": "",
+    "cost_center": "",
+    "ami_users": "",
+    "tmp_dir": "/tmp/shinesolutions/packer-aem"
+  },
+  "builders": [
+    {
+      "name": "ami_bake",
+      "type": "amazon-ebs",
+      "ssh_username": "{{user `aws_user`}}",
+      "ami_description": "Packer AEM Bootstrap - Base AMI ({{user `version`}})",
+      "ami_name": "{{user `component`}}-{{user `version`}}-{{timestamp}}",
+      "instance_type": "{{user `instance_type`}}",
+      "region": "{{user `aws_region`}}",
+      "iam_instance_profile": "{{ user `iam_instance_profile` }}",
+      "vpc_id": "{{user `aws_vpc_id`}}",
+      "subnet_id": "{{user `aws_subnet_id`}}",
+      "security_group_id": "{{user `aws_security_group_id`}}",
+      "ami_users": "{{user `ami_users`}}",
+      "source_ami": "{{user `source_ami`}}",
+      "communicator": "ssh",
+      "ssh_pty": true,
+      "run_tags": {
+        "Application Id": "Adobe Experience Manager (AEM)",
+        "Application Role": "Base AMI",
+        "Version": "{{user `version`}}",
+        "Name": "Packer Builder - Base AMI ({{user `version`}})",
+        "Owner": "{{user `owner`}}",
+        "Cost Center": "{{user `cost_center`}}"
+      },
+      "tags": {
+        "Application Id": "Adobe Experience Manager (AEM)",
+        "Application Role": "Base AMI",
+        "Version": "{{user `version`}}",
+        "Name": "Base AMI ({{user `version`}})",
+        "Owner": "{{user `owner`}}",
+        "Cost Center": "{{user `cost_center`}}"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "mkdir -p {{user `tmp_dir`}}"
+      ]
+    },
+    {
+      "type": "shell",
+      "script": "provisioners/bash/{{user `source_ami`}}.sh",
+      "execute_command": "{{ .Vars }} sudo -E bash {{ .Path }}",
+      "environment_vars" : [
+        "PUPPET_BIN_DIR={{user `puppet_bin_dir`}}"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "conf/",
+      "destination": "{{user `tmp_dir`}}"
+    },
+    {
+      "type": "puppet-masterless",
+      "extra_arguments": [
+      ],
+      "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-{{user `component`}}",
+      "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
+      "hiera_config_path": "conf/hiera.yaml",
+      "module_paths": [
+        "modules",
+        "provisioners/puppet/modules"
+      ],
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}"
+    },
+    {
+      "type": "file",
+      "source": "test/serverspec",
+      "destination": "{{user `tmp_dir`}}"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "set -o nounset",
+        "set -o errexit",
+        "export PATH=${PATH}:/sbin:/usr/sbin:/usr/local/sbin",
+
+        "cd {{user `tmp_dir`}}/serverspec",
+        "bundle install --path=vendor",
+        "bundle exec rake spec SPEC=spec/{{user `component`}}_spec.rb"
+      ],
+      "environment_vars" : [
+        "FACTER_packer_build_name={{user `component`}}",
+        "FACTER_packer_staging_dir={{user `tmp_dir`}}"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "rm -rf {{user `tmp_dir`}}",
+        "sudo -E find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete"
+      ],
+      "environment_vars" : [
+        "HISTFILE=/dev/null"
+      ]
+    }
+  ]
+}

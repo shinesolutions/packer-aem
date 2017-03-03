@@ -9,6 +9,10 @@
     { "name": "saz/limits", "version_requirement": "2.5.x" },
     { "name": "puppetlabs/stdlib", "version_requirement": "4.x" },
     { "name": "thias/sysctl", "version_requirement": "1.0.x" },
+    { "name": "bashtoni/timezone", "version_requirement": "1.0.x" },
+    { "name": "kemra102/cloudwatchlogs", "version_requirement": "2.3.x" },
+    { "name": "pcfens/rhn_register", "version_requirement": "1.5.x" },
+    { "name": "puppet/selinux", "version_requirement": "0.7.1" },
     { "name": "MiamiOH/tcpwrappers", "version_requirement": "1.1.x" }
   ],
   "project_page": "https://github.com/shinesolutions/puppet-aem-ami-config",

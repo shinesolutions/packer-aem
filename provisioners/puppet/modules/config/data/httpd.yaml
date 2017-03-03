@@ -1,0 +1,2 @@
+---
+httpd::tmp_dir: "%{hiera('tmp_dir')}"
