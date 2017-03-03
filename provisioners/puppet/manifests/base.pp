@@ -42,7 +42,9 @@ class base (
     pip     => 'present'
   }
 
-  # needed for running various aem-aws scripts
+  # needed for running various aem-tools and aws-tools scripts
+  # TODO: this is a candidate to be moved to a package requirement
+  # when those Python scripts are turned into a proper CLI app
   python::pip { 'boto3' :
     ensure     => 'present',
     pkgname    => 'boto3',
@@ -60,6 +62,13 @@ class base (
   python::pip { 'retrying' :
     ensure     => 'present',
     pkgname    => 'retrying',
+    virtualenv => 'system',
+    owner      => 'root',
+    timeout    => 1800,
+  }
+  python::pip { 'sh' :
+    ensure     => 'present',
+    pkgname    => 'sh',
     virtualenv => 'system',
     owner      => 'root',
     timeout    => 1800,
