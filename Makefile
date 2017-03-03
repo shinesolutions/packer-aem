@@ -1,12 +1,13 @@
-AMIS = base java httpd author publish dispatcher all-in-one
+AMIS = soe base java httpd author publish dispatcher all-in-one
 VAR_FILES = $(foreach var_file,$(sort $(wildcard vars/*.json)),-var-file $(var_file))
 ami_var_file ?= vars/00_amis.json
 version ?= 1.0.0
 
 ci: clean tools deps lint validate
 
-deps: Gemfile.lock
+modules/.librarian-puppet-has-run: Gemfile.lock
 	bundle exec librarian-puppet install --path modules --verbose
+	touch modules/.librarian-puppet-has-run
 
 clean:
 	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache
@@ -35,7 +36,7 @@ validate:
 	done
 
 #TODO: consider having a var-file for each component - which should include the ami_users variable
-$(AMIS):
+$(AMIS): modules/.librarian-puppet-has-run
 	mkdir -p logs/
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
@@ -45,7 +46,7 @@ $(AMIS):
 		-var 'component=$@' \
 		-var 'version=$(version)' \
 		-var 'ami_users=$(ami_users)' \
-		templates/$@.json
+		templates/generic.json
 
 amis-all: $(AMIS)
 
