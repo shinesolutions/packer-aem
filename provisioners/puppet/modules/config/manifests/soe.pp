@@ -21,7 +21,7 @@
 class config::soe (
   $modprobe_file = '/etc/modprobe.d/CIS.conf',
 ) {
-  include ::config
+  require ::config
 
   File {
     owner  => root,

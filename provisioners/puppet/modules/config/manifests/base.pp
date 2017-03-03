@@ -42,7 +42,7 @@ class config::base (
   $install_aws_cli = true,
   $install_cloudwatchlogs = true,
 ){
-  include ::config::soe
+  require ::config::soe
 
   class { '::timezone': }
 

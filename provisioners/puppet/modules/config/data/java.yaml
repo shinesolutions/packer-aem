@@ -1,8 +1,0 @@
----
-classes:
-  - 'jdk_oracle'
-jdk_oracle::version: '8'
-jdk_oracle::version_update: '112'
-jdk_oracle::version_build: '15'
-
-java::tmp_dir: "%{hiera('tmp_dir')}"

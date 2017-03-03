@@ -1,15 +1,13 @@
 ---
-base::python_package: python
-base::python_pip_package: python-pip
-base::python_cheetah_package: python-cheetah
-
-packer_user: 'ec2-user'
-packer_group: 'ec2-user'
-
-aem_quickstart_source: 's3://aem-artifacts/adobeaemcloud/AEM_6.2_Quickstart.jar'
-aem_license_source: 's3://aem-artifacts/adobeaemcloud/license-6.2.properties'
-aem_healthcheck_version: 1.3
-
-aem_sample_content: false
-
 tmp_dir: /tmp/shinesolutions/packer-aem
+
+timezone::region: 'Australia'
+timezone::locality: 'Melbourne'
+
+cloudwatchlogs::region: 'ap-southeast-2'
+
+jdk_oracle::version: '8'
+jdk_oracle::version_update: '112'
+jdk_oracle::version_build: '15'
+
+java::tmp_dir: "%{hiera('tmp_dir')}"
