@@ -10,3 +10,9 @@ mod 'puppet/archive'
 mod 'puppetlabs/apache'
 mod 'tylerwalts/jdk_oracle'
 mod 'shinesolutions/aem_resources', :git => 'https://github.com/shinesolutions/puppet-aem-resources'
+
+# Needed by `config` module
+mod 'saz/limits'
+mod 'puppetlabs/stdlib'
+mod 'thias/sysctl'
+mod 'MiamiOH/tcpwrappers'
