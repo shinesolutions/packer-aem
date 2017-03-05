@@ -41,7 +41,7 @@ class dispatcher (
   } ->
   exec { 'httpd -k graceful':
     cwd  => "${tmp_dir}",
-    path => ['/sbin'],
+    path => ['/sbin','/usr/sbin'],
   }
 
   class { 'serverspec':
@@ -62,7 +62,7 @@ class dispatcher_shutdown {
 
   exec { 'service httpd stop':
     cwd  => "${dispatcher::tmp_dir}",
-    path => ['/usr/bin', '/usr/sbin'],
+    path => ['/sbin/','/usr/bin', '/usr/sbin'],
   }
 
 }

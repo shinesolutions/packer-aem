@@ -1,5 +1,5 @@
 class httpd (
-  $tmp_dir,
+  $tmp_dir
 ) {
 
   stage { 'test':
@@ -9,14 +9,14 @@ class httpd (
     require => Stage['test'],
   }
 
-  class { 'apache': }
+  class { 'apache':}
 
   class { 'serverspec':
     stage             => 'test',
     component         => 'httpd',
     staging_directory => "${tmp_dir}/packer-puppet-masterless-httpd",
     tries             => 15,
-    try_sleep         => 3,
+    try_sleep         => 6,
   }
 
   class { 'httpd_shutdown':
@@ -28,7 +28,7 @@ class httpd_shutdown {
 
   exec { 'service httpd stop':
     cwd  => "${httpd::tmp_dir}",
-    path => ['/usr/bin', '/usr/sbin'],
+    path => ['/sbin', '/usr/bin', '/usr/sbin'],
   }
 
 }
