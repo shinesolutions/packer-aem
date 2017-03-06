@@ -1,10 +1,9 @@
 require 'spec_helper'
 
-apache_version = @hiera.lookup('apache::apache_version', nil, @scope)
-apache_version ||= ''
-apache_version = apache_version.tr('.','')
+apache_package = @hiera.lookup('apache::apache_name', nil, @scope)
+apache_package ||= 'httpd'
 
-describe package("httpd#{apache_version}") do
+describe package("#{apache_package}") do
   it { should be_installed }
 end
 
