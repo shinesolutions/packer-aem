@@ -36,6 +36,8 @@ class dispatcher (
     group        => $packer_group,
   }
 
+  class { 'apache::mod::headers':
+  }
   class { 'aem::dispatcher' :
     module_file => "${tmp_dir}/${module_filename}",
   } ->
