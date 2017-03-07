@@ -12,14 +12,14 @@ for (( i=0; i < ${#AMI_ROLE_ARR[@]}; i++)); do
 
   for OLD_AMI in $OLD_AMIS; do
     LCG_COUNT=$(aws autoscaling describe-launch-configurations \
-               --query 'LaunchConfigurations[?ImageId==`'$OLD_AMI'`].LaunchConfigurationName'| jq 'length')
-    if [ $LCG_COUNT -gt 0 ]; then
+               --query 'LaunchConfigurations[?ImageId==`'"$OLD_AMI"'`].LaunchConfigurationName'| jq 'length')
+    if [ "$LCG_COUNT" -gt 0 ]; then
       echo "Not deregistering image $OLD_AMI because it is still used by some launch configurations"
       continue
     fi
     RUNNING_COUNT=$(aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" \
-                   --query 'Reservations[].Instances[?ImageId==`'$OLD_AMI'`].InstanceId' | jq 'flatten|length')
-    if [ $RUNNING_COUNT -gt 0 ]; then
+                   --query 'Reservations[].Instances[?ImageId==`'"$OLD_AMI"'`].InstanceId' | jq 'flatten|length')
+    if [ "$RUNNING_COUNT" -gt 0 ]; then
       echo "Not deregistering image $OLD_AMI becuase it is still used by some runningn instances"
       continue
     fi
