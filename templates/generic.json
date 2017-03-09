@@ -73,16 +73,24 @@
     },
     {
       "type": "puppet-masterless",
+      "manifest_file": "provisioners/puppet/manifests/config.pp",
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "module_paths": [
+        "provisioners/puppet/modules"
+      ]
+    },
+    {
+      "type": "puppet-masterless",
       "extra_arguments": [
       ],
       "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-{{user `component`}}",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "hiera_config_path": "conf/hiera.yaml",
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
       "module_paths": [
         "modules",
         "provisioners/puppet/modules"
-      ],
-      "puppet_bin_dir": "{{user `puppet_bin_dir`}}"
+      ]
     },
     {
       "type": "file",
@@ -109,6 +117,7 @@
       "type": "shell",
       "inline": [
         "rm -rf {{user `tmp_dir`}}",
+        "/opt/puppetlabs/bin/puppet resource service aem-aem ensure=stopped",
         "sudo -E find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete"
       ],
       "environment_vars" : [
