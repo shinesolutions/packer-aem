@@ -10,7 +10,7 @@ deps:
 	pip install -r requirements.txt --user
 
 clean:
-	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage
+	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage logs/
 
 lint:
 	puppet-lint \
