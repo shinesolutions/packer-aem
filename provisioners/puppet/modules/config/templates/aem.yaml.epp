@@ -1,0 +1,7 @@
+---
+:username: 'admin'
+:password: 'admin'
+:host: 'localhost'
+:port: <%= $port %>
+:debug: False
+:protocol: 'http'

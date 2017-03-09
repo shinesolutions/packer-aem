@@ -9,7 +9,5 @@ config::author::aem_quickstart_source: "s3://aem-artifacts/adobeaemcloud/AEM_6.2
 config::author::aem_license_source: "s3://aem-artifacts/adobeaemcloud/license-6.2.properties"
 config::author::aem_healthcheck_version: "1.3"
 
-config::author_shutdown::tmp_dir: "%{lookup('config::base::tmp_dir')}"
-
 config::aem_base::tmp_dir: "%{lookup('config::base::tmp_dir')}"
 config::aem_base::aem_healthcheck_version: "%{lookup('config::author::aem_healthcheck_version')}"

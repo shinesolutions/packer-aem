@@ -5,7 +5,7 @@ version ?= 1.0.0
 
 ci: clean tools deps lint validate
 
-modules/.librarian-puppet-has-run: Gemfile.lock
+modules/.librarian-puppet-has-run: Gemfile.lock Puppetfile
 	bundle exec librarian-puppet install --path modules --verbose
 	touch modules/.librarian-puppet-has-run
 
