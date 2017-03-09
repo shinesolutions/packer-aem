@@ -9,6 +9,7 @@ mod 'puppet/archive'
 mod 'puppetlabs/apache'
 mod 'tylerwalts/jdk_oracle'
 mod 'shinesolutions/aem_resources', :git => 'https://github.com/shinesolutions/puppet-aem-resources'
+mod 'puppet-collectd', '5.3.0'
 
 # Needed by `config` module
 mod 'saz/limits'
