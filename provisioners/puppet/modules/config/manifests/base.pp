@@ -41,7 +41,7 @@ class config::base (
   $disable_selinux = true,
   $install_aws_cli = true,
   $install_cloudwatchlogs = true,
-){
+) {
   require ::config::soe
 
   class { '::timezone': }
@@ -84,10 +84,7 @@ class config::base (
   }
 
   if $install_cloudwatchlogs {
-
     class { '::cloudwatchlogs': }
-
   }
-
-  # TODO: create a puppet module for installing the aws agent. push it up to puppet forge.
+  
 }

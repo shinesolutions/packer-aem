@@ -1,6 +1,6 @@
 # == Class: config::author
 #
-# Install AEM and configure for the `author` role.
+# Install AEM and configure for the `publisher` role.
 #
 # === Parameters
 #
@@ -28,34 +28,35 @@
 #
 # === Authors
 #
-# James Sinclair <james.sinclair@shinesolutions.com>
+# Andy Wang <andy.wang@shinesolutions.com>
 #
 # === Copyright
 #
 # Copyright © 2017 Shine Solutions Group, unless otherwise noted.
 #
-class config::author (
+class config::publish (
   $tmp_dir,
   $aem_quickstart_source,
   $aem_license_source,
   $aem_healthcheck_version,
   $aem_base           = '/opt',
   $aem_jvm_mem_opts   = '-Xmx4096m',
-  $aem_port           = '4502',
+  $aem_port           = '4503',
   $aem_sample_content = false
 ) {
-  require ::config::java
-#  require ::config::aem_base
+
+  include ::config::java
+  #include ::config::aem_base
 
 
-  file { [ "${aem_base}/aem", "${aem_base}/aem/author" ]:
-    ensure => directory,
-    mode   => '0775',
-    owner  => 'aem',
-    group  => 'aem',
+  file { [ "${aem_base}/aem", "${aem_base}/aem/publish"]:
+    ensure  => directory,
+    mode    => '0775',
+    owner   => 'aem',
+    group   => 'aem',
   }
 
-  archive { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
+  archive {  "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
     ensure  => present,
     source  => "http://central.maven.org/maven2/com/shinesolutions/aem-healthcheck-content/${aem_healthcheck_version}/aem-healthcheck-content-${aem_healthcheck_version}.zip",
     cleanup => false,
@@ -66,29 +67,29 @@ class config::author (
     mode   => '0664',
   }
 
-  # Retrieve the cq-quickstart jar and move into aem/author directory
-  archive { "${aem_base}/aem/author/aem-author-${aem_port}.jar":
+  # Retrieve the cq-quickstart jar and move into aem/publish directory
+  archive { "${aem_base}/aem/publish/aem-publish-${aem_port}.jar":
     ensure  => present,
     source  => $aem_quickstart_source,
     cleanup => false,
-    require => File["${aem_base}/aem/author"],
+    require => File["${aem_base}/aem/publish"],
   } ->
-  file { "${aem_base}/aem/author/aem-author-${aem_port}.jar":
+  file { "${aem_base}/aem/publish/aem-publish-${aem_port}.jar":
     ensure  => file,
     mode    => '0775',
     owner   => 'aem',
     group   => 'aem',
-    require => File["${aem_base}/aem/author"],
+    require => File["${aem_base}/aem/publish"],
   }
 
-  # Retrieve the license file and move into aem/author directory
-  archive { "${aem_base}/aem/author/license.properties":
+  # Retrieve the license file and move into aem/publish directory
+  archive { "${aem_base}/aem/publish/license.properties":
     ensure  => present,
-    source  => $aem_license_source,
+    source  => "${aem_license_source}",
     cleanup => false,
-    require => File["${aem_base}/aem/author"],
+    require => File["${aem_base}/aem/publish"],
   } ->
-  file { "${aem_base}/aem/author/license.properties":
+  file { "${aem_base}/aem/publish/license.properties":
     ensure => file,
     mode   => '0440',
     owner  => 'aem',
@@ -103,10 +104,11 @@ class config::author (
     '-XX:+PrintGCApplicationStoppedTime',
     '-XX:+HeapDumpOnOutOfMemoryError',
   ]
+
   aem::instance { 'aem':
-    source         => "${aem_base}/aem/author/aem-author-${aem_port}.jar",
-    home           => "${aem_base}/aem/author",
-    type           => 'author',
+    source         => "${aem_base}/aem/publish/aem-publish-${aem_port}.jar",
+    home           => "${aem_base}/aem/publish",
+    type           => 'publish',
     port           => $aem_port,
     sample_content => $aem_sample_content,
     jvm_mem_opts   => $aem_jvm_mem_opts,
@@ -122,17 +124,13 @@ class config::author (
     group   => 'root',
   }
 
-  # Confirm AEM starts up and the login page is ready.
+  # Confirm AEM Starts up and the login page is ready.
   aem_aem { 'Wait until login page is ready':
     ensure  => login_page_is_ready,
     require => [Aem::Instance['aem'], File['/etc/puppetlabs/puppet/aem.yaml']],
   }
 
-  class { '::aem_resources::author_remove_default_agents':
-    require => [Aem_aem['Wait until login page is ready']],
-  }
-
-  class { '::aem_resources::create_system_users':
+  class { 'aem_resources::create_system_users':
     require => [Aem_aem['Wait until login page is ready']],
   }
 
@@ -140,7 +138,7 @@ class config::author (
     ensure    => present,
     name      => 'aem-healthcheck-content',
     group     => 'shinesolutions',
-    version   => $aem_healthcheck_version,
+    version   => "${aem_healthcheck_version}",
     path      => "${aem_base}/aem",
     replicate => false,
     activate  => false,
@@ -149,8 +147,8 @@ class config::author (
   }
 
   exec { "rm -f ${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
-    cwd     => $tmp_dir,
-    path    => ['/bin','/sbin','/usr/bin','/usr/sbin'],
+    cwd  => "${tmp_dir}",
+    path => ['/bin','/sbin','/usr/bin', 'usr/sbin' ],
     require => Aem_package['Install AEM Healthcheck Content Package'],
   }
 
@@ -161,9 +159,9 @@ class config::author (
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
     require                    => [
-      Class['aem_resources::author_remove_default_agents'],
       Class['aem_resources::create_system_users'],
       File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
     ],
   }
+
 }

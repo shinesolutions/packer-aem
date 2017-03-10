@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 AMI_ROLE_ARR=("Base AMI" "Java AMI" "AEM Author AMI" "AEM Publish AMI" "Apache HTTP Server AMI" "AEM Dispatcher AMI")
 
@@ -17,8 +17,9 @@ for (( i=0; i < ${#AMI_ROLE_ARR[@]}; i++)); do
       echo "Not deregistering image $OLD_AMI because it is still used by some launch configurations"
       continue
     fi
-    RUNNING_COUNT=$(aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" \
-                   --query 'Reservations[].Instances[?ImageId==`'"$OLD_AMI"'`].InstanceId' | jq 'flatten|length')
+    RUNNING_COUNT=$(aws ec2 describe-instances --filters "Name=instance-state-name,Values=running"\
+                      "Name=image-id,Values=$OLD_AMI" \
+                   --query 'Reservations[].Instances[].InstanceId' | jq 'flatten|length')
     if [ "$RUNNING_COUNT" -gt 0 ]; then
       echo "Not deregistering image $OLD_AMI becuase it is still used by some runningn instances"
       continue
