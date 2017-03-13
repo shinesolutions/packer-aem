@@ -18,7 +18,7 @@
   },
   "builders": [
     {
-      "name": "ami_bake",
+      "name": "ami_{{user `component`}}",
       "type": "amazon-ebs",
       "ssh_username": "{{user `aws_user`}}",
       "ami_description": "Packer AEM Bootstrap - {{user `component`}} AMI ({{user `version`}})",
