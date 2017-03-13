@@ -39,31 +39,31 @@ class config::dispatcher (
   $packer_group
 ) {
 
-  include apache
+  include ::apache
 
-  file { "${tmp_dir}":
+  file { $tmp_dir:
     ensure => directory,
     owner  => $packer_user,
     group  => $packer_group,
     mode   => '0775',
   }
 
-  archive { "${filename}":
+  archive { $filename:
     path         => "${tmp_dir}/${filename}",
     extract      => true,
-    extract_path => "${tmp_dir}",
+    extract_path => $tmp_dir,
     source       => $aem_dispatcher_source,
     cleanup      => true,
-    require      => File["${tmp_dir}"],
+    require      => File[$tmp_dir],
     user         => $packer_user,
     group        => $packer_group,
   }
 
-  class { 'aem::dispatcher' :
+  class { '::aem::dispatcher' :
     module_file => "${tmp_dir}/${module_filename}",
   } ->
   exec { 'httpd -k graceful':
-    cwd  => "${tmp_dir}",
+    cwd  => $tmp_dir,
     path => ['/sbin','/usr/sbin'],
   }
 

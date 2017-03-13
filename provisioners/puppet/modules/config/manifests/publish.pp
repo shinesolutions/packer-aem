@@ -50,10 +50,10 @@ class config::publish (
 
 
   file { [ "${aem_base}/aem", "${aem_base}/aem/publish"]:
-    ensure  => directory,
-    mode    => '0775',
-    owner   => 'aem',
-    group   => 'aem',
+    ensure => directory,
+    mode   => '0775',
+    owner  => 'aem',
+    group  => 'aem',
   }
 
   archive {  "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
@@ -85,7 +85,7 @@ class config::publish (
   # Retrieve the license file and move into aem/publish directory
   archive { "${aem_base}/aem/publish/license.properties":
     ensure  => present,
-    source  => "${aem_license_source}",
+    source  => $aem_license_source,
     cleanup => false,
     require => File["${aem_base}/aem/publish"],
   } ->
@@ -130,7 +130,7 @@ class config::publish (
     require => [Aem::Instance['aem'], File['/etc/puppetlabs/puppet/aem.yaml']],
   }
 
-  class { 'aem_resources::create_system_users':
+  class { '::aem_resources::create_system_users':
     require => [Aem_aem['Wait until login page is ready']],
   }
 
@@ -138,7 +138,7 @@ class config::publish (
     ensure    => present,
     name      => 'aem-healthcheck-content',
     group     => 'shinesolutions',
-    version   => "${aem_healthcheck_version}",
+    version   => $aem_healthcheck_version,
     path      => "${aem_base}/aem",
     replicate => false,
     activate  => false,
@@ -147,8 +147,8 @@ class config::publish (
   }
 
   exec { "rm -f ${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
-    cwd  => "${tmp_dir}",
-    path => ['/bin','/sbin','/usr/bin', 'usr/sbin' ],
+    cwd     => $tmp_dir,
+    path    => ['/bin','/sbin','/usr/bin', 'usr/sbin' ],
     require => Aem_package['Install AEM Healthcheck Content Package'],
   }
 

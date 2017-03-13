@@ -1,1 +1,1 @@
-include config::publish
+include ::config::publish

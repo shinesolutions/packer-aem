@@ -38,11 +38,11 @@ class config::aem_base (
     command => "mkfs -t ext4 ${aem_repo_device}",
     path    => ['/sbin'],
   } ->
-  file { "${aem_repo_mount_point}":
+  file { $aem_repo_mount_point:
     ensure => directory,
     mode   => '0755',
   } ->
-  mount { "${aem_repo_mount_point}":
+  mount { $aem_repo_mount_point:
     ensure   => mounted,
     device   => $aem_repo_device,
     fstype   => 'ext4',
