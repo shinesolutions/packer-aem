@@ -1,6 +1,6 @@
 #!/bin/bash
 
-AMI_ROLE_ARR=("Base AMI" "Java AMI" "AEM Author AMI" "AEM Publish AMI" "Apache HTTP Server AMI" "AEM Dispatcher AMI")
+AMI_ROLE_ARR=("author AMI" "publish AMI" "dispatcher AMI")
 
 for (( i=0; i < ${#AMI_ROLE_ARR[@]}; i++)); do
   echo "processing images for application role \"${AMI_ROLE_ARR[$i]}\" .... "
