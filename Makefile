@@ -3,7 +3,7 @@ VAR_FILES = $(foreach var_file,$(sort $(wildcard vars/*.json)),-var-file $(var_f
 ami_var_file ?= vars/00_amis.json
 version ?= 1.0.0
 
-ci: clean tools deps lint validate
+ci: clean lint validate
 
 modules/.librarian-puppet-has-run: Gemfile.lock Puppetfile
 	bundle exec librarian-puppet install --path modules --verbose
@@ -48,10 +48,7 @@ $(AMIS): modules/.librarian-puppet-has-run
 
 amis-all: $(AMIS)
 
-tools:
-	gem install puppet puppet-lint librarian-puppet
-
 Gemfile.lock: Gemfile
 	bundle install
 
-.PHONY: $(AMIS) amis-all ci clean deps lint tools validate
+.PHONY: $(AMIS) amis-all ci clean lint validate
