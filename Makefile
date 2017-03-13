@@ -22,7 +22,7 @@ lint: Gemfile.lock
 		--no-selector_inside_resource-check \
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
-	shellcheck $(gfind provisioners scripts -name '*.sh')
+	shellcheck $(find provisioners scripts -name '*.sh')
 
 validate:
 	for AMI in $(AMIS); do \
