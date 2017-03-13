@@ -21,7 +21,7 @@
       "name": "ami_bake",
       "type": "amazon-ebs",
       "ssh_username": "{{user `aws_user`}}",
-      "ami_description": "Packer AEM Bootstrap - Base AMI ({{user `version`}})",
+      "ami_description": "Packer AEM Bootstrap - {{user `component`}} AMI ({{user `version`}})",
       "ami_name": "{{user `component`}}-{{user `version`}}-{{timestamp}}",
       "instance_type": "{{user `instance_type`}}",
       "region": "{{user `aws_region`}}",
@@ -35,17 +35,17 @@
       "ssh_pty": true,
       "run_tags": {
         "Application Id": "Adobe Experience Manager (AEM)",
-        "Application Role": "Base AMI",
+        "Application Role": "{{user `component`}} AMI",
         "Version": "{{user `version`}}",
-        "Name": "Packer Builder - Base AMI ({{user `version`}})",
+        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Owner": "{{user `owner`}}",
         "Cost Center": "{{user `cost_center`}}"
       },
       "tags": {
         "Application Id": "Adobe Experience Manager (AEM)",
-        "Application Role": "Base AMI",
+        "Application Role": "{{user `component`}} AMI",
         "Version": "{{user `version`}}",
-        "Name": "Base AMI ({{user `version`}})",
+        "Name": "{{user `component`}} AMI ({{user `version`}})",
         "Owner": "{{user `owner`}}",
         "Cost Center": "{{user `cost_center`}}"
       }

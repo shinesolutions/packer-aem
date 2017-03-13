@@ -311,11 +311,4 @@ class config::soe (
     }
   }
 
-  yumrepo { 'newrelic-infra':
-    ensure  => present,
-    descr   => 'New Relic Infrastructure',
-    baseurl => "http://download.newrelic.com/infrastructure_agent/linux/yum/el/6/${::facts[os][architecture]}",
-    gpgkey  => 'https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg',
-    enabled => true,
-  }
 }

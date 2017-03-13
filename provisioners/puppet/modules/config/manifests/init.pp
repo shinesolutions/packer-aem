@@ -4,6 +4,12 @@
 #
 # === Parameters
 #
+# [*newrelic_releasever*]
+#   The release version to use when constructing the repo baseurl.
+#
+# [*newrelic_architecture*]
+#   The architecture to use when constructing the repo baseurl.
+#
 # === Authors
 #
 # James Sinclair <james.sinclair@shinesolutions.com>
@@ -12,7 +18,10 @@
 #
 # Copyright © 2017	Shine Solutions Group, unless otherwise noted.
 #
-class config () {
+class config (
+  $newrelic_releasever = '$releasever',
+  $newrelic_architecture = $::facts[os][architecture]
+) {
   # needed for running Serverspec, used for testing baked AMIs and provisioned EC instances
   package { [ 'gcc', 'ruby-devel', 'zlib-devel' ]:
     ensure  => 'installed',
@@ -27,5 +36,12 @@ class config () {
   package { 'ruby_aem':
     ensure   => '1.0.8',
     provider => 'puppet_gem',
+  }
+  yumrepo { 'newrelic-infra':
+    ensure  => present,
+    descr   => 'New Relic Infrastructure',
+    baseurl => "http://download.newrelic.com/infrastructure_agent/linux/yum/el/${newrelic_releasever}/${newrelic_architecture}",
+    gpgkey  => 'https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg',
+    enabled => true,
   }
 }

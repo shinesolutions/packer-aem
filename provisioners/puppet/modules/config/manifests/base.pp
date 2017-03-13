@@ -24,6 +24,12 @@
 # [*install_cloudwatchlogs*]
 #   Boolean that determines whether `cloudwatchlogs` will be installed.
 #
+# [*install_collectd*]
+#   Boolean that determines whether `collectd` will be installed.
+#
+# [*collectd_cloudwatch_source_url*]
+#   URL to a `.tar.gz` file of the `collectd-cloudwatch` source.
+#
 # === Authors
 #
 # James Sinclair <james.sinclair@shinesolutions.com>
@@ -41,8 +47,10 @@ class config::base (
   $disable_selinux = true,
   $install_aws_cli = true,
   $install_cloudwatchlogs = true,
-) {
-  require ::config::soe
+  $install_collectd = true,
+  $collectd_cloudwatch_source_url = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
+){
+  require ::config
 
   class { '::timezone': }
 
@@ -86,5 +94,67 @@ class config::base (
   if $install_cloudwatchlogs {
     class { '::cloudwatchlogs': }
   }
-  
+
+  if $install_collectd {
+    $collectd_plugins = [
+      'syslog', 'cpu', 'interface', 'load', 'memory',
+    ]
+    $collectd_jmx_types_path = '/usr/share/collectd/jmx.db'
+    $collectd_cloudwatch_base_dir = '/opt/collectd-cloudwatch'
+    file { '/opt/collectd-cloudwatch':
+      ensure => directory,
+    }
+    archive { '/tmp/collectd-cloudwatch.tar.gz':
+      extract       => true,
+      extract_path  => $collectd_cloudwatch_base_dir,
+      extract_flags => '--strip-components=1 -xvzf',
+      creates       => "${collectd_cloudwatch_base_dir}/src/cloudwatch_writer.py",
+      source        => $collectd_cloudwatch_source_url,
+      cleanup       => true,
+    }
+    class { '::collectd':
+      purge           => true,
+      recurse         => true,
+      purge_config    => true,
+      minimum_version => '5.4',
+      package_ensure  => latest,
+      service_ensure  => stopped,
+      service_enable  => false,
+      typesdb         => [
+        '/usr/share/collectd/types.db',
+        $collectd_jmx_types_path,
+      ],
+    }
+    file { $collectd_jmx_types_path:
+      ensure  => present,
+      content => file('config/collectd_jmx_types.db'),
+      require => Package[$::collectd::install::package_name],
+    }
+    collectd::plugin { $collectd_plugins:
+      ensure => present,
+    }
+    class { '::collectd::plugin::python':
+      modulepaths => [
+        '/usr/lib/python2.7/dist-packages',
+        '/usr/local/lib/python2.7/site-packages',
+        "${collectd_cloudwatch_base_dir}/src",
+      ],
+      logtraces   => true,
+    }
+    collectd::plugin::python::module {'cloudwatch_writer':
+      script_source => 'puppet:///modules/config/cloudwatch_writer.py',
+    }
+    $cloudwatch_memory_stats = [
+      'used', 'buffered', 'cached', 'free',
+    ]
+    $cloudwatch_memory_stats.each |$stat| {
+      file_line { "${stat} memory":
+        ensure  => present,
+        line    => "memory--memory-${stat}",
+        path    => "${collectd_cloudwatch_base_dir}/src/cloudwatch/config/whitelist.conf",
+        require => Collectd::Plugin::Python::Module['cloudwatch_writer'],
+      }
+    }
+  }
+  # TODO: create a puppet module for installing the aws agent. push it up to puppet forge.
 }
