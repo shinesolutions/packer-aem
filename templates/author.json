@@ -46,7 +46,7 @@
         {
           "delete_on_termination": true,
           "device_name": "/dev/sdb",
-          "volume_size": 10,
+          "volume_size": "{{user `author_repository_volume_size`}}",
           "volume_type": "gp2"
         }
       ],
