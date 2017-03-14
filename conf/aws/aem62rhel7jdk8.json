@@ -2,6 +2,7 @@
     "ami_users": "",
     "author_ami_source_ami": "ami-9fbdbefc",
     "author_instance_type": "m4.large",
+    "author_repository_volume_size" : "50",
     "aws_region": "ap-southeast-2",
     "aws_security_group_id": "",
     "aws_subnet_id": "",
@@ -25,6 +26,7 @@
     "pre_puppet_provisioner_script": "provisioners/aws/rhel7/pre_puppet.sh",
     "publish_ami_source_ami": "ami-9fbdbefc",
     "publish_instance_type": "m4.large",
+    "publish_repository_volume_size" : "50",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "vm_name": "rhel-7.2-vbox"
 }

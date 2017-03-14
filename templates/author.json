@@ -10,6 +10,7 @@
     "version": "x.x.x",
     "author_instance_type": "m4.large",
     "author_ami_source_ami": "ami-xxxxxxxx",
+    "author_repository_volume_size": "50",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "owner": "",
     "cost_center": "",
@@ -37,7 +38,7 @@
         {
           "delete_on_termination": true,
           "device_name": "/dev/sdb",
-          "volume_size": 10,
+          "volume_size": "{{user `author_repository_volume_size`}}",
           "volume_type": "gp2"
         }
       ],
