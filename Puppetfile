@@ -8,7 +8,7 @@ mod 'pcfens/rhn_register'
 mod 'puppet/archive'
 mod 'puppetlabs/apache'
 mod 'aco-oracle_java', '2.8.0'
-mod 'shinesolutions/aem_resources', :git => 'https://github.com/shinesolutions/puppet-aem-resources'
+mod 'shinesolutions/aem_resources'
 mod 'puppet-collectd', '5.3.0'
 
 # Needed by `config` module
