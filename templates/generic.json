@@ -130,7 +130,8 @@
       "type": "json-updater",
       "ami_id": {
         "{{user `ami_var_file`}}": [
-          "{{user `component`}}_ami"
+          "{{user `component`}}_ami",
+          "source_ami"
         ]
       }
     }

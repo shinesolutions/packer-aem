@@ -1,5 +1,6 @@
-AMIS = soe base java httpd author publish dispatcher all-in-one
-VAR_FILES = $(foreach var_file,$(sort $(wildcard vars/*.json)),-var-file $(var_file))
+AMIS = soe java author publish dispatcher all-in-one
+VAR_FILES = $(sort $(wildcard vars/*.json))
+VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 ami_var_file ?= vars/00_amis.json
 version ?= 1.0.0
 
@@ -28,7 +29,7 @@ validate:
 	for AMI in $(AMIS); do \
 		packer validate \
 			-syntax-only \
-			$(VAR_FILES) \
+			$(VAR_PARAMS) \
 			-var "component=$$AMI" \
 			templates/$$AMI.json; \
 	done
@@ -39,7 +40,7 @@ $(AMIS): modules/.librarian-puppet-has-run
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
-		$(VAR_FILES) \
+		$(VAR_PARAMS) \
 		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'component=$@' \
 		-var 'version=$(version)' \
@@ -48,7 +49,10 @@ $(AMIS): modules/.librarian-puppet-has-run
 
 amis-all: $(AMIS)
 
+var_files:
+	@echo $(VAR_FILES) $(ami_var_file)
+
 Gemfile.lock: Gemfile
 	bundle install
 
-.PHONY: $(AMIS) amis-all ci clean lint validate
+.PHONY: $(AMIS) amis-all ci clean lint validate var_files
