@@ -128,10 +128,14 @@ class config::publish (
   aem_aem { 'Wait until login page is ready':
     ensure  => login_page_is_ready,
     require => [Aem::Instance['aem'], File['/etc/puppetlabs/puppet/aem.yaml']],
+  } ->
+  exec {'Manual delay to let AEM ready':
+    command => "sleep 120",
+    path => ['/bin', '/usr/bin'],
   }
 
   class { '::aem_resources::create_system_users':
-    require => [Aem_aem['Wait until login page is ready']],
+    require => [Exec['Manual delay to let AEM ready']],
   }
 
   aem_package { 'Install AEM Healthcheck Content Package':
@@ -143,7 +147,7 @@ class config::publish (
     replicate => false,
     activate  => false,
     force     => true,
-    require   => [Aem_aem['Wait until login page is ready']],
+    require   => [Exec['Manual delay to let AEM ready']],
   }
 
   exec { "rm -f ${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
