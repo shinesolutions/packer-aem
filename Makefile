@@ -44,7 +44,6 @@ $(AMIS): modules/.librarian-puppet-has-run
 		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'component=$@' \
 		-var 'version=$(version)' \
-		-var 'ami_users=$(ami_users)' \
 		templates/generic.json
 
 amis-all: $(AMIS)
