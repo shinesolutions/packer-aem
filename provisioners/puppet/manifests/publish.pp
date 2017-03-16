@@ -215,7 +215,7 @@ class publish (
     replicate => false,
     activate  => false,
     force     => true,
-    require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
+    require   => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
   } ->
   file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
     ensure  => absent,
