@@ -8,7 +8,7 @@
     "aws_security_group_id": "",
     "component": "author",
     "version": "x.x.x",
-    "author_instance_type": "m4.large",
+    "author_instance_type": "m4.xlarge",
     "author_ami_source_ami": "ami-xxxxxxxx",
     "author_repository_volume_size": "50",
     "puppet_bin_dir": "/opt/puppetlabs/bin",

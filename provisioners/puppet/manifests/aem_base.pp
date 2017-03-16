@@ -49,7 +49,7 @@ class aem_base (
     provider => 'puppet_gem',
   } ->
   package { 'ruby_aem':
-    ensure   => '1.0.8',
+    ensure   => '1.0.12',
     provider => 'puppet_gem',
   }
 

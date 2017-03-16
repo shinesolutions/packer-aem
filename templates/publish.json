@@ -8,7 +8,7 @@
     "aws_security_group_id": "",
     "component": "publish",
     "version": "x.x.x",
-    "publish_instance_type": "m4.large",
+    "publish_instance_type": "m4.xlarge",
     "publish_ami_source_ami": "ami-xxxxxxxx",
     "publish_repository_volume_size": "50",
     "puppet_bin_dir": "/opt/puppetlabs/bin",

@@ -1,6 +1,7 @@
 ---
 author::aem_quickstart_source: "%{hiera('aem_quickstart_source')}"
 author::aem_license_source: "%{hiera('aem_license_source')}"
+author::aem_artifacts_base: "%{hiera('aem_artifacts_base')}"
 author::aem_healthcheck_version: "%{hiera('aem_healthcheck_version')}"
 # TODO: how do we load a boolean value? "%{hiera('aem_sample_content')}"
 author::aem_sample_content: false
