@@ -24,8 +24,8 @@ class config::soe (
   require ::config
 
   File {
-    owner  => root,
-    group  => root,
+    owner => root,
+    group => root,
   }
 
   # 1.1.1 Disable unused filesystems
@@ -203,6 +203,7 @@ class config::soe (
     '10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16',
   ]
   tcpwrappers::allow { $private_cidrs: }
+  tcpwrappers::allow { '0.0.0.0/0': } # TODO Remove this
   tcpwrappers::deny { 'ALL': }
 
   # 3.5 Uncommon Network Protocols
