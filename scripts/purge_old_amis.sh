@@ -3,12 +3,17 @@
 AMI_ROLE_ARR=("soe AMI" "java AMI" "author AMI" "publish AMI" "dispatcher AMI")
 
 for (( i=0; i < ${#AMI_ROLE_ARR[@]}; i++)); do
-  echo "processing images for application role \"${AMI_ROLE_ARR[$i]}\" .... "
+  echo "Processing images for application role \"${AMI_ROLE_ARR[$i]}\" .... "
 
   OLD_AMIS=$(aws ec2 describe-images --owner self \
          --filters "Name=tag:Application Id,Values=Adobe Experience Manager (AEM)"\
                     "Name=tag:Application Role,Values=${AMI_ROLE_ARR[$i]}" \
          --region ap-southeast-2 | jq -r '."Images"|sort_by(."CreationDate")|.[0:-3]|.[]."ImageId"')
+
+  if [ "${OLD_AMIS}empty" = "empty" ]; then
+    echo "No stale images found for role \"${AMI_ROLE_ARR[$i]}\"."
+    continue
+  fi
 
   for OLD_AMI in $OLD_AMIS; do
     LCG_COUNT=$(aws autoscaling describe-launch-configurations \
