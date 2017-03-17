@@ -5,25 +5,10 @@ config::base::python_pip_package: python-pip
 config::base::python_cheetah_package: python-cheetah
 config::base::tmp_dir: /tmp/shinesolutions/packer-aem
 
-config::aem_base::tmp_dir: "%{lookup('config::base::tmp_dir')}"
-config::aem_base::aem_healthcheck_version: "1.3"
-config::aem_base::aem_quickstart_source: "s3://aem-artifacts/adobeaemcloud/AEM_6.2_Quickstart.jar"
-config::aem_base::aem_license_source: "s3://aem-artifacts/adobeaemcloud/license-6.2.properties"
-
-config::aem_base::aem_repo_mount_point: /mnt/ebs1
-config::aem_base::aem_repo_device: /dev/xvdb
-config::aem_base::aem_repo_mount_point: /mnt/ebs1
-
-
-config::author::tmp_dir: "%{lookup('config::base::tmp_dir')}"
-config::author::aem_quickstart_source: "%{lookup('config::aem_base::aem_quickstart_source')}"
-config::author::aem_license_source: "%{lookup('config::aem_base::aem_license_source')}"
-config::author::aem_healthcheck_version: "%{lookup('config::aem_base::aem_healthcheck_version')}"
-
-config::publish::tmp_dir: "%{lookup('config::base::tmp_dir')}"
-config::publish::aem_quickstart_source: "%{lookup('config::aem_base::aem_quickstart_source')}"
-config::publish::aem_license_source: "%{lookup('config::aem_base::aem_license_source')}"
-config::publish::aem_healthcheck_version: "%{lookup('config::aem_base::aem_healthcheck_version')}"
+config::aem::tmp_dir: "%{lookup('config::base::tmp_dir')}"
+config::aem::aem_healthcheck_version: "1.3"
+config::aem::aem_quickstart_source: "s3://aem-artifacts/adobeaemcloud/AEM_6.2_Quickstart.jar"
+config::aem::aem_license_source: "s3://aem-artifacts/adobeaemcloud/license-6.2.properties"
 
 config::dispatcher::aem_dispatcher_source: 'https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_8/file.res/dispatcher-apache2.4-linux-x86-64-4.2.2.tar.gz'
 config::dispatcher::filename: 'dispatcher-apache2.4-linux-x86-64-4.2.2.tar.gz'

@@ -117,8 +117,10 @@
       "type": "shell",
       "inline": [
         "rm -rf {{user `tmp_dir`}}",
-        "/opt/puppetlabs/bin/puppet resource service aem-aem ensure=stopped",
-        "sudo -E find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete"
+        "sudo /opt/puppetlabs/bin/puppet resource service aem-aem ensure=stopped",
+        "sudo -E find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete",
+        "sudo dd if=/dev/null of=/var/log/wtmp",
+        "sudo dd if=/dev/null of=/var/log/btmp"
       ],
       "environment_vars" : [
         "HISTFILE=/dev/null"
