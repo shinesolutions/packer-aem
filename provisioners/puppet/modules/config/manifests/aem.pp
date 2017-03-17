@@ -15,7 +15,9 @@
 #
 # [*aem_quickstart_source*]
 # [*aem_license_source*]
-#   URLs (s3://, http:// or file://) for the AEM jar and license files.
+# [*aem_artifacts_base*]
+#   URLs (s3://, http:// or file://) for the AEM jar, license and package
+#   files.
 #
 # [*aem_healthcheck_version*]
 #   The version of the AEM healthcheck service to install.
@@ -68,7 +70,7 @@ class config::aem (
 
   $setup_repository_volume       = false,
   $repository_volume_device      = '/dev/xvdb',
-  $repostory_volume_mount_point = '/mnt/ebs1',
+  $repository_volume_mount_point = '/mnt/ebs1',
 
   $sleep_secs = 120,
 ) {
@@ -81,7 +83,7 @@ class config::aem (
   }
 
   if $setup_repository_volume {
-    exec { 'Prepare device for AEM repository':
+    exec { 'Prepare device for the AEM repository':
       command => "mkfs -t ext4 ${repository_volume_device}",
     } ->
     file { $repository_volume_mount_point:
@@ -222,7 +224,7 @@ class config::aem (
     name      => 'cq-6.2.0-hotfix-11490',
     group     => 'adobe/cq620/hotfix',
     version   => '1.2',
-    path      => "${tmp_dir}",
+    path      => $tmp_dir,
     replicate => false,
     activate  => false,
     force     => true,
@@ -237,7 +239,7 @@ class config::aem (
     name      => 'cq-6.2.0-hotfix-12785',
     group     => 'adobe/cq620/hotfix',
     version   => '7.0',
-    path      => "${tmp_dir}",
+    path      => $tmp_dir,
     replicate => false,
     activate  => false,
     force     => true,
@@ -273,7 +275,7 @@ class config::aem (
     name                       => 'aem-service-pkg',
     group                      => 'adobe/cq620/servicepack',
     version                    => '6.2.SP1',
-    path                       => "${tmp_dir}",
+    path                       => $tmp_dir,
     replicate                  => false,
     activate                   => false,
     force                      => true,
@@ -300,7 +302,7 @@ class config::aem (
     name                       => 'cq-6.2.0-sp1-cfp',
     group                      => 'adobe/cq620/cumulativefixpack',
     version                    => '1.0',
-    path                       => "${tmp_dir}",
+    path                       => $tmp_dir,
     replicate                  => false,
     activate                   => false,
     force                      => true,
@@ -361,14 +363,14 @@ class config::aem (
     exec { 'service aem-aem stop':
       require => Exec['Ensure login page is ready'],
     } ->
-    exec { "mv ${author::aem_base}/aem/author/crx-quickstart/repository/* ${author::aem_repo_mount_point}/":
+    exec { "mv ${aem_base}/aem/author/crx-quickstart/repository/* ${repository_volume_mount_point}/":
     } ->
-    file { "${author::aem_base}/aem/author/crx-quickstart/repository/":
+    file { "${aem_base}/aem/author/crx-quickstart/repository/":
       ensure => 'link',
       owner  => 'aem',
       group  => 'aem',
       force  => true,
-      target => "${author::aem_repo_mount_point}",
+      target => $repository_volume_mount_point,
     }
   }
 
