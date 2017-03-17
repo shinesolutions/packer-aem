@@ -1,3 +1,5 @@
+//TODO: Work In Progress - Jenkinsfile for building the amis.
+
 node {
     currentBuild.displayName = "#${env.BUILD_NUMBER}: ${Component}-${ImageConfiguration} "
 }

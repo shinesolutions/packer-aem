@@ -1,17 +1,34 @@
-AMIS = soe java author publish dispatcher all-in-one
+AMIS = soe base java author publish dispatcher all-in-one
 VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 ami_var_file ?= vars/00_amis.json
 version ?= 1.0.0
+packer_aem_version ?= 0.9.0
 
-ci: clean lint validate
+stage/packer-aem-$(packer_aem_version).tar.gz: clean lint validate stage
+	tar \
+	    --exclude='stage*' \
+		--exclude-from .gitignore \
+	    --exclude='.git*' \
+	    --exclude='.librarian*' \
+	    --exclude='.tmp*' \
+	    --exclude='.idea*' \
+	    --exclude='.DS_Store*' \
+	    --exclude='logs*' \
+	    --exclude='*.retry' \
+	    --exclude='*.iml' \
+	    -czvf \
+		$@
+
+#ci: clean lint validate package
+#ci: clean tools deps lint validate package
 
 modules/.librarian-puppet-has-run: Gemfile.lock Puppetfile
 	bundle exec librarian-puppet install --path modules --verbose
 	touch modules/.librarian-puppet-has-run
 
 clean:
-	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache
+	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage logs/
 
 lint: Gemfile.lock
 	bundle exec puppet-lint \
@@ -26,13 +43,11 @@ lint: Gemfile.lock
 	shellcheck $$(find provisioners scripts -name '*.sh')
 
 validate:
-	for AMI in $(AMIS); do \
-		packer validate \
-			-syntax-only \
-			$(VAR_PARAMS) \
-			-var "component=$$AMI" \
-			templates/$$AMI.json; \
-	done
+	packer validate \
+		-syntax-only \
+		$(VAR_PARAMS) \
+		-var "component=null" \
+		templates/generic.json
 
 #TODO: consider having a var-file for each component - which should include the ami_users variable
 $(AMIS): modules/.librarian-puppet-has-run
@@ -54,4 +69,10 @@ var_files:
 Gemfile.lock: Gemfile
 	bundle install
 
-.PHONY: $(AMIS) amis-all ci clean lint validate var_files
+stage:
+	mkdir -p stage/
+
+stage/ami-ids.yaml: stage
+	scripts/create-ami-ids-yaml.py -o $@
+
+.PHONY: $(AMIS) amis-all ci clean deps lint tools validate create-ami-ids-yaml var_files

@@ -79,7 +79,7 @@ class config::base (
     ensure => latest,
   }
 
-  package { [ 'boto3', 'requests', 'retrying' ]:
+  package { [ 'boto3', 'requests', 'retrying', 'sh' ]:
     ensure   => latest,
     provider => 'pip',
   }

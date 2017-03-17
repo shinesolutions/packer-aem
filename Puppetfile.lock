@@ -1,0 +1,55 @@
+FORGE
+  remote: https://forgeapi.puppetlabs.com
+  specs:
+    bashtoni-timezone (1.0.0)
+    bstopp-aem (2.4.1)
+      puppetlabs-ruby (< 1.0.0, >= 0.6.0)
+      puppetlabs-stdlib (< 5.0.0, >= 4.6.0)
+    jfryman-selinux (999.999.999)
+      puppetlabs-stdlib (< 5.0.0, >= 4.6.0)
+    kemra102-cloudwatchlogs (2.3.1)
+      puppetlabs-concat (>= 1.1.0)
+      puppetlabs-stdlib (>= 3.2.0)
+    maestrodev-wget (1.7.3)
+    pcfens-command_args (0.2.0)
+    pcfens-rhn_register (1.5.0)
+      pcfens-command_args (< 1.0.0, >= 0.0.1)
+      puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
+    puppet-archive (1.3.0)
+      puppetlabs-stdlib (< 5.0.0, >= 4.6.0)
+    puppetlabs-apache (1.11.0)
+      puppetlabs-concat (< 3.0.0, >= 1.1.1)
+      puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
+    puppetlabs-concat (2.2.0)
+      puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
+    puppetlabs-ruby (0.6.0)
+      puppetlabs-stdlib (< 6.0.0, >= 4.6.0)
+    puppetlabs-stdlib (4.15.0)
+    stahnma-epel (1.2.2)
+      puppetlabs-stdlib (>= 3.0.0)
+    stankevich-python (1.18.2)
+      puppetlabs-stdlib (< 6.0.0, >= 4.6.0)
+      stahnma-epel (< 2.0.0, >= 1.2.2)
+    tylerwalts-jdk_oracle (1.5.0)
+
+GIT
+  remote: https://github.com/shinesolutions/puppet-aem-resources
+  ref: master
+  sha: 1c37094e5e2fd9b21c6477169935b43dd862758c
+  specs:
+    shinesolutions-aem_resources (0.9.3)
+      puppetlabs-stdlib (>= 4.14.0)
+
+DEPENDENCIES
+  bashtoni-timezone (>= 0)
+  bstopp-aem (>= 0)
+  jfryman-selinux (>= 0)
+  kemra102-cloudwatchlogs (>= 0)
+  maestrodev-wget (>= 0)
+  pcfens-rhn_register (>= 0)
+  puppet-archive (>= 0)
+  puppetlabs-apache (>= 0)
+  shinesolutions-aem_resources (>= 0)
+  stankevich-python (>= 0)
+  tylerwalts-jdk_oracle (>= 0)
+
