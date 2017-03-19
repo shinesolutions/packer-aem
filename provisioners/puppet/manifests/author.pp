@@ -116,19 +116,24 @@ class author (
     activate  => false,
     force     => true,
   } ->
-  exec { 'Wait AEM post hotfix 12785 install':
-    command => 'sleep 120',
-    cwd     => "${tmp_dir}",
-    path    => ['/usr/bin', '/usr/sbin'],
-  } ->
   aem_aem { 'Wait until login page is ready post hotfix 12785 install':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
   } ->
+  exec { 'Wait AEM post hotfix 12785 install':
+    command => 'sleep 120',
+    cwd     => "${tmp_dir}",
+    path    => ['/usr/bin', '/usr/sbin'],
+  } ->
   exec { 'Restart AEM post hotfix 12785 install':
     command => 'service aem-aem restart',
+    cwd     => "${tmp_dir}",
+    path    => ['/usr/bin', '/usr/sbin'],
+  } ->
+  exec { 'Wait AEM post hotfix 12785 restart':
+    command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
   } ->
@@ -138,11 +143,6 @@ class author (
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
   } ->
-  #exec { 'Wait AEM post hotfix 12785 restart':
-  #  command => 'sleep 120',
-  #  cwd     => "${tmp_dir}",
-  #  path    => ['/usr/bin', '/usr/sbin'],
-  #} ->
   archive { "${tmp_dir}/aem-service-pkg-6.2.SP1.zip":
     ensure  => present,
     source  => "${aem_artifacts_base}/AEM-6.2-Service-Pack-1-6.2.SP1.zip",
