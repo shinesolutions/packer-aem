@@ -14,17 +14,19 @@ class dispatcher (
     require => Stage['test'],
   }
 
+  class { 'apache':
+    package_ensure => installed,
+  }
+
+  class { 'apache::mod::headers':
+  }
+
   file { "${tmp_dir}":
     ensure => directory,
     owner  => $packer_user,
     group  => $packer_group,
     mode   => '0775',
-  }
-
-  class { 'apache':
-    package_ensure => installed,
-  }
-
+  } ->
   archive { $filename:
     path         => "${tmp_dir}/${filename}",
     extract      => true,
@@ -34,12 +36,16 @@ class dispatcher (
     require      => File["${tmp_dir}"],
     user         => $packer_user,
     group        => $packer_group,
-  }
-
-  class { 'apache::mod::headers':
-  }
+  } ->
   class { 'aem::dispatcher' :
     module_file => "${tmp_dir}/${module_filename}",
+  } ->
+  # Set the Docroot owner and group to apache
+  # https://docs.adobe.com/docs/en/dispatcher/disp-install.html#Apache Web Server - Configure Apache Web Server for Dispatcher
+  file { '/var/www/html':
+    ensure => directory,
+    owner  => 'apache',
+    group  => 'apache',
   } ->
   exec { 'httpd -k graceful':
     cwd  => "${tmp_dir}",
