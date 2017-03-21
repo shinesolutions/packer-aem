@@ -1,0 +1,6 @@
+---
+fixtures:
+  symlinks:
+    archive: "#{source_dir}/../../../../modules/archive"
+    stdlib: "#{source_dir}/../../../../modules/stdlib"
+    aem_resources: "#{source_dir}/../../../../modules/aem_resources"

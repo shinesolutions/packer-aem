@@ -282,7 +282,7 @@ class config::soe (
     [ 'PermitUserEnvironment',   'no' ],
     [ 'Ciphers',                 $sshd_ciphers.join(',') ],
     [ 'MACs',                    $sshd_macs.join(',') ],
-    [ 'ClientAliveInterval',     '300' ],
+    [ 'ClientAliveInterval',     '0' ],
     [ 'ClientAliveCountMax',     '0' ],
     [ 'LoginGraceTime',          '60' ],
   ]

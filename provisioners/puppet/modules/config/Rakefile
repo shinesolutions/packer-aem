@@ -27,9 +27,9 @@ end
 Rake::Task["default"].clear
 desc 'Run tests metadata_lint, lint, syntax, spec'
 task default: [
+  :syntax,
   :metadata_lint,
   :lint,
-  :syntax,
   :spec,
 ]
 # vim: syntax=ruby
