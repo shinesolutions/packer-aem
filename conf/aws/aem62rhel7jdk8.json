@@ -30,4 +30,3 @@
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "vm_name": "rhel-7.2-vbox"
 }
-}
