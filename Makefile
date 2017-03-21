@@ -20,7 +20,7 @@ stage/packer-aem-$(packer_aem_version).tar.gz: clean lint validate stage
 	    -czvf \
 		$@
 
-#ci: clean lint validate package
+ci: clean lint validate
 #ci: clean tools deps lint validate package
 
 modules/.librarian-puppet-has-run: Gemfile.lock Puppetfile
