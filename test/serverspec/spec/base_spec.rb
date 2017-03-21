@@ -32,24 +32,21 @@ end
 
 if install_aws_cli == 'true'
 
-  describe package('python') do
+  describe package(@hiera.lookup('base::python_package', 'python', @scope)) do
     it { should be_installed }
   end
 
-  describe file('/usr/bin/pip') do
-    it { should exist }
-    it { should be_executable }
-    it { should be_owned_by 'root' }
-    it { should be_grouped_into 'root' }
-    it { should be_mode 755 }
-  end
+  executables = [ '/usr/bin/pip', '/usr/bin/aws' ]
 
-  describe file('/usr/bin/aws') do
-    it { should exist }
-    it { should be_executable }
-    it { should be_owned_by 'root' }
-    it { should be_grouped_into 'root' }
-    it { should be_mode 755 }
+  executables.each do |exe|
+
+    describe file(exe) do
+      it { should exist }
+      it { should be_executable }
+      it { should be_owned_by 'root' }
+      it { should be_grouped_into 'root' }
+    end
+
   end
 
 end
@@ -74,23 +71,17 @@ end
 #
 # end
 
-describe package('gcc') do
-  it { should be_installed }
-end
 
-describe package('ruby-devel') do
-  it { should be_installed }
-end
+packages = [
+    'gcc',
+    'ruby-devel',
+    'zlib-devel',
+    'ruby',
+    @hiera.lookup('base::python_cheetah_package', 'python-cheetah', @scope),
+]
 
-describe package('zlib-devel') do
-  it { should be_installed }
-end
-
-describe package('python-cheetah') do
-  it { should be_installed }
-end
-
-# the serverspec module installs the ruby package
-describe package('ruby') do
-  it { should be_installed }
+packages.each do |pkg|
+  describe package(pkg) do
+    it { should be_installed }
+  end
 end

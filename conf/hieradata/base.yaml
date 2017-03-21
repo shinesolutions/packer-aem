@@ -4,8 +4,9 @@ timezone::locality: 'Melbourne'
 
 cloudwatchlogs::region: 'ap-southeast-2'
 
-base::packer_user: "%{hiera('packer_user')}"
-base::packer_group: "%{hiera('packer_group')}"
+base::python_package: python
+base::python_pip_package: python-pip
+base::python_cheetah_package: python-cheetah
 
 base::aws_agents_install_url: 'https://d1wk0tztpsntt1.cloudfront.net/linux/latest/install'
 
