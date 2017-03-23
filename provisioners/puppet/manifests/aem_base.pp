@@ -32,7 +32,7 @@ class aem_base (
     mode   => '0775',
   }
 
-  # Retrieve Healthcheck Content Package and move into aem directory
+  # Retrieve AEM Healthcheck Content Package
   archive { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
     ensure  => present,
     source  => "http://central.maven.org/maven2/com/shinesolutions/aem-healthcheck-content/${aem_healthcheck_version}/aem-healthcheck-content-${aem_healthcheck_version}.zip",
@@ -40,6 +40,18 @@ class aem_base (
     require => File["${aem_base}/aem"],
   } ->
   file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
+    ensure => file,
+    mode   => '0664',
+  }
+
+  # Retrieve AEM Password Reset Content Package
+  archive { "${aem_base}/aem/aem-password-reset-content-${aem_password_reset_version}.zip":
+    ensure  => present,
+    source  => "http://central.maven.org/maven2/com/shinesolutions/aem-password-reset-content/${aem_password_reset_version}/aem-password-reset-content-${aem_password_reset_version}.zip",
+    cleanup => false,
+    require => File["${aem_base}/aem"],
+  } ->
+  file { "${aem_base}/aem/aem-password-reset-content-${aem_password_reset_version}.zip":
     ensure => file,
     mode   => '0664',
   }
