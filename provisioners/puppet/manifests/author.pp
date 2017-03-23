@@ -207,10 +207,6 @@ class author (
     require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
   }
 
-  class { 'aem_resources::create_system_users':
-    require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
-  }
-
   aem_package { 'Install AEM Healthcheck Content Package':
     ensure    => present,
     name      => 'aem-healthcheck-content',
@@ -249,7 +245,6 @@ class author (
     retries_max_sleep_seconds  => 5,
     require                    => [
       Class['aem_resources::author_remove_default_agents'],
-      Class['aem_resources::create_system_users'],
       File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
       File["${aem_base}/aem/aem-password-reset-content-${aem_password_reset_version}.zip"],
     ]
