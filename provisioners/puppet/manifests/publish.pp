@@ -4,7 +4,6 @@ class publish (
   $aem_license_source,
   $aem_artifacts_base,
   $aem_healthcheck_version,
-  $aem_password_reset_version,
   $aem_repo_mount_point,
   $aem_base           = '/opt',
   $aem_jvm_mem_opts   = '-Xss4m -Xmx8192m',
@@ -219,21 +218,6 @@ class publish (
     require => Aem_package['Install AEM Healthcheck Content Package'],
   }
 
-  aem_package { 'Install AEM Password Reset Content Package':
-    ensure    => present,
-    name      => 'aem-password-reset-content',
-    group     => 'shinesolutions',
-    version   => "${aem_password_reset_version}",
-    path      => "${aem_base}/aem",
-    replicate => false,
-    activate  => false,
-    force     => true,
-    require   => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
-  } ->
-  file { "${aem_base}/aem/aem-password-reset-content-${aem_password_reset_version}.zip":
-    ensure  => absent,
-  }
-
   # Ensure login page is still ready after all provisioning steps and before stopping AEM.
   aem_aem { 'Ensure login page is ready':
     ensure                     => login_page_is_ready,
@@ -242,7 +226,6 @@ class publish (
     retries_max_sleep_seconds  => 5,
     require                    => [
       File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
-      File["${aem_base}/aem/aem-password-reset-content-${aem_password_reset_version}.zip"],
     ]
   } ->
   class { 'serverspec':
