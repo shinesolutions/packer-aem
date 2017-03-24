@@ -5,5 +5,5 @@ describe package('nokogiri') do
 end
 
 describe package('ruby_aem') do
-  it { should be_installed.by('gem').with_version('1.0.12') }
+  it { should be_installed.by('gem').with_version('1.0.13') }
 end
