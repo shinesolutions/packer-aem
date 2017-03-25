@@ -202,6 +202,10 @@ class publish (
     retries_max_sleep_seconds  => 5,
   }
 
+  class { 'aem_resources::publish_remove_default_agents':
+    require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
+  }
+
   aem_package { 'Install AEM Healthcheck Content Package':
     ensure    => present,
     name      => 'aem-healthcheck-content',
@@ -225,6 +229,7 @@ class publish (
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
     require                    => [
+      Class['aem_resources::publish_remove_default_agents'],
       File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
     ]
   } ->
