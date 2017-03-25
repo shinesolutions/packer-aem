@@ -1,5 +1,5 @@
 ---
-dispatcher::aem_dispatcher_source: 'https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_8/file.res/dispatcher-apache2.4-linux-x86-64-4.2.2.tar.gz'
+dispatcher::aem_dispatcher_source: 'https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_9/file.res/dispatcher-apache2.4-linux-x86-64-ssl-4.2.2.tar.gz'
 dispatcher::filename: 'dispatcher-apache2.4-linux-x86-64-4.2.2.tar.gz'
 dispatcher::module_filename: 'dispatcher-apache2.4-4.2.2.so'
 dispatcher::packer_user: "%{hiera('packer_user')}"
