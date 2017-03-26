@@ -21,6 +21,9 @@ class dispatcher (
   class { 'apache::mod::headers':
   }
 
+  class { 'apache::mod::ssl':
+  }
+
   file { "${tmp_dir}":
     ensure => directory,
     owner  => $packer_user,
