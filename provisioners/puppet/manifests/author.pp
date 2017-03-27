@@ -75,7 +75,7 @@ class author (
     port           => $aem_port,
     sample_content => $aem_sample_content,
     jvm_mem_opts   => $aem_jvm_mem_opts,
-    jvm_opts       => '-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -XX:+HeapDumpOnOutOfMemoryError',
+    jvm_opts       => '-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -XX:+HeapDumpOnOutOfMemoryError -Dcom.sun.management.jmxremote.port=8463 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false',
     status         => 'running',
   } ->
   # Confirm AEM starts up and the login page is ready.
@@ -219,6 +219,12 @@ class author (
   } ->
   file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
     ensure  => absent,
+  }
+
+  collectd::plugin::genericjmx::connection { 'java_app':
+    host        => $::fqdn,
+    service_url => 'service:jmx:rmi:///jndi/rmi://localhost:8463/jmxrmi',
+    collect     => [ 'memory-heap', 'memory-nonheap', 'garbage_collector', 'memory-permgen' ],
   }
 
   # Ensure login page is still ready after all provisioning steps and before stopping AEM.
