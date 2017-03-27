@@ -23,13 +23,13 @@ lint:
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
 	shellcheck \
-	  provisioners/*/*/*.sh \
-	  scripts/*.sh
+		provisioners/*/*/*.sh \
+		scripts/*.sh
 
 validate:
 	for AMI in $(AMIS); do \
 		packer validate \
-      -syntax-only \
+			-syntax-only \
 			-var-file $(var_file) \
 			-var "component=$$AMI" \
 			templates/$$AMI.json; \
@@ -61,17 +61,17 @@ package:
 	rm -rf stage
 	mkdir -p stage
 	tar \
-	    --exclude='.git*' \
-	    --exclude='.librarian*' \
-	    --exclude='.tmp*' \
-	    --exclude='stage*' \
-	    --exclude='.idea*' \
-	    --exclude='.DS_Store*' \
-	    --exclude='logs*' \
-	    --exclude='*.retry' \
-	    --exclude='*.iml' \
-	    -cvf \
-	    stage/packer-aem-$(packer_aem_version).tar ./
+		--exclude='.git*' \
+		--exclude='.librarian*' \
+		--exclude='.tmp*' \
+		--exclude='stage*' \
+		--exclude='.idea*' \
+		--exclude='.DS_Store*' \
+		--exclude='logs*' \
+		--exclude='*.retry' \
+		--exclude='*.iml' \
+		-cvf \
+		stage/packer-aem-$(packer_aem_version).tar ./
 	gzip stage/packer-aem-$(packer_aem_version).tar
 
 .PHONY: $(AMIS) amis-all ci clean deps lint tools validate create-ami-ids-yaml
