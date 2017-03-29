@@ -1,5 +1,7 @@
 class dispatcher (
   $aem_dispatcher_source,
+  $aem_cert_source,
+  $aem_key_source,
   $filename,
   $tmp_dir,
   $module_filename,
@@ -12,6 +14,27 @@ class dispatcher (
   }
   stage { 'shutdown':
     require => Stage['test'],
+  }
+
+  # Prepare AEM unified dispatcher certificate
+  archive { "${tmp_dir}/aem.cert":
+    ensure => present,
+    source => "${aem_cert_source}",
+  }
+  archive { "${tmp_dir}/aem.key":
+    ensure => present,
+    source => "${aem_key_source}",
+  }
+  file { '/etc/ssl/aem.unified-dispatcher.cert':
+    ensure => absent,
+  }
+  exec { "cat ${tmp_dir}/aem.key >> /etc/ssl/aem.unified-dispatcher.cert":
+    cwd  => "${tmp_dir}",
+    path => ['/usr/bin'],
+  }
+  exec { "cat ${tmp_dir}/aem.cert >> /etc/ssl/aem.unified-dispatcher.cert":
+    cwd  => "${tmp_dir}",
+    path => ['/usr/bin'],
   }
 
   class { 'apache':

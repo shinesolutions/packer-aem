@@ -1,5 +1,6 @@
 class java (
   $tmp_dir,
+  $aem_cert_source,
   $install_collectd = true,
   $collectd_cloudwatch_source_url = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
 ) {
@@ -22,6 +23,18 @@ class java (
 
   exec { '/sbin/ldconfig':
     refreshonly => true,
+  }
+
+  archive { "${tmp_dir}/aem.cert":
+    ensure => present,
+    source => $aem_cert_source,
+  }
+  java_ks { 'Add cert to default Java truststore':
+    ensure       => latest,
+    name         => 'cqse',
+    certificate  => "${tmp_dir}/aem.cert",
+    target       => '/usr/java/default/jre/lib/security/cacerts',
+    password     => 'changeit',
   }
 
   if $install_collectd {

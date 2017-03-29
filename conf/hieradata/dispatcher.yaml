@@ -5,3 +5,5 @@ dispatcher::module_filename: 'dispatcher-apache2.4-4.2.2.so'
 dispatcher::packer_user: "%{hiera('packer_user')}"
 dispatcher::packer_group: "%{hiera('packer_group')}"
 dispatcher::tmp_dir: "%{hiera('tmp_dir')}"
+dispatcher::aem_key_source: "%{hiera('aem_library_base')}/aem-stack-builder.key"
+dispatcher::aem_cert_source: "%{hiera('aem_library_base')}/aem-stack-builder.cert"
