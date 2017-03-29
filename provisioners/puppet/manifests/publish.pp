@@ -38,8 +38,7 @@ class publish (
     source  => $aem_quickstart_source,
     cleanup => false,
     require => File["${aem_base}/aem/publish"],
-  } ->
-  file { "${aem_base}/aem/publish/aem-publish-${aem_port}.jar":
+  } -> file { "${aem_base}/aem/publish/aem-publish-${aem_port}.jar":
     ensure => file,
     mode   => '0775',
     owner  => 'aem',
@@ -60,8 +59,7 @@ class publish (
     source  => "${aem_license_source}",
     cleanup => false,
     require => File["${aem_base}/aem/publish"],
-  } ->
-  file { "${aem_base}/aem/publish/license.properties":
+  } -> file { "${aem_base}/aem/publish/license.properties":
     ensure => file,
     mode   => '0440',
     owner  => 'aem',
@@ -77,21 +75,16 @@ class publish (
     jvm_mem_opts   => $aem_jvm_mem_opts,
     jvm_opts       => '-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -XX:+HeapDumpOnOutOfMemoryError',
     status         => 'running',
-  } ->
-  # Confirm AEM Starts up and the login page is ready.
-  aem_aem { 'Wait until login page is ready':
+  } -> aem_aem { 'Wait until login page is ready':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } ->
-  # Install AEM service pack, hotfix, and feature pack packages.
-  archive { "${tmp_dir}/cq-6.2.0-hotfix-11490-1.2.zip":
+  } -> archive { "${tmp_dir}/cq-6.2.0-hotfix-11490-1.2.zip":
     ensure  => present,
     source  => "${aem_artifacts_base}/cq-6.2.0-hotfix-11490-1.2.zip",
     cleanup => false,
-  } ->
-  aem_package { 'Install hotfix 11490':
+  } -> aem_package { 'Install hotfix 11490':
     ensure    => present,
     name      => 'cq-6.2.0-hotfix-11490',
     group     => 'adobe/cq620/hotfix',
@@ -100,13 +93,11 @@ class publish (
     replicate => false,
     activate  => false,
     force     => true,
-  } ->
-  archive { "${tmp_dir}/cq-6.2.0-hotfix-12785-7.0.zip":
+  } -> archive { "${tmp_dir}/cq-6.2.0-hotfix-12785-7.0.zip":
     ensure  => present,
     source  => "${aem_artifacts_base}/cq-6.2.0-hotfix-12785-7.0.zip",
     cleanup => false,
-  } ->
-  aem_package { 'Install hotfix 12785':
+  } -> aem_package { 'Install hotfix 12785':
     ensure    => present,
     name      => 'cq-6.2.0-hotfix-12785',
     group     => 'adobe/cq620/hotfix',
@@ -115,40 +106,33 @@ class publish (
     replicate => false,
     activate  => false,
     force     => true,
-  } ->
-  aem_aem { 'Wait until login page is ready post hotfix 12785 install':
+  } -> aem_aem { 'Wait until login page is ready post hotfix 12785 install':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } ->
-  exec { 'Wait AEM post hotfix 12785 install':
+  } -> exec { 'Wait AEM post hotfix 12785 install':
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
-  } ->
-  exec { 'Restart AEM post hotfix 12785 install':
+  } -> exec { 'Restart AEM post hotfix 12785 install':
     command => 'service aem-aem restart',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
-  } ->
-  exec { 'Wait AEM post hotfix 12785 restart':
+  } -> exec { 'Wait AEM post hotfix 12785 restart':
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
-  } ->
-  aem_aem { 'Wait until login page is ready post hotfix 12785 restart':
+  } -> aem_aem { 'Wait until login page is ready post hotfix 12785 restart':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 120,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } ->
-  archive { "${tmp_dir}/aem-service-pkg-6.2.SP1.zip":
+  } -> archive { "${tmp_dir}/aem-service-pkg-6.2.SP1.zip":
     ensure  => present,
     source  => "${aem_artifacts_base}/AEM-6.2-Service-Pack-1-6.2.SP1.zip",
     cleanup => false,
-  } ->
-  aem_package { 'Install Service Pack 1':
+  } -> aem_package { 'Install Service Pack 1':
     ensure                     => present,
     name                       => 'aem-service-pkg',
     group                      => 'adobe/cq620/servicepack',
@@ -160,24 +144,20 @@ class publish (
     retries_max_tries          => 120,
     retries_base_sleep_seconds => 10,
     retries_max_sleep_seconds  => 10,
-  } ->
-  exec { 'Wait AEM post Service Pack 1 install':
+  } -> exec { 'Wait AEM post Service Pack 1 install':
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
-  } ->
-  aem_aem { 'Wait until login page is ready post Service Pack 1 install':
+  } -> em_aem { 'Wait until login page is ready post Service Pack 1 install':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } ->
-  archive { "${tmp_dir}/cq-6.2.0-sp1-cfp-1.0.zip":
+  } -> archive { "${tmp_dir}/cq-6.2.0-sp1-cfp-1.0.zip":
     ensure  => present,
     source  => "${aem_artifacts_base}/AEM-6.2-SP1-CFP1-1.0.zip",
     cleanup => false,
-  } ->
-  aem_package { 'Install Service Pack 1 Cumulative Fix Pack 1':
+  } -> aem_package { 'Install Service Pack 1 Cumulative Fix Pack 1':
     ensure                     => present,
     name                       => 'cq-6.2.0-sp1-cfp',
     group                      => 'adobe/cq620/cumulativefixpack',
@@ -189,13 +169,11 @@ class publish (
     retries_max_tries          => 120,
     retries_base_sleep_seconds => 10,
     retries_max_sleep_seconds  => 10,
-  } ->
-  exec { 'Wait AEM post Service Pack 1 Cumulative Fix Pack 1 install':
+  } -> exec { 'Wait AEM post Service Pack 1 Cumulative Fix Pack 1 install':
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
-  } ->
-  aem_aem { 'Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install':
+  } -> aem_aem { 'Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
@@ -216,8 +194,7 @@ class publish (
     activate  => false,
     force     => true,
     require   => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
-  } ->
-  file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
+  } -> file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
     ensure  => absent,
     require => Aem_package['Install AEM Healthcheck Content Package'],
   }
@@ -232,8 +209,7 @@ class publish (
       Class['aem_resources::publish_remove_default_agents'],
       File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
     ]
-  } ->
-  class { 'serverspec':
+  } -> class { 'serverspec':
     stage             => 'test',
     component         => 'publish',
     staging_directory => "${tmp_dir}/packer-puppet-masterless-publish",
@@ -257,8 +233,7 @@ class publish_shutdown {
   exec { "mv ${publish::aem_base}/aem/publish/crx-quickstart/repository/* ${publish::aem_repo_mount_point}/":
     cwd  => "${publish::tmp_dir}",
     path => '/usr/bin',
-  } ->
-  file { "${publish::aem_base}/aem/publish/crx-quickstart/repository/":
+  } -> file { "${publish::aem_base}/aem/publish/crx-quickstart/repository/":
     ensure => 'link',
     owner  => 'aem',
     group  => 'aem',

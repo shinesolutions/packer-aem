@@ -13,12 +13,10 @@ class aem_base (
   exec { 'Prepare device for AEM repository':
     command => "mkfs -t ext4 ${aem_repo_device}",
     path    => ['/sbin'],
-  } ->
-  file { "${aem_repo_mount_point}":
+  } -> file { "${aem_repo_mount_point}":
     ensure => directory,
     mode   => '0755',
-  } ->
-  mount { "${aem_repo_mount_point}":
+  } -> mount { "${aem_repo_mount_point}":
     ensure   => mounted,
     device   => $aem_repo_device,
     fstype   => 'ext4',
@@ -38,8 +36,7 @@ class aem_base (
     source  => "http://central.maven.org/maven2/com/shinesolutions/aem-healthcheck-content/${aem_healthcheck_version}/aem-healthcheck-content-${aem_healthcheck_version}.zip",
     cleanup => false,
     require => File["${aem_base}/aem"],
-  } ->
-  file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
+  } -> file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
     ensure => file,
     mode   => '0664',
   }
@@ -51,8 +48,7 @@ class aem_base (
   package { 'nokogiri':
     ensure   => '1.6.8.1',
     provider => 'puppet_gem',
-  } ->
-  package { 'ruby_aem':
+  } -> package { 'ruby_aem':
     ensure   => '1.0.14',
     provider => 'puppet_gem',
   }

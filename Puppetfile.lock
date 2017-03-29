@@ -43,7 +43,7 @@ FORGE
 GIT
   remote: https://github.com/shinesolutions/puppet-aem-resources
   ref: master
-  sha: 66ae61cc29bd06e55aef0e71848db99b6a3432d9
+  sha: 34f1334f90f7ded5bb2ea7edf3ee09187c7f7b17
   specs:
     shinesolutions-aem_resources (0.9.3)
       puppetlabs-java_ks (>= 1.5.0)

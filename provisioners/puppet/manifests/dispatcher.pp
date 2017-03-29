@@ -52,8 +52,7 @@ class dispatcher (
     owner  => $packer_user,
     group  => $packer_group,
     mode   => '0775',
-  } ->
-  archive { $filename:
+  } -> archive { $filename:
     path         => "${tmp_dir}/${filename}",
     extract      => true,
     extract_path => "${tmp_dir}",
@@ -62,18 +61,15 @@ class dispatcher (
     require      => File["${tmp_dir}"],
     user         => $packer_user,
     group        => $packer_group,
-  } ->
-  class { 'aem::dispatcher' :
+  } -> class { 'aem::dispatcher' :
     module_file => "${tmp_dir}/${module_filename}",
-  } ->
-  # Set the Docroot owner and group to apache
-  # https://docs.adobe.com/docs/en/dispatcher/disp-install.html#Apache Web Server - Configure Apache Web Server for Dispatcher
-  file { '/var/www/html':
+  } -> file { '/var/www/html':
+    # Set the Docroot owner and group to apache
+    # https://docs.adobe.com/docs/en/dispatcher/disp-install.html#Apache Web Server - Configure Apache Web Server for Dispatcher
     ensure => directory,
     owner  => 'apache',
     group  => 'apache',
-  } ->
-  exec { 'httpd -k graceful':
+  } -> exec { 'httpd -k graceful':
     cwd  => "${tmp_dir}",
     path => ['/sbin'],
   }
