@@ -1,6 +1,9 @@
 ---
 publish::aem_quickstart_source: "%{hiera('aem_quickstart_source')}"
 publish::aem_license_source: "%{hiera('aem_license_source')}"
+publish::aem_key_source: "%{hiera('aem_library_base')}/aem-stack-builder.key"
+publish::aem_keystore_password: somekeystorepassword
+publish::aem_cert_source: "%{hiera('aem_library_base')}/aem-stack-builder.cert"
 publish::aem_artifacts_base: "%{hiera('aem_artifacts_base')}"
 publish::aem_healthcheck_version: "%{hiera('aem_healthcheck_version')}"
 # TODO: how do we load a boolean value? "%{hiera('aem_sample_content')}"

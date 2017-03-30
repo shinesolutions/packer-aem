@@ -2,6 +2,9 @@ class author (
   $tmp_dir,
   $aem_quickstart_source,
   $aem_license_source,
+  $aem_cert_source,
+  $aem_key_source,
+  $aem_keystore_password,
   $aem_artifacts_base,
   $aem_healthcheck_version,
   $aem_repo_mount_point,
@@ -198,6 +201,41 @@ class author (
     ensure  => absent,
   }
 
+  # Enable SSL support on AEM
+  archive { "${tmp_dir}/aem.key":
+    ensure => present,
+    source => $aem_key_source,
+  } ->
+  archive { "${tmp_dir}/aem.cert":
+    ensure => present,
+    source => $aem_cert_source,
+  } ->
+  file { "${aem_base}/aem/author/crx-quickstart/ssl/":
+    ensure  => directory,
+    mode    => '0775',
+    owner   => 'aem',
+    group   => 'aem',
+    require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
+  } ->
+  java_ks { 'Set up keystore':
+    ensure       => latest,
+    name         => 'cqse',
+    certificate  => "${tmp_dir}/aem.cert",
+    target       => "${aem_base}/aem/author/crx-quickstart/ssl/aem.ks",
+    private_key  => "${tmp_dir}/aem.key",
+    password     => $aem_keystore_password,
+    trustcacerts => true,
+  } ->
+  class { 'aem_resources::author_publish_enable_ssl':
+    run_mode                => 'author',
+    port                    => 5433,
+    keystore                => "${aem_base}/aem/author/crx-quickstart/ssl/aem.ks",
+    keystore_password       => $aem_keystore_password,
+    keystore_key_alias      => 'cqse',
+    truststore              => '/usr/java/default/jre/lib/security/cacerts',
+    truststore_password     => 'changeit',
+  }
+
   collectd::plugin::genericjmx::connection { 'java_app':
     host        => $::fqdn,
     service_url => 'service:jmx:rmi:///jndi/rmi://localhost:8463/jmxrmi',
@@ -213,6 +251,7 @@ class author (
     require                    => [
       Class['aem_resources::author_remove_default_agents'],
       File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
+      Class['aem_resources::author_publish_enable_ssl'],
     ]
   } -> class { 'serverspec':
     stage             => 'test',
