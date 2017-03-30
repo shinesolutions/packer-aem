@@ -206,19 +206,16 @@ class publish (
   archive { "${tmp_dir}/aem.key":
     ensure => present,
     source => $aem_key_source,
-  } ->
-  archive { "${tmp_dir}/aem.cert":
+  } -> archive { "${tmp_dir}/aem.cert":
     ensure => present,
     source => $aem_cert_source,
-  } ->
-  file { "${aem_base}/aem/publish/crx-quickstart/ssl/":
+  } -> file { "${aem_base}/aem/publish/crx-quickstart/ssl/":
     ensure  => directory,
     mode    => '0775',
     owner   => 'aem',
     group   => 'aem',
     require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
-  } ->
-  java_ks { 'Set up keystore':
+  } -> java_ks { 'Set up keystore':
     ensure       => latest,
     name         => 'cqse',
     certificate  => "${tmp_dir}/aem.cert",
@@ -226,15 +223,14 @@ class publish (
     private_key  => "${tmp_dir}/aem.key",
     password     => $aem_keystore_password,
     trustcacerts => true,
-  } ->
-  class { 'aem_resources::author_publish_enable_ssl':
-    run_mode                => 'publish',
-    port                    => 5433,
-    keystore                => "${aem_base}/aem/publish/crx-quickstart/ssl/aem.ks",
-    keystore_password       => $aem_keystore_password,
-    keystore_key_alias      => 'cqse',
-    truststore              => '/usr/java/default/jre/lib/security/cacerts',
-    truststore_password     => 'changeit',
+  } -> class { 'aem_resources::author_publish_enable_ssl':
+    run_mode            => 'publish',
+    port                => 5433,
+    keystore            => "${aem_base}/aem/publish/crx-quickstart/ssl/aem.ks",
+    keystore_password   => $aem_keystore_password,
+    keystore_key_alias  => 'cqse',
+    truststore          => '/usr/java/default/jre/lib/security/cacerts',
+    truststore_password => 'changeit',
   }
 
   # Ensure login page is still ready after all provisioning steps and before stopping AEM.
