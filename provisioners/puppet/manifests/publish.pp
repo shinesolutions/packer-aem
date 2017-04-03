@@ -151,7 +151,7 @@ class publish (
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
-  } -> em_aem { 'Wait until login page is ready post Service Pack 1 install':
+  } -> aem_aem { 'Wait until login page is ready post Service Pack 1 install':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
