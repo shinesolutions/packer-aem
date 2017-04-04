@@ -231,7 +231,7 @@ class publish (
     mode    => '0775',
     owner   => 'aem',
     group   => 'aem',
-    require                    => [
+    require => [
       Aem_config_property['Configure system usernames for AEM Password Reset Activator to process'],
       Class['aem_resources::publish_remove_default_agents'],
       File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
