@@ -183,6 +183,23 @@ class publish (
     retries_max_sleep_seconds  => 5,
   }
 
+  # Create system users and configure their usernames for password reset during provisioning
+  class { 'aem_resources::create_system_users':
+    orchestrator_password => 'orchestrator',
+    replicator_password   => 'replicator',
+    deployer_password     => 'deployer',
+    exporter_password     => 'exporter',
+    importer_password     => 'importer',
+    require               => Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install'],
+  } -> aem_config_property { 'Configure system usernames for AEM Password Reset Activator to process':
+    ensure           => present,
+    name             => 'pwdreset.authorizables',
+    type             => 'String[]',
+    value            => ['admin', 'orchestrator', 'replicator', 'deployer', 'exporter', 'importer'],
+    run_mode         => 'publish',
+    config_node_name => 'com.shinesolutions.aem.passwordreset.Activator',
+  }
+
   class { 'aem_resources::publish_remove_default_agents':
     require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
   }
@@ -214,7 +231,11 @@ class publish (
     mode    => '0775',
     owner   => 'aem',
     group   => 'aem',
-    require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
+    require                    => [
+      Aem_config_property['Configure system usernames for AEM Password Reset Activator to process'],
+      Class['aem_resources::publish_remove_default_agents'],
+      File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
+    ],
   } -> java_ks { 'Set up keystore':
     ensure       => latest,
     name         => 'cqse',
@@ -239,11 +260,7 @@ class publish (
     retries_max_tries          => 30,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-    require                    => [
-      Class['aem_resources::publish_remove_default_agents'],
-      File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
-      Class['aem_resources::author_publish_enable_ssl'],
-    ]
+    require                    => Class['aem_resources::author_publish_enable_ssl'],
   } -> class { 'serverspec':
     stage             => 'test',
     component         => 'publish',
