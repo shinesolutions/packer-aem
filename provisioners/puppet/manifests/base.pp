@@ -39,7 +39,7 @@ class base (
   }
 
   package { 'unzip':
-    ensure  => installed,
+    ensure => installed,
   }
 
   package { [ $python_package, $python_pip_package, $python_cheetah_package ]:
@@ -52,6 +52,10 @@ class base (
   package { [ 'boto3', 'requests', 'retrying', 'sh' ]:
     ensure   => latest,
     provider => 'pip',
+  }
+
+  package { 'jq':
+    ensure => installed,
   }
 
   if $install_aws_cli {
@@ -118,6 +122,7 @@ class base (
     ensure   => '2.38.0',
     provider => 'gem',
   }
+
 
   class { 'serverspec':
     stage             => 'test',

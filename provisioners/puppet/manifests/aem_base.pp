@@ -41,10 +41,6 @@ class aem_base (
     mode   => '0664',
   }
 
-  package { 'jq':
-    ensure  => 'installed',
-  }
-
   package { 'nokogiri':
     ensure   => '1.6.8.1',
     provider => 'puppet_gem',
