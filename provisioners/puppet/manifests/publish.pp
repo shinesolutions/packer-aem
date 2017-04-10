@@ -191,6 +191,11 @@ class publish (
     exporter_password     => 'exporter',
     importer_password     => 'importer',
     require               => Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install'],
+  } -> aem_node { 'Create AEM Password Reset Activator config node':
+    ensure => present,
+    name   => 'com.shinesolutions.aem.passwordreset.Activator',
+    path   => '/apps/system/config.publish',
+    type   => 'sling:OsgiConfig',
   } -> aem_config_property { 'Configure system usernames for AEM Password Reset Activator to process':
     ensure           => present,
     name             => 'pwdreset.authorizables',
