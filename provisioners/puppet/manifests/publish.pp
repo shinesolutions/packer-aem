@@ -205,6 +205,21 @@ class publish (
     config_node_name => 'com.shinesolutions.aem.passwordreset.Activator',
   }
 
+  aem_node { 'Create AEM Health Check Servlet config node':
+    ensure  => present,
+    name    => 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck',
+    path    => '/apps/system/config.publish',
+    type    => 'sling:OsgiConfig',
+    require => Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install'],
+  } -> aem_config_property { 'Configure AEM Health Check Servlet ignored bundles':
+    ensure           => present,
+    name             => 'bundles.ignored',
+    type             => 'String[]',
+    value            => ['com.day.cq.dam.dam-webdav-support'],
+    run_mode         => 'publish',
+    config_node_name => 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck',
+  }
+
   class { 'aem_resources::publish_remove_default_agents':
     require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install']],
   }
@@ -238,6 +253,7 @@ class publish (
     group   => 'aem',
     require => [
       Aem_config_property['Configure system usernames for AEM Password Reset Activator to process'],
+      Aem_config_property['Configure AEM Health Check Servlet ignored bundles'],
       Class['aem_resources::publish_remove_default_agents'],
       File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
     ],
