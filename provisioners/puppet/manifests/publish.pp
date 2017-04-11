@@ -156,15 +156,15 @@ class publish (
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } -> archive { "${tmp_dir}/cq-6.2.0-sp1-cfp-1.0.zip":
+  } -> archive { "${tmp_dir}/cq-6.2.0-sp1-cfp-2.0.zip":
     ensure  => present,
-    source  => "${aem_artifacts_base}/AEM-6.2-SP1-CFP1-1.0.zip",
+    source  => "${aem_artifacts_base}/AEM-6.2-SP1-CFP2-2.0.zip",
     cleanup => false,
-  } -> aem_package { 'Install Service Pack 1 Cumulative Fix Pack 1':
+  } -> aem_package { 'Install Service Pack 1 Cumulative Fix Pack 2':
     ensure                     => present,
     name                       => 'cq-6.2.0-sp1-cfp',
     group                      => 'adobe/cq620/cumulativefixpack',
-    version                    => '1.0',
+    version                    => '2.0',
     path                       => "${tmp_dir}",
     replicate                  => false,
     activate                   => false,
@@ -172,11 +172,11 @@ class publish (
     retries_max_tries          => 120,
     retries_base_sleep_seconds => 10,
     retries_max_sleep_seconds  => 10,
-  } -> exec { 'Wait AEM post Service Pack 1 Cumulative Fix Pack 1 install':
+  } -> exec { 'Wait AEM post Service Pack 1 Cumulative Fix Pack 2 install':
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
-  } -> aem_aem { 'Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install':
+  } -> aem_aem { 'Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
@@ -190,7 +190,7 @@ class publish (
     deployer_password     => 'deployer',
     exporter_password     => 'exporter',
     importer_password     => 'importer',
-    require               => Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install'],
+    require               => Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install'],
   } -> aem_node { 'Create AEM Password Reset Activator config node':
     ensure => present,
     name   => 'com.shinesolutions.aem.passwordreset.Activator',
@@ -206,7 +206,7 @@ class publish (
   }
 
   class { 'aem_resources::publish_remove_default_agents':
-    require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
+    require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install']],
   }
 
   aem_package { 'Install AEM Healthcheck Content Package':
@@ -218,7 +218,7 @@ class publish (
     replicate => false,
     activate  => false,
     force     => true,
-    require   => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 1 install']],
+    require   => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install']],
   } -> file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
     ensure  => absent,
     require => Aem_package['Install AEM Healthcheck Content Package'],
