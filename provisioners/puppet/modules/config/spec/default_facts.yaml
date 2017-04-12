@@ -1,0 +1,26 @@
+architecture: x86_64
+is_pe: ""
+operatingsystem: Amazon
+operatingsystemmajrelease: "2016"
+operatingsystemrelease: "2016.09"
+os:
+  architecture: x86_64
+  distro:
+    codename: n/a
+    description: Amazon Linux AMI release 2016.09
+    id: AmazonAMI
+    release:
+      full: "2016.09"
+      major: "2016"
+      minor: "09"
+    specification: ":base-4.0-amd64:base-4.0-noarch:core-4.0-amd64:core-4.0-noarch"
+  family: RedHat
+  hardware: x86_64
+  name: Amazon
+  release:
+    full: "2016.09"
+    major: "2016"
+    minor: "09"
+  selinux:
+    enabled: false
+osfamily: RedHat

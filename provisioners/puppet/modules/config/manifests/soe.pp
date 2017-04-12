@@ -311,5 +311,4 @@ class config::soe (
       mode => $file[1],
     }
   }
-
 }

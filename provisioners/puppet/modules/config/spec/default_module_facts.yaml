@@ -1,0 +1,7 @@
+---
+# Set by collectd
+collectd_version: '5.5.0'
+python_dir: ""
+#operatingsystem: 'Debian'
+#lsbdistid: 'Debian'
+#lsbdistcodename: 'wheezy'

@@ -1,6 +1,27 @@
 ---
 fixtures:
+  forge_modules:
   symlinks:
-    archive: "#{source_dir}/../../../../modules/archive"
-    stdlib: "#{source_dir}/../../../../modules/stdlib"
+    config: "#{source_dir}"
+
+    aem: "#{source_dir}/../../../../modules/aem"
     aem_resources: "#{source_dir}/../../../../modules/aem_resources"
+    apache: "#{source_dir}/../../../../modules/apache"
+    apt: "#{source_dir}/../../../../modules/apt"
+    archive: "#{source_dir}/../../../../modules/archive"
+    cloudwatchlogs: "#{source_dir}/../../../../modules/cloudwatchlogs"
+    collectd: "#{source_dir}/../../../../modules/collectd"
+    command_args: "#{source_dir}/../../../../modules/command_args"
+    concat: "#{source_dir}/../../../../modules/concat"
+    limits: "#{source_dir}/../../../../modules/limits"
+    oracle_java: "#{source_dir}/../../../../modules/oracle_java"
+    puppi: "#{source_dir}/../../../../modules/puppi"
+    rhn_register: "#{source_dir}/../../../../modules/rhn_register"
+    ruby: "#{source_dir}/../../../../modules/ruby"
+    selinux: "#{source_dir}/../../../../modules/selinux"
+    stdlib: "#{source_dir}/../../../../modules/stdlib"
+    sysctl: "#{source_dir}/../../../../modules/sysctl"
+    tcpwrappers: "#{source_dir}/../../../../modules/tcpwrappers"
+    timezone: "#{source_dir}/../../../../modules/timezone"
+    wget: "#{source_dir}/../../../../modules/wget"
+    yum: "#{source_dir}/../../../../modules/yum"

@@ -114,7 +114,7 @@ class config::aem (
     $aem_unknown_datetime_files = [
       # TODO Get example log files to determine `datetime_format`
       'audit.log', 'auditlog.log', 'history.log',
-      's7access-2017-03-17.log', 'upgrade.log',
+      'upgrade.log',
     ]
     $aem_unknown_datetime_files.each |$file| {
       cloudwatchlogs::log { "${aem_log_dir}/${file}":
@@ -276,6 +276,8 @@ class config::aem (
   }
 
   class { '::config::aem_cleanup':
-    require => Aem_aem['Ensure login page is ready'],
+    aem_base                => $aem_base,
+    aem_healthcheck_version => $aem_healthcheck_version,
+    require                 => Aem_aem['Ensure login page is ready'],
   }
 }
