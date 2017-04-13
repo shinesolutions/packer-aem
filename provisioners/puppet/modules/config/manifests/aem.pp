@@ -92,12 +92,12 @@ class config::aem (
   if $setup_repository_volume {
     exec { 'Prepare device for the AEM repository':
       command => "mkfs -t ext4 ${repository_volume_device}",
-    } ->
-    file { $repository_volume_mount_point:
+    }
+    -> file { $repository_volume_mount_point:
       ensure => directory,
       mode   => '0755',
-    } ->
-    mount { $repository_volume_mount_point:
+    }
+    -> mount { $repository_volume_mount_point:
       ensure   => mounted,
       device   => $repository_volume_device,
       fstype   => 'ext4',
@@ -148,8 +148,8 @@ class config::aem (
     source  => $aem_quickstart_source,
     cleanup => false,
     require => File["${aem_base}/aem/${aem_role}"],
-  } ->
-  file { "${aem_base}/aem/${aem_role}/aem-${aem_role}-${aem_port}.jar":
+  }
+  -> file { "${aem_base}/aem/${aem_role}/aem-${aem_role}-${aem_port}.jar":
     ensure  => file,
     mode    => '0775',
     owner   => 'aem',
@@ -172,8 +172,8 @@ class config::aem (
     source  => $aem_license_source,
     cleanup => false,
     require => File["${aem_base}/aem/${aem_role}"],
-  } ->
-  file { "${aem_base}/aem/${aem_role}/license.properties":
+  }
+  -> file { "${aem_base}/aem/${aem_role}/license.properties":
     ensure => file,
     mode   => '0440',
     owner  => 'aem',
@@ -198,40 +198,39 @@ class config::aem (
     jvm_mem_opts   => $aem_jvm_mem_opts,
     jvm_opts       => $jvm_opts.join(' '),
     status         => 'running',
-  } ->
+  }
   # Confirm AEM Starts up and the login page is ready.
-  aem_aem { 'Wait until login page is ready':
+  -> aem_aem { 'Wait until login page is ready':
     ensure  => login_page_is_ready,
     require => [Aem::Instance['aem'], File['/etc/puppetlabs/puppet/aem.yaml']],
-  } ->
-  exec { 'Manual delay to let AEM become ready':
+  }
+  -> exec { 'Manual delay to let AEM become ready':
     command => "sleep ${sleep_secs}",
-  } ->
-
-  config::aem_install_package { 'cq-6.2.0-hotfix-11490':
+  }
+  -> config::aem_install_package { 'cq-6.2.0-hotfix-11490':
     group   => 'adobe/cq620/hotfix',
     version => '1.2',
-  } ->
-  config::aem_install_package { 'cq-6.2.0-hotfix-12785':
+  }
+  -> config::aem_install_package { 'cq-6.2.0-hotfix-12785':
     group                   => 'adobe/cq620/hotfix',
     version                 => '7.0',
     restart                 => true,
     post_install_sleep_secs => $sleep_secs,
-  } ->
-  config::aem_install_package { 'aem-service-pkg':
+  }
+  -> config::aem_install_package { 'aem-service-pkg':
     file_name               => 'AEM-6.2-Service-Pack-1-6.2.SP1.zip',
     group                   => 'adobe/cq620/servicepack',
     version                 => '6.2.SP1',
     post_install_sleep_secs => $sleep_secs,
-  } ->
-  config::aem_install_package { 'cq-6.2.0-sp1-cfp':
+  }
+  -> config::aem_install_package { 'cq-6.2.0-sp1-cfp':
     file_name                   => 'AEM-6.2-SP1-CFP1-1.0.zip',
     group                       => 'adobe/cq620/cumulativefixpack',
     version                     => '1.0',
     post_install_sleep_secs     => $sleep_secs,
     post_login_page_ready_sleep => $sleep_secs,
-  } ->
-  config::aem_install_package { 'aem-healthcheck-content':
+  }
+  -> config::aem_install_package { 'aem-healthcheck-content':
     group                       => 'shinesolutions',
     version                     => $aem_healthcheck_version,
     post_install_sleep_secs     => $sleep_secs,
@@ -262,11 +261,11 @@ class config::aem (
   if $setup_repository_volume {
     exec { 'service aem-aem stop':
       require => Exec['Ensure login page is ready'],
-    } ->
-    exec { "mv ${aem_base}/aem/author/crx-quickstart/repository/* ${repository_volume_mount_point}/":
+    }
+    -> exec { "mv ${aem_base}/aem/author/crx-quickstart/repository/* ${repository_volume_mount_point}/":
       require => Mount[$repository_volume_mount_point],
-    } ->
-    file { "${aem_base}/aem/author/crx-quickstart/repository/":
+    }
+    -> file { "${aem_base}/aem/author/crx-quickstart/repository/":
       ensure => 'link',
       owner  => 'aem',
       group  => 'aem',

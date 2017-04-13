@@ -63,8 +63,8 @@ class config::dispatcher (
 
   class { '::aem::dispatcher' :
     module_file => "${tmp_dir}/${module_filename}",
-  } ->
-  exec { 'httpd -k graceful':
+  }
+  -> exec { 'httpd -k graceful':
     cwd  => $tmp_dir,
     path => ['/sbin','/usr/sbin'],
   }

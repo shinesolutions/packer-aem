@@ -94,8 +94,8 @@ define config::aem_install_package (
     source  => "${artifacts_base}/${url_file_name}",
     cleanup => false,
     require => File[$tmp_dir],
-  } ->
-  aem_package { "Install ${title}":
+  }
+  -> aem_package { "Install ${title}":
     ensure    => present,
     name      => $title,
     group     => $group,
@@ -104,8 +104,8 @@ define config::aem_install_package (
     replicate => $replicate,
     activate  => $activate,
     force     => $force,
-  } ->
-  exec { "Wait post install of ${title}":
+  }
+  -> exec { "Wait post install of ${title}":
     command => "sleep ${post_install_sleep_secs}",
   }
 
@@ -113,15 +113,15 @@ define config::aem_install_package (
     exec { "Stop post install of ${title}":
       command => 'service aem-aem stop',
       require => Exec["Wait post install of ${title}"],
-    } ->
-    exec { "Wait post stop with ${title}":
+    }
+    -> exec { "Wait post stop with ${title}":
       command => 'sleep 240',
     }
     exec { "Start post install of ${title}":
       command => 'service aem-aem start',
       require => Exec["Wait post install of ${title}"],
-    } ->
-    exec { "Wait post restart with ${title}":
+    }
+    -> exec { "Wait post restart with ${title}":
       command => "sleep ${post_restart_sleep_secs}",
     }
     $restart_exec = [Exec["Wait post restart with ${title}"]]
@@ -136,8 +136,8 @@ define config::aem_install_package (
     retries_max_sleep_seconds  => 5,
     require                    =>
       [Exec["Wait post install of ${title}"]] + $restart_exec,
-  } ->
-  exec { "Wait post login page for ${title}":
+  }
+  -> exec { "Wait post login page for ${title}":
     command => "sleep ${post_login_page_ready_sleep}",
   }
 }
