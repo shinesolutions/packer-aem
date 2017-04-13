@@ -133,9 +133,6 @@ class config::base (
     collectd::plugin { $collectd_plugins:
       ensure => present,
     }
-    file { '/usr/lib/python2.7/site-packages':
-      ensure => directory,
-    }
     class { '::collectd::plugin::python':
       modulepaths => [
         '/usr/lib/python2.7/dist-packages',

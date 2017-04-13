@@ -6,7 +6,6 @@ describe 'config::base' do
     it { is_expected.to contain_file_line('sudo_rule_keep_proxy_vairables') }
     it { is_expected.to contain_archive('/tmp/collectd-cloudwatch.tar.gz') }
     it { is_expected.to contain_file('/opt/collectd-cloudwatch') }
-    it { is_expected.to contain_file('/usr/lib/python2.7/site-packages') }
     it { is_expected.to contain_file('/usr/share/collectd/jmx.db') }
 
     system_packages = [ 'python27', 'python27-pip', 'python27-cheetah', ]
