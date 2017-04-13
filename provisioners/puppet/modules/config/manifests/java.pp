@@ -44,12 +44,12 @@ class config::java (
         instance_from   => 'name',
         values          => [
           {
-            type      => 'invocations',
+            'type'    => 'invocations',
             table     => false,
             attribute => 'CollectionCount',
           },
           {
-            type            => 'total_time_in_ms',
+            'type'          => 'total_time_in_ms',
             instance_prefix => 'collection_time',
             table           => false,
             attribute       => 'CollectionTime',
@@ -60,7 +60,7 @@ class config::java (
         instance_prefix => 'memory-heap',
         values          => [
           {
-            type      => 'jmx_memory',
+            'type'    => 'jmx_memory',
             table     => true,
             attribute => 'HeapMemoryUsage',
           },
@@ -70,7 +70,7 @@ class config::java (
         instance_prefix => 'memory-nonheap',
         values          => [
           {
-            type      => 'jmx_memory',
+            'type'    => 'jmx_memory',
             table     => true,
             attribute => 'NonHeapMemoryUsage',
           },
@@ -80,7 +80,7 @@ class config::java (
         instance_prefix => 'memory-permgen',
         values          => [
           {
-            type      => 'jmx_memory',
+            'type'    => 'jmx_memory',
             table     => true,
             attribute => 'Usage',
           },
