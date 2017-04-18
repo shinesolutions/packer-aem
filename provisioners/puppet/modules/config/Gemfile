@@ -1,4 +1,4 @@
-source ENV['GEM_SOURCE'] || "https://rubygems.org"
+source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
 group :test do
   gem 'puppetlabs_spec_helper',                                     :require => false
@@ -22,7 +22,6 @@ group :test do
   gem 'ruby_aem', '1.0.12',                                         :require => false
 end
 
-gem "rake"
-gem "puppet"
-gem "facter"
-gem "hiera"
+puppetversion = ENV.key?('PUPPET_VERSION') ? "~> #{ENV['PUPPET_VERSION']}" : ['~> 4.0']
+gem 'puppet', puppetversion
+gem 'rake'

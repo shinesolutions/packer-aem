@@ -29,5 +29,11 @@ describe 'config::base' do
     cloudwatch_memory_stats.each do |stat|
       it { is_expected.to contain_file_line("#{stat} memory") }
     end
+    # These are treated differently by different versions of Puppet.
+    if Puppet.version =~ /4\.[45678]\.[0-9]+/
+      it { is_expected.to contain_file('/opt/collectd-cloudwatch/src') }
+      it { is_expected.to contain_file('/usr/lib/python2.7/dist-packages') }
+      it { is_expected.to contain_file('/usr/local/lib/python2.7/site-packages') }
+    end
   end
 end

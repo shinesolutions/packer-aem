@@ -13,7 +13,7 @@
     { "name": "kemra102/cloudwatchlogs", "version_requirement": "2.3.x" },
     { "name": "pcfens/rhn_register", "version_requirement": "1.5.x" },
     { "name": "puppet/selinux", "version_requirement": "0.7.1" },
-    { "name": "tylerwalts/jdk_oracle", "version_requirement": "1.5.x" },
+    { "name": "aco-oracle_java", "version_requirement": "2.8.0" },
     { "name": "MiamiOH/tcpwrappers", "version_requirement": "1.1.x" }
   ],
   "project_page": "https://github.com/shinesolutions/puppet-aem-ami-config",
