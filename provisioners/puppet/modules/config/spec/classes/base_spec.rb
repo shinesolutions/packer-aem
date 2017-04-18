@@ -29,6 +29,17 @@ describe 'config::base' do
     cloudwatch_memory_stats.each do |stat|
       it { is_expected.to contain_file_line("#{stat} memory") }
     end
+
+    # These values are specific to the Amazon Linux module data. Not sure how
+    # to test other versions.
+    logfiles = [
+      'amazon/ssm/errors.log', 'cloud-init-output.log', 'cloud-init.log',
+      'cron', 'dmesg', 'maillog', 'messages', 'secure', 'yum.log',
+    ]
+    logfiles.each do |logfile|
+      it { is_expected.to contain_cloudwatchlogs__log("/var/log/#{logfile}") }
+    end
+
     # These are treated differently by different versions of Puppet.
     if Puppet.version =~ /4\.[45678]\.[0-9]+/
       it { is_expected.to contain_file('/opt/collectd-cloudwatch/src') }

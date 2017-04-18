@@ -30,6 +30,15 @@
 # [*collectd_cloudwatch_source_url*]
 #   URL to a `.tar.gz` file of the `collectd-cloudwatch` source.
 #
+# [*cloudwatchlogs_logfiles*]
+#   A hash of `cloudwatchlogs::log` resources that's passed as the second
+#   argument to `create_resources`. The keys should be log file paths and the
+#   values should be a hash of `cloudwatchlogs::log` resource properties.
+#
+# [*cloudwatchlogs_logfiles_defaults*]
+#   A hash of `cloudwatchlogs::log` resource properties that's passed as the
+#   third argument to `create_resources`.
+#
 # === Authors
 #
 # James Sinclair <james.sinclair@shinesolutions.com>
@@ -49,6 +58,9 @@ class config::base (
   $install_cloudwatchlogs = true,
   $install_collectd = true,
   $collectd_cloudwatch_source_url = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
+
+  $cloudwatchlogs_logfiles          = {},
+  $cloudwatchlogs_logfiles_defaults = {},
 ){
   require ::config
 
@@ -93,6 +105,14 @@ class config::base (
 
   if $install_cloudwatchlogs {
     class { '::cloudwatchlogs': }
+    Cloudwatchlogs::Log {
+      notify => Service['awslogs'],
+    }
+    create_resources(
+      cloudwatchlogs::log,
+      $cloudwatchlogs_logfiles,
+      $cloudwatchlogs_logfiles_defaults,
+    )
   }
 
   if $install_collectd {
