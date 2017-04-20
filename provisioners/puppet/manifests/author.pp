@@ -69,21 +69,6 @@ class author (
     group  => 'aem',
   }
 
-  # Install AEM Health Check using aem::crx::package file type
-  # which will place the artifact in AEM install directory
-  # and it will be installed when AEM starts up.
-  archive { "${tmp_dir}/aem-healthcheck-content-${aem_healthcheck_version}.zip":
-    ensure => present,
-    source => "http://central.maven.org/maven2/com/shinesolutions/aem-healthcheck-content/${aem_healthcheck_version}/aem-healthcheck-content-${aem_healthcheck_version}.zip",
-  } -> aem::crx::package { 'aem-healthcheck' :
-    ensure => present,
-    type   => 'file',
-    home   => "${aem_base}/aem/author",
-    source => "${tmp_dir}/aem-healthcheck-content-${aem_healthcheck_version}.zip",
-    user   => 'aem',
-    group  => 'aem',
-  }
-
   aem::instance { 'aem':
     source         => "${aem_base}/aem/author/aem-author-${aem_port}.jar",
     home           => "${aem_base}/aem/author",
@@ -196,8 +181,6 @@ class author (
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } -> exec { "rm ${aem_base}/aem/author/crx-quickstart/install/aem-healthcheck-content-${aem_healthcheck_version}.zip":
-    path => ['/usr/bin', '/usr/sbin'],
   }
 
   # Create system users and configure their usernames for password reset during provisioning
@@ -241,6 +224,20 @@ class author (
     require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install']],
   }
 
+  aem_package { 'Install AEM Healthcheck Content Package':
+    ensure    => present,
+    name      => 'aem-healthcheck-content',
+    group     => 'shinesolutions',
+    version   => "${aem_healthcheck_version}",
+    path      => "${aem_base}/aem",
+    replicate => false,
+    activate  => false,
+    force     => true,
+    require   => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install']],
+  } -> file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
+    ensure  => absent,
+  }
+
   # Enable SSL support on AEM
   archive { "${tmp_dir}/aem.key":
     ensure => present,
@@ -257,6 +254,7 @@ class author (
       Aem_config_property['Configure system usernames for AEM Password Reset Activator to process'],
       Aem_config_property['Configure AEM Health Check Servlet ignored bundles'],
       Class['aem_resources::author_remove_default_agents'],
+      File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
     ],
   } -> java_ks { 'Set up keystore':
     ensure       => latest,
