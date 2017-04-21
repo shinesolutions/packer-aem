@@ -35,6 +35,7 @@ class config::soe (
   String $proxy_server_port = '3128',
   Array[String] $proxy_no_proxy = [
     '127.0.0.1',
+    'localhost',
     '169.254.169.254',
   ],
   String $proxy_profile_sh_file = '/etc/profile.d/proxy.sh',
