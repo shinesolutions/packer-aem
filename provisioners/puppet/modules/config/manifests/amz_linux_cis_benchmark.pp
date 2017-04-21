@@ -1,7 +1,6 @@
-# == Class: config::soe
+# == Class: config::amz_linux_cis_benchmark
 #
-# Basic SOE module for AEM AMIs - based on CIS Amazon Linux Benchmark v2.0.0
-# 06-02-2016
+# A Puppet module to implement CIS Amazon Linux Benchmark v2.0.0 06-02-2016
 #
 # https://benchmarks.cisecurity.org/tools2/linux/CIS_Amazon_Linux_Benchmark_v2.0.0.pdf
 #
@@ -18,11 +17,9 @@
 #
 # Copyright © 2017	Shine Solutions Group, unless otherwise noted.
 #
-class config::soe (
+class config::amz_linux_cis_benchmark (
   $modprobe_file = '/etc/modprobe.d/CIS.conf',
 ) {
-  require ::config
-
   File {
     owner => root,
     group => root,

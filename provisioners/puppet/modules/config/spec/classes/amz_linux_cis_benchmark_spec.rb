@@ -1,10 +1,10 @@
 require 'spec_helper'
-describe 'config::soe' do
+describe 'config::amz_linux_cis_benchmark' do
   modprobe_file = '/etc/modprobe.d/CIS.conf'
   context 'with defaults for all parameters' do
     it { is_expected.to compile }
 
-    it { is_expected.to contain_class('config::soe') }
+    it { is_expected.to contain_class('config::amz_linux_cis_benchmark') }
     it { is_expected.to contain_package('iptables').with_ensure('present') }
 
     it {
