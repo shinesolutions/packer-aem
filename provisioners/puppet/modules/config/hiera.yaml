@@ -10,8 +10,10 @@ hierarchy:
     path: "%{::os.family}/%{::os.name}.yaml"
     backend: yaml
 
+  - name: OS family
+    path: "%{::os.family}.yaml"
+    backend: yaml
 
   - name: Common
     path: common.yaml
     backend: yaml
-

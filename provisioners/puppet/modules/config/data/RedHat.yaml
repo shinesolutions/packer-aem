@@ -1,0 +1,1 @@
+config::soe::proxy_yum_file: /etc/yum.conf
