@@ -52,9 +52,9 @@ class config::soe (
   if $proxy_server_name != '' {
     # Configure proxy servers.
     $epp_template_params = {
-      'proxy_server_name' => $proxy_server_name,
-      'proxy_server_port' => $proxy_server_port,
-      'proxy_no_proxy'    => $proxy_no_proxy,
+      'proxy_name' => $proxy_server_name,
+      'proxy_port' => $proxy_server_port,
+      'no_proxy'   => $proxy_no_proxy,
     }
     if $proxy_profile_sh_file != '' {
       file { $proxy_profile_sh_file:
