@@ -3,5 +3,5 @@
 :password: 'admin'
 :host: 'localhost'
 :port: <%= $port %>
-:debug: False
+:debug: True
 :protocol: 'http'
