@@ -61,6 +61,7 @@ class config::base (
 
   $cloudwatchlogs_logfiles          = {},
   $cloudwatchlogs_logfiles_defaults = {},
+  $install_amazon_ssm_agent = true
 ){
   require ::config
 
@@ -176,5 +177,8 @@ class config::base (
       }
     }
   }
-  # TODO: create a puppet module for installing the aws agent. push it up to puppet forge.
+
+  if $install_amazon_ssm_agent {
+    include amazon_ssm_agent
+  }
 }
