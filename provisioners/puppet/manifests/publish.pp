@@ -78,6 +78,12 @@ class publish (
     jvm_mem_opts   => $aem_jvm_mem_opts,
     jvm_opts       => '-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -XX:+HeapDumpOnOutOfMemoryError',
     status         => 'running',
+  } -> aem_aem { 'Wait until aem health check is ok':
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
+    retries_max_tries          => 60,
+    retries_base_sleep_seconds => 5,
+    retries_max_sleep_seconds  => 5,
   } -> aem_aem { 'Wait until login page is ready':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
@@ -109,6 +115,12 @@ class publish (
     replicate => false,
     activate  => false,
     force     => true,
+  } -> aem_aem { 'Wait until aem health check is ok post hotfix 12785 install':
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
+    retries_max_tries          => 60,
+    retries_base_sleep_seconds => 5,
+    retries_max_sleep_seconds  => 5,
   } -> aem_aem { 'Wait until login page is ready post hotfix 12785 install':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
@@ -126,6 +138,12 @@ class publish (
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
+  } -> aem_aem { 'Wait until aem health check is ok post hotfix 12785 restart':
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
+    retries_max_tries          => 120,
+    retries_base_sleep_seconds => 5,
+    retries_max_sleep_seconds  => 5,
   } -> aem_aem { 'Wait until login page is ready post hotfix 12785 restart':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 120,
@@ -151,6 +169,12 @@ class publish (
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
+  } -> aem_aem { 'Wait until aem health check is ok post Service Pack 1 install':
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
+    retries_max_tries          => 60,
+    retries_base_sleep_seconds => 5,
+    retries_max_sleep_seconds  => 5,
   } -> aem_aem { 'Wait until login page is ready post Service Pack 1 install':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
@@ -176,6 +200,12 @@ class publish (
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
+  } -> aem_aem { 'Wait until aem health check is ok post Service Pack 1 Cumulative Fix Pack 2 install':
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
+    retries_max_tries          => 60,
+    retries_base_sleep_seconds => 5,
+    retries_max_sleep_seconds  => 5,
   } -> aem_aem { 'Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
@@ -276,12 +306,18 @@ class publish (
   }
 
   # Ensure login page is still ready after all provisioning steps and before stopping AEM.
-  aem_aem { 'Ensure login page is ready':
-    ensure                     => login_page_is_ready,
+  aem_aem { 'Ensure aem health check is ok':
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
     retries_max_tries          => 30,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
     require                    => Class['aem_resources::author_publish_enable_ssl'],
+  } -> aem_aem { 'Ensure login page is ready':
+    ensure                     => login_page_is_ready,
+    retries_max_tries          => 30,
+    retries_base_sleep_seconds => 5,
+    retries_max_sleep_seconds  => 5,
   } -> class { 'serverspec':
     stage             => 'test',
     component         => 'publish',
@@ -300,6 +336,8 @@ class publish_shutdown {
 
   exec { 'service aem-aem stop':
     cwd  => "${publish::tmp_dir}",
+    path => ['/usr/bin', '/usr/sbin'],
+  } -> exec { "rm -f ${aem_base}/aem/publish/crx-quickstart/install/aem-healthcheck-content-${publish::aem_healthcheck_version}.zip":
     path => ['/usr/bin', '/usr/sbin'],
   }
 
