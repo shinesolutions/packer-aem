@@ -73,8 +73,8 @@ class publish (
   # which will place the artifact in AEM install directory
   # and it will be installed when AEM starts up.
   archive { "${tmp_dir}/aem-healthcheck-content-${aem_healthcheck_version}.zip":
-    ensure  => present,
-    source  => "http://central.maven.org/maven2/com/shinesolutions/aem-healthcheck-content/${aem_healthcheck_version}/aem-healthcheck-content-${aem_healthcheck_version}.zip",
+    ensure => present,
+    source => "http://central.maven.org/maven2/com/shinesolutions/aem-healthcheck-content/${aem_healthcheck_version}/aem-healthcheck-content-${aem_healthcheck_version}.zip",
   } -> aem::crx::package { 'aem-healthcheck' :
     ensure => present,
     type   => 'file',
