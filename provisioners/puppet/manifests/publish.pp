@@ -69,6 +69,21 @@ class publish (
     group  => 'aem',
   }
 
+  # Install AEM Health Check using aem::crx::package file type
+  # which will place the artifact in AEM install directory
+  # and it will be installed when AEM starts up.
+  archive { "${tmp_dir}/aem-healthcheck-content-${aem_healthcheck_version}.zip":
+    ensure  => present,
+    source  => "http://central.maven.org/maven2/com/shinesolutions/aem-healthcheck-content/${aem_healthcheck_version}/aem-healthcheck-content-${aem_healthcheck_version}.zip",
+  } -> aem::crx::package { 'aem-healthcheck' :
+    ensure => present,
+    type   => 'file',
+    home   => "${aem_base}/aem/publish",
+    source => "${tmp_dir}/aem-healthcheck-content-${aem_healthcheck_version}.zip",
+    user   => 'aem',
+    group  => 'aem',
+  }
+
   aem::instance { 'aem':
     source         => "${aem_base}/aem/publish/aem-publish-${aem_port}.jar",
     home           => "${aem_base}/aem/publish",
@@ -254,21 +269,6 @@ class publish (
     require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install']],
   }
 
-  aem_package { 'Install AEM Healthcheck Content Package':
-    ensure    => present,
-    name      => 'aem-healthcheck-content',
-    group     => 'shinesolutions',
-    version   => "${aem_healthcheck_version}",
-    path      => "${aem_base}/aem",
-    replicate => false,
-    activate  => false,
-    force     => true,
-    require   => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install']],
-  } -> file { "${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip":
-    ensure  => absent,
-    require => Aem_package['Install AEM Healthcheck Content Package'],
-  }
-
   # Enable SSL support on AEM
   archive { "${tmp_dir}/aem.key":
     ensure => present,
@@ -285,7 +285,6 @@ class publish (
       Aem_config_property['Configure system usernames for AEM Password Reset Activator to process'],
       Aem_config_property['Configure AEM Health Check Servlet ignored bundles'],
       Class['aem_resources::publish_remove_default_agents'],
-      File["${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip"],
     ],
   } -> java_ks { 'Set up keystore':
     ensure       => latest,
