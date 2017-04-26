@@ -156,7 +156,7 @@ class author (
   } -> aem_aem { 'Wait until aem health check is ok post hotfix 12785 restart':
     ensure                     => aem_health_check_is_ok,
     tags                       => 'deep',
-    retries_max_tries          => 60,
+    retries_max_tries          => 120,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
   } -> aem_aem { 'Wait until login page is ready post hotfix 12785 restart':
