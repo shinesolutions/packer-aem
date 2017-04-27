@@ -39,7 +39,8 @@
         "Version": "{{user `version`}}",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Owner": "{{user `owner`}}",
-        "Cost Center": "{{user `cost_center`}}"
+        "Cost Center": "{{user `cost_center`}}",
+        "Availability": "{\"availability\": \"24x7\"}"
       },
       "tags": {
         "Application Id": "Adobe Experience Manager (AEM)",
