@@ -38,7 +38,7 @@ class config::dispatcher (
   $packer_user,
   $packer_group
 ) {
-
+  include ::config::base
   include ::apache
 
   file { $tmp_dir:

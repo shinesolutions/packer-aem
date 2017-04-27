@@ -17,7 +17,7 @@
 #
 class config::java (
 ) {
-  require ::config::base
+  include ::config::base
 
   class { '::oracle_java':
     version         => '8u112',
