@@ -8,6 +8,7 @@
   "dependencies": [
     { "name": "saz/limits", "version_requirement": "2.5.x" },
     { "name": "puppetlabs/stdlib", "version_requirement": "4.x" },
+    { "name": "puppetlabs/apache", "version_requirement": "1.x" },
     { "name": "thias/sysctl", "version_requirement": "1.0.x" },
     { "name": "bashtoni/timezone", "version_requirement": "1.0.x" },
     { "name": "kemra102/cloudwatchlogs", "version_requirement": "2.3.x" },
