@@ -23,6 +23,9 @@ shared_examples "aem" do |role, port|
   }
 
   it { is_expected.to compile }
+  it { is_expected.to contain_class('config') }
+  it { is_expected.to contain_class('config::base') }
+  it { is_expected.to contain_class('config::java') }
   it { is_expected.to contain_aem__instance('aem') }
   it { is_expected.to contain_aem_aem('Ensure login page is ready') }
   it { is_expected.to contain_aem_aem('Wait until login page is ready') }

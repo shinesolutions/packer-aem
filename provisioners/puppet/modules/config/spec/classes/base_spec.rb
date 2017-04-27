@@ -2,6 +2,7 @@ require 'spec_helper'
 describe 'config::base' do
   context 'with defaults for all parameters' do
     it { is_expected.to compile }
+    it { is_expected.to contain_class('config') }
     it { is_expected.to contain_class('config::base') }
     it { is_expected.to contain_file_line('sudo_rule_keep_proxy_vairables') }
     it { is_expected.to contain_archive('/tmp/collectd-cloudwatch.tar.gz') }
