@@ -25,3 +25,4 @@ fixtures:
     timezone: "#{source_dir}/../../../../modules/timezone"
     wget: "#{source_dir}/../../../../modules/wget"
     yum: "#{source_dir}/../../../../modules/yum"
+    amazon_ssm_agent: "#{source_dir}/../../../../modules/amazon_ssm_agent"

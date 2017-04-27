@@ -27,6 +27,9 @@
 # [*install_collectd*]
 #   Boolean that determines whether `collectd` will be installed.
 #
+# [*install_amazon_ssm_agent*]
+#   Boolean that determines whether the Amazon SSM Agent will be installed.
+#
 # [*collectd_cloudwatch_source_url*]
 #   URL to a `.tar.gz` file of the `collectd-cloudwatch` source.
 #
@@ -57,11 +60,11 @@ class config::base (
   $install_aws_cli = true,
   $install_cloudwatchlogs = true,
   $install_collectd = true,
+  $install_amazon_ssm_agent = false,
   $collectd_cloudwatch_source_url = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
 
   $cloudwatchlogs_logfiles          = {},
   $cloudwatchlogs_logfiles_defaults = {},
-  $install_amazon_ssm_agent = true
 ){
   require ::config
 
@@ -179,6 +182,6 @@ class config::base (
   }
 
   if $install_amazon_ssm_agent {
-    include amazon_ssm_agent
+    include ::amazon_ssm_agent
   }
 }
