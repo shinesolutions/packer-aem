@@ -226,26 +226,26 @@ class publish (
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } -> archive { "${tmp_dir}/cq-6.2.0-hotfix-15527-1.0.zip":
+  } -> archive { "${tmp_dir}/cq-6.2.0-hotfix-15607-1.0.zip":
     ensure  => present,
-    source  => "${aem_artifacts_base}/cq-6.2.0-hotfix-15527-1.0.zip",
+    source  => "${aem_artifacts_base}/cq-6.2.0-hotfix-15607-1.0.zip",
     cleanup => false,
-  } -> aem_package { 'Install hotfix 15527':
+  } -> aem_package { 'Install hotfix 15607':
     ensure    => present,
-    name      => 'cq-6.2.0-hotfix-15527',
+    name      => 'cq-6.2.0-hotfix-15607',
     group     => 'adobe/cq620/hotfix',
     version   => '1.0',
     path      => "${tmp_dir}",
     replicate => false,
     activate  => false,
     force     => true,
-  } -> aem_aem { 'Wait until aem health check is ok post hotfix 15527 install':
+  } -> aem_aem { 'Wait until aem health check is ok post hotfix 15607 install':
     ensure                     => aem_health_check_is_ok,
     tags                       => 'deep',
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } -> aem_aem { 'Wait until login page is ready post hotfix 15527 install':
+  } -> aem_aem { 'Wait until login page is ready post hotfix 15607 install':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
@@ -259,7 +259,7 @@ class publish (
     deployer_password     => 'deployer',
     exporter_password     => 'exporter',
     importer_password     => 'importer',
-    require               => Aem_aem['Wait until login page is ready post hotfix 15527 install'],
+    require               => Aem_aem['Wait until login page is ready post hotfix 15607 install'],
   } -> aem_node { 'Create AEM Password Reset Activator config node':
     ensure => present,
     name   => 'com.shinesolutions.aem.passwordreset.Activator',
