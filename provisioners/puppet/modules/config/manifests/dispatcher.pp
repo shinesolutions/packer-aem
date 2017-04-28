@@ -39,7 +39,6 @@ class config::dispatcher (
   $packer_group
 ) {
   include ::config::base
-  include ::apache
 
   file { $tmp_dir:
     ensure => directory,
@@ -59,7 +58,12 @@ class config::dispatcher (
     group        => $packer_group,
   }
 
-  class { '::apache::mod::headers': }
+  $apache_classes = [
+    'apache',
+    'apache::mod::ssl',
+    'apache::mod::headers',
+  ]
+  class { $apache_classes: }
 
   class { '::aem::dispatcher' :
     module_file => "${tmp_dir}/${module_filename}",
