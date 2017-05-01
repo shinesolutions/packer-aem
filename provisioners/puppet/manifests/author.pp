@@ -284,7 +284,7 @@ class author (
     ensure           => present,
     name             => 'bundles.ignored',
     type             => 'String[]',
-    value            => ['com.day.cq.dam.dam-webdav-support'],
+    value            => ['org.apache.sling.jcr.webdav'],
     run_mode         => 'author',
     config_node_name => 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck',
   }
