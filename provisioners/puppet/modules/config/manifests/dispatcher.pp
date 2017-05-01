@@ -77,9 +77,9 @@ class config::dispatcher (
   }
 
   $apache_classes = [
-    'apache',
-    'apache::mod::ssl',
-    'apache::mod::headers',
+    '::apache',
+    '::apache::mod::ssl',
+    '::apache::mod::headers',
   ]
   class { $apache_classes: }
 

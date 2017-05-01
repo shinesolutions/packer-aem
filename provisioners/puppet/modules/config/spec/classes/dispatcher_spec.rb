@@ -1,4 +1,5 @@
 require 'spec_helper'
+
 describe 'config::dispatcher' do
   context 'with defaults for all parameters' do
     it { is_expected.to compile }
@@ -6,7 +7,21 @@ describe 'config::dispatcher' do
     it { is_expected.to contain_class('config') }
     it { is_expected.to contain_class('config::base') }
     it { is_expected.to contain_class('config::dispatcher') }
+
+    it { is_expected.to contain_file('/tmp/aem_certs') }
+    it { is_expected.to contain_archive('/tmp/aem_certs/aem.cert') }
+    it { is_expected.to contain_archive('/tmp/aem_certs/aem.key') }
+
+    it { is_expected.to contain_concat('/etc/ssl/aem.unified-dispatcher.cert') }
+    it { is_expected.to contain_concat__fragment('cert') }
+    it { is_expected.to contain_concat__fragment('key') }
+
+    it { is_expected.to contain_class('apache') }
+    it { is_expected.to contain_class('apache::mod::ssl') }
+    it { is_expected.to contain_class('apache::mod::headers') }
+
     it { is_expected.to contain_archive('dispatcher-apache2.4-linux-x86-64-4.2.2.tar.gz') }
+    it { is_expected.to contain_class('aem::dispatcher') }
 
     # These are treated differently by different versions of Puppet.
     if Puppet.version =~ /4\.[4567]\.[0-9]+/
