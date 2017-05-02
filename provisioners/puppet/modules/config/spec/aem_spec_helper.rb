@@ -74,6 +74,17 @@ shared_examples "aem" do |role, port|
     it { is_expected.to contain_file(dir).with_ensure('directory') }
   end
 
+  it { is_expected.to contain_file("/opt/aem/#{role}/crx-quickstart/ssl") }
+  it { is_expected.to contain_archive('/tmp/aem_certs/aem.key') }
+  it { is_expected.to contain_archive('/tmp/aem_certs/aem.cert') }
+  it {
+    is_expected.to contain_java_ks("/opt/aem/#{role}/crx-quickstart/ssl/aem.ks")
+      .that_requires([
+          'Archive[/tmp/aem_certs/aem.key]',
+          'Archive[/tmp/aem_certs/aem.cert]',
+      ])
+  }
+
   included_classes = [
     'config',
     'config::base',
