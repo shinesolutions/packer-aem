@@ -23,14 +23,14 @@ stage/packer-aem-$(packer_aem_version).tar.gz: clean lint validate stage
 ci: clean lint validate
 #ci: clean tools deps lint validate package
 
-modules/.librarian-puppet-has-run: Gemfile.lock Puppetfile
+Puppetfile.lock: Gemfile.lock Puppetfile
 	bundle exec librarian-puppet install --path modules --verbose
 	touch modules/.librarian-puppet-has-run
 
 clean:
 	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage logs/
 
-lint: Gemfile.lock
+lint: Puppetfile.lock
 	bundle exec puppet-lint \
 		--fail-on-warnings \
 		--no-140chars-check \
@@ -50,7 +50,7 @@ validate:
 		templates/generic.json
 
 #TODO: consider having a var-file for each component - which should include the ami_users variable
-$(AMIS): modules/.librarian-puppet-has-run
+$(AMIS): lint validate
 	mkdir -p logs/
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
