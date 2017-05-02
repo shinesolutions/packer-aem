@@ -13,8 +13,8 @@ describe 'config::dispatcher' do
     it { is_expected.to contain_archive('/tmp/aem_certs/aem.key') }
 
     it { is_expected.to contain_concat('/etc/ssl/aem.unified-dispatcher.cert') }
-    it { is_expected.to contain_concat__fragment('cert') }
-    it { is_expected.to contain_concat__fragment('key') }
+    it { is_expected.to contain_concat__fragment('/etc/ssl/aem.unified-dispatcher.cert:cert') }
+    it { is_expected.to contain_concat__fragment('/etc/ssl/aem.unified-dispatcher.cert:key') }
 
     it { is_expected.to contain_class('apache') }
     it { is_expected.to contain_class('apache::mod::ssl') }

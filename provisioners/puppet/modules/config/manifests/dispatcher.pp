@@ -69,7 +69,7 @@ class config::dispatcher (
       source  => "${cert_base_url}/aem.${part}",
       require => File[$cert_temp_dir],
     }
-    -> concat::fragment { $part:
+    -> concat::fragment { "${cert_filename}:${part}":
       target => $cert_filename,
       source => "${cert_temp_dir}/aem.${part}",
       order  => $idx,
