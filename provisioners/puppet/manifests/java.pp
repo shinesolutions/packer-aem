@@ -1,6 +1,8 @@
 class java (
   $tmp_dir,
   $aem_cert_source,
+  $jdkversion = hiera("jdk_oracle::version"),
+  $jdkversion_update = hiera("jdk_oracle::version_update"),
   $install_collectd = true,
   $collectd_cloudwatch_source_url = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
 ) {
@@ -24,6 +26,10 @@ class java (
   exec { '/sbin/ldconfig':
     refreshonly => true,
   }
+
+  exec { "alternatives --set java /usr/java/jdk1.${jdkversion}.0_${jdkversion_update}/bin/java":
+    path => ['/usr/bin', '/usr/sbin'],
+  } 
 
   archive { "${tmp_dir}/aem.cert":
     ensure => present,
