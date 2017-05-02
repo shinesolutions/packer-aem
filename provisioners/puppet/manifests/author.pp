@@ -93,14 +93,18 @@ class author (
     jvm_mem_opts   => $aem_jvm_mem_opts,
     jvm_opts       => '-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -XX:+HeapDumpOnOutOfMemoryError -Dcom.sun.management.jmxremote.port=8463 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false',
     status         => 'running',
-  } -> aem_aem { 'Wait until aem health check is ok':
-    ensure                     => aem_health_check_is_ok,
-    tags                       => 'deep',
+  } -> exec { 'Wait AEM post initial installation':
+    command => 'sleep 120',
+    cwd     => "${tmp_dir}",
+    path    => ['/usr/bin', '/usr/sbin'],
+  } -> aem_aem { 'Wait until login page is ready':
+    ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } -> aem_aem { 'Wait until login page is ready':
-    ensure                     => login_page_is_ready,
+  } -> aem_aem { 'Wait until aem health check is ok':
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
@@ -117,6 +121,21 @@ class author (
     replicate => false,
     activate  => false,
     force     => true,
+  } -> exec { 'Wait AEM post hotfix 11490 install':
+    command => 'sleep 120',
+    cwd     => "${tmp_dir}",
+    path    => ['/usr/bin', '/usr/sbin'],
+  } -> aem_aem { 'Wait until login page is ready post hotfix 11490 install':
+    ensure                     => login_page_is_ready,
+    retries_max_tries          => 60,
+    retries_base_sleep_seconds => 5,
+    retries_max_sleep_seconds  => 5,
+  } -> aem_aem { 'Wait until aem health check is ok post hotfix 11490 install':
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
+    retries_max_tries          => 60,
+    retries_base_sleep_seconds => 5,
+    retries_max_sleep_seconds  => 5,
   } -> archive { "${tmp_dir}/cq-6.2.0-hotfix-12785-7.0.zip":
     ensure  => present,
     source  => "${aem_artifacts_base}/cq-6.2.0-hotfix-12785-7.0.zip",
@@ -130,21 +149,21 @@ class author (
     replicate => false,
     activate  => false,
     force     => true,
+  } -> exec { 'Wait AEM post hotfix 12785 install':
+    command => 'sleep 120',
+    cwd     => "${tmp_dir}",
+    path    => ['/usr/bin', '/usr/sbin'],
+  } -> aem_aem { 'Wait until login page is ready post hotfix 12785 install':
+    ensure                     => login_page_is_ready,
+    retries_max_tries          => 60,
+    retries_base_sleep_seconds => 5,
+    retries_max_sleep_seconds  => 5,
   } -> aem_aem { 'Wait until aem health check is ok post hotfix 12785 install':
     ensure                     => aem_health_check_is_ok,
     tags                       => 'deep',
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } -> aem_aem { 'Wait until login page is ready post hotfix 12785 install':
-    ensure                     => login_page_is_ready,
-    retries_max_tries          => 60,
-    retries_base_sleep_seconds => 5,
-    retries_max_sleep_seconds  => 5,
-  } -> exec { 'Wait AEM post hotfix 12785 install':
-    command => 'sleep 120',
-    cwd     => "${tmp_dir}",
-    path    => ['/usr/bin', '/usr/sbin'],
   } -> exec { 'Restart AEM post hotfix 12785 install':
     command => 'service aem-aem restart',
     cwd     => "${tmp_dir}",
@@ -153,14 +172,14 @@ class author (
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
-  } -> aem_aem { 'Wait until aem health check is ok post hotfix 12785 restart':
-    ensure                     => aem_health_check_is_ok,
-    tags                       => 'deep',
+  } -> aem_aem { 'Wait until login page is ready post hotfix 12785 restart':
+    ensure                     => login_page_is_ready,
     retries_max_tries          => 120,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } -> aem_aem { 'Wait until login page is ready post hotfix 12785 restart':
-    ensure                     => login_page_is_ready,
+  } -> aem_aem { 'Wait until aem health check is ok post hotfix 12785 restart':
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
     retries_max_tries          => 120,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
@@ -184,14 +203,14 @@ class author (
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
-  } -> aem_aem { 'Wait until aem health check is ok post Service Pack 1 install':
-    ensure                     => aem_health_check_is_ok,
-    tags                       => 'deep',
+  } -> aem_aem { 'Wait until login page is ready post Service Pack 1 install':
+    ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } -> aem_aem { 'Wait until login page is ready post Service Pack 1 install':
-    ensure                     => login_page_is_ready,
+  } -> aem_aem { 'Wait until aem health check is ok post Service Pack 1 install':
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
@@ -215,14 +234,14 @@ class author (
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
-  } -> aem_aem { 'Wait until aem health check is ok post Service Pack 1 Cumulative Fix Pack 2 install':
-    ensure                     => aem_health_check_is_ok,
-    tags                       => 'deep',
+  } -> aem_aem { 'Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install':
+    ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } -> aem_aem { 'Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 2 install':
-    ensure                     => login_page_is_ready,
+  } -> aem_aem { 'Wait until aem health check is ok post Service Pack 1 Cumulative Fix Pack 2 install':
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
@@ -239,14 +258,18 @@ class author (
     replicate => false,
     activate  => false,
     force     => true,
-  } -> aem_aem { 'Wait until aem health check is ok post hotfix 15607 install':
-    ensure                     => aem_health_check_is_ok,
-    tags                       => 'deep',
+  } -> exec { 'Wait AEM post hotfix 15607 install':
+    command => 'sleep 120',
+    cwd     => "${tmp_dir}",
+    path    => ['/usr/bin', '/usr/sbin'],
+  } -> aem_aem { 'Wait until login page is ready post hotfix 15607 install':
+    ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } -> aem_aem { 'Wait until login page is ready post hotfix 15607 install':
-    ensure                     => login_page_is_ready,
+  } -> aem_aem { 'Wait until aem health check is ok post hotfix 15607 install':
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
@@ -259,7 +282,7 @@ class author (
     deployer_password     => 'deployer',
     exporter_password     => 'exporter',
     importer_password     => 'importer',
-    require               => Aem_aem['Wait until login page is ready post hotfix 15607 install'],
+    require               => Aem_aem['Wait until aem health check is ok post hotfix 15607 install'],
   } -> aem_node { 'Create AEM Password Reset Activator config node':
     ensure => present,
     name   => 'com.shinesolutions.aem.passwordreset.Activator',
