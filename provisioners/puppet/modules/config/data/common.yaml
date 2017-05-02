@@ -24,3 +24,7 @@ config::dispatcher::apache_module_temp_dir: /tmp/dispatcher-apache
 
 config::java::cert_base_url: "%{lookup('config::params::cert_base_url')}"
 config::java::cert_temp_dir: "%{lookup('config::params::cert_temp_dir')}"
+
+config::aem::cert_base_url: "%{lookup('config::params::cert_base_url')}"
+config::aem::cert_temp_dir: "%{lookup('config::params::cert_temp_dir')}"
+config::aem::aem_keystore_password: changeit

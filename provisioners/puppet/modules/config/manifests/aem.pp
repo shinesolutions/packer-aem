@@ -41,6 +41,21 @@
 # [*repository_volume_mount_point*]
 #   The mount point for the AEM repository volume.
 #
+# [*aem_keystore_path*]
+#   The full path to the Java keystore that will store the X.509 certificate
+#   and private key to be used by AEM.
+#
+# [*aem_keystore_password*]
+#   The password for the AEM Java keystore.
+#
+# [*cert_base_url*]
+#   Base URL (supported by the puppet-archive module) to download the X.509
+#   certificate and private key to be used with Apache.
+#
+# [*cert_temp_dir*]
+#   A temporary directory used to store the X.509 certificate and private key
+#   while building the PEM file for Apache.
+#
 # [*sleep_secs*]
 #   Number of seconds to sleep to allow AEM to settle. If installation fails,
 #   try turning this up.
@@ -71,6 +86,11 @@ class config::aem (
   $setup_repository_volume       = false,
   $repository_volume_device      = '/dev/xvdb',
   $repository_volume_mount_point = '/mnt/ebs1',
+
+  $aem_keystore_path = undef,
+  $aem_keystore_password = undef,
+  $cert_base_url = undef,
+  $cert_temp_dir = undef,
 
   $sleep_secs = 120,
 ) {
@@ -257,6 +277,56 @@ class config::aem (
     retries_max_sleep_seconds  => 5,
     require                    => $aem_resource_classes.map |$cls| { Class["::aem_resources::${cls}"] },
   }
+
+  $keystore_path = pick(
+    $aem_keystore_path,
+    "${aem_base}/aem/${aem_role}/crx-quickstart/ssl/aem.ks",
+  )
+
+  file { dirname($keystore_path):
+    ensure  => directory,
+    mode    => '0770',
+    owner   => 'aem',
+    group   => 'aem',
+    require => [
+      Aem_aem['Ensure login page is ready'],
+    ],
+  }
+
+  $x509_parts = [ 'key', 'cert' ]
+  $x509_parts.each |$idx, $part| {
+    ensure_resource(
+      'archive',
+      "${cert_temp_dir}/aem.${part}",
+      {
+        'ensure' => 'present',
+        'source' => "${cert_base_url}/aem.${part}",
+      },
+    )
+  }
+  $java_ks_require = $x509_parts.map |$part| {
+    Archive["${cert_temp_dir}/aem.${part}"]
+  }
+
+  java_ks { $keystore_path:
+    ensure       => latest,
+    name         => 'cqse',
+    certificate  => "${cert_temp_dir}/aem.cert",
+    private_key  => "${cert_temp_dir}/aem.key",
+    password     => $aem_keystore_password,
+    trustcacerts => true,
+    require      => $java_ks_require,
+  }
+  -> class { '::aem_resources::author_publish_enable_ssl':
+    run_mode            => $aem_role,
+    port                => 5433,
+    keystore            => $keystore_path,
+    keystore_password   => $aem_keystore_password,
+    keystore_key_alias  => 'cqse',
+    truststore          => '/usr/java/default/jre/lib/security/cacerts',
+    truststore_password => 'changeit',
+  }
+
 
   if $setup_repository_volume {
     exec { 'service aem-aem stop':
