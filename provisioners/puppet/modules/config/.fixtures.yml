@@ -26,3 +26,4 @@ fixtures:
     wget: "#{source_dir}/../../../../modules/wget"
     yum: "#{source_dir}/../../../../modules/yum"
     amazon_ssm_agent: "#{source_dir}/../../../../modules/amazon_ssm_agent"
+    java_ks: "#{source_dir}/../../../../modules/java_ks"

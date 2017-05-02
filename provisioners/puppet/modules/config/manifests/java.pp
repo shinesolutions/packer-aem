@@ -4,8 +4,13 @@
 #
 # === Parameters
 #
-# [*tmp_dir*]
-#   A temporary directory used for staging
+# [*cert_base_url*]
+#   Base URL (supported by the puppet-archive module) to download the X.509
+#   certificate and private key to be used with Apache.
+#
+# [*cert_temp_dir*]
+#   A temporary directory used to store the X.509 certificate and private key
+#   while building the PEM file for Apache.
 #
 # === Authors
 #
@@ -16,6 +21,8 @@
 # Copyright © 2017 Shine Solutions Group, unless otherwise noted.
 #
 class config::java (
+  $cert_base_url,
+  $cert_temp_dir,
 ) {
   include ::config::base
 
@@ -33,6 +40,24 @@ class config::java (
 
   exec { '/sbin/ldconfig':
     refreshonly => true,
+  }
+
+  file { $cert_temp_dir:
+    ensure => directory,
+    mode   => '0700',
+  }
+
+  [ 'cert' ].each |$idx, $part| {
+    archive { "${cert_temp_dir}/aem.${part}":
+      ensure  => present,
+      source  => "${cert_base_url}/aem.${part}",
+      require => File[$cert_temp_dir],
+    }
+    -> java_ks { "cqse-${idx}:/usr/java/default/jre/lib/security/cacerts":
+      ensure      => latest,
+      certificate => "${cert_temp_dir}/aem.${part}",
+      password    => 'changeit',
+    }
   }
 
   if $::config::base::install_collectd {
