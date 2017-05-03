@@ -387,7 +387,12 @@ class publish_shutdown {
     path => ['/usr/bin', '/usr/sbin'],
   }
 
-  exec { "mv ${publish::aem_base}/aem/publish/crx-quickstart/repository/* ${publish::aem_repo_mount_point}/":
+  file { "${publish::aem_repo_mount_point}":
+    ensure => directory,
+    mode   => '0755',
+    owner  => 'aem',
+    group  => 'aem',
+  } -> exec { "mv ${publish::aem_base}/aem/publish/crx-quickstart/repository/* ${publish::aem_repo_mount_point}/":
     cwd  => "${publish::tmp_dir}",
     path => '/usr/bin',
   } -> file { "${publish::aem_base}/aem/publish/crx-quickstart/repository/":

@@ -393,7 +393,12 @@ class author_shutdown {
     path => ['/usr/bin', '/usr/sbin'],
   }
 
-  exec { "mv ${author::aem_base}/aem/author/crx-quickstart/repository/* ${author::aem_repo_mount_point}/":
+  file { "${author::aem_repo_mount_point}":
+    ensure => directory,
+    mode   => '0755',
+    owner  => 'aem',
+    group  => 'aem',
+  } -> exec { "mv ${author::aem_base}/aem/author/crx-quickstart/repository/* ${author::aem_repo_mount_point}/":
     cwd  => "${author::tmp_dir}",
     path => '/usr/bin',
   } -> file { "${author::aem_base}/aem/author/crx-quickstart/repository/":

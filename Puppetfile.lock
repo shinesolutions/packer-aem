@@ -31,7 +31,7 @@ FORGE
     puppetlabs-apache (1.11.0)
       puppetlabs-concat (< 3.0.0, >= 1.1.1)
       puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
-    puppetlabs-apt (3.0.0)
+    puppetlabs-apt (4.0.0)
       puppetlabs-stdlib (< 5.0.0, >= 4.16.0)
     puppetlabs-concat (2.2.1)
       puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
