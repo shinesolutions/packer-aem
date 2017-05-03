@@ -29,7 +29,7 @@ class java (
 
   exec { "alternatives --set java /usr/java/jdk1.${jdkversion}.0_${jdkversion_update}/bin/java":
     path => ['/usr/bin', '/usr/sbin'],
-  } 
+  }
 
   archive { "${tmp_dir}/aem.cert":
     ensure => present,
