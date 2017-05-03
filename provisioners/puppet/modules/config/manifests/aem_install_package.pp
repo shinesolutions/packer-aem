@@ -68,7 +68,7 @@ define config::aem_install_package (
   $post_restart_sleep_secs     = 120,
   $post_login_page_ready_sleep = 0,
 
-  $retries_max_tries          = 60,
+  $retries_max_tries          = 120,
   $retries_base_sleep_seconds = 5,
   $retries_max_sleep_seconds  = 5,
 ) {
