@@ -120,8 +120,7 @@
         "rm -rf {{user `tmp_dir`}}",
         "sudo /opt/puppetlabs/bin/puppet resource service aem-aem ensure=stopped",
         "sudo -E find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete",
-        "sudo dd if=/dev/null of=/var/log/wtmp",
-        "sudo dd if=/dev/null of=/var/log/btmp"
+        "sudo truncate --size 0 --no-create /var/log/wtmp /var/log/btmp"
       ],
       "environment_vars" : [
         "HISTFILE=/dev/null"
