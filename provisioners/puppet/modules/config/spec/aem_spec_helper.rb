@@ -14,11 +14,11 @@ shared_examples "aem" do |role, port|
     },
     'cq-6.2.0-sp1-cfp': {
       :has_restart => false,
-      :version     => '1.0',
+      :version     => '2.0',
     },
-    'aem-healthcheck-content': {
+    'cq-6.2.0-hotfix-15607': {
       :has_restart => false,
-      :version     => '1.3',
+      :version     => '1.0',
     },
   }
 
@@ -29,6 +29,7 @@ shared_examples "aem" do |role, port|
   it { is_expected.to contain_aem__instance('aem') }
   it { is_expected.to contain_aem_aem('Ensure login page is ready') }
   it { is_expected.to contain_aem_aem('Wait until login page is ready') }
+  it { is_expected.to contain_aem_aem('Wait until aem health check is ok') }
   it { is_expected.to contain_exec('Manual delay to let AEM become ready') }
   it { is_expected.to contain_file('/etc/puppetlabs/puppet/aem.yaml') }
   it { is_expected.to contain_file('/tmp/aem_install_tmp') }
@@ -41,22 +42,26 @@ shared_examples "aem" do |role, port|
     it { is_expected.to contain_cloudwatchlogs__log("/opt/aem/#{role}/crx-quickstart/logs/#{log}") }
   end
 
+  it { is_expected.to contain_aem__crx__package('aem-healthcheck') }
+  it { is_expected.to contain_archive('/tmp/shinesolutions/packer-aem/aem-healthcheck-content-1.3.zip') }
+
   aem_packages.each do |pkg_name, pkg|
     it { is_expected.to contain_config__aem_install_package(pkg_name) }
+
     it { is_expected.to contain_archive("/tmp/aem_install_tmp/#{pkg_name}-#{pkg[:version]}.zip") }
     it { is_expected.to contain_aem_package("Install #{pkg_name}") }
-    it { is_expected.to contain_aem_aem("Wait for login page post #{pkg_name}") }
-    [ 'install of', 'login page for' ].each do |step|
-      it { is_expected.to contain_exec("Wait post #{step} #{pkg_name}") }
-    end
+    it { is_expected.to contain_exec("Wait post install of #{pkg_name}") }
+
     if pkg[:has_restart]
-      [ 'Stop', 'Start' ].each do |step|
-        it { is_expected.to contain_exec("#{step} post install of #{pkg_name}") }
-      end
-      [ 'stop', 'restart' ].each do |step|
-        it { is_expected.to contain_exec("Wait post #{step} with #{pkg_name}") }
-      end
+      it { is_expected.to contain_aem_aem("Wait for login page before restart #{pkg_name}") }
+      it { is_expected.to contain_aem_aem("Wait until aem health check is ok before restart #{pkg_name}") }
+      it { is_expected.to contain_exec("Restart post install of #{pkg_name}") }
+      it { is_expected.to contain_exec("Wait post restart with #{pkg_name}") }
     end
+
+    it { is_expected.to contain_aem_aem("Wait for login page post #{pkg_name}") }
+    it { is_expected.to contain_aem_aem("Wait until aem health check is ok post #{pkg_name}") }
+    it { is_expected.to contain_exec("Wait post login page for #{pkg_name}") }
   end
 
   files = [
@@ -78,11 +83,11 @@ shared_examples "aem" do |role, port|
   it { is_expected.to contain_archive('/tmp/aem_certs/aem.key') }
   it { is_expected.to contain_archive('/tmp/aem_certs/aem.cert') }
   it {
-    is_expected.to contain_java_ks("/opt/aem/#{role}/crx-quickstart/ssl/aem.ks")
-      .that_requires([
-          'Archive[/tmp/aem_certs/aem.key]',
-          'Archive[/tmp/aem_certs/aem.cert]',
-      ])
+    is_expected.to contain_java_ks("cqse:/opt/aem/#{role}/crx-quickstart/ssl/aem.ks")
+    .that_requires([
+      'Archive[/tmp/aem_certs/aem.key]',
+      'Archive[/tmp/aem_certs/aem.cert]',
+    ])
   }
 
   included_classes = [

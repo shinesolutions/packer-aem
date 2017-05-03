@@ -109,6 +109,12 @@ class config::aem (
     retries_max_sleep_seconds  => 10,
   }
 
+  Aem_aem {
+    retries_max_tries          => 60,
+    retries_base_sleep_seconds => 5,
+    retries_max_sleep_seconds  => 5,
+  }
+
   if $setup_repository_volume {
     exec { 'Prepare device for the AEM repository':
       command => "mkfs -t ext4 ${repository_volume_device}",
@@ -208,6 +214,32 @@ class config::aem (
     '-XX:+PrintGCApplicationStoppedTime',
     '-XX:+HeapDumpOnOutOfMemoryError',
   ]
+  $author_extra_jvm_options = [
+    '-Dcom.sun.management.jmxremote.port=8463',
+    '-Dcom.sun.management.jmxremote.authenticate=false',
+    '-Dcom.sun.management.jmxremote.ssl=false',
+  ]
+  $publish_extra_jvm_options = []
+
+  $aem_jvm_options = $aem_role ? {
+    'author'  => $jvm_opts + $author_extra_jvm_options,
+    'publish' => $jvm_opts + $publish_extra_jvm_options,
+  }
+
+  # Install AEM Health Check using aem::crx::package file type which will place
+  # the artifact in AEM install directory and it will be installed when AEM
+  # starts up.
+  archive { "${tmp_dir}/aem-healthcheck-content-${aem_healthcheck_version}.zip":
+    ensure => present,
+    source => "http://central.maven.org/maven2/com/shinesolutions/aem-healthcheck-content/${aem_healthcheck_version}/aem-healthcheck-content-${aem_healthcheck_version}.zip",
+  } -> aem::crx::package { 'aem-healthcheck' :
+    ensure => present,
+    type   => 'file',
+    home   => "${aem_base}/aem/${aem_role}",
+    source => "${tmp_dir}/aem-healthcheck-content-${aem_healthcheck_version}.zip",
+    user   => 'aem',
+    group  => 'aem',
+  }
 
   aem::instance { 'aem':
     source         => "${aem_base}/aem/${aem_role}/aem-${aem_role}-${aem_port}.jar",
@@ -216,46 +248,42 @@ class config::aem (
     port           => $aem_port,
     sample_content => $aem_sample_content,
     jvm_mem_opts   => $aem_jvm_mem_opts,
-    jvm_opts       => $jvm_opts.join(' '),
+    jvm_opts       => $aem_jvm_options.join(' '),
     status         => 'running',
+  }
+  -> exec { 'Manual delay to let AEM become ready':
+    command => "sleep ${sleep_secs}",
   }
   # Confirm AEM Starts up and the login page is ready.
   -> aem_aem { 'Wait until login page is ready':
     ensure  => login_page_is_ready,
-    require => [Aem::Instance['aem'], File['/etc/puppetlabs/puppet/aem.yaml']],
   }
-  -> exec { 'Manual delay to let AEM become ready':
-    command => "sleep ${sleep_secs}",
+  -> aem_aem { 'Wait until aem health check is ok':
+    ensure => aem_health_check_is_ok,
+    tags   => 'deep',
   }
   -> config::aem_install_package { 'cq-6.2.0-hotfix-11490':
     group   => 'adobe/cq620/hotfix',
     version => '1.2',
   }
   -> config::aem_install_package { 'cq-6.2.0-hotfix-12785':
-    group                   => 'adobe/cq620/hotfix',
-    version                 => '7.0',
-    restart                 => true,
-    post_install_sleep_secs => $sleep_secs,
+    group   => 'adobe/cq620/hotfix',
+    version => '7.0',
+    restart => true,
   }
   -> config::aem_install_package { 'aem-service-pkg':
-    file_name               => 'AEM-6.2-Service-Pack-1-6.2.SP1.zip',
-    group                   => 'adobe/cq620/servicepack',
-    version                 => '6.2.SP1',
-    post_install_sleep_secs => $sleep_secs,
+    file_name => 'AEM-6.2-Service-Pack-1-6.2.SP1.zip',
+    group     => 'adobe/cq620/servicepack',
+    version   => '6.2.SP1',
   }
   -> config::aem_install_package { 'cq-6.2.0-sp1-cfp':
-    file_name                   => 'AEM-6.2-SP1-CFP1-1.0.zip',
-    group                       => 'adobe/cq620/cumulativefixpack',
-    version                     => '1.0',
-    post_install_sleep_secs     => $sleep_secs,
-    post_login_page_ready_sleep => $sleep_secs,
+    file_name => 'AEM-6.2-SP1-CFP2-2.0.zip',
+    group     => 'adobe/cq620/cumulativefixpack',
+    version   => '2.0',
   }
-  -> config::aem_install_package { 'aem-healthcheck-content':
-    group                       => 'shinesolutions',
-    version                     => $aem_healthcheck_version,
-    post_install_sleep_secs     => $sleep_secs,
-    post_login_page_ready_sleep => $sleep_secs,
-    artifacts_base              => "http://central.maven.org/maven2/com/shinesolutions/aem-healthcheck-content/${aem_healthcheck_version}",
+  -> config::aem_install_package { 'cq-6.2.0-hotfix-15607':
+    group   => 'adobe/cq620/hotfix',
+    version => '1.0',
   }
 
   $aem_resource_classes = $aem_role ? {
@@ -265,17 +293,14 @@ class config::aem (
 
   $aem_resource_classes.each |$cls| {
     class { "::aem_resources::${cls}":
-      require => Config::Aem_install_package['aem-healthcheck-content'],
+      require => Config::Aem_install_package['cq-6.2.0-hotfix-15607'],
     }
   }
 
   # Ensure login page is still ready after all provisioning steps and before stopping AEM.
   aem_aem { 'Ensure login page is ready':
-    ensure                     => login_page_is_ready,
-    retries_max_tries          => 30,
-    retries_base_sleep_seconds => 5,
-    retries_max_sleep_seconds  => 5,
-    require                    => $aem_resource_classes.map |$cls| { Class["::aem_resources::${cls}"] },
+    ensure  => login_page_is_ready,
+    require => $aem_resource_classes.map |$cls| { Class["::aem_resources::${cls}"] },
   }
 
   $keystore_path = pick(
@@ -329,12 +354,14 @@ class config::aem (
 
   if $setup_repository_volume {
     exec { 'service aem-aem stop':
-      require => Exec['Ensure login page is ready'],
+      require => [
+        Exec['Ensure login page is ready'],
+        Mount[$repository_volume_mount_point],
+      ],
     }
-    -> exec { "mv ${aem_base}/aem/author/crx-quickstart/repository/* ${repository_volume_mount_point}/":
-      require => Mount[$repository_volume_mount_point],
+    -> exec { "mv ${aem_base}/aem/${aem_role}/crx-quickstart/repository/* ${repository_volume_mount_point}/":
     }
-    -> file { "${aem_base}/aem/author/crx-quickstart/repository/":
+    -> file { "${aem_base}/aem/${aem_role}/crx-quickstart/repository/":
       ensure => 'link',
       owner  => 'aem',
       group  => 'aem',

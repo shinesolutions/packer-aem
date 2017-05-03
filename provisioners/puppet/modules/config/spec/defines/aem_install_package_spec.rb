@@ -12,6 +12,7 @@ describe 'config::aem_install_package' do
     it { is_expected.to contain_archive('/tmp/aem_install_tmp/package-name-package-version.zip') }
     it { is_expected.to contain_aem_package('Install package-name') }
     it { is_expected.to contain_aem_aem('Wait for login page post package-name') }
+    it { is_expected.to contain_aem_aem('Wait until aem health check is ok post package-name') }
     it { is_expected.to contain_exec('Wait post install of package-name') }
     it { is_expected.to contain_exec('Wait post login page for package-name') }
     it { is_expected.to contain_file('/tmp/aem_install_tmp') }

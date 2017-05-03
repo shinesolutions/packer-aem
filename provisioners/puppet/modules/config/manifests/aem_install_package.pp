@@ -29,7 +29,7 @@
 #   Temporary directory for storing files. Default is '/tmp/aem_install_tmp'.
 #
 # [*post_install_sleep_secs*]
-#   Number of seconds to sleep for after installing the package. Default 0.
+#   Number of seconds to sleep for after installing the package. Default 120.
 #
 # [*post_restart_sleep_secs*]
 #   Number of seconds to sleep for after restarting AEM. Default 120.
@@ -64,11 +64,11 @@ define config::aem_install_package (
 
   $tmp_dir = '/tmp/aem_install_tmp',
 
-  $post_install_sleep_secs     = 0,
+  $post_install_sleep_secs     = 120,
   $post_restart_sleep_secs     = 120,
   $post_login_page_ready_sleep = 0,
 
-  $retries_max_tries          = 120,
+  $retries_max_tries          = 60,
   $retries_base_sleep_seconds = 5,
   $retries_max_sleep_seconds  = 5,
 ) {
@@ -77,6 +77,11 @@ define config::aem_install_package (
     path => [ '/bin', '/sbin', '/usr/bin', '/usr/sbin' ],
   }
 
+  Aem_aem {
+    retries_max_tries          => $retries_max_tries,
+    retries_base_sleep_seconds => $retries_base_sleep_seconds,
+    retries_max_sleep_seconds  => $retries_max_sleep_seconds,
+  }
 
   if !defined(File[$tmp_dir]) {
     file { $tmp_dir:
@@ -110,16 +115,16 @@ define config::aem_install_package (
   }
 
   if $restart {
-    exec { "Stop post install of ${title}":
-      command => 'service aem-aem stop',
+    aem_aem { "Wait for login page before restart ${title}":
+      ensure  => login_page_is_ready,
       require => Exec["Wait post install of ${title}"],
     }
-    -> exec { "Wait post stop with ${title}":
-      command => 'sleep 240',
+    -> aem_aem { "Wait until aem health check is ok before restart ${title}":
+      ensure => aem_health_check_is_ok,
+      tags   => 'deep',
     }
-    exec { "Start post install of ${title}":
-      command => 'service aem-aem start',
-      require => Exec["Wait post install of ${title}"],
+    -> exec { "Restart post install of ${title}":
+      command => 'service aem-aem restart',
     }
     -> exec { "Wait post restart with ${title}":
       command => "sleep ${post_restart_sleep_secs}",
@@ -130,12 +135,12 @@ define config::aem_install_package (
   }
 
   aem_aem { "Wait for login page post ${title}":
-    ensure                     => login_page_is_ready,
-    retries_max_tries          => 120,
-    retries_base_sleep_seconds => 5,
-    retries_max_sleep_seconds  => 5,
-    require                    =>
-      [Exec["Wait post install of ${title}"]] + $restart_exec,
+    ensure  => login_page_is_ready,
+    require => [Exec["Wait post install of ${title}"]] + $restart_exec,
+  }
+  -> aem_aem { "Wait until aem health check is ok post ${title}":
+    ensure => aem_health_check_is_ok,
+    tags   => 'deep',
   }
   -> exec { "Wait post login page for ${title}":
     command => "sleep ${post_login_page_ready_sleep}",
