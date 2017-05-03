@@ -1,6 +1,6 @@
 {
     "ami_users": "",
-    "author_ami_source_ami": "ami-56303f35",
+    "author_ami_source_ami": "ami-02020961",
     "author_instance_type": "m4.large",
     "author_repository_volume_size": "50",
     "aws_region": "ap-southeast-2",
@@ -24,7 +24,7 @@
     "owner": "",
     "post_puppet_provisioner_script": "provisioners/aws/rhel7/post_puppet.sh",
     "pre_puppet_provisioner_script": "provisioners/aws/rhel7/pre_puppet.sh",
-    "publish_ami_source_ami": "ami-56303f35",
+    "publish_ami_source_ami": "ami-02020961",
     "publish_instance_type": "m4.large",
     "publish_repository_volume_size": "50",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
