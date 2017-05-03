@@ -308,9 +308,8 @@ class config::aem (
     Archive["${cert_temp_dir}/aem.${part}"]
   }
 
-  java_ks { $keystore_path:
+  java_ks { "cqse:${keystore_path}":
     ensure       => latest,
-    name         => 'cqse',
     certificate  => "${cert_temp_dir}/aem.cert",
     private_key  => "${cert_temp_dir}/aem.key",
     password     => $aem_keystore_password,
