@@ -307,7 +307,7 @@ class publish (
     ensure           => present,
     name             => 'bundles.ignored',
     type             => 'String[]',
-    value            => ['org.apache.sling.jcr.webdav'],
+    value            => ['org.apache.sling.jcr.webdav', 'org.apache.sling.jcr.davex'],
     run_mode         => 'publish',
     config_node_name => 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck',
   }
