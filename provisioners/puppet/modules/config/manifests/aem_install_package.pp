@@ -123,13 +123,19 @@ define config::aem_install_package (
       ensure => aem_health_check_is_ok,
       tags   => 'deep',
     }
-    -> exec { "Restart post install of ${title}":
-      command => 'service aem-aem restart',
+    -> exec { "Stop post install of ${title}":
+      command => 'service aem-aem stop',
     }
-    -> exec { "Wait post restart with ${title}":
+    -> exec { "Wait post stop with ${title}":
+      command => 'sleep 60',
+    }
+    -> exec { "Start post install of ${title}":
+      command => 'service aem-aem start',
+    }
+    -> exec { "Wait post start with ${title}":
       command => "sleep ${post_restart_sleep_secs}",
     }
-    $restart_exec = [Exec["Wait post restart with ${title}"]]
+    $restart_exec = [Exec["Wait post start with ${title}"]]
   } else {
     $restart_exec = []
   }

@@ -55,8 +55,10 @@ shared_examples "aem" do |role, port|
     if pkg[:has_restart]
       it { is_expected.to contain_aem_aem("Wait for login page before restart #{pkg_name}") }
       it { is_expected.to contain_aem_aem("Wait until aem health check is ok before restart #{pkg_name}") }
-      it { is_expected.to contain_exec("Restart post install of #{pkg_name}") }
-      it { is_expected.to contain_exec("Wait post restart with #{pkg_name}") }
+      it { is_expected.to contain_exec("Stop post install of #{pkg_name}") }
+      it { is_expected.to contain_exec("Start post install of #{pkg_name}") }
+      it { is_expected.to contain_exec("Wait post stop with #{pkg_name}") }
+      it { is_expected.to contain_exec("Wait post start with #{pkg_name}") }
     end
 
     it { is_expected.to contain_aem_aem("Wait for login page post #{pkg_name}") }
