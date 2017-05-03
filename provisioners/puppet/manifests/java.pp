@@ -1,8 +1,8 @@
 class java (
   $tmp_dir,
   $aem_cert_source,
-  $jdkversion = hiera("jdk_oracle::version"),
-  $jdkversion_update = hiera("jdk_oracle::version_update"),
+  $jdkversion = hiera('jdk_oracle::version'),
+  $jdkversion_update = hiera('jdk_oracle::version_update'),
   $install_collectd = true,
   $collectd_cloudwatch_source_url = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
 ) {
