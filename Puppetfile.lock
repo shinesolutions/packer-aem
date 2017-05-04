@@ -35,10 +35,11 @@ FORGE
     puppetlabs-apache (1.11.0)
       puppetlabs-concat (< 3.0.0, >= 1.1.1)
       puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
-    puppetlabs-apt (3.0.0)
+    puppetlabs-apt (4.0.0)
       puppetlabs-stdlib (< 5.0.0, >= 4.16.0)
     puppetlabs-concat (2.2.1)
       puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
+    puppetlabs-java_ks (1.6.0)
     puppetlabs-ruby (0.6.0)
       puppetlabs-stdlib (< 6.0.0, >= 4.6.0)
     puppetlabs-stdlib (4.16.0)
@@ -48,7 +49,7 @@ FORGE
 GIT
   remote: https://github.com/shinesolutions/amazon_ssm_agent.git
   ref: master
-  sha: a65e47e5a09e67052000b8d0076cb0106d1ecf0e
+  sha: 5d36cb74612ae82e3b9c6ad0a558e2288e1edc19
   specs:
     shinesolutions-amazon_ssm_agent (0.9.0)
       puppet-archive (~> 1.3.0)
@@ -56,7 +57,7 @@ GIT
 GIT
   remote: https://github.com/shinesolutions/puppet-aem-resources
   ref: master
-  sha: 49b5eac84d0c02f8fa753d44654480436572aa62
+  sha: 4a6847a97db9f758719710e11b38a44033d31be4
   specs:
     shinesolutions-aem_resources (0.9.4)
       puppetlabs-stdlib (>= 4.14.0)
@@ -72,6 +73,7 @@ DEPENDENCIES
   puppet-collectd (= 5.3.0)
   puppet-selinux (= 0.7.1)
   puppetlabs-apache (>= 0)
+  puppetlabs-java_ks (>= 0)
   puppetlabs-stdlib (>= 0)
   saz-limits (>= 0)
   shinesolutions-aem_resources (>= 0)
