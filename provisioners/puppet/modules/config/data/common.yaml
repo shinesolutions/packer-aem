@@ -17,8 +17,8 @@ config::dispatcher::cert_base_url: "%{lookup('config::params::cert_base_url')}"
 config::dispatcher::cert_temp_dir: "%{lookup('config::params::cert_temp_dir')}"
 config::dispatcher::cert_filename: /etc/ssl/aem.unified-dispatcher.cert
 
-config::dispatcher::apache_module_base_url: https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_8/file.res
-config::dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86-64-4.2.2.tar.gz
+config::dispatcher::apache_module_base_url: https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_9/file.res
+config::dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86-64-ssl-4.2.2.tar.gz
 config::dispatcher::apache_module_filename: dispatcher-apache2.4-4.2.2.so
 config::dispatcher::apache_module_temp_dir: /tmp/dispatcher-apache
 
