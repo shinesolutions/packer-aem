@@ -221,10 +221,11 @@ class config::aem (
   ]
   $publish_extra_jvm_options = []
 
-  $aem_jvm_options = $aem_role ? {
-    'author'  => $jvm_opts + $author_extra_jvm_options,
-    'publish' => $jvm_opts + $publish_extra_jvm_options,
-  }
+  #$aem_jvm_options = $aem_role ? {
+  #  'author'  => $jvm_opts + $author_extra_jvm_options,
+  #  'publish' => $jvm_opts + $publish_extra_jvm_options,
+  #}
+  $aem_jvm_options = $jvm_opts
 
   # Install AEM Health Check using aem::crx::package file type which will place
   # the artifact in AEM install directory and it will be installed when AEM
