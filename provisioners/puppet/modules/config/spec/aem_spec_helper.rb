@@ -1,4 +1,5 @@
 shared_examples "aem" do |role, port|
+
   aem_packages = {
     'cq-6.2.0-hotfix-11490': {
       :has_restart => false,
@@ -43,7 +44,7 @@ shared_examples "aem" do |role, port|
   end
 
   it { is_expected.to contain_aem__crx__package('aem-healthcheck') }
-  it { is_expected.to contain_archive('/tmp/shinesolutions/packer-aem/aem-healthcheck-content-1.3.zip') }
+  it { is_expected.to contain_archive('/tmp/shinesolutions/packer-aem/aem-healthcheck-content-1.3.3.zip') }
 
   aem_packages.each do |pkg_name, pkg|
     it { is_expected.to contain_config__aem_install_package(pkg_name) }
@@ -102,5 +103,5 @@ shared_examples "aem" do |role, port|
   included_classes.each do |cls|
     it { is_expected.to contain_class(cls) }
   end
-  it { is_expected.to contain_exec('rm -f /opt/aem/aem-healthcheck-content-1.3.zip') }
+  it { is_expected.to contain_exec('rm -f /opt/aem/aem-healthcheck-content-1.3.3.zip') }
 end

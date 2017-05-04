@@ -42,6 +42,17 @@
 #   A hash of `cloudwatchlogs::log` resource properties that's passed as the
 #   third argument to `create_resources`.
 #
+# [*proxy_server_name*]
+#   Date type: String
+#   Name of proxy host should cloudwatch logs need to communicate via a proxy
+#   Default value: undef
+#
+# [*proxy_server_port*]
+#   Date type: String
+#   Port on proxy host should cloudwatch logs need to communicate via a proxy
+#   Default value: 3128
+#
+#
 # === Authors
 #
 # James Sinclair <james.sinclair@shinesolutions.com>
@@ -65,6 +76,8 @@ class config::base (
 
   $cloudwatchlogs_logfiles          = {},
   $cloudwatchlogs_logfiles_defaults = {},
+  $proxy_server_name = undef,
+  $proxy_server_port = '3128',
 ){
   require ::config
 
@@ -117,6 +130,17 @@ class config::base (
       $cloudwatchlogs_logfiles,
       $cloudwatchlogs_logfiles_defaults,
     )
+
+    if defined('$proxy_server_name') {
+      file {'/etc/awslogs/proxy.conf':
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        content => epp('config/cloudwatch_proxy.conf.epp'),
+        notify  => Service['awslogs'],
+      }
+    }
   }
 
   if $install_collectd {

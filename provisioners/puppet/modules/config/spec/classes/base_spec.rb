@@ -48,4 +48,22 @@ describe 'config::base' do
       it { is_expected.to contain_file('/usr/local/lib/python2.7/site-packages') }
     end
   end
+
+  context 'with proxy settings for awslogs' do
+    let(:params ) {
+      {
+        :install_cloudwatchlogs => true,
+        :proxy_server_name      => 'shinesolutions.com',
+        :proxy_server_port      => '443'
+      }
+    }
+
+    it {
+      is_expected.to contain_file('/etc/awslogs/proxy.conf')
+      .with(
+        :ensure => 'present',
+        :notify => 'Service[awslogs]',
+      )
+    }
+  end
 end
