@@ -104,6 +104,10 @@ class config::base (
     line => 'Defaults    env_keep += "ftp_proxy http_proxy https_proxy no_proxy"',
   }
 
+  package { [ 'unzip', 'jq' ]:
+    ensure => installed,
+  }
+
   package { [ $python_package, $python_pip_package, $python_cheetah_package ]:
     ensure => latest,
   }
