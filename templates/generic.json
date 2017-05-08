@@ -10,7 +10,7 @@
     "version": "x.x.x",
     "instance_type": "t2.large",
     "source_ami": "",
-    "repository_volume_size": 50,
+    "repository_volume_size": "50",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "owner": "",
     "cost_center": "",
