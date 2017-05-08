@@ -356,7 +356,7 @@ class config::aem (
   if $setup_repository_volume {
     exec { 'service aem-aem stop':
       require => [
-        Exec['Ensure login page is ready'],
+        Aem_aem['Ensure login page is ready'],
         Mount[$repository_volume_mount_point],
       ],
     }
