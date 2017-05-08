@@ -10,6 +10,7 @@
     "version": "x.x.x",
     "instance_type": "t2.large",
     "source_ami": "",
+    "repository_volume_size": 50,
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "owner": "",
     "cost_center": "",
@@ -31,6 +32,22 @@
       "security_group_id": "{{user `aws_security_group_id`}}",
       "ami_users": "{{user `ami_users`}}",
       "source_ami": "{{user `source_ami`}}",
+      "ami_block_device_mappings": [
+        {
+          "delete_on_termination": true,
+          "device_name": "/dev/sdb",
+          "volume_size": "{{user `repository_volume_size`}}",
+          "volume_type": "gp2"
+        }
+      ],
+      "launch_block_device_mappings": [
+        {
+          "delete_on_termination": true,
+          "device_name": "/dev/sdb",
+          "volume_size": "{{user `repository_volume_size`}}",
+          "volume_type": "gp2"
+        }
+      ],
       "communicator": "ssh",
       "ssh_pty": true,
       "run_tags": {
