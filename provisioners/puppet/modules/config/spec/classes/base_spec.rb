@@ -11,6 +11,7 @@ describe 'config::base' do
 
     system_packages = [ 'python27', 'python27-pip', 'python27-cheetah', ]
     python_modules = [ 'awscli', 'boto3', 'requests', 'retrying', 'sh' ]
+    util_packages = ['unzip', 'jq']
 
     system_packages.each do |pkg|
       it { is_expected.to contain_package(pkg) }
@@ -18,6 +19,10 @@ describe 'config::base' do
 
     python_modules.each do |pkg|
       it { is_expected.to contain_package(pkg).with_provider('pip') }
+    end
+
+    util_packages.each do |pkg|
+      it { is_expected.to contain_package(pkg).with_ensure('installed')}
     end
 
     collectd_plugins = [ 'cpu', 'interface', 'load', 'memory', 'syslog', ]
