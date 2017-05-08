@@ -117,6 +117,10 @@ class config::base (
     provider => 'pip',
   }
 
+  package { 'jq':
+    ensure => installed,
+  }
+  
   if $install_aws_cli {
     package { 'awscli':
       ensure   => latest,
