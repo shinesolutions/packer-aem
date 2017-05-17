@@ -1,3 +1,7 @@
+File {
+  backup => false,
+}
+
 class dispatcher (
   $aem_dispatcher_source,
   $aem_cert_source,

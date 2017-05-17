@@ -1,3 +1,7 @@
+File {
+  backup => false,
+}
+
 class base (
   $tmp_dir,
   $python_package,

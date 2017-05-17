@@ -1,3 +1,7 @@
+File {
+  backup => false,
+}
+
 class publish (
   $tmp_dir,
   $aem_quickstart_source,

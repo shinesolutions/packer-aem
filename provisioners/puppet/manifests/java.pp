@@ -1,3 +1,7 @@
+File {
+  backup => false,
+}
+
 class java (
   $tmp_dir,
   $aem_cert_source,

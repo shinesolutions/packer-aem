@@ -1,3 +1,7 @@
+File {
+  backup => false,
+}
+
 class httpd (
   $tmp_dir,
 ) {

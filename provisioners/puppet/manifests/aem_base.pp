@@ -1,3 +1,7 @@
+File {
+  backup => false,
+}
+
 class aem_base (
   $tmp_dir,
   $aem_repo_device,

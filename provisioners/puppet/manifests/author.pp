@@ -1,3 +1,7 @@
+File {
+  backup => false,
+}
+
 class author (
   $tmp_dir,
   $aem_quickstart_source,
