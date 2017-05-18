@@ -299,6 +299,15 @@ class publish (
     value            => ['admin', 'orchestrator', 'replicator', 'deployer', 'exporter', 'importer'],
     run_mode         => 'publish',
     config_node_name => 'com.shinesolutions.aem.passwordreset.Activator',
+  # Deny replicate permission for replication-service user to prevent agents from being published
+  } -> aem_user { 'Update replication-service user permission':
+    ensure     => has_permission,
+    name       => 'replication-service',
+    path       => '/home/users/system/',
+    permission => {
+      '/etc/replication/agents.author' => ['replicate:false'],
+      '/etc/replication/agents.publish' => ['replicate:false']
+    }
   }
 
   aem_node { 'Create AEM Health Check Servlet config node':

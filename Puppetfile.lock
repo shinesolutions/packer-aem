@@ -38,14 +38,8 @@ FORGE
     puppetlabs-java_ks (1.5.0)
     puppetlabs-ruby (0.6.0)
       puppetlabs-stdlib (< 6.0.0, >= 4.6.0)
-    puppetlabs-stdlib (4.16.0)
-
-GIT
-  remote: https://github.com/shinesolutions/puppet-aem-resources
-  ref: master
-  sha: 4a6847a97db9f758719710e11b38a44033d31be4
-  specs:
-    shinesolutions-aem_resources (0.9.4)
+    puppetlabs-stdlib (4.17.0)
+    shinesolutions-aem_resources (1.0.0)
       puppetlabs-stdlib (>= 4.14.0)
 
 DEPENDENCIES
@@ -60,5 +54,5 @@ DEPENDENCIES
   puppet-collectd (= 5.3.0)
   puppetlabs-apache (>= 0)
   puppetlabs-java_ks (= 1.5.0)
-  shinesolutions-aem_resources (>= 0)
+  shinesolutions-aem_resources (= 1.0.0)
 
