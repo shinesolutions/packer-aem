@@ -60,6 +60,9 @@
 #   Number of seconds to sleep to allow AEM to settle. If installation fails,
 #   try turning this up.
 #
+# [*jvm_opts*]
+#   An array of command line options to pass to the JVM when starting AEM.
+#
 # === Authors
 #
 # Andy Wang <andy.wang@shinesolutions.com>
@@ -93,6 +96,15 @@ class config::aem (
   $cert_temp_dir = undef,
 
   $sleep_secs = 120,
+
+  $jvm_opts = [
+    '-XX:+PrintGCDetails',
+    '-XX:+PrintGCTimeStamps',
+    '-XX:+PrintGCDateStamps',
+    '-XX:+PrintTenuringDistribution',
+    '-XX:+PrintGCApplicationStoppedTime',
+    '-XX:+HeapDumpOnOutOfMemoryError',
+  ],
 ) {
 
   include ::config::java
@@ -206,26 +218,6 @@ class config::aem (
     group  => 'aem',
   }
 
-  $jvm_opts = [
-    '-XX:+PrintGCDetails',
-    '-XX:+PrintGCTimeStamps',
-    '-XX:+PrintGCDateStamps',
-    '-XX:+PrintTenuringDistribution',
-    '-XX:+PrintGCApplicationStoppedTime',
-    '-XX:+HeapDumpOnOutOfMemoryError',
-  ]
-  $author_extra_jvm_options = [
-    '-Dcom.sun.management.jmxremote.port=8463',
-    '-Dcom.sun.management.jmxremote.authenticate=false',
-    '-Dcom.sun.management.jmxremote.ssl=false',
-  ]
-  $publish_extra_jvm_options = []
-
-  #$aem_jvm_options = $aem_role ? {
-  #  'author'  => $jvm_opts + $author_extra_jvm_options,
-  #  'publish' => $jvm_opts + $publish_extra_jvm_options,
-  #}
-  $aem_jvm_options = $jvm_opts
 
   # Install AEM Health Check using aem::crx::package file type which will place
   # the artifact in AEM install directory and it will be installed when AEM
@@ -249,7 +241,7 @@ class config::aem (
     port           => $aem_port,
     sample_content => $aem_sample_content,
     jvm_mem_opts   => $aem_jvm_mem_opts,
-    jvm_opts       => $aem_jvm_options.join(' '),
+    jvm_opts       => $jvm_opts.join(' '),
     status         => 'running',
   }
   -> exec { 'Manual delay to let AEM become ready':
