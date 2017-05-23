@@ -42,6 +42,9 @@
 #   A hash of `cloudwatchlogs::log` resource properties that's passed as the
 #   third argument to `create_resources`.
 #
+# [*collectd_packages*]
+#   An array of extra packages to install when installing collectd.
+#
 # [*proxy_server_name*]
 #   Date type: String
 #   Name of proxy host should cloudwatch logs need to communicate via a proxy
@@ -76,6 +79,7 @@ class config::base (
 
   $cloudwatchlogs_logfiles          = {},
   $cloudwatchlogs_logfiles_defaults = {},
+  $collectd_packages = [],
   $proxy_server_name = undef,
   $proxy_server_port = '3128',
 ){
@@ -151,6 +155,9 @@ class config::base (
     $collectd_plugins = [
       'syslog', 'cpu', 'interface', 'load', 'memory',
     ]
+    package { $collectd_packages:
+      ensure => installed,
+    }
     $collectd_jmx_types_path = '/usr/share/collectd/jmx.db'
     $collectd_cloudwatch_base_dir = '/opt/collectd-cloudwatch'
     file { '/opt/collectd-cloudwatch':

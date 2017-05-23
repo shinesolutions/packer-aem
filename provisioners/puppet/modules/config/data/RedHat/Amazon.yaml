@@ -6,6 +6,9 @@ config::base::python_package: python27
 config::base::python_pip_package: python27-pip
 config::base::python_cheetah_package: python27-cheetah
 
+config::base::collectd_packages:
+    - collectd-python
+
 config::base::cloudwatchlogs_logfiles:
     /var/log/messages:
         datetime_format: '%b %d %H:%M:%S'

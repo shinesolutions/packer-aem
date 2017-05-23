@@ -22,6 +22,12 @@ class config (
   $newrelic_releasever = '$releasever',
   $newrelic_architecture = $::facts[os][architecture]
 ) {
+  # Ensure we have a working FQDN <=> IP mapping.
+  host { $facts['fqdn']:
+    ensure       => present,
+    ip           => $facts['ipaddress'],
+    host_aliases => $facts['hostname'],
+  }
   # needed for running Serverspec, used for testing baked AMIs and provisioned EC instances
   package { [ 'gcc', 'ruby-devel', 'zlib-devel' ]:
     ensure  => 'installed',
@@ -34,7 +40,7 @@ class config (
     provider => 'puppet_gem',
   }
   -> package { 'ruby_aem':
-    ensure   => '1.1.0',
+    ensure   => '1.1.2',
     provider => 'puppet_gem',
   }
   yumrepo { 'newrelic-infra':

@@ -24,3 +24,6 @@ os:
   selinux:
     enabled: false
 osfamily: RedHat
+fqdn: test.example.com
+hostname: test
+ipaddress: 192.0.2.42
