@@ -6,7 +6,7 @@ timezone::locality: 'Melbourne'
 
 cloudwatchlogs::region: 'ap-southeast-2'
 jdk_oracle::version: '8'
-jdk_oracle::version_update: '112'
+jdk_oracle::version_update: '131'
 jdk_oracle::version_build: '15'
 
 java::tmp_dir: "%{lookup('tmp_dir')}"
