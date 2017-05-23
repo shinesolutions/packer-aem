@@ -1,7 +1,7 @@
 FORGE
   remote: https://forgeapi.puppetlabs.com
   specs:
-    aco-oracle_java (2.8.0)
+    aco-oracle_java (2.8.1)
       puppet-archive (< 2.0.0, >= 0.4.4)
       puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
     bashtoni-timezone (1.0.0)
@@ -43,7 +43,7 @@ FORGE
       puppetlabs-stdlib (>= 4.14.0)
 
 DEPENDENCIES
-  aco-oracle_java (= 2.8.0)
+  aco-oracle_java (= 2.8.1)
   bashtoni-timezone (= 1.0.0)
   bstopp-aem (= 2.4.1)
   jfryman-selinux (= 999.999.999)
