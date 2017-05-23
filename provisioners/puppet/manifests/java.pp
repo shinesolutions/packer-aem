@@ -16,7 +16,7 @@ class java (
   }
 
   class { '::oracle_java':
-    version         => '8u121',
+    version         => "${jdkversion}u${jdkversion_update}",
     type            => 'jdk',
     add_alternative => true,
   }

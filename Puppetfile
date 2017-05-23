@@ -1,6 +1,6 @@
 forge 'https://forgeapi.puppetlabs.com'
 
-mod 'aco-oracle_java', '2.8.0'
+mod 'aco-oracle_java', '2.8.1'
 mod 'bashtoni/timezone', '1.0.0'
 mod 'bstopp/aem', '2.4.1'
 mod 'jfryman/selinux', '999.999.999'
