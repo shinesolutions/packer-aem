@@ -27,7 +27,7 @@ class config::java (
   include ::config::base
 
   class { '::oracle_java':
-    version         => '8u112',
+    version         => '8u131',
     type            => 'jdk',
     add_alternative => true,
   }
