@@ -260,9 +260,11 @@ class config::aem (
     version => '1.2',
   }
   -> config::aem_install_package { 'cq-6.2.0-hotfix-12785':
-    group   => 'adobe/cq620/hotfix',
-    version => '7.0',
-    restart => true,
+    group                       => 'adobe/cq620/hotfix',
+    version                     => '7.0',
+    restart                     => true,
+    post_install_sleep_secs     => 150,
+    post_login_page_ready_sleep => 30,
   }
   -> config::aem_install_package { 'aem-service-pkg':
     file_name => 'AEM-6.2-Service-Pack-1-6.2.SP1.zip',

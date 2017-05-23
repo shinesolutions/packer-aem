@@ -119,6 +119,9 @@ define config::aem_install_package (
       ensure  => login_page_is_ready,
       require => Exec["Wait post install of ${title}"],
     }
+    -> exec { "Wait post login page before restart for ${title}":
+      command => "sleep ${post_login_page_ready_sleep}",
+    }
     -> aem_aem { "Wait until aem health check is ok before restart ${title}":
       ensure => aem_health_check_is_ok,
       tags   => 'deep',
