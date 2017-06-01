@@ -143,6 +143,9 @@ class config::aem (
       remounts => false,
       atboot   => false,
     }
+    -> exec { 'Fix repository mount permissions':
+      command => "chown aem:aem ${repository_volume_mount_point}",
+    }
   }
 
   if $::config::base::install_cloudwatchlogs {
