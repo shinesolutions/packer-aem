@@ -145,6 +145,7 @@ class config::aem (
     }
     -> exec { 'Fix repository mount permissions':
       command => "chown aem:aem ${repository_volume_mount_point}",
+      require => User['aem'],
     }
   }
 
