@@ -4,7 +4,7 @@ set -o errexit
 
 yum -y upgrade
 
-rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 yum install puppet-agent -y
 "$PUPPET_BIN_DIR"/puppet resource package puppet ensure=latest
 
