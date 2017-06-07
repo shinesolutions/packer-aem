@@ -218,15 +218,15 @@ class publish (
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } -> archive { "${tmp_dir}/cq-6.2.0-sp1-cfp-3.0.zip":
+  } -> archive { "${tmp_dir}/cq-6.2.0-sp1-cfp-4.0.zip":
     ensure  => present,
-    source  => "${aem_artifacts_base}/AEM-6.2-SP1-CFP3-3.0.zip",
+    source  => "${aem_artifacts_base}/AEM-6.2-SP1-CFP4-4.0.zip",
     cleanup => false,
-  } -> aem_package { 'Install Service Pack 1 Cumulative Fix Pack 3':
+  } -> aem_package { 'Install Service Pack 1 Cumulative Fix Pack 4':
     ensure                     => present,
     name                       => 'cq-6.2.0-sp1-cfp',
     group                      => 'adobe/cq620/cumulativefixpack',
-    version                    => '3.0',
+    version                    => '4.0',
     path                       => "${tmp_dir}",
     replicate                  => false,
     activate                   => false,
@@ -234,17 +234,17 @@ class publish (
     retries_max_tries          => 120,
     retries_base_sleep_seconds => 10,
     retries_max_sleep_seconds  => 10,
-  } -> exec { 'Wait AEM post Service Pack 1 Cumulative Fix Pack 3 install':
+  } -> exec { 'Wait AEM post Service Pack 1 Cumulative Fix Pack 4 install':
     command => 'sleep 120',
     cwd     => "${tmp_dir}",
     path    => ['/usr/bin', '/usr/sbin'],
-  } -> aem_aem { 'Wait until aem health check is ok post Service Pack 1 Cumulative Fix Pack 3 install':
+  } -> aem_aem { 'Wait until aem health check is ok post Service Pack 1 Cumulative Fix Pack 4 install':
     ensure                     => aem_health_check_is_ok,
     tags                       => 'deep',
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
     retries_max_sleep_seconds  => 5,
-  } -> aem_aem { 'Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 3 install':
+  } -> aem_aem { 'Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 4 install':
     ensure                     => login_page_is_ready,
     retries_max_tries          => 60,
     retries_base_sleep_seconds => 5,
@@ -315,7 +315,7 @@ class publish (
     name    => 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck',
     path    => '/apps/system/config.publish',
     type    => 'sling:OsgiConfig',
-    require => Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 3 install'],
+    require => Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 4 install'],
   } -> aem_config_property { 'Configure AEM Health Check Servlet ignored bundles':
     ensure           => present,
     name             => 'bundles.ignored',
@@ -326,7 +326,7 @@ class publish (
   }
 
   class { 'aem_resources::publish_remove_default_agents':
-    require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 3 install']],
+    require => [Aem_aem['Wait until login page is ready post Service Pack 1 Cumulative Fix Pack 4 install']],
   }
 
   # Enable SSL support on AEM
