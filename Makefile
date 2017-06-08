@@ -1,7 +1,7 @@
 AMIS = base java httpd author publish dispatcher all-in-one
 var_file ?= conf/aws/aem62rhel7jdk8.json
 version ?= 1.0.0
-packer_aem_version ?= 1.1.1
+packer_aem_version ?= 1.1.1-SNAPSHOT
 
 ci: clean tools deps lint validate package
 
