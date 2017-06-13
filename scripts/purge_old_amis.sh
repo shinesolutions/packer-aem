@@ -44,15 +44,21 @@ function check_ami_unused {
 # snapshots that are not referenced by any AMIs.
 function delete_orphaned_snapshots {
 
-  for SNAPSHOT_ID in "$@"; do
-    IMG_COUNT=$(aws ec2 describe-images --filters Name=block-device-mapping.snapshot-id,Values="$SNAPSHOT_ID" \
-                  --query 'length(Images)' --region ap-southeast-2)
-    IMG_COUNT="${IMG_COUNT:-0}"
-    if [ "$IMG_COUNT" -eq 0 ]; then
-      echo "Deleting orphaned snapshot $SNAPSHOT_ID"
-      aws ec2 delete-snapshot --snapshot-id "$SNAPSHOT_ID" --region ap-southeast-2
-    fi
+  set +o errexit
+
+  SNAPSHOT_IDS=$(aws ec2 describe-snapshots --owner-ids self \
+         --filters "Name=tag:Application Id,Values=Adobe Experience Manager (AEM)"\
+                   "Name=tag-key,Values=Obsoleted" \
+        --query 'Snapshots[].SnapshotId' \
+         --region ap-southeast-2 --output text)
+
+  # shellcheck disable=2086
+  for SNAPSHOT_ID in $SNAPSHOT_IDS; do
+    echo "Deleting snapshot $SNAPSHOT_ID"
+    aws ec2 delete-snapshot --snapshot-id "$SNAPSHOT_ID" --region ap-southeast-2
   done
+
+ set -o errexit
 }
 
 
@@ -110,14 +116,19 @@ for (( i=0; i < ${#AMI_ROLE_ARR[@]}; i++)); do
 
     SNAPSHOT_IDS=$(aws ec2 describe-images --image-ids "$OLD_AMI" --query 'Images[0].BlockDeviceMappings[].Ebs.SnapshotId' \
                    --region ap-southeast-2 --output text)
-    echo -n "Deregistering staled image $OLD_AMI ...."
+    echo "Deregistering staled image $OLD_AMI ...."
     aws ec2 deregister-image --image-id "$OLD_AMI" --region ap-southeast-2
+
+    echo "Marking snapshots $SNAPSHOT_IDS for deletion"
+    # shellcheck disable=2086
+    aws ec2 create-tags --resources $SNAPSHOT_IDS --tags Key=Obsoleted,Value=  --region ap-southeast-2
+
     # give AWS some time to propogate image deregistration
     sleep 15
 
-    echo "deleting snapshots $SNAPSHOT_IDS for $OLD_AMI if they are not used by any other images"
+    echo "Deleting old snapshots from deregistered images"
     # shellcheck disable=2086
-    delete_orphaned_snapshots $SNAPSHOT_IDS
+    delete_orphaned_snapshots
 
     echo "Done"
 
