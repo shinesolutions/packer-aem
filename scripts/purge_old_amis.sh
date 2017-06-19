@@ -86,9 +86,11 @@ for (( i=0; i < ${#AMI_ROLE_ARR[@]}; i++)); do
     echo "No stale images found for role \"${AMI_ROLE_ARR[$i]}\"."
     continue
   fi
+  echo "Found staled images for \"${AMI_ROLE_ARR[$i]}\": ${OLD_AMIS}"
 
   # shellcheck disable=2086
   for OLD_AMI in $OLD_AMIS; do
+    echo "Dealing with staled image: $OLD_AMI"
 
     AMI_IN_USE="true"
 
@@ -96,6 +98,7 @@ for (( i=0; i < ${#AMI_ROLE_ARR[@]}; i++)); do
     if [ "$AMI_IN_USE" = "true" ]; then
       continue
     fi
+    echo "Staled image $OLD_AMI is not used in the current account"
 
     if [ "$#" -eq 1 ]; then
       echo "Checking in a second account with provided role arn"
@@ -112,6 +115,7 @@ for (( i=0; i < ${#AMI_ROLE_ARR[@]}; i++)); do
       if [ "$AMI_IN_USE" = "true" ]; then
         continue
       fi
+      echo "Staled image $OLD_AMI is not used in the second account, neither"
     fi
 
     SNAPSHOT_IDS=$(aws ec2 describe-images --image-ids "$OLD_AMI" --query 'Images[0].BlockDeviceMappings[].Ebs.SnapshotId' \
