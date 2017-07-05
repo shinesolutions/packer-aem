@@ -48,10 +48,6 @@ describe service('aem-aem') do
 #  it { should be_running }
 end
 
-describe port(aem_port) do
-  it { should be_listening }
-end
-
 describe file('/etc/puppetlabs/puppet/aem.yaml') do
   it { should be_file }
   it { should exist }

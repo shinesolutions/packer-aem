@@ -12,10 +12,6 @@ describe service('httpd') do
 #  it { should be_running }
 end
 
-describe port(80) do
-  it { should be_listening }
-end
-
 # TODO: check disapatcher installation.
 # dispatcher module installation differs depending on os and apache version.
 if os[:family] == 'redhat'
