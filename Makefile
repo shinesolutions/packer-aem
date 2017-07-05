@@ -42,6 +42,9 @@ lint: Puppetfile.lock
 	shellcheck $$(find provisioners scripts -name '*.sh')
 
 validate:
+	bundle exec puppet parser validate \
+		provisioners/puppet/manifests/*.pp \
+		provisioners/puppet/modules/*/manifests/*.pp
 	packer validate \
 		-syntax-only \
 		$(VAR_PARAMS) \
@@ -66,7 +69,7 @@ var_files:
 	@echo $(VAR_FILES) $(ami_var_file)
 
 Gemfile.lock: Gemfile
-	bundle install
+	bundle install path=.gems
 
 stage:
 	mkdir -p stage/
