@@ -1,5 +1,5 @@
 dist: trusty
-sudo: required
+sudo: true
 language: ruby
 addons:
   apt:
@@ -8,3 +8,9 @@ addons:
     - findutils
 script:
   - make ci
+rvm:
+  - 2.4
+  - 2.3
+  - 2.2
+  - 2.1
+  - 2.0

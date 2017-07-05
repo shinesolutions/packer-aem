@@ -1,9 +1,12 @@
+export PATH := $(PWD)/bin:$(PATH)
 AMIS = soe base java author publish dispatcher all-in-one
 VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 ami_var_file ?= vars/00_amis.json
 version ?= 1.0.0
 packer_aem_version ?= 0.9.0
+
+package: stage/packer-aem-$(packer_aem_version).tar.gz
 
 stage/packer-aem-$(packer_aem_version).tar.gz: lint validate stage
 	tar \
@@ -20,7 +23,6 @@ stage/packer-aem-$(packer_aem_version).tar.gz: lint validate stage
 		$@ .
 
 ci: clean lint validate
-#ci: clean tools deps lint validate package
 
 Puppetfile.lock: Gemfile.lock Puppetfile
 	bundle exec librarian-puppet install --path modules --verbose
@@ -52,7 +54,7 @@ validate:
 		templates/generic.json
 
 #TODO: consider having a var-file for each component - which should include the ami_users variable
-$(AMIS): lint validate
+$(AMIS): Puppetfile.lock
 	mkdir -p logs/
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
@@ -69,7 +71,7 @@ var_files:
 	@echo $(VAR_FILES) $(ami_var_file)
 
 Gemfile.lock: Gemfile
-	bundle install --path=.gems
+	bundle install --binstubs
 
 stage:
 	mkdir -p stage/
@@ -77,4 +79,4 @@ stage:
 stage/ami-ids.yaml: stage
 	scripts/create-ami-ids-yaml.py -o $@
 
-.PHONY: $(AMIS) amis-all ci clean deps lint tools validate create-ami-ids-yaml var_files
+.PHONY: $(AMIS) amis-all ci clean lint validate create-ami-ids-yaml var_files package

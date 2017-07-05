@@ -16,3 +16,5 @@ logs/
 .gem
 crash.log
 !/provisioners/puppet/modules/
+.bundle/
+.gems/
