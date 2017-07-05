@@ -27,7 +27,7 @@ Puppetfile.lock: Gemfile.lock Puppetfile
 	touch modules/.librarian-puppet-has-run
 
 clean:
-	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage logs/
+	rm -rf .librarian .tmp Puppetfile.lock Gemfile.lock .gems .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage logs/
 
 lint: Puppetfile.lock
 	bundle exec puppet-lint \
