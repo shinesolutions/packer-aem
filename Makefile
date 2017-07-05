@@ -69,7 +69,7 @@ var_files:
 	@echo $(VAR_FILES) $(ami_var_file)
 
 Gemfile.lock: Gemfile
-	bundle install path=.gems
+	bundle install --path=.gems
 
 stage:
 	mkdir -p stage/
