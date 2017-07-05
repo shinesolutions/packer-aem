@@ -73,6 +73,7 @@
     {
       "type": "shell",
       "inline": [
+        "mount -t tmpfs tmpfs /tmp",
         "mkdir -p {{user `tmp_dir`}}"
       ]
     },
