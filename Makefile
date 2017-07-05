@@ -5,7 +5,7 @@ ami_var_file ?= vars/00_amis.json
 version ?= 1.0.0
 packer_aem_version ?= 0.9.0
 
-stage/packer-aem-$(packer_aem_version).tar.gz: clean lint validate stage
+stage/packer-aem-$(packer_aem_version).tar.gz: lint validate stage
 	tar \
 	    --exclude='stage*' \
 	    --exclude='.git*' \
@@ -16,8 +16,8 @@ stage/packer-aem-$(packer_aem_version).tar.gz: clean lint validate stage
 	    --exclude='logs*' \
 	    --exclude='*.retry' \
 	    --exclude='*.iml' \
-	    -czvf \
-		$@
+	    -czf \
+		$@ .
 
 ci: clean lint validate
 #ci: clean tools deps lint validate package
