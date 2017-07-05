@@ -115,6 +115,9 @@ define config::aem_install_package (
   }
 
   if $restart {
+    -> exec { "Wait pre stop with ${title}":
+      command => 'sleep 120',
+    }
     aem_aem { "Wait for login page before restart ${title}":
       ensure  => login_page_is_ready,
       require => Exec["Wait post install of ${title}"],
@@ -130,7 +133,7 @@ define config::aem_install_package (
       command => 'service aem-aem stop',
     }
     -> exec { "Wait post stop with ${title}":
-      command => 'sleep 60',
+      command => 'sleep 120',
     }
     -> exec { "Start post install of ${title}":
       command => 'service aem-aem start',
