@@ -8,7 +8,6 @@ packer_aem_version ?= 0.9.0
 stage/packer-aem-$(packer_aem_version).tar.gz: clean lint validate stage
 	tar \
 	    --exclude='stage*' \
-		--exclude-from .gitignore \
 	    --exclude='.git*' \
 	    --exclude='.librarian*' \
 	    --exclude='.tmp*' \
