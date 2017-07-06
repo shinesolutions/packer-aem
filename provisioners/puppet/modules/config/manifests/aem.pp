@@ -291,21 +291,77 @@ class config::aem (
     version => '1.0',
   }
 
-  $aem_resource_classes = $aem_role ? {
-    'author'  => [ 'create_system_users', 'author_remove_default_agents' ],
-    'publish' => [ 'create_system_users' ],
+  # Create system users and configure their usernames for password reset during provisioning
+  class { '::aem_resources::create_system_users':
+    orchestrator_password => 'orchestrator',
+    replicator_password   => 'replicator',
+    deployer_password     => 'deployer',
+    exporter_password     => 'exporter',
+    importer_password     => 'importer',
+    require               => Config::Aem_install_package['cq-6.2.0-hotfix-15607'],
+  }
+  -> aem_node { 'Create AEM Password Reset Activator config node':
+    ensure => present,
+    name   => 'com.shinesolutions.aem.passwordreset.Activator',
+    path   => "/apps/system/config.${aem_role}",
+    type   => 'sling:OsgiConfig',
+  }
+  -> aem_config_property { 'Configure system usernames for AEM Password Reset Activator to process':
+    ensure           => present,
+    name             => 'pwdreset.authorizables',
+    type             => 'String[]',
+    value            => ['admin', 'orchestrator', 'replicator', 'deployer', 'exporter', 'importer'],
+    run_mode         => $aem_role,
+    config_node_name => 'com.shinesolutions.aem.passwordreset.Activator',
+  }
+  -> aem_user { 'Update replication-service user permission':
+    # Deny replicate permission for replication-service user to prevent agents from being published
+    ensure     => has_permission,
+    name       => 'replication-service',
+    path       => '/home/users/system/',
+    permission => {
+      '/etc/replication/agents.author'  => ['replicate:false'],
+      '/etc/replication/agents.publish' => ['replicate:false'],
+    },
   }
 
-  $aem_resource_classes.each |$cls| {
-    class { "::aem_resources::${cls}":
+  aem_node { 'Create AEM Health Check Servlet config node':
+    ensure  => present,
+    name    => 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck',
+    path    => "/apps/system/config.${aem_role}",
+    type    => 'sling:OsgiConfig',
+    require => Config::Aem_install_package['cq-6.2.0-hotfix-15607'],
+  }
+  -> aem_config_property { 'Configure AEM Health Check Servlet ignored bundles':
+    ensure           => present,
+    name             => 'bundles.ignored',
+    type             => 'String[]',
+    value            => ['org.apache.sling.jcr.webdav', 'org.apache.sling.jcr.davex'],
+    run_mode         => $aem_role,
+    config_node_name => 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck',
+  }
+
+  $provisioning_steps = [
+    Aem_config_property['Configure AEM Health Check Servlet ignored bundles'],
+    Aem_user['Update replication-service user permission'],
+  ]
+
+  if $aem_role == 'author' {
+    class { '::aem_resources::author_remove_default_agents':
       require => Config::Aem_install_package['cq-6.2.0-hotfix-15607'],
     }
+    $all_provisioning_steps = concat(
+      $provisioning_steps,
+      Class['::aem_resources::author_remove_default_agents'],
+    )
+  } else {
+    $all_provisioning_steps = $provisioning_steps
   }
 
   # Ensure login page is still ready after all provisioning steps and before stopping AEM.
   aem_aem { 'Ensure login page is ready':
     ensure  => login_page_is_ready,
-    require => $aem_resource_classes.map |$cls| { Class["::aem_resources::${cls}"] },
+    require => $all_provisioning_steps,
   }
 
   $keystore_path = pick(
@@ -355,14 +411,19 @@ class config::aem (
     truststore          => '/usr/java/default/jre/lib/security/cacerts',
     truststore_password => 'changeit',
   }
+  -> class { '::config::aem_cleanup':
+    aem_base => $aem_base,
+  }
 
 
   if $setup_repository_volume {
     exec { 'service aem-aem stop':
       require => [
-        Aem_aem['Ensure login page is ready'],
+        Class['::config::aem_cleanup'],
         Mount[$repository_volume_mount_point],
       ],
+    }
+    -> exec { 'sleep 120':
     }
     -> exec { "mv ${aem_base}/aem/${aem_role}/crx-quickstart/repository/* ${repository_volume_mount_point}/":
     }
@@ -375,9 +436,4 @@ class config::aem (
     }
   }
 
-  class { '::config::aem_cleanup':
-    aem_base                => $aem_base,
-    aem_healthcheck_version => $aem_healthcheck_version,
-    require                 => Aem_aem['Ensure login page is ready'],
-  }
 }

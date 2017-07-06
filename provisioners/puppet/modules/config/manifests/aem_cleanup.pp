@@ -7,9 +7,6 @@
 # [*aem_base*]
 #   Base directory for installing AEM.
 #
-# [*aem_healthcheck_version*]
-#   The version of the AEM healthcheck service to clean up.
-#
 # === Authors
 #
 # Andy Wang <andy.wang@shinesolutions.com>
@@ -21,7 +18,6 @@
 #
 class config::aem_cleanup (
   $aem_base,
-  $aem_healthcheck_version,
 ) {
-  exec { "rm -f ${aem_base}/aem/aem-healthcheck-content-${aem_healthcheck_version}.zip": }
+  exec { "rm -f ${aem_base}/aem/aem-healthcheck-content-*.zip": }
 }

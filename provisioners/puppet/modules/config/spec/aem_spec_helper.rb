@@ -103,5 +103,5 @@ shared_examples "aem" do |role, port|
   included_classes.each do |cls|
     it { is_expected.to contain_class(cls) }
   end
-  it { is_expected.to contain_exec('rm -f /opt/aem/aem-healthcheck-content-1.3.3.zip') }
+  it { is_expected.to contain_exec('rm -f /opt/aem/aem-healthcheck-content-*.zip') }
 end
