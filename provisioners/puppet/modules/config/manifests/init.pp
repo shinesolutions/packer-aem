@@ -40,7 +40,7 @@ class config (
     provider => 'puppet_gem',
   }
   -> package { 'ruby_aem':
-    ensure   => '1.1.2',
+    ensure   => '1.3.1',
     provider => 'puppet_gem',
   }
   yumrepo { 'newrelic-infra':
