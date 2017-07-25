@@ -341,55 +341,6 @@ class config::aem (
     config_node_name => 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck',
   }
 
-  aem_node { 'Create AEM Default Workflow Purge config node':
-    ensure  => present,
-    name    => 'com.adobe.granite.workflow.purge.Scheduler-all',
-    path    => "/apps/system/config.${aem_role}",
-    type    => 'sling:OsgiConfig',
-    require => Config::Aem_install_package['cq-6.2.0-hotfix-15607'],
-  }
-  -> aem_config_property { 'Configure AEM Default Workflow Purge Flow Names':
-    ensure           => present,
-    name             => 'scheduledpurge.name',
-    type             => 'String',
-    value            => 'All Workflows',
-    run_mode         => $aem_role,
-    config_node_name => 'com.adobe.granite.workflow.purge.Scheduler-all',
-  }
-  -> aem_config_property { 'Configure AEM Default Workflow Purge Flow Age':
-    ensure           => present,
-    name             => 'scheduledpurge.daysold',
-    type             => 'String',
-    value            => '30',
-    run_mode         => $aem_role,
-    config_node_name => 'com.adobe.granite.workflow.purge.Scheduler-all',
-  }
-  -> aem_config_property { 'Configure AEM Default Workflow Purge Model IDs':
-    ensure           => present,
-    name             => 'scheduledpurge.modelIds',
-    type             => 'String[]',
-    value            => [],
-    run_mode         => $aem_role,
-    config_node_name => 'com.adobe.granite.workflow.purge.Scheduler-all',
-  }
-  -> aem_config_property { 'Configure AEM Default Workflow Purge Flow Status':
-    ensure           => present,
-    name             => 'scheduledpurge.workflowStatus',
-    type             => 'String',
-    value            => 'COMPLETED',
-    run_mode         => $aem_role,
-    config_node_name => 'com.adobe.granite.workflow.purge.Scheduler-all',
-  }
-  -> aem_config_property { 'Configure AEM Default Workflow Purge Cron Expression':
-    ensure           => present,
-    name             => 'shceduledpurge.cron',
-    type             => 'String',
-    value            => '30 4 * * 0',
-    run_mode         => $aem_role,
-    config_node_name => 'com.adobe.granite.workflow.purge.Scheduler-all',
-  }
-
-
   $provisioning_steps = [
     Aem_config_property['Configure AEM Health Check Servlet ignored bundles'],
     Aem_user['Update replication-service user permission'],
