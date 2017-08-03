@@ -3,6 +3,7 @@ AMIS = soe base java author publish dispatcher all-in-one
 VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 ami_var_file ?= vars/00_amis.json
+all_var_files := $(VAR_FILES) $(ami_var_file)
 version ?= 1.0.0
 packer_aem_version ?= 0.9.0
 
@@ -68,7 +69,10 @@ $(AMIS): Puppetfile.lock
 amis-all: $(AMIS)
 
 var_files:
-	@echo $(VAR_FILES) $(ami_var_file)
+	@echo $(all_var_files)
+
+merge_var_files:
+	@jq -s 'reduce .[] as $$item ({}; . * $$item)' $(all_var_files)
 
 Gemfile.lock: Gemfile
 	bundle install --binstubs
@@ -79,4 +83,4 @@ stage:
 stage/ami-ids.yaml: stage
 	scripts/create-ami-ids-yaml.py -o $@
 
-.PHONY: $(AMIS) amis-all ci clean lint validate create-ami-ids-yaml var_files package
+.PHONY: $(AMIS) amis-all ci clean lint validate create-ami-ids-yaml var_files merge_var_files package
