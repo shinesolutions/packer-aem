@@ -336,9 +336,13 @@ class config::aem (
     ensure           => present,
     name             => 'bundles.ignored',
     type             => 'String[]',
-    value            => ['org.apache.sling.jcr.webdav', 'org.apache.sling.jcr.davex'],
     run_mode         => $aem_role,
     config_node_name => 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck',
+    value            => [
+      'org.apache.sling.jcr.webdav',
+      'org.apache.sling.jcr.davex',
+      'com.adobe.acs.acs-aem-commons-bundle-twitter',
+    ],
   }
 
   $provisioning_steps = [
