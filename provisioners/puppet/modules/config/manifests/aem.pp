@@ -282,7 +282,7 @@ class config::aem (
     version   => '6.2.SP1',
   }
   -> config::aem_install_package { 'cq-6.2.0-sp1-cfp':
-    file_name               => 'AEM-6.2-SP1-CFP2-3.0.zip',
+    file_name               => 'AEM-6.2-SP1-CFP3-3.0.zip',
     group                   => 'adobe/cq620/cumulativefixpack',
     post_install_sleep_secs => 900,
     version                 => '3.0',
