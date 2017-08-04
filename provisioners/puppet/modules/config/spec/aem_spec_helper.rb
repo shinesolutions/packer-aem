@@ -15,7 +15,7 @@ shared_examples "aem" do |role, port|
     },
     'cq-6.2.0-sp1-cfp': {
       :has_restart => false,
-      :version     => '2.0',
+      :version     => '3.0',
     },
     'cq-6.2.0-hotfix-15607': {
       :has_restart => false,

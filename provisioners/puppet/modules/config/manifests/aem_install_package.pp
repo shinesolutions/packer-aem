@@ -112,6 +112,7 @@ define config::aem_install_package (
   }
   -> exec { "Wait post install of ${title}":
     command => "sleep ${post_install_sleep_secs}",
+    timeout => $post_install_sleep_secs,
   }
 
   if $restart {
