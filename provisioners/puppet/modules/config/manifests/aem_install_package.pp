@@ -73,8 +73,9 @@ define config::aem_install_package (
   $retries_max_sleep_seconds  = 5,
 ) {
   Exec {
-    cwd  => '/tmp',
-    path => [ '/bin', '/sbin', '/usr/bin', '/usr/sbin' ],
+    cwd     => '/tmp',
+    path    => [ '/bin', '/sbin', '/usr/bin', '/usr/sbin' ],
+    timeout => 0,
   }
 
   Aem_aem {
@@ -112,7 +113,6 @@ define config::aem_install_package (
   }
   -> exec { "Wait post install of ${title}":
     command => "sleep ${post_install_sleep_secs}",
-    timeout => $post_install_sleep_secs,
   }
 
   if $restart {
