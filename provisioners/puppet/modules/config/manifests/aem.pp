@@ -63,6 +63,8 @@
 # [*jvm_opts*]
 #   An array of command line options to pass to the JVM when starting AEM.
 #
+# [*aem_cfp_class*]
+# the Puppet class name that used to install an AEM CFP
 # === Authors
 #
 # Andy Wang <andy.wang@shinesolutions.com>
@@ -105,6 +107,8 @@ class config::aem (
     '-XX:+PrintGCApplicationStoppedTime',
     '-XX:+HeapDumpOnOutOfMemoryError',
   ],
+
+  $aem_cfp_class = 'config::aem_cfp3',
 ) {
 
   include ::config::java
@@ -265,32 +269,7 @@ class config::aem (
     ensure => aem_health_check_is_ok,
     tags   => 'deep',
   }
-  -> config::aem_install_package { 'cq-6.2.0-hotfix-11490':
-    group   => 'adobe/cq620/hotfix',
-    version => '1.2',
-  }
-  -> config::aem_install_package { 'cq-6.2.0-hotfix-12785':
-    group                       => 'adobe/cq620/hotfix',
-    version                     => '7.0',
-    restart                     => true,
-    post_install_sleep_secs     => 150,
-    post_login_page_ready_sleep => 30,
-  }
-  -> config::aem_install_package { 'aem-service-pkg':
-    file_name => 'AEM-6.2-Service-Pack-1-6.2.SP1.zip',
-    group     => 'adobe/cq620/servicepack',
-    version   => '6.2.SP1',
-  }
-  -> config::aem_install_package { 'cq-6.2.0-sp1-cfp':
-    file_name               => 'AEM-6.2-SP1-CFP3-3.0.zip',
-    group                   => 'adobe/cq620/cumulativefixpack',
-    post_install_sleep_secs => 900,
-    version                 => '3.0',
-  }
-  -> config::aem_install_package { 'cq-6.2.0-hotfix-15607':
-    group   => 'adobe/cq620/hotfix',
-    version => '1.0',
-  }
+  -> class { $aem_cfp_class: }
 
   # Create system users and configure their usernames for password reset during provisioning
   class { '::aem_resources::create_system_users':
@@ -299,7 +278,7 @@ class config::aem (
     deployer_password     => 'deployer',
     exporter_password     => 'exporter',
     importer_password     => 'importer',
-    require               => Config::Aem_install_package['cq-6.2.0-hotfix-15607'],
+    require               => Class[$aem_cfp_class]
   }
   -> aem_node { 'Create AEM Password Reset Activator config node':
     ensure => present,
@@ -331,7 +310,7 @@ class config::aem (
     name    => 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck',
     path    => "/apps/system/config.${aem_role}",
     type    => 'sling:OsgiConfig',
-    require => Config::Aem_install_package['cq-6.2.0-hotfix-15607'],
+    require => Class[$aem_cfp_class]
   }
   -> aem_config_property { 'Configure AEM Health Check Servlet ignored bundles':
     ensure           => present,
@@ -353,7 +332,7 @@ class config::aem (
 
   if $aem_role == 'author' {
     class { '::aem_resources::author_remove_default_agents':
-      require => Config::Aem_install_package['cq-6.2.0-hotfix-15607'],
+      require => Class[$aem_cfp_class]
     }
     $all_provisioning_steps = concat(
       $provisioning_steps,
@@ -419,7 +398,6 @@ class config::aem (
   -> class { '::config::aem_cleanup':
     aem_base => $aem_base,
   }
-
 
   if $setup_repository_volume {
     exec { 'service aem-aem stop':
