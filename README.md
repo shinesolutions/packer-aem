@@ -23,12 +23,17 @@ Install [Puppet](https://puppet.com/), [puppet-lint](http://puppet-lint.com/) an
 make tools
 ```
 
-Install Puppet modules dependencies:
+Install Puppet modules and Python packages dependencies:
 ```
 make deps
 ```
 
 See [Puppetfile](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/Puppetfile) for the list of modules.
+
+Set up the following AWS resources:
+# Create IAM instance profile with permissions to EC2 and S3, set this IAM instance profile name in `iam_instance_profile` property in Packer AEM config file.
+# Create S3 bucket(s) to store AEM artifacts and license, along with all application artifacts. Configure the S3 paths in hieradata common.yaml .
+# Optional - If you don't want to use the default VPC, you can configure a subnet and a security group in `aws_subnet_id` and `aws_security_group_id` properties.
 
 ## Usage
 
@@ -42,12 +47,12 @@ To build the base machine image:
 make base version=1.0.1
 ```
 
-_todo: add ability to specify the packer builder to use_ 
+_todo: add ability to specify the packer builder to use_
 
 
 ## Configuration
 
-### Packer 
+### Packer
 
 Packer Building can be configured in the [conf/template-vars.json](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/template-vars.json) file.
 
@@ -98,7 +103,7 @@ Packer amazon-ebs reference: https://www.packer.io/docs/builders/amazon-ebs.html
 
 Puppet Provisioning can be configured in the [conf/hieradata/common.yaml](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/hieradata/common.yaml) file.
 
-_todo: populate configuration items. specify items in hieradata yaml files. mention how to configure 3rd party puppet modules_ 
+_todo: populate configuration items. specify items in hieradata yaml files. mention how to configure 3rd party puppet modules_
 
 #### common.yaml
 
