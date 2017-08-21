@@ -1,3 +1,6 @@
+### 1.1.2
+* Reverse replication should no longer occur on content modification
+
 ### 1.1.1
 * Upgrade AEM Cumulative Fix Pack to SP1-CFP4
 
