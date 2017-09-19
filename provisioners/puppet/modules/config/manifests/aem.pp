@@ -13,6 +13,9 @@
 # [*aem_port*]
 #   TCP port AEM will listen on.
 #
+# [*aem_ssl_port*]
+#   SSL port AEM will listen on.
+#
 # [*aem_quickstart_source*]
 # [*aem_license_source*]
 # [*aem_artifacts_base*]
@@ -80,6 +83,7 @@ class config::aem (
 
   $aem_role,
   $aem_port,
+  $aem_ssl_port,
   $aem_quickstart_source,
   $aem_license_source,
   $aem_artifacts_base,
@@ -389,7 +393,7 @@ class config::aem (
   }
   -> class { '::aem_resources::author_publish_enable_ssl':
     run_mode            => $aem_role,
-    port                => 5433,
+    port                => $aem_ssl_port,
     keystore            => $keystore_path,
     keystore_password   => $aem_keystore_password,
     keystore_key_alias  => 'cqse',
