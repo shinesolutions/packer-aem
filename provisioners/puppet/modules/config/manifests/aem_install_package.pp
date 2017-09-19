@@ -6,6 +6,9 @@
 #
 #   The AEM package group.
 #
+# [*aem_role*]
+#   The AEM role to install. Should be 'publish' or 'author'.
+#
 # [*artifacts_base*]
 #   The base URL for downloading the artifact.
 #
@@ -52,6 +55,7 @@
 # Copyright © 2017 Shine Solutions Group, unless otherwise noted.
 #
 define config::aem_install_package (
+  $aem_role,
   $group,
   $version,
   $artifacts_base,
@@ -131,13 +135,13 @@ define config::aem_install_package (
       tags   => 'deep',
     }
     -> exec { "Stop post install of ${title}":
-      command => 'service aem-aem stop',
+      command => "service aem-${aem_role} stop",
     }
     -> exec { "Wait post stop with ${title}":
       command => 'sleep 120',
     }
     -> exec { "Start post install of ${title}":
-      command => 'service aem-aem start',
+      command => "service aem-${aem_role} start",
     }
     -> exec { "Wait post start with ${title}":
       command => "sleep ${post_restart_sleep_secs}",

@@ -119,6 +119,7 @@ class config::aem (
   }
 
   Config::Aem_install_package {
+    aem_role                   => $aem_role,
     artifacts_base             => $aem_artifacts_base,
     retries_max_tries          => 120,
     retries_base_sleep_seconds => 10,
@@ -248,7 +249,7 @@ class config::aem (
     group  => 'aem',
   }
 
-  aem::instance { 'aem':
+  aem::instance { "${aem_role}":
     source         => "${aem_base}/aem/${aem_role}/aem-${aem_role}-${aem_port}.jar",
     home           => "${aem_base}/aem/${aem_role}",
     type           => $aem_role,
@@ -400,7 +401,7 @@ class config::aem (
   }
 
   if $setup_repository_volume {
-    exec { 'service aem-aem stop':
+    exec { "service aem-${aem_role} stop":
       require => [
         Class['::config::aem_cleanup'],
         Mount[$repository_volume_mount_point],

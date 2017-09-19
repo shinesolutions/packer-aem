@@ -1,0 +1,197 @@
+{
+  "variables": {
+    "aws_region": "ap-southeast-2",
+    "aws_user": "ec2-user",
+    "iam_instance_profile": "",
+    "aws_vpc_id": "",
+    "aws_subnet_id": "",
+    "aws_security_group_id": "",
+    "component": "",
+    "version": "x.x.x",
+    "instance_type": "t2.large",
+    "source_ami": "",
+    "repository_volume_size": "50",
+    "puppet_bin_dir": "/opt/puppetlabs/bin",
+    "owner": "",
+    "cost_center": "",
+    "ami_users": "",
+    "tmp_dir": "/tmp/shinesolutions/packer-aem"
+  },
+  "builders": [
+    {
+      "name": "ami_{{user `component`}}",
+      "type": "amazon-ebs",
+      "ssh_username": "{{user `aws_user`}}",
+      "ami_description": "Packer AEM Bootstrap - {{user `component`}} AMI ({{user `version`}})",
+      "ami_name": "{{user `component`}}-{{user `version`}}-{{timestamp}}",
+      "instance_type": "{{user `instance_type`}}",
+      "region": "{{user `aws_region`}}",
+      "iam_instance_profile": "{{ user `iam_instance_profile` }}",
+      "vpc_id": "{{user `aws_vpc_id`}}",
+      "subnet_id": "{{user `aws_subnet_id`}}",
+      "security_group_id": "{{user `aws_security_group_id`}}",
+      "ami_users": "{{user `ami_users`}}",
+      "source_ami": "{{user `source_ami`}}",
+      "ami_block_device_mappings": [
+        {
+          "delete_on_termination": true,
+          "device_name": "/dev/sdb",
+          "volume_size": "{{user `repository_volume_size`}}",
+          "volume_type": "gp2"
+        }
+      ],
+      "launch_block_device_mappings": [
+        {
+          "delete_on_termination": true,
+          "device_name": "/dev/sdb",
+          "volume_size": "{{user `repository_volume_size`}}",
+          "volume_type": "gp2"
+        }
+      ],
+      "communicator": "ssh",
+      "ssh_pty": true,
+      "run_tags": {
+        "Application Id": "Adobe Experience Manager (AEM)",
+        "Application Role": "{{user `component`}} AMI",
+        "Version": "{{user `version`}}",
+        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
+        "Owner": "{{user `owner`}}",
+        "Cost Center": "{{user `cost_center`}}",
+        "Availability": "{\"availability\": \"24x7\"}"
+      },
+      "tags": {
+        "Application Id": "Adobe Experience Manager (AEM)",
+        "Application Role": "{{user `component`}} AMI",
+        "Version": "{{user `version`}}",
+        "Name": "{{user `component`}} AMI ({{user `version`}})",
+        "Owner": "{{user `owner`}}",
+        "Cost Center": "{{user `cost_center`}}"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo mount -t tmpfs tmpfs /tmp",
+        "mkdir -p {{user `tmp_dir`}}"
+      ]
+    },
+    {
+      "type": "shell",
+      "script": "provisioners/bash/{{user `source_ami`}}.sh",
+      "execute_command": "{{ .Vars }} sudo -E bash {{ .Path }}",
+      "environment_vars" : [
+        "PUPPET_BIN_DIR={{user `puppet_bin_dir`}}"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "conf/",
+      "destination": "{{user `tmp_dir`}}"
+    },
+
+
+
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "provisioners/puppet/manifests/config.pp",
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "module_paths": [
+        "provisioners/puppet/modules"
+      ]
+    },
+
+
+
+    {
+      "type": "puppet-masterless",
+      "extra_arguments": [
+      ],
+      "manifest_file": "provisioners/puppet/manifests/dispatcher.pp",
+      "staging_directory": "/tmp/packer-puppet-masterless-a",
+      "hiera_config_path": "conf/hiera.yaml",
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "module_paths": [
+        "modules",
+        "provisioners/puppet/modules"
+      ]
+    },
+    {
+      "type": "puppet-masterless",
+      "extra_arguments": [
+      ],
+      "manifest_file": "provisioners/puppet/manifests/publish.pp",
+      "staging_directory": "/tmp/packer-puppet-masterless-b",
+      "hiera_config_path": "conf/hiera.yaml",
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "module_paths": [
+        "modules",
+        "provisioners/puppet/modules"
+      ]
+    },
+    {
+      "type": "puppet-masterless",
+      "extra_arguments": [
+      ],
+      "manifest_file": "provisioners/puppet/manifests/author.pp",
+      "staging_directory": "/tmp/packer-puppet-masterless-c",
+      "hiera_config_path": "conf/hiera.yaml",
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "module_paths": [
+        "modules",
+        "provisioners/puppet/modules"
+      ]
+    },
+
+
+
+    {
+      "type": "file",
+      "source": "test/serverspec",
+      "destination": "{{user `tmp_dir`}}"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "set -o nounset",
+        "set -o errexit",
+        "export PATH=${PATH}:/sbin:/usr/sbin:/usr/local/sbin",
+
+        "sleep 60",
+
+        "cd {{user `tmp_dir`}}/serverspec",
+        "bundle install --path=vendor",
+        "bundle exec rake spec SPEC=spec/{{user `component`}}_spec.rb"
+      ],
+      "environment_vars" : [
+        "FACTER_packer_build_name={{user `component`}}",
+        "FACTER_packer_staging_dir={{user `tmp_dir`}}"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "rm -rf {{user `tmp_dir`}}",
+        "sudo /opt/puppetlabs/bin/puppet resource service aem-aem ensure=stopped",
+        "sudo /opt/puppetlabs/bin/facter resource host $(facter fqdn) ensure=absent",
+        "sudo -E find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete",
+        "sudo truncate --size 0 --no-create /var/log/wtmp /var/log/btmp"
+      ],
+      "environment_vars" : [
+        "HISTFILE=/dev/null"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "json-updater",
+      "ami_id": {
+        "{{user `ami_var_file`}}": [
+          "{{user `component`}}_ami",
+          "source_ami"
+        ]
+      }
+    }
+  ]
+}
