@@ -27,9 +27,11 @@ class config::java (
   include ::config::base
 
   class { '::oracle_java':
-    version         => '8u131',
-    type            => 'jdk',
-    add_alternative => true,
+    version  => '8u144',
+    type     => 'jdk',
+    build    => '-b01',
+    checksum => 'dcc4c903506766ec4c50a969babdd856',
+    urlcode  => '/090f390dda5b47b9b721c7dfaa008135',
   }
 
   file { '/etc/ld.so.conf.d/99-libjvm.conf':
