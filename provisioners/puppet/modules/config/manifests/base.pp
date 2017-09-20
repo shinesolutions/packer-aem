@@ -194,8 +194,6 @@ class config::base (
     }
     class { '::collectd::plugin::python':
       modulepaths => [
-        '/usr/lib/python2.7/dist-packages',
-        '/usr/local/lib/python2.7/site-packages',
         "${collectd_cloudwatch_base_dir}/src",
       ],
       logtraces   => true,
