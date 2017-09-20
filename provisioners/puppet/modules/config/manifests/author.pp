@@ -24,8 +24,8 @@ class config::author (
   $aem_ssl_port = '5432',
 ) {
   class { '::config::aem':
-    aem_role => 'author',
-    aem_port => $aem_port,
+    aem_role     => 'author',
+    aem_port     => $aem_port,
     aem_ssl_port => $aem_ssl_port,
   }
 }

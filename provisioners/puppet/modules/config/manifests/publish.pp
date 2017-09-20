@@ -25,8 +25,8 @@ class config::publish (
   $aem_ssl_port = '5433',
 ) {
   class { '::config::aem':
-    aem_role => 'publish',
-    aem_port => $aem_port,
+    aem_role     => 'publish',
+    aem_port     => $aem_port,
     aem_ssl_port => $aem_ssl_port,
   }
 }
