@@ -6,11 +6,7 @@ config::base::python_package: python
 config::base::python_pip_package: python2-pip
 config::base::python_cheetah_package: python-cheetah
 
-# (sshim) Set to false as there's a problem with installing collectd at present (8 Sept 17)!!!
-config::base::install_collectd: false
-
-config::base::collectd_packages:
-    - collectd-python
+config::base::install_collectd: true
 
 config::base::cloudwatchlogs_logfiles:
     /var/log/messages:
