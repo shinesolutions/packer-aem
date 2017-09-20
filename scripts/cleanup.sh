@@ -30,16 +30,16 @@ rm -f /root/install.log.syslog
 rm -rf /root/.pki
 
 # Clean up /var/log
->/var/log/cron
->/var/log/dmesg
->/var/log/lastlog
->/var/log/maillog
->/var/log/messages
->/var/log/secure
->/var/log/wtmp
->/var/log/audit/audit.log
->/var/log/rhsm/rhsm.log
->/var/log/rhsm/rhsmcertd.log
+true > /var/log/cron
+true > /var/log/dmesg
+true > /var/log/lastlog
+true > /var/log/maillog
+true > /var/log/messages
+true > /var/log/secure
+true > /var/log/wtmp
+true > /var/log/audit/audit.log
+true > /var/log/rhsm/rhsm.log
+true > /var/log/rhsm/rhsmcertd.log
 rm -f /var/log/*.old
 rm -f /var/log/*.log
 rm -f /var/log/*.syslog
