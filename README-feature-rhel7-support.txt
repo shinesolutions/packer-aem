@@ -7,18 +7,7 @@ This is an information
 ===========================================
 
 
-(   search for (sshim) for important code highlights  )
-
-1. Disabled 'collectd' in RedHat/RedHat.yaml due to the following error:
-
-ami_base: Error: Could not find dependency File[/usr/lib/python2.7/site-packages] for File[cloudwatch_writer.script] at /tmp/packer-puppet-masterless/module-0/collectd/manifests/plugin/python/module.pp:22
-
-
-
-
 _ Modifications
-
-Turned off 'collectd' in RedHat.yaml (config::base::collectd_packages)
 
 Turned off Serverspec uniaem_spec.rb
 
