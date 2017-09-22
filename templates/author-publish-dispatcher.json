@@ -90,9 +90,6 @@
       "source": "conf/",
       "destination": "{{user `tmp_dir`}}"
     },
-
-
-
     {
       "type": "puppet-masterless",
       "manifest_file": "provisioners/puppet/manifests/config.pp",
@@ -173,7 +170,8 @@
       "type": "shell",
       "inline": [
         "rm -rf {{user `tmp_dir`}}",
-        "sudo /opt/puppetlabs/bin/puppet resource service aem-aem ensure=stopped",
+        "sudo /opt/puppetlabs/bin/puppet resource service aem-author ensure=stopped",
+        "sudo /opt/puppetlabs/bin/puppet resource service aem-publish ensure=stopped",
         "sudo /opt/puppetlabs/bin/facter resource host $(facter fqdn) ensure=absent",
         "sudo -E find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete",
         "sudo truncate --size 0 --no-create /var/log/wtmp /var/log/btmp"

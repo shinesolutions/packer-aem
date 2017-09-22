@@ -1,5 +1,5 @@
 export PATH := $(PWD)/bin:$(PATH)
-AMIS = soe base java author publish dispatcher all-in-one uniaem
+AMIS = soe base java author publish dispatcher all-in-one author-publish-dispatcher
 VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 ami_var_file ?= vars/00_amis.json
