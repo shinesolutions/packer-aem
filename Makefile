@@ -13,7 +13,6 @@ stage/packer-aem-$(packer_aem_version).tar.gz: lint validate stage
 	tar \
 	    --exclude='stage*' \
 	    --exclude='.git*' \
-	    --exclude='.librarian*' \
 	    --exclude='.tmp*' \
 	    --exclude='.idea*' \
 	    --exclude='.DS_Store*' \
@@ -26,11 +25,10 @@ stage/packer-aem-$(packer_aem_version).tar.gz: lint validate stage
 ci: clean lint validate
 
 Puppetfile.lock: Gemfile.lock Puppetfile
-	bundle exec librarian-puppet install --path modules --verbose
-	touch modules/.librarian-puppet-has-run
+	bundle exec r10k puppetfile install --moduledir modules
 
 clean:
-	rm -rf .librarian .tmp Puppetfile.lock Gemfile.lock .gems .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage logs/
+	rm -rf .tmp Puppetfile.lock Gemfile.lock .gems .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage logs/
 
 lint: Puppetfile.lock
 	bundle exec puppet-lint \

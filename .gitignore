@@ -1,4 +1,4 @@
-.librarian/
+bin/
 .tmp/
 /modules/
 templates/_archive/

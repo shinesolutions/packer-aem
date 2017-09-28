@@ -18,7 +18,7 @@ Requirements
 * [Ruby](https://www.ruby-lang.org/en/)
 * [GNU Make](https://www.gnu.org/software/make/) (optional, see Makefile to use commands instead)
 
-Install [Puppet](https://puppet.com/), [puppet-lint](http://puppet-lint.com/) and [Librarian-puppet](https://github.com/voxpupuli/librarian-puppet):
+Install [Puppet](https://puppet.com/), [puppet-lint](http://puppet-lint.com/) and [r10k](https://github.com/puppetlabs/r10k):
 ```
 make tools
 ```
@@ -42,12 +42,12 @@ To build the base machine image:
 make base version=1.0.1
 ```
 
-_todo: add ability to specify the packer builder to use_ 
+_todo: add ability to specify the packer builder to use_
 
 
 ## Configuration
 
-### Packer 
+### Packer
 
 Packer Building can be configured in the [conf/template-vars.json](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/template-vars.json) file.
 
@@ -98,7 +98,7 @@ Packer amazon-ebs reference: https://www.packer.io/docs/builders/amazon-ebs.html
 
 Puppet Provisioning can be configured in the [conf/hieradata/common.yaml](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/hieradata/common.yaml) file.
 
-_todo: populate configuration items. specify items in hieradata yaml files. mention how to configure 3rd party puppet modules_ 
+_todo: populate configuration items. specify items in hieradata yaml files. mention how to configure 3rd party puppet modules_
 
 #### common.yaml
 
