@@ -40,7 +40,7 @@ end
 
 # Service will be renamed to 'aem' on next puppet-aem release.
 # https://github.com/bstopp/puppet-aem/commit/a28d87fbf6bafc81ff00dec1759d8848708f32af
-describe service('aem-aem') do
+describe service('aem-publish') do
   it { should_not be_enabled }
 # serverspec is using ps aux | grep -w to determine if a service is running
 # # aem is just a java process, which fails the test

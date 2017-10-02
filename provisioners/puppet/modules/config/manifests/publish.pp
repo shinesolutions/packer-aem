@@ -10,7 +10,6 @@
 # [*aem_ssl_port*]
 #   SSL port AEM will listen on.
 #
-#
 # === Authors
 #
 # Andy Wang <andy.wang@shinesolutions.com>

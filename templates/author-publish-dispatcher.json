@@ -159,7 +159,9 @@
 
         "cd {{user `tmp_dir`}}/serverspec",
         "bundle install --path=vendor",
-        "bundle exec rake spec SPEC=spec/{{user `component`}}_spec.rb"
+        "bundle exec rake spec SPEC=spec/author_spec.rb",
+        "bundle exec rake spec SPEC=spec/publish_spec.rb",
+        "bundle exec rake spec SPEC=spec/dispatcher_spec.rb"
       ],
       "environment_vars" : [
         "FACTER_packer_build_name={{user `component`}}",
