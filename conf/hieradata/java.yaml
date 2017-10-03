@@ -1,9 +1,0 @@
----
-classes:
-  - 'jdk_oracle'
-jdk_oracle::version: '8'
-jdk_oracle::version_update: '131'
-jdk_oracle::version_build: '11'
-
-java::tmp_dir: "%{hiera('tmp_dir')}"
-java::aem_cert_source: "%{hiera('aem_library_base')}/aem-stack-builder.cert"
