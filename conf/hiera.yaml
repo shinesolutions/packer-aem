@@ -3,9 +3,12 @@
 :yaml:
   :datadir: "/tmp/shinesolutions/packer-aem/hieradata"
 :hierarchy:
+  - local
+  - "%{::os.family}/%{::os.name}-%{::os.release.major}"
+  - "%{::os.family}/%{::os.name}"
   - "%{::packer_build_name}"
-  - "serverspec"
-  - "common"
-:logger: console
+  - serverspec
+  - common
+:logger: noop
 :merge_behavior: native
 :deep_merge_options: {}

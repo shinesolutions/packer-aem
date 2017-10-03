@@ -1,0 +1,19 @@
+---
+version: 4
+
+hierarchy:
+  - name: OS family, name and major release
+    path: "%{::os.family}/%{::os.name}-%{::os.release.major}.yaml"
+    backend: yaml
+
+  - name: OS family and name
+    path: "%{::os.family}/%{::os.name}.yaml"
+    backend: yaml
+
+  - name: OS family
+    path: "%{::os.family}.yaml"
+    backend: yaml
+
+  - name: Common
+    path: common.yaml
+    backend: yaml

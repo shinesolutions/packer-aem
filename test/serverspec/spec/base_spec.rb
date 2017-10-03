@@ -39,14 +39,12 @@ if install_aws_cli == 'true'
   executables = [ '/usr/bin/pip', '/usr/bin/aws' ]
 
   executables.each do |exe|
-
     describe file(exe) do
       it { should exist }
       it { should be_executable }
       it { should be_owned_by 'root' }
       it { should be_grouped_into 'root' }
     end
-
   end
 
 end
@@ -71,13 +69,12 @@ end
 #
 # end
 
-
 packages = [
-    'gcc',
-    'ruby-devel',
-    'zlib-devel',
-    'ruby',
-    @hiera.lookup('base::python_cheetah_package', 'python-cheetah', @scope),
+  'gcc',
+  'ruby-devel',
+  'zlib-devel',
+  'ruby',
+  @hiera.lookup('base::python_cheetah_package', 'python-cheetah', @scope),
 ]
 
 packages.each do |pkg|

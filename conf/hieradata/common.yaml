@@ -1,13 +1,12 @@
 ---
-packer_user: 'ec2-user'
-packer_group: 'ec2-user'
-
-aem_quickstart_source: 's3://aem-artifacts/adobeaemcloud/AEM_6.2_Quickstart.jar'
-aem_license_source: 's3://aem-artifacts/adobeaemcloud/license-6.2.properties'
-aem_artifacts_base: 's3://aem-artifacts/adobeaemcloud'
-aem_library_base: 's3://aem-stack-builder/library'
-aem_healthcheck_version: 1.3.3
-
-aem_sample_content: false
-
 tmp_dir: /tmp/shinesolutions/packer-aem
+
+timezone::region: 'Australia'
+timezone::locality: 'Melbourne'
+
+cloudwatchlogs::region: 'ap-southeast-2'
+oracle_java::version: '8'
+oracle_java::version_update: '144'
+oracle_java::version_build: '01'
+
+java::tmp_dir: "%{lookup('tmp_dir')}"

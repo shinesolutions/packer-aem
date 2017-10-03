@@ -1,0 +1,4 @@
+{
+    "aws_user": "centos",
+    "source_ami": "ami-87d2f4e4"
+}

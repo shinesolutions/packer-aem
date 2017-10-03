@@ -1,0 +1,6 @@
+---
+collectd_version: '5.5.0'
+
+# This value is completely fake but the module is doing something odd with this
+# fact and this is the least horrible way I could find to work around it.
+python_dir: /opt/collectd-cloudwatch

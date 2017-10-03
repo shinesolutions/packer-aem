@@ -10,14 +10,11 @@
     "version": "x.x.x",
     "base_instance_type": "t2.micro",
     "base_ami_source_ami": "ami-39ac915a",
-    "var_file": "",
+    "ami_var_file": "vars/00_amis.json",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "owner": "",
     "cost_center": "",
     "ami_users": "",
-    "base_provisioner_script": "provisioners/aws/rhel7/base.sh",
-    "post_puppet_provisioner_script": "provisioners/aws/rhel7/post_puppet.sh",
-    "pre_puppet_provisioner_script": "provisioners/aws/rhel7/pre_puppet.sh",
     "tmp_dir": "/tmp/shinesolutions/packer-aem"
   },
   "builders": [
@@ -35,6 +32,8 @@
       "security_group_id": "{{user `aws_security_group_id`}}",
       "ami_users": "{{user `ami_users`}}",
       "source_ami": "{{user `base_ami_source_ami`}}",
+      "communicator": "ssh",
+      "ssh_pty": true,
       "run_tags": {
         "Application Id": "Adobe Experience Manager (AEM)",
         "Application Role": "Base AMI",
@@ -56,28 +55,27 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "{{user `pre_puppet_provisioner_script`}}"
+      "inline": [
+        "mkdir -p {{user `tmp_dir`}}"
+      ]
     },
     {
       "type": "shell",
-      "script": "{{user `base_provisioner_script`}}",
-      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E {{ .Path }}",
+      "script": "provisioners/bash/{{user `base_ami_source_ami`}}.sh",
+      "execute_command": "{{ .Vars }} sudo -E bash {{ .Path }}",
       "environment_vars" : [
         "PUPPET_BIN_DIR={{user `puppet_bin_dir`}}"
       ]
     },
     {
       "type": "file",
-      "source": "conf/hieradata",
-      "destination": "{{user `tmp_dir`}}"
-    },
-    {
-      "type": "file",
-      "source": "test/serverspec",
+      "source": "conf/",
       "destination": "{{user `tmp_dir`}}"
     },
     {
       "type": "puppet-masterless",
+      "extra_arguments": [
+      ],
       "staging_directory": "{{user `tmp_dir`}}/packer-puppet-masterless-{{user `component`}}",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "hiera_config_path": "conf/hiera.yaml",
@@ -88,15 +86,42 @@
       "puppet_bin_dir": "{{user `puppet_bin_dir`}}"
     },
     {
+      "type": "file",
+      "source": "test/serverspec",
+      "destination": "{{user `tmp_dir`}}"
+    },
+    {
       "type": "shell",
-      "script": "{{user `post_puppet_provisioner_script`}}"
+      "inline": [
+        "set -o nounset",
+        "set -o errexit",
+        "export PATH=${PATH}:/sbin:/usr/sbin:/usr/local/sbin",
+
+        "cd {{user `tmp_dir`}}/serverspec",
+        "bundle install --path=vendor",
+        "bundle exec rake spec SPEC=spec/{{user `component`}}_spec.rb"
+      ],
+      "environment_vars" : [
+        "FACTER_packer_build_name={{user `component`}}",
+        "FACTER_packer_staging_dir={{user `tmp_dir`}}"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "rm -rf {{user `tmp_dir`}}",
+        "sudo -E find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete"
+      ],
+      "environment_vars" : [
+        "HISTFILE=/dev/null"
+      ]
     }
   ],
   "post-processors": [
     {
       "type": "json-updater",
       "ami_id": {
-        "{{user `var_file`}}": [
+        "{{user `ami_var_file`}}": [
           "java_ami_source_ami",
           "httpd_ami_source_ami"
         ]

@@ -1,6 +1,6 @@
-.librarian/
+bin/
 .tmp/
-modules/
+/modules/
 templates/_archive/
 .idea/
 Vagrantfile
@@ -13,5 +13,8 @@ Gemfile.lock
 stage/
 *.pem
 logs/
+.gem
 crash.log
 !/provisioners/puppet/modules/
+.bundle/
+.gems/

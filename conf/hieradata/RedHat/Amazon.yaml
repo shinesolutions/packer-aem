@@ -1,0 +1,7 @@
+---
+
+base::python_package: python27
+base::python_cheetah_package: python27-cheetah
+
+apache::apache_name: httpd24
+apache::apache_version: "2.4"

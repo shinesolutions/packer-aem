@@ -1,19 +1,37 @@
-AMIS = base java httpd author publish dispatcher all-in-one
-var_file ?= conf/aws/aem62rhel7jdk8.json
+export PATH := $(PWD)/bin:$(PATH)
+AMIS = soe base java author publish dispatcher all-in-one
+VAR_FILES = $(sort $(wildcard vars/*.json))
+VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
+ami_var_file ?= vars/00_amis.json
+all_var_files := $(VAR_FILES) $(ami_var_file)
 version ?= 1.0.0
-packer_aem_version ?= 1.1.0
+packer_aem_version ?= 0.9.0
 
-ci: clean tools deps lint validate package
+package: stage/packer-aem-$(packer_aem_version).tar.gz
 
-deps:
-	librarian-puppet install --path modules --verbose
-	pip install -r requirements.txt --user
+stage/packer-aem-$(packer_aem_version).tar.gz: lint validate stage
+	tar \
+	    --exclude='stage*' \
+	    --exclude='.git*' \
+	    --exclude='.tmp*' \
+	    --exclude='.idea*' \
+	    --exclude='.DS_Store*' \
+	    --exclude='logs*' \
+	    --exclude='*.retry' \
+	    --exclude='*.iml' \
+	    -czf \
+		$@ .
+
+ci: clean lint validate
+
+Puppetfile.lock: Gemfile.lock Puppetfile
+	bundle exec r10k puppetfile install --moduledir modules
 
 clean:
-	rm -rf .librarian .tmp Puppetfile.lock .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage logs/
+	rm -rf .tmp Puppetfile.lock Gemfile.lock .gems .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage logs/
 
-lint:
-	puppet-lint \
+lint: Puppetfile.lock
+	bundle exec puppet-lint \
 		--fail-on-warnings \
 		--no-140chars-check \
 		--no-autoloader_layout-check \
@@ -22,56 +40,57 @@ lint:
 		--no-selector_inside_resource-check \
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
-	shellcheck \
-		provisioners/*/*/*.sh \
-		scripts/*.sh
+	shellcheck $$(find provisioners scripts -name '*.sh')
 
 validate:
-	for AMI in $(AMIS); do \
-		packer validate \
-			-syntax-only \
-			-var-file $(var_file) \
-			-var "component=$$AMI" \
-			templates/$$AMI.json; \
-	done
+	bundle exec puppet parser validate \
+		provisioners/puppet/manifests/*.pp \
+		provisioners/puppet/modules/*/manifests/*.pp
+	packer validate \
+		-syntax-only \
+		$(VAR_PARAMS) \
+		-var "component=null" \
+		templates/generic.json
 
 #TODO: consider having a var-file for each component - which should include the ami_users variable
-$(AMIS):
+$(AMIS): Puppetfile.lock
 	mkdir -p logs/
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
-		-var-file $(var_file) \
-		-var 'var_file=$(var_file)' \
+		$(VAR_PARAMS) \
+		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'component=$@' \
 		-var 'version=$(version)' \
-		-var 'ami_users=$(ami_users)' \
-		templates/$@.json
+		templates/generic.json
+
+# For building the author-publish-dispatcher component only
+author-publish-dispatcher: Puppetfile.lock
+	mkdir -p logs/
+	PACKER_LOG_PATH=logs/packer-$@.log \
+		PACKER_LOG=1 \
+		packer build \
+		$(VAR_PARAMS) \
+		-var 'ami_var_file=$(ami_var_file)' \
+		-var 'component=$@' \
+		-var 'version=$(version)' \
+		templates/author-publish-dispatcher.json
 
 amis-all: $(AMIS)
 
-create-ami-ids-yaml:
+var_files:
+	@echo $(all_var_files)
+
+merge_var_files:
+	@jq -s 'reduce .[] as $$item ({}; . * $$item)' $(all_var_files)
+
+Gemfile.lock: Gemfile
+	bundle install --binstubs
+
+stage:
 	mkdir -p stage/
-	scripts/create-ami-ids-yaml.py
 
-tools:
-	gem install puppet puppet-lint librarian-puppet
+stage/ami-ids.yaml: stage
+	scripts/create-ami-ids-yaml.py -o $@
 
-package:
-	rm -rf stage
-	mkdir -p stage
-	tar \
-		--exclude='.git*' \
-		--exclude='.librarian*' \
-		--exclude='.tmp*' \
-		--exclude='stage*' \
-		--exclude='.idea*' \
-		--exclude='.DS_Store*' \
-		--exclude='logs*' \
-		--exclude='*.retry' \
-		--exclude='*.iml' \
-		-cvf \
-		stage/packer-aem-$(packer_aem_version).tar ./
-	gzip stage/packer-aem-$(packer_aem_version).tar
-
-.PHONY: $(AMIS) amis-all ci clean deps lint tools validate create-ami-ids-yaml
+.PHONY: $(AMIS) amis-all ci clean lint validate create-ami-ids-yaml var_files merge_var_files package

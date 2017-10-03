@@ -6,6 +6,9 @@ set :backend, :exec
 
 #TODO: consider: http://logicminds.github.io/blog/2016/01/16/testing-hiera-data/
 
-@scope = {'::packer_build_name' => Facter.value(:packer_build_name)}
+@scope = {
+  '::packer_build_name' => Facter.value(:packer_build_name),
+  '::os' => Facter.value(:os),
+}
 
 @hiera = Hiera.new(:config => Facter.value(:packer_staging_dir) + '/hiera.yaml')

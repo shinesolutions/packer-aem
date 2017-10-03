@@ -1,0 +1,4 @@
+{
+    "aws_user": "ec2-user",
+    "source_ami": "ami-e0c19f83"
+}
