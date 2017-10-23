@@ -12,7 +12,7 @@ mod 'puppetlabs/concat'
 mod 'puppet/yum'
 mod 'puppetlabs/java_ks'
 mod 'aco-oracle_java', '2.8.1'
-mod 'shinesolutions/aem_resources', '1.2.0'
+mod 'shinesolutions/aem_resources', '1.3.0'
 mod 'shinesolutions/amazon_ssm_agent', :git => 'https://github.com/shinesolutions/amazon_ssm_agent.git'
 
 # Needed by `config` module
