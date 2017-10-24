@@ -112,7 +112,7 @@ class config::aem (
     '-XX:+HeapDumpOnOutOfMemoryError',
   ],
 
-  $aem_cfp_class = 'config::aem_cfp3',
+  $aem_cfp_class = 'config::aem62_cfp3',
 ) {
 
   include ::config::java
