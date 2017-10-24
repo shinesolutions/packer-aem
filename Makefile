@@ -25,7 +25,7 @@ stage/packer-aem-$(packer_aem_version).tar.gz: lint validate stage
 ci: clean lint validate
 
 Puppetfile.lock: Gemfile.lock Puppetfile
-	bundle exec r10k puppetfile install --moduledir modules
+	bundle exec r10k puppetfile install --verbose --moduledir modules
 
 clean:
 	rm -rf .tmp Puppetfile.lock Gemfile.lock .gems .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage logs/
