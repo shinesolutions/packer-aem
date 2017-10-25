@@ -43,6 +43,12 @@
       "launch_block_device_mappings": [
         {
           "delete_on_termination": true,
+          "device_name": "/dev/sda1",
+          "volume_size": "{{user `repository_volume_size`}}",
+          "volume_type": "gp2"
+        },
+        {
+          "delete_on_termination": true,
           "device_name": "/dev/sdb",
           "volume_size": "{{user `repository_volume_size`}}",
           "volume_type": "gp2"
