@@ -1,1 +1,1 @@
-include ::config::dispatcher
+include aem_curator::install_dispatcher

@@ -1,18 +1,12 @@
 forge 'https://forgeapi.puppetlabs.com'
 
-mod 'puppet-collectd', '5.3.0'
 mod 'bashtoni/timezone'
-mod 'bstopp/aem'
 mod 'puppet/selinux', '0.7.1'
 mod 'kemra102/cloudwatchlogs'
 mod 'pcfens/rhn_register'
 mod 'puppet/archive', '1.3.0'
-mod 'puppetlabs/apache'
-mod 'puppetlabs/concat'
 mod 'puppet/yum'
-mod 'puppetlabs/java_ks'
-mod 'aco-oracle_java', '2.9.1'
-mod 'shinesolutions/aem_resources', '1.2.0'
+mod 'shinesolutions/aem_curator', :git => 'https://github.com/shinesolutions/puppet-aem-curator.git'
 mod 'shinesolutions/amazon_ssm_agent', :git => 'https://github.com/shinesolutions/amazon_ssm_agent.git'
 
 # Needed by `config` module

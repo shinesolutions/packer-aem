@@ -6,7 +6,31 @@ timezone::locality: 'Melbourne'
 
 cloudwatchlogs::region: 'ap-southeast-2'
 oracle_java::version: '8'
-oracle_java::version_update: '144'
-oracle_java::version_build: '01'
+oracle_java::version_update: '151'
+oracle_java::version_build: '12'
 
 java::tmp_dir: "%{lookup('tmp_dir')}"
+
+config::params::cert_base_url: s3://aem-stack-builder/library
+config::params::cert_temp_dir: /tmp/aem_certs
+
+aem_curator::install_java::cert_base_url: "%{lookup('config::params::cert_base_url')}"
+aem_curator::install_java::cert_temp_dir: "%{lookup('config::params::cert_temp_dir')}"
+
+aem_curator::install_aem::tmp_dir: "%{lookup('config::base::tmp_dir')}"
+aem_curator::install_aem::aem_host: localhost
+aem_curator::install_aem::aem_healthcheck_version: "1.3.3"
+aem_curator::install_aem::aem_quickstart_source: s3://aem-artifacts/adobeaemcloud/AEM_6.2_Quickstart.jar
+aem_curator::install_aem::aem_license_source: s3://aem-artifacts/adobeaemcloud/license-6.2.properties
+aem_curator::install_aem::aem_artifacts_base: s3://aem-artifacts/adobeaemcloud
+aem_curator::install_aem::cert_base_url: "%{lookup('config::params::cert_base_url')}"
+aem_curator::install_aem::cert_temp_dir: "%{lookup('config::params::cert_temp_dir')}"
+aem_curator::install_aem::aem_keystore_password: changeit
+
+aem_curator::install_dispatcher::cert_base_url: "%{lookup('config::params::cert_base_url')}"
+aem_curator::install_dispatcher::cert_temp_dir: "%{lookup('config::params::cert_temp_dir')}"
+aem_curator::install_dispatcher::cert_filename: /etc/ssl/aem.unified-dispatcher.cert
+aem_curator::install_dispatcher::apache_module_base_url: https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_9/file.res
+aem_curator::install_dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86-64-ssl-4.2.2.tar.gz
+aem_curator::install_dispatcher::apache_module_filename: dispatcher-apache2.4-4.2.2.so
+aem_curator::install_dispatcher::apache_module_temp_dir: /tmp/dispatcher-apache

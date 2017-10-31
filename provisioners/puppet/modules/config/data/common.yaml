@@ -6,25 +6,3 @@ config::base::python_package: python
 config::base::python_pip_package: python-pip
 config::base::python_cheetah_package: python-cheetah
 config::base::tmp_dir: /tmp/shinesolutions/packer-aem
-
-config::aem::tmp_dir: "%{lookup('config::base::tmp_dir')}"
-config::aem::aem_healthcheck_version: "1.3.3"
-config::aem::aem_quickstart_source: s3://aem-artifacts/adobeaemcloud/AEM_6.2_Quickstart.jar
-config::aem::aem_license_source: s3://aem-artifacts/adobeaemcloud/license-6.2.properties
-config::aem::aem_artifacts_base: s3://aem-artifacts/adobeaemcloud
-
-config::dispatcher::cert_base_url: "%{lookup('config::params::cert_base_url')}"
-config::dispatcher::cert_temp_dir: "%{lookup('config::params::cert_temp_dir')}"
-config::dispatcher::cert_filename: /etc/ssl/aem.unified-dispatcher.cert
-
-config::dispatcher::apache_module_base_url: https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_9/file.res
-config::dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86-64-ssl-4.2.2.tar.gz
-config::dispatcher::apache_module_filename: dispatcher-apache2.4-4.2.2.so
-config::dispatcher::apache_module_temp_dir: /tmp/dispatcher-apache
-
-config::java::cert_base_url: "%{lookup('config::params::cert_base_url')}"
-config::java::cert_temp_dir: "%{lookup('config::params::cert_temp_dir')}"
-
-config::aem::cert_base_url: "%{lookup('config::params::cert_base_url')}"
-config::aem::cert_temp_dir: "%{lookup('config::params::cert_temp_dir')}"
-config::aem::aem_keystore_password: changeit
