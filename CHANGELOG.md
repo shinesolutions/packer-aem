@@ -4,7 +4,7 @@
 * Added AuthorPublishDispatcher component
 * Added RHEL 7.x support
 * Replace librarian-puppet with r10k for Puppet dependency management
-* Replace AEM-specific provisioning manifests with puppet-aem-resources #35
+* Replace AEM-specific provisioning manifests with puppet-aem-curator #35
 
 ### 2.0.0
 * (NEED TO COMPLETE)

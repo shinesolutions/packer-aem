@@ -87,6 +87,11 @@ class config::base (
 
   class { '::timezone': }
 
+  file { $tmp_dir:
+    ensure => directory,
+    mode   => '0700',
+  }
+
   if ($::osfamily == 'redhat') and ($::operatingsystem != 'Amazon') {
 
     if $rhn_register {

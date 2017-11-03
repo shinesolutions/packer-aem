@@ -1,6 +1,5 @@
 ---
 config::params::cert_base_url: s3://aem-stack-builder/library
-config::params::cert_temp_dir: /tmp/aem_certs
 
 config::base::python_package: python
 config::base::python_pip_package: python-pip

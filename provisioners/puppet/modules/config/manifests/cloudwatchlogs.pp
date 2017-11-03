@@ -1,4 +1,4 @@
-class config::cloudwatchlogs (
+define config::cloudwatchlogs (
   $aem_role,
 ) {
 

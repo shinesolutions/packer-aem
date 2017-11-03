@@ -2,7 +2,7 @@
 set -o nounset
 set -o errexit
 
-yum -y upgrade
+#yum -y upgrade
 
 rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 yum -y install puppet-agent epel-release

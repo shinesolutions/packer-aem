@@ -11,32 +11,32 @@ describe file("#{aem_base}/aem") do
   it { should be_directory }
   it { should exist }
   it { should be_mode 775 }
-  it { should be_owned_by 'aem' }
-  it { should be_grouped_into 'aem' }
+  it { should be_owned_by 'aem-author' }
+  it { should be_grouped_into 'aem-author' }
 end
 
 describe file("#{aem_base}/aem/author") do
   it { should be_directory }
   it { should exist }
   it { should be_mode 775 }
-  it { should be_owned_by 'aem' }
-  it { should be_grouped_into 'aem' }
+  it { should be_owned_by 'aem-author' }
+  it { should be_grouped_into 'aem-author' }
 end
 
 describe file("#{aem_base}/aem/author/license.properties") do
   it { should be_file }
   it { should exist }
   it { should be_mode 440 }
-  it { should be_owned_by 'aem' }
-  it { should be_grouped_into 'aem' }
+  it { should be_owned_by 'aem-author' }
+  it { should be_grouped_into 'aem-author' }
 end
 
 describe file("#{aem_base}/aem/author/aem-author-#{aem_port}.jar") do
   it { should be_file }
   it { should exist }
   it { should be_mode 775 }
-  it { should be_owned_by 'aem' }
-  it { should be_grouped_into 'aem' }
+  it { should be_owned_by 'aem-author' }
+  it { should be_grouped_into 'aem-author' }
 end
 
 # Service will be renamed to 'aem' on next puppet-aem release.
@@ -48,7 +48,7 @@ describe service('aem-author') do
 #  it { should be_running }
 end
 
-describe file('/etc/puppetlabs/puppet/aem.yaml') do
+describe file('/etc/puppetlabs/puppet/author.yaml') do
   it { should be_file }
   it { should exist }
   it { should be_mode 644 }

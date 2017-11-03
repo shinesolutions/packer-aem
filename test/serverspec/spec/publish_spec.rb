@@ -10,32 +10,32 @@ describe file("#{aem_base}/aem") do
   it { should be_directory }
   it { should exist }
   it { should be_mode 775 }
-  it { should be_owned_by 'aem' }
-  it { should be_grouped_into 'aem' }
+  it { should be_owned_by 'aem-publish' }
+  it { should be_grouped_into 'aem-publish' }
 end
 
 describe file("#{aem_base}/aem/publish") do
   it { should be_directory }
   it { should exist }
   it { should be_mode 775 }
-  it { should be_owned_by 'aem' }
-  it { should be_grouped_into 'aem' }
+  it { should be_owned_by 'aem-publish' }
+  it { should be_grouped_into 'aem-publish' }
 end
 
 describe file("#{aem_base}/aem/publish/license.properties") do
   it { should be_file }
   it { should exist }
   it { should be_mode 440 }
-  it { should be_owned_by 'aem' }
-  it { should be_grouped_into 'aem' }
+  it { should be_owned_by 'aem-publish' }
+  it { should be_grouped_into 'aem-publish' }
 end
 
 describe file("#{aem_base}/aem/publish/aem-publish-#{aem_port}.jar") do
   it { should be_file }
   it { should exist }
   it { should be_mode 775 }
-  it { should be_owned_by 'aem' }
-  it { should be_grouped_into 'aem' }
+  it { should be_owned_by 'aem-publish' }
+  it { should be_grouped_into 'aem-publish' }
 end
 
 # Service will be renamed to 'aem' on next puppet-aem release.
@@ -48,7 +48,7 @@ describe service('aem-publish') do
 
 end
 
-describe file('/etc/puppetlabs/puppet/aem.yaml') do
+describe file('/etc/puppetlabs/puppet/publish.yaml') do
   it { should be_file }
   it { should exist }
   it { should be_mode 644 }
