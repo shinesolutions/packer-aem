@@ -1,5 +1,5 @@
 export PATH := $(PWD)/bin:$(PATH)
-AMIS = soe base java author publish dispatcher all-in-one
+AMIS = soe base java author publish dispatcher author-publish-dispatcher all-in-one
 VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 ami_var_file ?= vars/00_amis.json
@@ -64,17 +64,17 @@ $(AMIS): Puppetfile.lock
 		-var 'version=$(version)' \
 		templates/generic.json
 
-# For building the author-publish-dispatcher component only
-author-publish-dispatcher: Puppetfile.lock
-	mkdir -p logs/
-	PACKER_LOG_PATH=logs/packer-$@.log \
-		PACKER_LOG=1 \
-		packer build \
-		$(VAR_PARAMS) \
-		-var 'ami_var_file=$(ami_var_file)' \
-		-var 'component=$@' \
-		-var 'version=$(version)' \
-		templates/author-publish-dispatcher.json
+# # For building the author-publish-dispatcher component only
+# author-publish-dispatcher: Puppetfile.lock
+# 	mkdir -p logs/
+# 	PACKER_LOG_PATH=logs/packer-$@.log \
+# 		PACKER_LOG=1 \
+# 		packer build \
+# 		$(VAR_PARAMS) \
+# 		-var 'ami_var_file=$(ami_var_file)' \
+# 		-var 'component=$@' \
+# 		-var 'version=$(version)' \
+# 		templates/author-publish-dispatcher.json
 
 amis-all: $(AMIS)
 
