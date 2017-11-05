@@ -5,6 +5,7 @@
 * Added RHEL 7.x support
 * Replace librarian-puppet with r10k for Puppet dependency management
 * Replace AEM-specific provisioning manifests with puppet-aem-curator #35
+* AEM base directory is now owned by root, while each AEM ID installation subdirectory is owned by specific AEM ID user
 
 ### 2.0.0
 * (NEED TO COMPLETE)

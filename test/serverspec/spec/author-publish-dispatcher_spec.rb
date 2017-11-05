@@ -11,8 +11,8 @@ describe file("#{aem_base}/aem") do
   it { should be_directory }
   it { should exist }
   it { should be_mode 775 }
-  it { should be_owned_by 'aem-author' }
-  it { should be_grouped_into 'aem-author' }
+  it { should be_owned_by 'root' }
+  it { should be_grouped_into 'root' }
 end
 
 describe file("#{aem_base}/aem/author") do
@@ -67,8 +67,8 @@ describe file("#{aem_base}/aem") do
   it { should be_directory }
   it { should exist }
   it { should be_mode 775 }
-  it { should be_owned_by 'aem-publish' }
-  it { should be_grouped_into 'aem-publish' }
+  it { should be_owned_by 'root' }
+  it { should be_grouped_into 'root' }
 end
 
 describe file("#{aem_base}/aem/publish") do
