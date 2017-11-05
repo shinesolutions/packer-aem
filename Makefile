@@ -52,13 +52,13 @@ validate:
 		-var "component=null" \
 		templates/generic.json
 
-#TODO: consider having a var-file for each component - which should include the ami_users variable
 $(AMIS): Puppetfile.lock
 	mkdir -p logs/
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
+		-var-file=vars/components/$@.json \
 		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'component=$@' \
 		-var 'version=$(version)' \
