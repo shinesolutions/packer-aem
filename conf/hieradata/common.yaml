@@ -25,7 +25,7 @@ aem_curator::install_author::aem_keystore_password: changeit
 aem_curator::install_author::aem_base: /opt
 aem_curator::install_author::aem_sample_content: false
 aem_curator::install_author::aem_jvm_mem_opts: "-Xss4m -Xmx8192m"
-aem_curator::install_author::setup_repository_volume: false
+aem_curator::install_author::setup_repository_volume: true
 aem_curator::install_author::repository_volume_device: /dev/xvdb
 aem_curator::install_author::repository_volume_mount_point: /mnt/ebs1
 
@@ -40,7 +40,7 @@ aem_curator::install_publish::aem_keystore_password: changeit
 aem_curator::install_publish::aem_base: /opt
 aem_curator::install_publish::aem_sample_content: false
 aem_curator::install_publish::aem_jvm_mem_opts: "-Xss4m -Xmx8192m"
-aem_curator::install_publish::setup_repository_volume: false
+aem_curator::install_publish::setup_repository_volume: true
 aem_curator::install_publish::repository_volume_device: /dev/xvdb
 aem_curator::install_publish::repository_volume_mount_point: /mnt/ebs1
 
