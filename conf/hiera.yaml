@@ -6,6 +6,7 @@
   - local
   - "%{::os.family}/%{::os.name}-%{::os.release.major}"
   - "%{::os.family}/%{::os.name}"
+  # - author-publish-dispatcher # temporary because packer_build_name doesn't work
   - "%{::packer_build_name}"
   - serverspec
   - common

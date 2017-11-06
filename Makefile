@@ -1,5 +1,5 @@
 export PATH := $(PWD)/bin:$(PATH)
-AMIS = soe base java author publish dispatcher author-publish-dispatcher
+AMIS = soe base java author publish dispatcher
 VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 ami_var_file ?= vars/00_amis.json
@@ -62,21 +62,19 @@ $(AMIS):
 		$(VAR_PARAMS) \
 		-var-file=vars/components/$@.json \
 		-var 'ami_var_file=$(ami_var_file)' \
-		-var 'component=$@' \
 		-var 'version=$(version)' \
 		templates/generic.json
 
-# # For building the author-publish-dispatcher component only
-# author-publish-dispatcher: Puppetfile.lock
-# 	mkdir -p logs/
-# 	PACKER_LOG_PATH=logs/packer-$@.log \
-# 		PACKER_LOG=1 \
-# 		packer build \
-# 		$(VAR_PARAMS) \
-# 		-var 'ami_var_file=$(ami_var_file)' \
-# 		-var 'component=$@' \
-# 		-var 'version=$(version)' \
-# 		templates/author-publish-dispatcher.json
+author-publish-dispatcher:
+	mkdir -p logs/
+	PACKER_LOG_PATH=logs/packer-$@.log \
+		PACKER_LOG=1 \
+		packer build \
+		$(VAR_PARAMS) \
+		-var-file=vars/components/$@.json \
+		-var 'ami_var_file=$(ami_var_file)' \
+		-var 'version=$(version)' \
+		templates/$@.json
 
 amis-all: $(AMIS)
 
