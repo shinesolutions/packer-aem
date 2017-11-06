@@ -24,13 +24,15 @@ stage/packer-aem-$(packer_aem_version).tar.gz: lint validate stage
 
 ci: clean lint validate
 
+deps: Puppetfile.lock Gemfile.lock
+
 Puppetfile.lock: Gemfile.lock Puppetfile
 	bundle exec r10k puppetfile install --verbose --moduledir modules
 
 clean:
 	rm -rf .tmp Puppetfile.lock Gemfile.lock .gems .vagrant output-virtualbox-iso *.box Vagrantfile modules packer_cache stage logs/
 
-lint: Puppetfile.lock
+lint:
 	bundle exec puppet-lint \
 		--fail-on-warnings \
 		--no-140chars-check \
@@ -52,7 +54,7 @@ validate:
 		-var "component=null" \
 		templates/generic.json
 
-$(AMIS): Puppetfile.lock
+$(AMIS):
 	mkdir -p logs/
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
