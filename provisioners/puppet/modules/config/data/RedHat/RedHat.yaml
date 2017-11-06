@@ -1,6 +1,5 @@
 ---
 # Values that should only be applied to RedHat Enterprise Linux
-config::newrelic_releasever: 6
 
 config::base::python_package: python
 config::base::python_pip_package: python2-pip

@@ -8,6 +8,7 @@
 * AEM base is owned by root, AEM installation directory is owned by aem-<aem_id> user
 * Introduce component-specific Packer config #44
 * Add Packer user variables for http_proxy, https_proxy, and no_proxy #45
+* Remove NewRelic as this should be a customisation #38
 
 ### 2.0.0
 * (NEED TO COMPLETE)
