@@ -129,7 +129,7 @@
     },
     {
       "type": "puppet-masterless",
-      "execute_command": "export http_proxy={{user `http_proxy`}} \u0026\u0026 export HTTP_PROXY={{user `http_proxy`}} \u0026\u0026 export https_proxy={{user `https_proxy`}} \u0026\u0026 export HTTPS_PROXY={{user `https_proxy`}} \u0026\u0026 export no_proxy={{user `no_proxy`}} \u0026\u0026 export NO_PROXY={{user `no_proxy`}} \u0026\u0026 cd {{.WorkingDir}} \u0026\u0026 {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \u0022\u0022}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \u0022\u0022}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
+      "execute_command": "export FACTER_component={{user `component`}} \u0026\u0026 export http_proxy={{user `http_proxy`}} \u0026\u0026 export HTTP_PROXY={{user `http_proxy`}} \u0026\u0026 export https_proxy={{user `https_proxy`}} \u0026\u0026 export HTTPS_PROXY={{user `https_proxy`}} \u0026\u0026 export no_proxy={{user `no_proxy`}} \u0026\u0026 export NO_PROXY={{user `no_proxy`}} \u0026\u0026 cd {{.WorkingDir}} \u0026\u0026 {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \u0022\u0022}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \u0022\u0022}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
       "extra_arguments": [
       ],
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
