@@ -1,9 +1,9 @@
 {
     "author-publish-dispatcher_ami": "ami-6f8c650d",
-    "author_ami": "ami-0d89606f",
+    "author_ami": "ami-d97b92bb",
     "base_ami": "ami-e5b85187",
     "dispatcher_ami": "ami-b3a64fd1",
     "java_ami": "ami-70bb5212",
-    "publish_ami": "ami-568e6734",
-    "source_ami": "ami-568e6734"
+    "publish_ami": "ami-d47b92b6",
+    "source_ami": "ami-d47b92b6"
 }

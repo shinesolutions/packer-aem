@@ -1,0 +1,6 @@
+{
+  "aws_user": "ec2-user",
+  "source-ami": "ami-14fb1676",
+  "http_proxy": "",
+  "https_proxy": ""
+}

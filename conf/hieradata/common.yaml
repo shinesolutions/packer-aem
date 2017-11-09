@@ -9,7 +9,10 @@ oracle_java::version: '8'
 oracle_java::version_update: '141'
 oracle_java::version_build: '12'
 
-config::params::cert_base_url: s3://aem-stack-builder/library
+config::params::cert_base_url: s3://change-me/certs/
+config::params::aem_quickstart_source: s3://change-me/AEM_6.2_Quickstart.jar
+config::params::aem_license_source: s3://change-me/license-6.2.properties
+config::params::aem_artifacts_base: s3://change-me/artifacts/
 
 aem_curator::install_java::cert_base_url: "%{lookup('config::params::cert_base_url')}"
 aem_curator::install_java::tmp_dir: "%{lookup('tmp_dir')}"
@@ -17,11 +20,11 @@ aem_curator::install_java::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_author::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_author::aem_host: localhost
 aem_curator::install_author::aem_healthcheck_version: "1.3.3"
-aem_curator::install_author::aem_quickstart_source: s3://aem-artifacts/adobeaemcloud/AEM_6.2_Quickstart.jar
-aem_curator::install_author::aem_license_source: s3://aem-artifacts/adobeaemcloud/license-6.2.properties
-aem_curator::install_author::aem_artifacts_base: s3://aem-artifacts/adobeaemcloud
+aem_curator::install_author::aem_quickstart_source: "%{lookup('config::params::aem_quickstart_source')}"
+aem_curator::install_author::aem_license_source: "%{lookup('config::params::aem_license_source')}"
+aem_curator::install_author::aem_artifacts_base: "%{lookup('config::params::aem_artifacts_base')}"
 aem_curator::install_author::cert_base_url: "%{lookup('config::params::cert_base_url')}"
-aem_curator::install_author::aem_keystore_password: changeit
+aem_curator::install_author::aem_keystore_password: "%{lookup('config::params::aem_keystore_password')}"
 aem_curator::install_author::aem_base: /opt
 aem_curator::install_author::aem_sample_content: false
 aem_curator::install_author::aem_jvm_mem_opts: "-Xss4m -Xmx8192m"
@@ -32,11 +35,11 @@ aem_curator::install_author::repository_volume_mount_point: /mnt/ebs1
 aem_curator::install_publish::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_publish::aem_host: localhost
 aem_curator::install_publish::aem_healthcheck_version: "1.3.3"
-aem_curator::install_publish::aem_quickstart_source: s3://aem-artifacts/adobeaemcloud/AEM_6.2_Quickstart.jar
-aem_curator::install_publish::aem_license_source: s3://aem-artifacts/adobeaemcloud/license-6.2.properties
-aem_curator::install_publish::aem_artifacts_base: s3://aem-artifacts/adobeaemcloud
+aem_curator::install_publish::aem_quickstart_source: "%{lookup('config::params::aem_quickstart_source')}"
+aem_curator::install_publish::aem_license_source: "%{lookup('config::params::aem_license_source')}"
+aem_curator::install_publish::aem_artifacts_base: "%{lookup('config::params::aem_artifacts_base')}"
 aem_curator::install_publish::cert_base_url: "%{lookup('config::params::cert_base_url')}"
-aem_curator::install_publish::aem_keystore_password: changeit
+aem_curator::install_publish::aem_keystore_password: "%{lookup('config::params::aem_keystore_password')}"
 aem_curator::install_publish::aem_base: /opt
 aem_curator::install_publish::aem_sample_content: false
 aem_curator::install_publish::aem_jvm_mem_opts: "-Xss4m -Xmx8192m"
@@ -50,4 +53,4 @@ aem_curator::install_dispatcher::cert_filename: /etc/ssl/aem.unified-dispatcher.
 aem_curator::install_dispatcher::apache_module_base_url: https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_9/file.res
 aem_curator::install_dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86-64-ssl-4.2.2.tar.gz
 aem_curator::install_dispatcher::apache_module_filename: dispatcher-apache2.4-4.2.2.so
-aem_curator::install_dispatcher::apache_module_temp_dir: /tmp/dispatcher-apache
+aem_curator::install_dispatcher::apache_module_temp_dir: "%{lookup('tmp_dir')}"
