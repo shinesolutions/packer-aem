@@ -16,8 +16,6 @@
     "http_proxy": "",
     "https_proxy": "",
     "no_proxy": "",
-    "owner": "",
-    "cost_center": "",
     "ami_users": "",
     "tmp_dir": "/tmp/shinesolutions/packer-aem"
   },
@@ -73,21 +71,12 @@
       "communicator": "ssh",
       "ssh_pty": true,
       "run_tags": {
-        "Application Id": "Adobe Experience Manager (AEM)",
-        "Application Role": "{{user `component`}} AMI",
         "Version": "{{user `version`}}",
-        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
-        "Owner": "{{user `owner`}}",
-        "Cost Center": "{{user `cost_center`}}",
-        "Availability": "{\"availability\": \"24x7\"}"
+        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})"
       },
       "tags": {
-        "Application Id": "Adobe Experience Manager (AEM)",
-        "Application Role": "{{user `component`}} AMI",
         "Version": "{{user `version`}}",
-        "Name": "{{user `component`}} AMI ({{user `version`}})",
-        "Owner": "{{user `owner`}}",
-        "Cost Center": "{{user `cost_center`}}"
+        "Name": "{{user `component`}} AMI ({{user `version`}})"
       }
     }
   ],

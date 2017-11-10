@@ -5,11 +5,9 @@
     "aws_subnet_id": "",
     "aws_user": "ec2-user",
     "aws_vpc_id": "",
-    "cost_center": "",
     "iam_instance_profile": "S3Access",
     "iso_sha256": "03f3a0291634335f6995534d829bd21ffaa0d000004dfeb1b2fb81052d64a4d5",
     "iso_url": "file:///some-path/rhel-server-7.2-x86_64-dvd.iso",
-    "owner": "",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "vm_name": "rhel-7.2-vbox"
 }

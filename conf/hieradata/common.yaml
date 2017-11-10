@@ -5,6 +5,7 @@ timezone::region: 'Australia'
 timezone::locality: 'Melbourne'
 
 cloudwatchlogs::region: 'ap-southeast-2'
+
 oracle_java::version: '8'
 oracle_java::version_update: '141'
 oracle_java::version_build: '12'

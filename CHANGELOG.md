@@ -10,6 +10,7 @@
 * Add Packer user variables for http_proxy, https_proxy, and no_proxy #45
 * Remove NewRelic as this should be a customisation #38
 * Add setconfig.sh script to specify hieradata and packer customisation
+* Tags Cost Center, Availability, Owner, Application ID, and Application Role are no longer included by default #37
 
 ### 2.0.0
 * (NEED TO COMPLETE)

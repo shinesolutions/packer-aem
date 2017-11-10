@@ -71,7 +71,6 @@ Packer amazon-ebs reference: https://www.packer.io/docs/builders/amazon-ebs.html
 | base_ami_source_ami | The initial AMI used as a base for the newly created machine (e.g the Red Hat Enterprise Linux 7 AMI provider by Amazon) |
 | base_instance_type | The EC2 instance type to use while building the base AMI (t2.micro) |
 | base_provisioner_script | The path to a script to upload and execute in the base machine. This path can be absolute or relative. (provisioners/base.sh) |
-| cost_center | Tag Value - Used to identify the cost center or business unit associated with a resource; typically for cost allocation and tracking |
 | dispatcher_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the httpd build) |
 | dispatcher_instance_type | The EC2 instance type to use while building the dispatcher AMI (t2.micro) |
 | httpd_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the base build) |
@@ -79,7 +78,6 @@ Packer amazon-ebs reference: https://www.packer.io/docs/builders/amazon-ebs.html
 | iam_instance_profile | The name of an IAM instance profile to launch the EC2 instance with. |
 | java_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the base build) |
 | java_instance_type | The EC2 instance type to use while building the java AMI (t2.micro) |
-| owner | Tag Value - Used to identify who is responsible for the resource |
 | publish_ami_source_ami | The initial AMI used as a base for the newly created machine (the ami created from the aem_base build) |
 | publish_instance_type | The EC2 instance type to use while building the publish AMI (m4.large) |
 | puppet_bin_dir | The location where puppet exists within the AMI (/opt/puppetlabs/bin) |
