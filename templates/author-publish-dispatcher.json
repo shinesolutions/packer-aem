@@ -1,98 +1,36 @@
 {
   "variables": {
-    "aws_region": "ap-southeast-2",
-    "aws_user": "ec2-user",
-    "iam_instance_profile": "",
-    "aws_vpc_id": "",
-    "aws_subnet_id": "",
-    "aws_security_group_id": "",
-    "component": "",
-    "version": "x.x.x",
-    "instance_type": "",
-    "source_ami": "",
-    "root_volume_size": "20",
-    "data_volume_size": "50",
-    "puppet_bin_dir": "/opt/puppetlabs/bin",
     "http_proxy": "",
-    "https_proxy": "",
+    "aws_subnet_id": "",
+    "source_ami": "",
+    "tmp_dir": "/tmp/shinesolutions/packer-aem",
+    "instance_type": "",
     "no_proxy": "",
+    "component": "",
+    "root_volume_size": "20",
+    "aws_region": "ap-southeast-2",
+    "iam_instance_profile": "",
     "ami_users": "",
-    "tmp_dir": "/tmp/shinesolutions/packer-aem"
+    "data_volume_size": "50",
+    "aws_security_group_id": "",
+    "puppet_bin_dir": "/opt/puppetlabs/bin",
+    "version": "x.x.x",
+    "aws_user": "ec2-user",
+    "https_proxy": "",
+    "aws_vpc_id": ""
   },
-  "builders": [
-    {
-      "name": "ami_{{user `component`}}",
-      "type": "amazon-ebs",
-      "ssh_username": "{{user `aws_user`}}",
-      "ami_description": "Packer AEM Bootstrap - {{user `component`}} AMI ({{user `version`}})",
-      "ami_name": "{{user `component`}}-{{user `version`}}-{{timestamp}}",
-      "instance_type": "{{user `instance_type`}}",
-      "region": "{{user `aws_region`}}",
-      "iam_instance_profile": "{{ user `iam_instance_profile` }}",
-      "vpc_id": "{{user `aws_vpc_id`}}",
-      "subnet_id": "{{user `aws_subnet_id`}}",
-      "security_group_id": "{{user `aws_security_group_id`}}",
-      "ami_users": "{{user `ami_users`}}",
-      "source_ami": "{{user `source_ami`}}",
-      "ami_block_device_mappings": [
-        {
-          "delete_on_termination": true,
-          "device_name": "/dev/sdb",
-          "volume_size": "{{user `data_volume_size`}}",
-          "volume_type": "gp2"
-        },
-        {
-          "delete_on_termination": true,
-          "device_name": "/dev/sdc",
-          "volume_size": "{{user `data_volume_size`}}",
-          "volume_type": "gp2"
-        }
-      ],
-      "launch_block_device_mappings": [
-        {
-          "delete_on_termination": true,
-          "device_name": "/dev/sda1",
-          "volume_size": "{{user `root_volume_size`}}",
-          "volume_type": "gp2"
-        },
-        {
-          "delete_on_termination": true,
-          "device_name": "/dev/sdb",
-          "volume_size": "{{user `data_volume_size`}}",
-          "volume_type": "gp2"
-        },
-        {
-          "delete_on_termination": true,
-          "device_name": "/dev/sdc",
-          "volume_size": "{{user `data_volume_size`}}",
-          "volume_type": "gp2"
-        }
-      ],
-      "communicator": "ssh",
-      "ssh_pty": true,
-      "run_tags": {
-        "Version": "{{user `version`}}",
-        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})"
-      },
-      "tags": {
-        "Version": "{{user `version`}}",
-        "Name": "{{user `component`}} AMI ({{user `version`}})"
-      }
-    }
-  ],
   "provisioners": [
     {
-      "type": "shell",
       "inline": [
         "sudo mount -t tmpfs tmpfs /tmp",
         "mkdir -p {{user `tmp_dir`}}"
-      ]
+      ],
+      "type": "shell"
     },
     {
-      "type": "shell",
-      "script": "provisioners/bash/{{user `source_ami`}}.sh",
       "execute_command": "{{ .Vars }} sudo -E bash {{ .Path }}",
-      "environment_vars" : [
+      "type": "shell",
+      "environment_vars": [
         "PUPPET_BIN_DIR={{user `puppet_bin_dir`}}",
         "http_proxy={{user `http_proxy`}}",
         "HTTP_PROXY={{user `http_proxy`}}",
@@ -100,54 +38,52 @@
         "HTTPS_PROXY={{user `https_proxy`}}",
         "no_proxy={{user `no_proxy`}}",
         "NO_PROXY={{user `no_proxy`}}"
-      ]
+      ],
+      "script": "provisioners/bash/{{user `source_ami`}}.sh"
     },
     {
-      "type": "file",
       "source": "conf/",
-      "destination": "{{user `tmp_dir`}}"
+      "destination": "{{user `tmp_dir`}}",
+      "type": "file"
     },
     {
-      "type": "puppet-masterless",
-      "execute_command": "export http_proxy={{user `http_proxy`}} \u0026\u0026 export HTTP_PROXY={{user `http_proxy`}} \u0026\u0026 export https_proxy={{user `https_proxy`}} \u0026\u0026 export HTTPS_PROXY={{user `https_proxy`}} \u0026\u0026 export no_proxy={{user `no_proxy`}} \u0026\u0026 export NO_PROXY={{user `no_proxy`}} \u0026\u0026 cd {{.WorkingDir}} \u0026\u0026 {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \u0022\u0022}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \u0022\u0022}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
-      "manifest_file": "provisioners/puppet/manifests/config.pp",
+      "execute_command": "export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
       "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "type": "puppet-masterless",
+      "manifest_file": "provisioners/puppet/manifests/config.pp",
       "module_paths": [
         "provisioners/puppet/modules"
       ]
     },
     {
-      "type": "puppet-masterless",
-      "execute_command": "export FACTER_component={{user `component`}} \u0026\u0026 export http_proxy={{user `http_proxy`}} \u0026\u0026 export HTTP_PROXY={{user `http_proxy`}} \u0026\u0026 export https_proxy={{user `https_proxy`}} \u0026\u0026 export HTTPS_PROXY={{user `https_proxy`}} \u0026\u0026 export no_proxy={{user `no_proxy`}} \u0026\u0026 export NO_PROXY={{user `no_proxy`}} \u0026\u0026 cd {{.WorkingDir}} \u0026\u0026 {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \u0022\u0022}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \u0022\u0022}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
-      "extra_arguments": [
-      ],
-      "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "hiera_config_path": "conf/hiera.yaml",
-      "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "module_paths": [
         "modules",
         "provisioners/puppet/modules"
-      ]
+      ],
+      "execute_command": "export FACTER_component={{user `component`}} && export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "extra_arguments": [],
+      "type": "puppet-masterless"
     },
     {
-      "type": "file",
       "source": "test/serverspec",
-      "destination": "{{user `tmp_dir`}}"
+      "destination": "{{user `tmp_dir`}}",
+      "type": "file"
     },
     {
-      "type": "shell",
       "inline": [
         "set -o nounset",
         "set -o errexit",
         "export PATH=${PATH}:/sbin:/usr/sbin:/usr/local/sbin",
-
         "sleep 60",
-
         "cd {{user `tmp_dir`}}/serverspec",
         "bundle install --path=vendor",
         "bundle exec rake spec SPEC=spec/{{user `component`}}_spec.rb"
       ],
-      "environment_vars" : [
+      "type": "shell",
+      "environment_vars": [
         "FACTER_packer_build_name={{user `component`}}",
         "FACTER_packer_staging_dir={{user `tmp_dir`}}",
         "http_proxy={{user `http_proxy`}}",
@@ -159,7 +95,6 @@
       ]
     },
     {
-      "type": "shell",
       "inline": [
         "sudo rm -rf {{user `tmp_dir`}}",
         "sudo /opt/puppetlabs/bin/puppet resource service aem-aem ensure=stopped",
@@ -167,7 +102,8 @@
         "sudo -E find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete",
         "sudo truncate --size 0 --no-create /var/log/wtmp /var/log/btmp"
       ],
-      "environment_vars" : [
+      "type": "shell",
+      "environment_vars": [
         "HISTFILE=/dev/null",
         "http_proxy={{user `http_proxy`}}",
         "HTTP_PROXY={{user `http_proxy`}}",
@@ -178,15 +114,76 @@
       ]
     }
   ],
+  "builders": [
+    {
+      "ami_block_device_mappings": [
+        {
+          "volume_size": "{{user `data_volume_size`}}",
+          "delete_on_termination": true,
+          "volume_type": "gp2",
+          "device_name": "/dev/sdb"
+        },
+        {
+          "volume_size": "{{user `data_volume_size`}}",
+          "delete_on_termination": true,
+          "volume_type": "gp2",
+          "device_name": "/dev/sdc"
+        }
+      ],
+      "source_ami": "{{user `source_ami`}}",
+      "name": "ami_{{user `component`}}",
+      "tags": {
+        "Version": "{{user `version`}}",
+        "Name": "{{user `component`}} AMI ({{user `version`}})"
+      },
+      "subnet_id": "{{user `aws_subnet_id`}}",
+      "ssh_username": "{{user `aws_user`}}",
+      "region": "{{user `aws_region`}}",
+      "ami_name": "{{user `component`}}-{{user `version`}}-{{timestamp}}",
+      "iam_instance_profile": "{{ user `iam_instance_profile` }}",
+      "security_group_id": "{{user `aws_security_group_id`}}",
+      "instance_type": "{{user `instance_type`}}",
+      "ami_description": "Packer AEM Bootstrap - {{user `component`}} AMI ({{user `version`}})",
+      "run_tags": {
+        "Version": "{{user `version`}}",
+        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})"
+      },
+      "communicator": "ssh",
+      "vpc_id": "{{user `aws_vpc_id`}}",
+      "launch_block_device_mappings": [
+        {
+          "volume_size": "{{user `root_volume_size`}}",
+          "delete_on_termination": true,
+          "volume_type": "gp2",
+          "device_name": "/dev/sda1"
+        },
+        {
+          "volume_size": "{{user `data_volume_size`}}",
+          "delete_on_termination": true,
+          "volume_type": "gp2",
+          "device_name": "/dev/sdb"
+        },
+        {
+          "volume_size": "{{user `data_volume_size`}}",
+          "delete_on_termination": true,
+          "volume_type": "gp2",
+          "device_name": "/dev/sdc"
+        }
+      ],
+      "ami_users": "{{user `ami_users`}}",
+      "type": "amazon-ebs",
+      "ssh_pty": true
+    }
+  ],
   "post-processors": [
     {
-      "type": "json-updater",
       "ami_id": {
         "{{user `ami_var_file`}}": [
           "{{user `component`}}_ami",
           "source_ami"
         ]
-      }
+      },
+      "type": "json-updater"
     }
   ]
 }
