@@ -1,3 +1,8 @@
+timezone::region: 'Australia'
+timezone::locality: 'Melbourne'
+
+cloudwatchlogs::region: 'ap-southeast-2'
+
 config::params::cert_base_url: s3://aem-stack-builder/library
 config::params::aem_quickstart_source: s3://aem-artifacts/adobeaemcloud/AEM_6.2_Quickstart.jar
 config::params::aem_license_source: s3://aem-artifacts/adobeaemcloud/license-6.2.properties
