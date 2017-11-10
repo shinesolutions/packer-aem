@@ -1,20 +1,15 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
 
-    "Description": "Create Role for Packer Agent",
+    "Description": "Create Role for Packer",
 
     "Parameters": {
-
-      "ComputeStackPrefixParameter": {
-        "Type": "String",
-        "Description": "The AEM Stack Compute Resources Stack Prefix"
-      }
 
     },
 
     "Resources": {
 
-        "rRole": {
+        "PackerRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
                 "AssumeRolePolicyDocument": {
@@ -35,7 +30,7 @@
                 "Path": "/",
                 "Policies": [
                     {
-                        "PolicyName": "policyBuilderHost",
+                        "PolicyName": "PackerRolePolicy",
                         "PolicyDocument": {
                             "Statement": [
                                  {
@@ -104,13 +99,13 @@
         },
 
 
-        "rInstPrf": {
+        "PackerInstanceProfile": {
             "Type": "AWS::IAM::InstanceProfile",
             "Properties": {
                 "Path": "/",
                 "Roles": [
                     {
-                        "Ref": "rRole"
+                        "Ref": "PackerRole"
                     }
                 ]
             }
