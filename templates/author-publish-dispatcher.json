@@ -10,7 +10,7 @@
     "version": "x.x.x",
     "instance_type": "",
     "source_ami": "",
-    "root_volume_size": "10",
+    "root_volume_size": "20",
     "repository_volume_size": "50",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "http_proxy": "",
