@@ -1,22 +1,15 @@
 {
     "ami_users": "",
-    "author_instance_type": "m4.large",
     "aws_region": "ap-southeast-2",
     "aws_security_group_id": "",
     "aws_subnet_id": "",
     "aws_user": "ec2-user",
     "aws_vpc_id": "",
-    "base_instance_type": "t2.micro",
-    "base_provisioner_script": "provisioners/aws/rhel7/base.sh",
     "cost_center": "",
-    "dispatcher_instance_type": "t2.micro",
-    "httpd_instance_type": "t2.micro",
     "iam_instance_profile": "S3Access",
     "iso_sha256": "03f3a0291634335f6995534d829bd21ffaa0d000004dfeb1b2fb81052d64a4d5",
     "iso_url": "file:///some-path/rhel-server-7.2-x86_64-dvd.iso",
-    "java_instance_type": "t2.micro",
     "owner": "",
-    "publish_instance_type": "m4.large",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "vm_name": "rhel-7.2-vbox"
 }
