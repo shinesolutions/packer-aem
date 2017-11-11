@@ -4,7 +4,6 @@ bin/
 templates/_archive/
 .idea/
 Vagrantfile
-output-virtualbox-iso/
 *.box
 .vagrant/
 packer_cache/

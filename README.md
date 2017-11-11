@@ -82,16 +82,6 @@ Packer amazon-ebs reference: https://www.packer.io/docs/builders/amazon-ebs.html
 | publish_instance_type | The EC2 instance type to use while building the publish AMI (m4.large) |
 | puppet_bin_dir | The location where puppet exists within the AMI (/opt/puppetlabs/bin) |
 
-#### virtualbox-iso builder
-
-| Name                | Description   |
-| -------------       |:-------------:|
-| iso_sha256 | The checksum for the OS ISO file. Because ISO files are so large, this is required and Packer will verify it prior to booting a virtual machine with the ISO attached |
-| iso_url | A URL to the ISO containing the installation image. This URL can be either an HTTP URL or a file URL (or path to a file) |
-| vm_name | This is the name of the OVF file for the new virtual machine, without the file extension |
-
-
-
 ### Puppet Configuration
 
 Puppet Provisioning can be configured in the [conf/hieradata/common.yaml](https://github.com/shinesolutions/packer-aem-bootstrap/blob/master/conf/hieradata/common.yaml) file.
