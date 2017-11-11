@@ -3,9 +3,6 @@ bin/
 /modules/
 templates/_archive/
 .idea/
-Vagrantfile
-*.box
-.vagrant/
 packer_cache/
 Gemfile.lock
 .DS_Store

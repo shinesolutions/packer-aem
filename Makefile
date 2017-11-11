@@ -30,7 +30,7 @@ Puppetfile.lock: Gemfile.lock Puppetfile
 	bundle exec r10k puppetfile install --verbose --moduledir modules
 
 clean:
-	rm -rf .tmp Puppetfile.lock Gemfile.lock .gems .vagrant Vagrantfile modules packer_cache stage logs/
+	rm -rf .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
 
 lint:
 	bundle exec puppet-lint \
