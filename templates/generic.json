@@ -142,6 +142,10 @@
         "Version": "{{user `version`}}",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})"
       },
+      "run_volume_tags": {
+        "Version": "{{user `version`}}",
+        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})"
+      },
       "communicator": "ssh",
       "vpc_id": "{{user `aws_vpc_id`}}",
       "launch_block_device_mappings": [
