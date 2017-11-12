@@ -8,6 +8,7 @@ config::params::aem_quickstart_source: s3://aem-artifacts/adobeaemcloud/AEM_6.2_
 config::params::aem_license_source: s3://aem-artifacts/adobeaemcloud/license-6.2.properties
 config::params::aem_artifacts_base: s3://aem-artifacts/adobeaemcloud
 config::params::aem_keystore_password: changeit
+config::params::aem_profile: aem62_sp1_cfp5
 
 aem_curator::install_author::aem_jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
 aem_curator::install_publish::aem_jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
