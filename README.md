@@ -31,6 +31,6 @@ Installation
 Usage
 -----
 
-- Set up [AWS resources required by Packer AEM]()
-- Create [Hieradata and Packer vars configuration files]()
+- Set up required [AWS resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md)
+- Create [global tags, Hieradata, and Packer vars configuration files](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md)
 - Create the AMIs by running `make <component> version=<version>`
