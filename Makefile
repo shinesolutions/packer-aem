@@ -24,10 +24,13 @@ stage/packer-aem-$(packer_aem_version).tar.gz: lint validate stage
 
 ci: clean lint validate
 
-deps: Puppetfile.lock Gemfile.lock
+deps: Gemfile.lock Puppetfile.lock
 
-Puppetfile.lock: Gemfile.lock Puppetfile
+Puppetfile.lock: Puppetfile
 	bundle exec r10k puppetfile install --verbose --moduledir modules
+
+Gemfile.lock: Gemfile
+	bundle install --binstubs
 
 clean:
 	rm -rf .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
@@ -83,9 +86,6 @@ var_files:
 
 merge_var_files:
 	@jq -s 'reduce .[] as $$item ({}; . * $$item)' $(all_var_files)
-
-Gemfile.lock: Gemfile
-	bundle install --binstubs
 
 stage:
 	mkdir -p stage/
