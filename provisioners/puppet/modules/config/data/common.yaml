@@ -1,6 +1,4 @@
 ---
-config::params::cert_base_url: s3://aem-stack-builder/library
-
 config::base::python_package: python
 config::base::python_pip_package: python-pip
 config::base::python_cheetah_package: python-cheetah
