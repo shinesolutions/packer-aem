@@ -14,8 +14,8 @@ hieradata_file=$2
 packer_vars_file=$3
 
 echo "Setting up Hieradata and Packer vars configuration files..."
-cp -vf "$hieradata_file" $BASEDIR/../conf/hieradata/local.yaml
-cp -vf "$packer_vars_file" $BASEDIR/../vars/99_local.json
+cp -vf "$hieradata_file" "$BASEDIR/../conf/hieradata/local.yaml"
+cp -vf "$packer_vars_file" "$BASEDIR/../vars/99_local.json"
 
 echo "Setting up AWS tags..."
-python $BASEDIR/add-global-tags.py $BASEDIR/../templates/ "$tags_file"
+python "$BASEDIR/add-global-tags.py" "$BASEDIR/../templates/" "$tags_file"
