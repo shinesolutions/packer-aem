@@ -33,4 +33,5 @@ Usage
 
 - Set up the required [AWS resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md)
 - Create [AWS tags, Hieradata, and Packer vars configuration files](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md)
-- Create the AMIs by running `make <component> version=<version>`
+- Set up the configuration files by running `scripts/set-config.sh <aws_tags_file> <hieradata_file> <packer_vars_file>`
+- Create the AMIs by running `make <component> version=<version> outdir=<path/to/out/dir>`, where AMI IDs files will be created in output directory
