@@ -43,6 +43,7 @@ filters = yaml.load(open(args.filter_file)) if args.filter_file else {}
 author_ami_id = most_recent_ami('Author AMI', filters.get('author_ami_filters', ["Name=tag:Application Role,Values=author AMI"]))
 publish_ami_id = most_recent_ami('Publish AMI', filters.get('publish_ami_id', ["Name=tag:Application Role,Values=publish AMI"]))
 dispatcher_ami_id = most_recent_ami('Dispatcher AMI', filters.get('dispatcher_ami_id', ["Name=tag:Application Role,Values=dispatcher AMI"]))
+author_publish_dispatcher_ami_id = most_recent_ami('AuthorPublishDispatcher AMI', filters.get('author_publish_dispatcher_ami_id', ["Name=tag:Application Role,Values=author-publish-dispatcher AMI"]))
 java_ami_id = most_recent_ami('Java AMI', filters.get('java_ami_id', ["Name=tag:Application Role,Values=java AMI"]))
 
 if args.outfile == '-':
