@@ -1,9 +1,0 @@
-{
-    "author-publish-dispatcher_ami": "ami-1aa35678",
-    "author_ami": "ami-2048a042",
-    "base_ami": "ami-6c69810e",
-    "dispatcher_ami": "ami-b3a64fd1",
-    "java_ami": "ami-70bb5212",
-    "publish_ami": "ami-daa653b8",
-    "source_ami": "ami-1aa35678"
-}
