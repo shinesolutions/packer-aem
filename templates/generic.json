@@ -128,7 +128,9 @@
       "name": "ami_{{user `component`}}",
       "tags": {
         "Version": "{{user `version`}}",
-        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})"
+        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
+        "Application Id": "Adobe Experience Manager (AEM)",
+        "Application Role": "{{user `component`}} AMI"
       },
       "subnet_id": "{{user `aws_subnet_id`}}",
       "ssh_username": "{{user `aws_user`}}",
@@ -140,11 +142,15 @@
       "ami_description": "Packer AEM Bootstrap - {{user `component`}} AMI ({{user `version`}})",
       "run_tags": {
         "Version": "{{user `version`}}",
-        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})"
+        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
+        "Application Id": "Adobe Experience Manager (AEM)",
+        "Application Role": "{{user `component`}} AMI"
       },
       "run_volume_tags": {
         "Version": "{{user `version`}}",
-        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})"
+        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
+        "Application Id": "Adobe Experience Manager (AEM)",
+        "Application Role": "{{user `component`}} AMI"
       },
       "communicator": "ssh",
       "vpc_id": "{{user `aws_vpc_id`}}",
