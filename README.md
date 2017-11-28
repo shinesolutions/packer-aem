@@ -34,4 +34,8 @@ Usage
 - Set up the required [AWS resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md)
 - Create [AWS tags, Hieradata, and Packer vars configuration files](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md)
 - Set up the configuration files by running `scripts/set-config.sh <aws_tags_file> <hieradata_file> <packer_vars_file>`
-- Create the AMIs by running `make <component> version=<version> outdir=<path/to/out/dir>`, where AMI IDs files will be created in output directory
+- Create the AMIs by running `make <component> version=<version>`, where AMI IDs will be written to stage/ami-ids.json (customisable with `ami_var_file` parameter)
+
+To retrieve the latest AMI IDs for all [AEM AWS Stack Builder](https://github.com/shinesolutions/aem-aws-stack-builder) components, run the command below, and the AMI IDs will be written into a YAML file that can be consumed as Ansible group vars:
+
+    scripts/create-stack-builder-ami-ids.py

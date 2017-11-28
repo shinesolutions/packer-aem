@@ -16,6 +16,7 @@
 * Upgrade Puppet to version 5
 * Default ami_var_file is stage/ami-ids.json
 * ami_var_file no longer update source_ami and remove _ami postfix
+* Stack Builder-specific AMI IDs config script file is now named scripts/create-stack-builder-ami-ids-config.py
 
 ### 2.0.0
 * (NEED TO COMPLETE)

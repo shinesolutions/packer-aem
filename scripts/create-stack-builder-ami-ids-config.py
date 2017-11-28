@@ -4,7 +4,7 @@ import sys, os, argparse, yaml, boto3
 from dateutil.parser import parse as parse_dt
 
 p = argparse.ArgumentParser()
-p.add_argument('--outfile', '-o', metavar = 'FILE', help = 'The file to write output to. Use "-" for stdout', default = 'stage/ami-ids.yaml')
+p.add_argument('--outfile', '-o', metavar = 'FILE', help = 'The file to write output to. Use "-" for stdout', default = 'stage/stack-builder-ami-ids.yaml')
 p.add_argument('--filter-file', '-f', metavar = 'FILE', help = 'A JSON or YAML file containing AMI filters', default = None)
 args = p.parse_args()
 
