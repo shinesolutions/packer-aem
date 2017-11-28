@@ -14,6 +14,8 @@
 * Volumes created during AMI baking are now tagged via run_volume_tags #50
 * Upgrade ruby_aem to 1.4.0
 * Upgrade Puppet to version 5
+* Default ami_var_file is stage/ami-ids.json
+* ami_var_file no longer update source_ami and remove _ami postfix
 
 ### 2.0.0
 * (NEED TO COMPLETE)
