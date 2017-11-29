@@ -57,6 +57,7 @@ yaml.dump({
         'publish_dispatcher': dispatcher_ami_id,
         'publish': publish_ami_id,
         'author': author_ami_id,
+        'author_publish_dispatcher': author_publish_dispatcher_ami_id,
         'orchestrator': java_ami_id,
         'chaos_monkey': java_ami_id,
     }
