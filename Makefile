@@ -57,7 +57,7 @@ validate:
 		-var "component=null" \
 		templates/generic.json
 
-$(AMIS):
+$(AMIS): stage
 	mkdir -p logs/
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
