@@ -11,7 +11,7 @@ mod 'puppetlabs/apache', '2.3.0'
 mod 'puppetlabs/java_ks', '1.6.0'
 mod 'aco-oracle_java', '2.8.1'
 mod 'shinesolutions/aem_resources', '1.2.0'
-mod 'shinesolutions/amazon_ssm_agent', :git => 'https://github.com/shinesolutions/amazon_ssm_agent.git'
+mod 'shinesolutions/amazon_ssm_agent', '0.9.0'
 
 # Needed by `config` module
 mod 'saz/limits', '2.5.0'
