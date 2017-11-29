@@ -1,3 +1,6 @@
+### 2.1.1
+*
+
 ### 2.1.0
 * Service names are now 'aem-author' (AEM Author) and 'aem-publish' (AEM Publish), previously 'aem-aem'
 * Replace default https port for author component from 5433 to 5432
