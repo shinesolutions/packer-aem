@@ -1,23 +1,23 @@
 {
   "variables": {
-    "http_proxy": "",
+    "ami_users": "",
+    "aws_region": "ap-southeast-2",
+    "aws_security_group_id": "",
     "aws_subnet_id": "",
-    "source_ami": "",
-    "tmp_dir": "/tmp/shinesolutions/packer-aem",
+    "aws_user": "ec2-user",
+    "aws_vpc_id": "",
+    "component": "",
+    "data_volume_size": "50",
+    "http_proxy": "",
+    "https_proxy": "",
+    "iam_instance_profile": "",
     "instance_type": "",
     "no_proxy": "",
-    "component": "",
-    "root_volume_size": "20",
-    "aws_region": "ap-southeast-2",
-    "iam_instance_profile": "",
-    "ami_users": "",
-    "data_volume_size": "50",
-    "aws_security_group_id": "",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
-    "version": "x.x.x",
-    "aws_user": "ec2-user",
-    "https_proxy": "",
-    "aws_vpc_id": ""
+    "root_volume_size": "20",
+    "source_ami": "",
+    "tmp_dir": "/tmp/shinesolutions/packer-aem",
+    "version": "x.x.x"
   },
   "provisioners": [
     {
