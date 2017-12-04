@@ -1,4 +1,6 @@
-require 'spec_helper'
+require './spec_helper'
+
+init_conf
 
 region = @hiera.lookup('timezone::region', nil, @scope)
 locality = @hiera.lookup('timezone::locality', nil, @scope)

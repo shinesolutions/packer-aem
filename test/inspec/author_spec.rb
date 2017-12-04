@@ -1,4 +1,6 @@
-require 'spec_helper'
+require './spec_helper'
+
+init_conf
 
 aem_base = @hiera.lookup('author::aem_base', nil, @scope)
 aem_base ||= '/opt'
@@ -10,7 +12,7 @@ aem_port ||= '4502'
 describe file("#{aem_base}/aem") do
   it { should be_directory }
   it { should exist }
-  it { should be_mode 775 }
+  its('mode') { should cmp '00775' }
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
 end
@@ -18,7 +20,7 @@ end
 describe file("#{aem_base}/aem/author") do
   it { should be_directory }
   it { should exist }
-  it { should be_mode 775 }
+  its('mode') { should cmp '00775' }
   it { should be_owned_by 'aem-author' }
   it { should be_grouped_into 'aem-author' }
 end
@@ -26,7 +28,7 @@ end
 describe file("#{aem_base}/aem/author/license.properties") do
   it { should be_file }
   it { should exist }
-  it { should be_mode 440 }
+  its('mode') { should cmp '00440' }
   it { should be_owned_by 'aem-author' }
   it { should be_grouped_into 'aem-author' }
 end
@@ -34,24 +36,20 @@ end
 describe file("#{aem_base}/aem/author/aem-author-#{aem_port}.jar") do
   it { should be_file }
   it { should exist }
-  it { should be_mode 775 }
+  its('mode') { should cmp '00775' }
   it { should be_owned_by 'aem-author' }
   it { should be_grouped_into 'aem-author' }
 end
 
-# Service will be renamed to 'aem' on next puppet-aem release.
-# https://github.com/bstopp/puppet-aem/commit/a28d87fbf6bafc81ff00dec1759d8848708f32af
 describe service('aem-author') do
   it { should_not be_enabled }
-# serverspec is using ps aux | grep -w to determine if a service is running
-# aem is just a java process, which fails the test
-#  it { should be_running }
+  it { should_not be_running }
 end
 
 describe file('/etc/puppetlabs/puppet/author.yaml') do
   it { should be_file }
   it { should exist }
-  it { should be_mode 644 }
+  its('mode') { should cmp '00644' }
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
 end

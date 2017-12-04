@@ -1,8 +1,9 @@
-require 'spec_helper'
+require './spec_helper'
+
+init_conf
 
 version = @hiera.lookup('oracle_java::version', nil, @scope)
 version_update = @hiera.lookup('oracle_java::version_update', nil, @scope)
-
 java_version = "1.#{version}.0_#{version_update}"
 
 describe command('java -version') do

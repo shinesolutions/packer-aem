@@ -1,7 +1,0 @@
-source "https://rubygems.org"
-
-gem "rake"
-gem "serverspec"
-gem "facter"
-gem "hiera"
-gem "io-console"

@@ -7,7 +7,6 @@
   - "%{::os.family}/%{::os.name}-%{::os.release.major}"
   - "%{::os.family}/%{::os.name}"
   - "%{::component}"
-  - serverspec
   - common
 :logger: noop
 :merge_behavior: native

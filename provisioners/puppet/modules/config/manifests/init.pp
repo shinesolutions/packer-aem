@@ -35,5 +35,8 @@ class config (
   -> package { 'ruby_aem':
     ensure   => '1.4.0',
     provider => 'puppet_gem',
+  } -> package { 'inspec':
+    ensure   => '1.46.2',
+    provider => 'puppet_gem',
   }
 }

@@ -1,5 +1,5 @@
 ### 2.1.1
-*
+* Replace Serverspec with InSpec for testing #42
 
 ### 2.1.0
 * Service names are now 'aem-author' (AEM Author) and 'aem-publish' (AEM Publish), previously 'aem-aem'

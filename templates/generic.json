@@ -69,7 +69,7 @@
     },
     {
       "type": "file",
-      "source": "test/serverspec",
+      "source": "test/inspec",
       "destination": "{{user `tmp_dir`}}"
     },
     {
@@ -77,11 +77,9 @@
       "inline": [
         "set -o nounset",
         "set -o errexit",
-        "export PATH=${PATH}:/sbin:/usr/sbin:/usr/local/sbin",
-        "sleep 60",
-        "cd {{user `tmp_dir`}}/serverspec",
-        "bundle install --path=vendor",
-        "bundle exec rake spec SPEC=spec/{{user `component`}}_spec.rb"
+        "export PATH=/opt/puppetlabs/puppet/bin/:/sbin:/usr/sbin:/usr/local/sbin:${PATH}",
+        "cd {{user `tmp_dir`}}/inspec",
+        "inspec exec {{user `component`}}_spec.rb"
       ],
       "environment_vars": [
         "FACTER_packer_build_name={{user `component`}}",
