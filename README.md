@@ -11,7 +11,7 @@ Packer AEM is a set of [Packer](https://www.packer.io/) templates for creating [
 * `java` - contains [Oracle JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html), to be used for running [AEM Orchestrator](https://github.com/shinesolutions/aem-orchestrator) and [Chaos Monkey](https://netflix.github.io/chaosmonkey/)
 * `author-publish-dispatcher` - contains AEM Author, AEM Publish, and AEM Dispatcher
 
-[![Packer AEM Images](https://raw.github.com/shinesolutions/packer-aem/master/docs/packer-aem-images.png)](https://raw.github.com/shinesolutions/packer-aem/master/docs/packer-aem-images.png)
+[![Machine Images Diagram](https://raw.github.com/shinesolutions/packer-aem/master/docs/machine-images-diagram.png)](https://raw.github.com/shinesolutions/packer-aem/master/docs/machine-images-diagram.png)
 
 The AMIs produced by Packer AEM will then be used by [AEM AWS Stack Builder](https://github.com/shinesolutions/aem-aws-stack-builder) to create an AEM environment on [AWS](https://aws.amazon.com/).
 
