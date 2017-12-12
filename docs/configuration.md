@@ -10,7 +10,7 @@ The following configurations are available for users to customise the creation p
 AWS Tags
 --------
 
-AWS resources created by Packer AEM can be tagged following your organisation's tagging standard.
+AWS resources (e.g. EC2 instance, AMI, EBS volume) created by Packer AEM can be tagged following your organisation's tagging standard.
 
 Create a YAML file which contains key value pairs for the tags in the following format:
 
