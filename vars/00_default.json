@@ -5,6 +5,6 @@
     "aws_subnet_id": "",
     "aws_user": "ec2-user",
     "aws_vpc_id": "",
-    "iam_instance_profile": "change-me",
+    "iam_instance_profile": "overwrite-me",
     "puppet_bin_dir": "/opt/puppetlabs/bin"
 }
