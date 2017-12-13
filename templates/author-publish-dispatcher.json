@@ -134,7 +134,8 @@
         "Version": "{{user `version`}}",
         "Name": "{{user `component`}} AMI ({{user `version`}})",
         "Application Id": "Adobe Experience Manager (AEM)",
-        "Application Role": "{{user `component`}} AMI"
+        "Application Role": "{{user `component`}} AMI",
+        "Application Profile": "{{user `profile`}}"
       },
       "subnet_id": "{{user `aws_subnet_id`}}",
       "ssh_username": "{{user `aws_user`}}",
@@ -148,13 +149,15 @@
         "Version": "{{user `version`}}",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Id": "Adobe Experience Manager (AEM)",
-        "Application Role": "{{user `component`}} AMI"
+        "Application Role": "{{user `component`}} AMI",
+        "Application Profile": "{{user `profile`}}"
       },
       "run_volume_tags": {
         "Version": "{{user `version`}}",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Id": "Adobe Experience Manager (AEM)",
-        "Application Role": "{{user `component`}} AMI"
+        "Application Role": "{{user `component`}} AMI",
+        "Application Profile": "{{user `profile`}}"
       },
       "communicator": "ssh",
       "vpc_id": "{{user `aws_vpc_id`}}",

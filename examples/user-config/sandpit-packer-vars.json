@@ -1,6 +1,7 @@
 {
   "aws_user": "ec2-user",
   "aws_region": "ap-southeast-2",
+  "profile": "aem62_sp1_cfp9",
   "source-ami": "ami-14fb1676",
   "iam_instance_profile": "S3Access",
   "http_proxy": "",

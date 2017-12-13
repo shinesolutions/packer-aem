@@ -54,6 +54,7 @@ AMI creation parameters can be configured in a Packer vars config file.
 |------|-------------|
 | `aws_user` | SSH username which Packer will use to connect to EC2 instance based on `source-ami` |
 | `aws_region` | [AWS region name](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) |
+| `profile` | AEM Profile, check out the [list of available profiles](https://github.com/shinesolutions/puppet-aem-curator/blob/master/docs/aem-profiles-artifacts.md) |
 | `source_ami` | ID of the AMI used as the base of all component AMIs  |
 | `iam_instance_profile` | IAM Instance Profile name as set up in [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) |
 | `http_proxy` | [Web proxy server](https://en.wikipedia.org/wiki/Proxy_server) for http URLs, leave empty if Packer EC2 instances can directly connect to the Internet |
