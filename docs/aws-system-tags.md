@@ -1,7 +1,7 @@
 AWS System Tags
 ---------------
 
-In order to identify the AWS resources (e.g. EC2 instance, AMI, volumes) that are used as part of AEM AMIs creation process, the following system tags are set up:
+In order to identify the AWS resources (e.g. EC2 instance, AMI, volumes) that are used as part of AEM AMIs creation process, the following system tags are set up following [AWS Tagging Strategies](https://aws.amazon.com/answers/account-management/aws-tagging-strategies/):
 
 | Name | Description |
 |------|-------------|
