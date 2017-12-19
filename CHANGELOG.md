@@ -1,6 +1,8 @@
 ### 2.2.0
 * Replace Serverspec with InSpec for testing #42
 * Add Application Profile system tag #53
+* Fix AEM Dispatcher not listening on port 443
+* Add AEM Dispatcher listen ports testing
 
 ### 2.1.0
 * Service names are now 'aem-author' (AEM Author) and 'aem-publish' (AEM Publish), previously 'aem-aem'
