@@ -110,6 +110,9 @@ end
 apache_package = @hiera.lookup('apache::apache_name', nil, @scope)
 apache_package ||= 'httpd'
 
+apache_http_port = @hiera.lookup('aem_curator::install_dispatcher::apache_http_port', nil, @scope)
+apache_https_port = @hiera.lookup('aem_curator::install_dispatcher::apache_https_port', nil, @scope)
+
 describe package("#{apache_package}") do
   it { should be_installed }
 end
@@ -119,10 +122,10 @@ describe service('httpd') do
 #  it { should be_running }
 end
 
-describe port(80) do
+describe port("#{apache_http_port}") do
   it { should be_listening }
 end
 
-describe port(443) do
+describe port("#{apache_https_port}") do
   it { should be_listening }
 end

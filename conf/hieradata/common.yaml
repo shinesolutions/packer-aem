@@ -74,3 +74,5 @@ aem_curator::install_dispatcher::apache_module_base_url: https://www.adobeaemclo
 aem_curator::install_dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86-64-ssl-4.2.3.tar.gz
 aem_curator::install_dispatcher::apache_module_filename: dispatcher-apache2.4-4.2.3.so
 aem_curator::install_dispatcher::apache_module_temp_dir: "%{lookup('tmp_dir')}"
+aem_curator::install_dispatcher::apache_http_port: "80"
+aem_curator::install_dispatcher::apache_https_port: "443"
