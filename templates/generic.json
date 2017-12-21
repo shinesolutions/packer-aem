@@ -13,6 +13,7 @@
     "iam_instance_profile": "",
     "instance_type": "",
     "no_proxy": "",
+    "os_type": "",
     "profile": "",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "root_volume_size": "10",
@@ -40,7 +41,7 @@
         "no_proxy={{user `no_proxy`}}",
         "NO_PROXY={{user `no_proxy`}}"
       ],
-      "script": "provisioners/bash/{{user `source_ami`}}.sh"
+      "script": "provisioners/bash/{{user `os_type`}}.sh"
     },
     {
       "type": "file",
