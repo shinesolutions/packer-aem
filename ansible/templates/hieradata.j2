@@ -1,0 +1,24 @@
+config::params::timezone_region: '{{ timezone.region }}'
+config::params::timezone_locality: '{{ timezone.locality }}'
+config::params::aws_region: '{{ aws.region }}'
+config::params::aem_certs_base: {{ aws.aem_certs_base }}
+config::params::aem_artifacts_base: {{ aws.aem_artifacts_base }}
+config::params::aem_keystore_password: {{ aem.keystore_password }}
+config::params::aem_profile: {{ aem.profile }}
+
+config::params::aem_author_jvm_opts:
+- '-XX:+PrintGCDetails'
+- '-XX:+PrintGCTimeStamps'
+- '-XX:+PrintGCDateStamps'
+- '-XX:+PrintTenuringDistribution'
+- '-XX:+PrintGCApplicationStoppedTime'
+- '-XX:+HeapDumpOnOutOfMemoryError'
+config::params::aem_author_jvm_mem_opts: "{{ aem.author.jvm_mem_opts }}"
+config::params::aem_publish_jvm_opts:
+- '-XX:+PrintGCDetails'
+- '-XX:+PrintGCTimeStamps'
+- '-XX:+PrintGCDateStamps'
+- '-XX:+PrintTenuringDistribution'
+- '-XX:+PrintGCApplicationStoppedTime'
+- '-XX:+HeapDumpOnOutOfMemoryError'
+config::params::aem_publish_jvm_mem_opts: "{{ aem.publish.jvm_mem_opts }}"

@@ -1,0 +1,28 @@
+---
+
+aws:
+  os: rhel7
+  user: ec2-user
+  region: overwrite-me
+  source_ami: overwrite-me
+  instance_profile: overwrite-me
+  aem_artifacts_base: overwrite-me
+  aem_certs_base: overwrite-me
+  tags:
+    - Key: overwrite-me
+      Value: overwrite-me
+
+aem:
+  profile: aem62_sp1_cfp9
+  keystore_password: changeit
+  author:
+    jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
+  publish:
+    jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
+
+http_proxy: ''
+https_proxy: ''
+
+timezone:
+  region: Australia
+  locality: Melbourne

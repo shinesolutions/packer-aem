@@ -1,0 +1,31 @@
+---
+
+aws:
+  user: ec2-user
+  region: ap-southeast-2
+  source_ami: ami-14fb1676
+  instance_profile: S3Access
+  aem_artifacts_base: s3://aem-artifacts/adobeaemcloud
+  aem_certs_base: s3://aem-stack-builder/library
+  tags:
+    - Key: Project
+      Value: Open Source AEM Platform
+    - Key: Owner
+      Value: Shine Solutions AEM Team
+    - Key: Cost Centre
+      Value: 12345
+
+aem:
+  profile: aem62_sp1_cfp9
+  keystore_password: changeit
+  author:
+    jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
+  publish:
+    jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
+
+http_proxy: ''
+https_proxy: ''
+
+timezone:
+  region: Australia
+  locality: Melbourne

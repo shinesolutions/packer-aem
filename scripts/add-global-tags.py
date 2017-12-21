@@ -23,10 +23,10 @@ def write_template(file_name, template):
 
 def read_global_tags(file_name):
     file = open(file_name, 'r')
-    tags = ruamel.yaml.load(file, Loader=ruamel.yaml.SafeLoader)
+    config = ruamel.yaml.load(file, Loader=ruamel.yaml.SafeLoader)
     file.close()
 
-    return [(entry['Key'], entry['Value']) for entry in tags['Tags']]
+    return [(entry['Key'], entry['Value']) for entry in config['aws']['tags']]
 
 
 def add_tags(global_tags, template, tag_key):

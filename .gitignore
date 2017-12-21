@@ -1,3 +1,4 @@
+ansible/playbooks/*.retry
 bin/
 .tmp/
 /modules/

@@ -59,6 +59,9 @@ validate:
 		-var "component=null" \
 		templates/generic.json
 
+config:
+	scripts/set-config.sh "${config_path}"
+
 $(AMIS): stage
 	mkdir -p logs/
 	PACKER_LOG_PATH=logs/packer-$@.log \
@@ -95,4 +98,4 @@ stage:
 stage/ami-ids.yaml: stage
 	scripts/create-ami-ids-yaml.py -o $@
 
-.PHONY: $(AMIS) amis-all ci clean lint validate create-ami-ids-yaml var_files merge_var_files package
+.PHONY: $(AMIS) amis-all ci clean config lint validate create-ami-ids-yaml var_files merge_var_files package

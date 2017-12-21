@@ -3,6 +3,7 @@
 * Add Application Profile system tag #53
 * Fix AEM Dispatcher not listening on port 443
 * Add AEM Dispatcher listen ports testing
+* Introduce generic YAML configuration using Ansible #52
 
 ### 2.1.0
 * Service names are now 'aem-author' (AEM Author) and 'aem-publish' (AEM Publish), previously 'aem-aem'

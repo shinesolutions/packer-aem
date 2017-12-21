@@ -1,0 +1,19 @@
+---
+- name: Set configuration tasks
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+    - name: Generate Hieradata configuration
+      template:
+        src: ../templates/hieradata.j2
+        dest: ../../conf/hieradata/local.yaml
+        mode: 0644
+
+    - name: Generate Packer Variables configuration
+      template:
+        src: ../templates/packer-vars.j2
+        dest: ../../vars/99_local.json
+        mode: 0644
