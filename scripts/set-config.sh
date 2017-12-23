@@ -23,7 +23,7 @@ echo "  ${extra_vars[*]}"
 ansible-playbook ansible/playbooks/set-config.yaml \
   -i "localhost," \
   --module-path ansible/library/ \
-  ${extra_vars[@]}
+  "${extra_vars[@]}"
 
 # BASEDIR=$(dirname "$0")
 #
