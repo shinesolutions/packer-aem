@@ -17,3 +17,8 @@
         src: ../templates/packer-vars.j2
         dest: ../../vars/99_local.json
         mode: 0644
+
+    - name: Add custom AWS tags to Packer template files
+      packer_tags:
+        template_dir: ../../templates/
+        tags: "{{ aws['tags'] }}"
