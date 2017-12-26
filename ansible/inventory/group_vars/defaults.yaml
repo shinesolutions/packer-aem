@@ -2,6 +2,13 @@
 
 os_type: rhel7
 
+http_proxy: ''
+https_proxy: ''
+
+timezone:
+  region: Australia
+  locality: Melbourne
+
 aws:
   user: ec2-user
   region: overwrite-me
@@ -22,10 +29,3 @@ aem:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
   dispatcher:
     version: 4.2.3
-
-http_proxy: ''
-https_proxy: ''
-
-timezone:
-  region: Australia
-  locality: Melbourne

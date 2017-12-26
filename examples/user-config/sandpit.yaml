@@ -1,10 +1,18 @@
 ---
 
+os_type: rhel7
+
+http_proxy: ''
+https_proxy: ''
+
+timezone:
+  region: Australia
+  locality: Melbourne
+
 aws:
   user: ec2-user
   region: ap-southeast-2
   source_ami: ami-ccecf5af
-  os: rhel7
   instance_profile: S3Access
   aem_artifacts_base: s3://aem-artifacts/adobeaemcloud
   aem_certs_base: s3://aem-stack-builder/library
@@ -25,10 +33,3 @@ aem:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
   dispatcher:
     version: 4.2.3
-
-http_proxy: ''
-https_proxy: ''
-
-timezone:
-  region: Australia
-  locality: Melbourne
