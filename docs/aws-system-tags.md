@@ -11,4 +11,4 @@ In order to identify the AWS resources (e.g. EC2 instance, AMI, volumes) that ar
 | Application Role | Value is `<component> AMI` |
 | Application Profile | Value is the configured AEM profile, check out the [list of available profiles](https://github.com/shinesolutions/puppet-aem-curator/blob/master/docs/aem-profiles-artifacts.md) |
 
-If you're looking to add custom tags, please check out the [AWS Tags section on configuration page](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md#aws-tags).
+If you're looking to add custom tags, please check out the [configuration page](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md).
