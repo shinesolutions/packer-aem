@@ -5,6 +5,7 @@
 * Add AEM Dispatcher listen ports testing
 * Introduce generic YAML configuration using Ansible #52
 * Add OS type configuration support #54
+* Add AEM Dispatcher version configuration
 
 ### 2.1.0
 * Service names are now 'aem-author' (AEM Author) and 'aem-publish' (AEM Publish), previously 'aem-aem'
