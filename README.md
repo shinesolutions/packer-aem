@@ -46,5 +46,5 @@ More
 
 Further information about Packer AEM:
 
-* [AWS System Tags]((https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-system-tags.md))
-* [Frequently Asked Questions]((https://github.com/shinesolutions/packer-aem/blob/master/docs/faq.md))
+* [AWS System Tags](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-system-tags.md)
+* [Frequently Asked Questions](https://github.com/shinesolutions/packer-aem/blob/master/docs/faq.md)
