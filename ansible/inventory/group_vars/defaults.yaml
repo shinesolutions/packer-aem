@@ -1,7 +1,8 @@
 ---
 
+os_type: rhel7
+
 aws:
-  os: rhel7
   user: ec2-user
   region: overwrite-me
   source_ami: overwrite-me
