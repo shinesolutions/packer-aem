@@ -1,1 +1,0 @@
-rhel7-puppet-agent.sh
