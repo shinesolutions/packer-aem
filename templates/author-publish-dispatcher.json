@@ -14,6 +14,7 @@
     "instance_type": "",
     "no_proxy": "",
     "os_type": "",
+    "profile": "",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "root_volume_size": "20",
     "source_ami": "",
