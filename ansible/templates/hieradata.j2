@@ -1,24 +1,33 @@
-config::params::timezone_region: '{{ timezone.region }}'
-config::params::timezone_locality: '{{ timezone.locality }}'
-config::params::aws_region: '{{ aws.region }}'
-config::params::aem_certs_base: {{ aws.aem_certs_base }}
-config::params::aem_artifacts_base: {{ aws.aem_artifacts_base }}
-config::params::aem_keystore_password: {{ aem.keystore_password }}
-config::params::aem_profile: {{ aem.profile }}
+timezone::region: '{{ timezone.region }}'
+timezone::locality: '{{ timezone.locality }}'
+cloudwatchlogs::region: '{{ aws.region }}'
 
-config::params::aem_author_jvm_opts:
+aem_curator::install_java::cert_base_url: {{ aws.aem_certs_base }}
+
+aem_curator::install_author::aem_profile: {{ aem.profile }}
+aem_curator::install_author::aem_keystore_password: {{ aem.keystore_password }}
+aem_curator::install_author::cert_base_url: {{ aws.aem_certs_base }}
+aem_curator::install_author::aem_artifacts_base: {{ aws.aem_artifacts_base }}
+aem_curator::install_author::aem_jvm_mem_opts: "{{ aem.author.jvm_mem_opts }}"
+aem_curator::install_author::aem_jvm_opts:
 - '-XX:+PrintGCDetails'
 - '-XX:+PrintGCTimeStamps'
 - '-XX:+PrintGCDateStamps'
 - '-XX:+PrintTenuringDistribution'
 - '-XX:+PrintGCApplicationStoppedTime'
 - '-XX:+HeapDumpOnOutOfMemoryError'
-config::params::aem_author_jvm_mem_opts: "{{ aem.author.jvm_mem_opts }}"
-config::params::aem_publish_jvm_opts:
+
+aem_curator::install_publish::aem_profile: {{ aem.profile }}
+aem_curator::install_publish::aem_keystore_password: {{ aem.keystore_password }}
+aem_curator::install_publish::cert_base_url: {{ aws.aem_certs_base }}
+aem_curator::install_publish::aem_artifacts_base: {{ aws.aem_artifacts_base }}
+aem_curator::install_publish::aem_jvm_mem_opts: "{{ aem.publish.jvm_mem_opts }}"
+aem_curator::install_publish::aem_jvm_opts:
 - '-XX:+PrintGCDetails'
 - '-XX:+PrintGCTimeStamps'
 - '-XX:+PrintGCDateStamps'
 - '-XX:+PrintTenuringDistribution'
 - '-XX:+PrintGCApplicationStoppedTime'
 - '-XX:+HeapDumpOnOutOfMemoryError'
-config::params::aem_publish_jvm_mem_opts: "{{ aem.publish.jvm_mem_opts }}"
+
+aem_curator::install_dispatcher::cert_base_url: {{ aws.aem_certs_base }}
