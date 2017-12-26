@@ -24,6 +24,7 @@ Installation
   * [Packer](https://www.packer.io/) version 1.0.0 or later
   * [Packer Post-Processor JSON Updater](https://github.com/cliffano/packer-post-processor-json-updater) version 1.2 or later
   * [Ruby](https://www.ruby-lang.org/en/) version 2.0.0 or later
+  * [Python](https://www.python.org/downloads/) version 2.7.x
   * [GNU Make](https://www.gnu.org/software/make/)
 - Either clone Packer AEM `git clone https://github.com/shinesolutions/packer-aem.git` or download one of the [released versions](https://github.com/shinesolutions/packer-aem/releases)
 - Resolve the [Puppet modules](https://github.com/shinesolutions/packer-aem/blob/master/Puppetfile) and [Ruby gems](https://github.com/shinesolutions/packer-aem/blob/master/Puppetfile) dependencies by running `make deps`
