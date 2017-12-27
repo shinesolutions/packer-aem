@@ -27,7 +27,7 @@ Installation
   * [Python](https://www.python.org/downloads/) version 2.7.x
   * [GNU Make](https://www.gnu.org/software/make/)
 - Either clone Packer AEM `git clone https://github.com/shinesolutions/packer-aem.git` or download one of the [released versions](https://github.com/shinesolutions/packer-aem/releases)
-- Resolve the [Puppet modules](https://github.com/shinesolutions/packer-aem/blob/master/Puppetfile) and [Ruby gems](https://github.com/shinesolutions/packer-aem/blob/master/Puppetfile) dependencies by running `make deps`
+- Resolve the [Puppet modules](https://github.com/shinesolutions/packer-aem/blob/master/Puppetfile), [Ruby gems](https://github.com/shinesolutions/packer-aem/blob/master/Gemfile), and [Python packages](https://github.com/shinesolutions/packer-aem/blob/master/requirements.txt) dependencies by running `make deps`
 
 Usage
 -----
