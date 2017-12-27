@@ -37,9 +37,9 @@ Usage
 - Set up the configuration files by running `make config config_path=<path/to/config/dir>`
 - Create the AMIs by running `make <component> version=<version>`, where AMI IDs will be written to stage/ami-ids.json (customisable with `ami_var_file` parameter)
 
-To retrieve the latest AMI IDs for all [AEM AWS Stack Builder](https://github.com/shinesolutions/aem-aws-stack-builder) components, run the command below, and the AMI IDs will be written into a YAML file that can be consumed as Ansible group vars:
+To retrieve the latest AMI IDs for all [AEM AWS Stack Builder](https://github.com/shinesolutions/aem-aws-stack-builder) components, run the command below, and the AMI IDs will be written into `stage/stack-builder-ami-ids.yaml` file that can be consumed as Ansible group vars by AEM AWS Stack Builder:
 
-    scripts/create-stack-builder-ami-ids.py
+    AWS_DEFAULT_REGION=<aws_region> scripts/create-stack-builder-ami-ids-config.py
 
 More
 ----
