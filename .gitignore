@@ -17,3 +17,4 @@ crash.log
 .gems/
 conf/hieradata/local.yaml
 vars/*local.json
+examples/user-config/zzz-local.yaml
