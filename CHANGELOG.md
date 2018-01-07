@@ -1,3 +1,6 @@
+### 2.3.0
+*
+
 ### 2.2.0
 * Replace Serverspec with InSpec for testing #42
 * Add Application Profile system tag #53
