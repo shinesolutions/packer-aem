@@ -4,6 +4,7 @@ os_type: rhel7
 
 http_proxy: ''
 https_proxy: ''
+no_proxy: ''
 
 timezone:
   region: Australia
@@ -12,10 +13,13 @@ timezone:
 aws:
   user: ec2-user
   region: ap-southeast-2
+  vpc_id: ''
+  subnet_id: ''
   source_ami: ami-ccecf5af
   instance_profile: S3Access
   aem_artifacts_base: s3://aem-artifacts/adobeaemcloud
   aem_certs_base: s3://aem-stack-builder/library
+  ami_users: ''
   tags:
     - Key: Project
       Value: Open Source AEM Platform
