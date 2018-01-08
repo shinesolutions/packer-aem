@@ -1,5 +1,5 @@
 ### 2.3.0
-*
+* Add no_proxy, aws.vpc_id, and aws.subnet_id configurations
 
 ### 2.2.0
 * Replace Serverspec with InSpec for testing #42
