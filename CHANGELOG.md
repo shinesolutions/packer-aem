@@ -1,5 +1,5 @@
 ### 2.3.0
-*
+* Enabled installation of Amazon SSM Agent by default
 
 ### 2.2.0
 * Replace Serverspec with InSpec for testing #42

@@ -15,6 +15,11 @@ aws:
   region: ap-southeast-2
   vpc_id: ''
   subnet_id: ''
+  # Amazon Linux AMI 2017.09.1 (HVM
+  #source_ami: ami-33996b51
+  # Amazon Linux 2 LTS Candidate AMI 2017.12.0 (HVM)  
+  #source_ami: ami-71867013
+  # RHEL-7.4_HVM
   source_ami: ami-ccecf5af
   instance_profile: S3Access
   aem_artifacts_base: s3://aem-artifacts/adobeaemcloud
