@@ -74,7 +74,7 @@ class config::base (
   $install_aws_cli = true,
   $install_cloudwatchlogs = true,
   $install_collectd = true,
-  $install_amazon_ssm_agent = false,
+  $install_amazon_ssm_agent = true,
   $collectd_cloudwatch_source_url = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
 
   $cloudwatchlogs_logfiles          = {},

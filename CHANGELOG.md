@@ -1,4 +1,5 @@
 ### 2.3.0
+* Enabled installation of Amazon SSM Agent by default
 * Add no_proxy, aws.vpc_id, and aws.subnet_id configurations
 
 ### 2.2.0
