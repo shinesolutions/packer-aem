@@ -76,7 +76,7 @@ $(AMIS): stage
 		-var 'version=$(version)' \
 		templates/generic.json
 
-author-publish-dispatcher:
+author-publish-dispatcher: stage
 	mkdir -p logs/
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
