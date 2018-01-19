@@ -7,6 +7,8 @@ import traceback
 from cloudwatch.modules.configuration.confighelper import ConfigHelper
 from cloudwatch.modules.flusher import Flusher
 from cloudwatch.modules.logger.logger import get_logger
+from cloudwatch.modules.collectd_integration.dataset import get_dataset_resolver
+
 
 _LOGGER = get_logger(__name__)
 
@@ -15,7 +17,7 @@ def aws_init():
     Collectd callback entry used to initialize plugin
     """
     config = ConfigHelper()
-    flusher = Flusher(config)
+    flusher = Flusher(config_helper=config,  dataset_resolver=get_dataset_resolver())
     collectd.register_write(aws_write, data = flusher)
     _LOGGER.info('Initialization finished successfully.')
 
