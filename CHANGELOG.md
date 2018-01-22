@@ -2,6 +2,7 @@
 * Enabled installation of Amazon SSM Agent by default
 * Add no_proxy, aws.vpc_id, and aws.subnet_id configurations
 * Fixed cloud_writer.py. Added third argument while loading Flusher module #58
+* Upgrade ruby_aem to 1.4.1 for nokogiri security vulnerability fix
 
 ### 2.2.0
 * Replace Serverspec with InSpec for testing #42
@@ -32,7 +33,7 @@
 * Default ami_var_file is stage/ami-ids.json
 * ami_var_file no longer update source_ami and remove _ami postfix
 * Stack Builder-specific AMI IDs config script file is now named scripts/create-stack-builder-ami-ids-config.py
-* Fix intermittent AEM installation error 500 loop 
+* Fix intermittent AEM installation error 500 loop
 
 ### 2.0.0
 * (NEED TO COMPLETE)
