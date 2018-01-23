@@ -17,6 +17,7 @@
     "profile": "",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "root_volume_size": "10",
+    "root_volume_name": "/dev/sda1",
     "source_ami": "",
     "tmp_dir": "/tmp/shinesolutions/packer-aem",
     "version": "x.x.x"
@@ -162,7 +163,7 @@
           "volume_size": "{{user `root_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "/dev/sda1"
+          "device_name": "{{user `root_volume_name`}}"
         },
         {
           "volume_size": "{{user `data_volume_size`}}",
