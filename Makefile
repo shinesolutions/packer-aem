@@ -7,7 +7,7 @@ all_var_files := $(VAR_FILES) $(ami_var_file)
 # version: version of machine images to be created
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
-packer_aem_version ?= 2.4.0
+packer_aem_version ?= 2.3.1
 
 package: stage/packer-aem-$(packer_aem_version).tar.gz
 

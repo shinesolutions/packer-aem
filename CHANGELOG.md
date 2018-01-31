@@ -1,5 +1,5 @@
-### 2.4.0
-*
+### 2.3.1
+* Add support for AEM 6.3 SP1 CFP2 
 
 ### 2.3.0
 * Enabled installation of Amazon SSM Agent by default

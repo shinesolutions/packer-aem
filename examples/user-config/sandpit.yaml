@@ -17,7 +17,7 @@ aws:
   subnet_id: ''
   # Amazon Linux AMI 2017.09.1 (HVM
   #source_ami: ami-33996b51
-  # Amazon Linux 2 LTS Candidate AMI 2017.12.0 (HVM)  
+  # Amazon Linux 2 LTS Candidate AMI 2017.12.0 (HVM)
   #source_ami: ami-71867013
   # RHEL-7.4_HVM
   source_ami: ami-ccecf5af
@@ -35,6 +35,8 @@ aws:
 
 aem:
   profile: aem62_sp1_cfp9
+  # AEM 6.3 
+  # profile: aem63_sp1_cfp2
   keystore_password: changeit
   author:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
