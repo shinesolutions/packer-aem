@@ -1,3 +1,6 @@
+### 2.3.2
+*
+
 ### 2.3.1
 * Add support for AEM 6.3 SP1 CFP2 
 
