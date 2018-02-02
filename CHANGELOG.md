@@ -1,5 +1,6 @@
 ### 2.3.2
 * Fix Cumulative Fix Pack support due to new naming convention in AEM 6.3 for CFPs
+* Remove lint and validate dependency from Makefile package target #63
 
 ### 2.3.1
 * Add support for AEM 6.3 SP1 CFP2 

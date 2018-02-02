@@ -11,7 +11,7 @@ packer_aem_version ?= 2.3.2
 
 package: stage/packer-aem-$(packer_aem_version).tar.gz
 
-stage/packer-aem-$(packer_aem_version).tar.gz: lint validate stage
+stage/packer-aem-$(packer_aem_version).tar.gz: stage
 	tar \
 	    --exclude='stage*' \
 	    --exclude='.git*' \
@@ -24,7 +24,7 @@ stage/packer-aem-$(packer_aem_version).tar.gz: lint validate stage
 	    -czf \
 		$@ .
 
-ci: clean lint validate
+ci: clean lint validate package
 
 deps: Gemfile.lock Puppetfile.lock PythonRequirements.lock
 
