@@ -1,5 +1,5 @@
 ### 2.3.2
-*
+* Fix Cumulative Fix Pack support due to new naming convention in AEM 6.3 for CFPs
 
 ### 2.3.1
 * Add support for AEM 6.3 SP1 CFP2 
