@@ -34,8 +34,9 @@ aws:
       Value: 12345
 
 aem:
+  # AEM 6.2
   profile: aem62_sp1_cfp9
-  # AEM 6.3 
+  # AEM 6.3
   # profile: aem63_sp1_cfp2
   keystore_password: changeit
   author:
