@@ -1,5 +1,5 @@
 ### 2.3.3
-*
+* Explicit installation of libtool, autoconf, and automake for native package compilation 
 
 ### 2.3.2
 * Fix Cumulative Fix Pack support due to new naming convention in AEM 6.3 for CFPs
