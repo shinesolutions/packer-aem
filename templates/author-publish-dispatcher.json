@@ -1,33 +1,33 @@
 {
   "variables": {
-    "ami_users": "",
-    "aws_region": "ap-southeast-2",
-    "aws_security_group_id": "",
-    "aws_subnet_id": "",
-    "aws_user": "ec2-user",
-    "aws_vpc_id": "",
-    "component": "",
-    "data_volume_size": "50",
-    "http_proxy": "",
-    "https_proxy": "",
-    "iam_instance_profile": "",
-    "instance_type": "",
-    "no_proxy": "",
-    "os_type": "",
     "profile": "",
-    "puppet_bin_dir": "/opt/puppetlabs/bin",
-    "root_volume_size": "20",
-    "source_ami": "",
+    "aws_subnet_id": "",
+    "http_proxy": "",
     "tmp_dir": "/tmp/shinesolutions/packer-aem",
-    "version": "x.x.x"
+    "version": "x.x.x",
+    "aws_security_group_id": "",
+    "no_proxy": "",
+    "aws_region": "ap-southeast-2",
+    "root_volume_size": "20",
+    "component": "",
+    "iam_instance_profile": "",
+    "ami_users": "",
+    "data_volume_size": "50",
+    "https_proxy": "",
+    "puppet_bin_dir": "/opt/puppetlabs/bin",
+    "source_ami": "",
+    "instance_type": "",
+    "aws_user": "ec2-user",
+    "os_type": "",
+    "aws_vpc_id": ""
   },
   "provisioners": [
     {
-      "type": "shell",
       "inline": [
         "sudo mount -t tmpfs tmpfs /tmp",
         "mkdir -p {{user `tmp_dir`}}"
-      ]
+      ],
+      "type": "shell"
     },
     {
       "type": "shell",
@@ -44,21 +44,20 @@
       "script": "provisioners/bash/{{user `os_type`}}.sh"
     },
     {
-      "type": "file",
       "source": "conf/",
-      "destination": "{{user `tmp_dir`}}"
+      "destination": "{{user `tmp_dir`}}",
+      "type": "file"
     },
     {
       "type": "puppet-masterless",
-      "execute_command": "export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
       "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "execute_command": "export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
       "manifest_file": "provisioners/puppet/manifests/config.pp",
       "module_paths": [
         "provisioners/puppet/modules"
       ]
     },
     {
-      "type": "puppet-masterless",
       "hiera_config_path": "conf/hiera.yaml",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "module_paths": [
@@ -67,15 +66,15 @@
       ],
       "execute_command": "export FACTER_component={{user `component`}} && export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
       "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
-      "extra_arguments": []
+      "extra_arguments": [],
+      "type": "puppet-masterless"
     },
     {
-      "type": "file",
       "source": "test/inspec",
-      "destination": "{{user `tmp_dir`}}"
+      "destination": "{{user `tmp_dir`}}",
+      "type": "file"
     },
     {
-      "type": "shell",
       "inline": [
         "set -o nounset",
         "set -o errexit",
@@ -83,6 +82,7 @@
         "cd {{user `tmp_dir`}}/inspec",
         "inspec exec {{user `component`}}_spec.rb"
       ],
+      "type": "shell",
       "environment_vars": [
         "FACTER_packer_build_name={{user `component`}}",
         "FACTER_packer_staging_dir={{user `tmp_dir`}}",
@@ -95,7 +95,6 @@
       ]
     },
     {
-      "type": "shell",
       "inline": [
         "sudo rm -rf {{user `tmp_dir`}}",
         "sudo /opt/puppetlabs/bin/puppet resource service aem-aem ensure=stopped",
@@ -103,6 +102,7 @@
         "sudo -E find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete",
         "sudo truncate --size 0 --no-create /var/log/wtmp /var/log/btmp"
       ],
+      "type": "shell",
       "environment_vars": [
         "HISTFILE=/dev/null",
         "http_proxy={{user `http_proxy`}}",
@@ -130,14 +130,15 @@
           "device_name": "/dev/sdc"
         }
       ],
+      "communicator": "ssh",
       "source_ami": "{{user `source_ami`}}",
       "name": "ami_{{user `component`}}",
       "tags": {
-        "Version": "{{user `version`}}",
-        "Name": "{{user `component`}} AMI ({{user `version`}})",
         "Application Id": "Adobe Experience Manager (AEM)",
-        "Application Role": "{{user `component`}} AMI",
-        "Application Profile": "{{user `profile`}}"
+        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
+        "Application Profile": "{{user `profile`}}",
+        "Version": "{{user `version`}}",
+        "Application Role": "{{user `component`}} AMI"
       },
       "subnet_id": "{{user `aws_subnet_id`}}",
       "ssh_username": "{{user `aws_user`}}",
@@ -148,20 +149,19 @@
       "instance_type": "{{user `instance_type`}}",
       "ami_description": "Packer AEM Bootstrap - {{user `component`}} AMI ({{user `version`}})",
       "run_tags": {
-        "Version": "{{user `version`}}",
-        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Id": "Adobe Experience Manager (AEM)",
-        "Application Role": "{{user `component`}} AMI",
-        "Application Profile": "{{user `profile`}}"
+        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
+        "Application Profile": "{{user `profile`}}",
+        "Version": "{{user `version`}}",
+        "Application Role": "{{user `component`}} AMI"
       },
       "run_volume_tags": {
-        "Version": "{{user `version`}}",
-        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Id": "Adobe Experience Manager (AEM)",
-        "Application Role": "{{user `component`}} AMI",
-        "Application Profile": "{{user `profile`}}"
+        "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
+        "Application Profile": "{{user `profile`}}",
+        "Version": "{{user `version`}}",
+        "Application Role": "{{user `component`}} AMI"
       },
-      "communicator": "ssh",
       "vpc_id": "{{user `aws_vpc_id`}}",
       "launch_block_device_mappings": [
         {
