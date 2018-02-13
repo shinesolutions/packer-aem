@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  install:
+    # can build packer from source
+    commands:
+      - echo Entered the install phase...
+      - apt-get update -y
+      - wget -P /usr/local/bin https://releases.hashicorp.com/packer/1.2.0/packer_1.2.0_linux_amd64.zip?_ga=2.265971791.1569437762.1518561217-1260700946.1517977021
+      - wget -P /usr/local/bin -o packer-post-processor-json-updater https://github.com/cliffano/packer-post-processor-json-updater/releases/download/v1.2/packer-post-processor-json-updater_linux_amd64
+      - make deps
+  pre_build:
+    commands:
+      - echo Entered the pre_build phase...
+      - make config config_path=examples/user-config/
+  build:
+    commands:
+      - echo Entered the build phase...
+      - echo Build started on `date`
+      - make java version=Code_Build_T
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
+      - echo Build completed on `date`
