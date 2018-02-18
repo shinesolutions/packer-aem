@@ -5,20 +5,24 @@ phases:
     # can build packer from source
     commands:
       - echo Entered the install phase...
-      - apt-get update -y
-      - wget -P /usr/local/bin -o packer https://releases.hashicorp.com/packer/1.2.0/packer_1.2.0_linux_amd64.zip?_ga=2.265971791.1569437762.1518561217-1260700946.1517977021
-      - wget -P /usr/local/bin -o packer-post-processor-json-updater https://github.com/cliffano/packer-post-processor-json-updater/releases/download/v1.2/packer-post-processor-json-updater_linux_amd64
+      - curl -qL -o packer.zip https://releases.hashicorp.com/packer/1.1.2/packer_1.1.2_linux_amd64.zip && unzip packer.zip
+      - curl -qL -o packer-post-processor-json-updater https://github.com/cliffano/packer-post-processor-json-updater/releases/download/v1.2/packer-post-processor-json-updater_linux_amd64 && chmod +x ./packer-post-processor-json-updater
       - make deps
   pre_build:
     commands:
       - echo Entered the pre_build phase...
+      - export PATH="$PWD:$PATH"
       - make config config_path=examples/user-config/
   build:
     commands:
-      - echo Entered the build phase...
-      - echo Build started on `date`
       - make java version=Code_Build_T
   post_build:
     commands:
       - echo Entered the post_build phase...
+      # check if packer operation completed i.e fail build if packer failed
+      - test -e stage/ami-ids.json || exit 1
       - echo Build completed on `date`
+
+artifacts:
+  files:
+    - stage/ami-ids.json
