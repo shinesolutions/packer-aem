@@ -14,7 +14,7 @@ phases:
       - make config config_path=examples/user-config/
   build:
     commands:
-      - make $AEM_COMPONENT version=COMPONENT_VERSION
+      - make $AEM_COMPONENT version=$COMPONENT_VERSION
   post_build:
     commands:
       - echo Entered the post_build phase...
