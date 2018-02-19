@@ -2,7 +2,6 @@ version: 0.2
 
 phases:
   install:
-    # can build packer from source
     commands:
       - echo Entered the install phase...
       - curl -qL -o packer.zip https://releases.hashicorp.com/packer/1.1.2/packer_1.1.2_linux_amd64.zip && unzip packer.zip
@@ -15,7 +14,7 @@ phases:
       - make config config_path=examples/user-config/
   build:
     commands:
-      - make java version=Code_Build_T
+      - make $AEM_COMPONENT version=COMPONENT_VERSION
   post_build:
     commands:
       - echo Entered the post_build phase...
