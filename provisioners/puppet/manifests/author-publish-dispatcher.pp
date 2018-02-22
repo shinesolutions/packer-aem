@@ -13,6 +13,7 @@ if $::config::base::install_cloudwatchlogs {
   config::cloudwatchlogs_aem { 'Setup CloudWatch for AEM Publish':
     aem_role => 'publish',
   }
+  include config::cloudwatchlogs_httpd
 }
 
 include aem_curator::install_dispatcher
