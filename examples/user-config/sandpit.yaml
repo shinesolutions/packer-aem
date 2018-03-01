@@ -28,6 +28,7 @@ aws:
   aem_artifacts_base: s3://aem-artifacts/adobeaemcloud
   aem_certs_base: s3://aem-stack-builder/library
   ami_users: ''
+  install_ssm_agent: true
   tags:
     - Key: Project
       Value: Open Source AEM Platform

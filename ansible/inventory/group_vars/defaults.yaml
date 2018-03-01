@@ -16,6 +16,7 @@ aws:
   instance_profile: overwrite-me
   aem_artifacts_base: overwrite-me
   aem_certs_base: overwrite-me
+  install_ssm_agent: true
   tags:
     - Key: overwrite-me
       Value: overwrite-me
