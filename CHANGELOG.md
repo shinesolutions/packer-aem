@@ -1,5 +1,6 @@
 ### 2.3.3
-* Explicit installation of libtool, autoconf, and automake for native package compilation 
+* Explicit installation of libtool, autoconf, and automake for native package compilation
+* Add CloudWatch logging for Dispatchers (Author and Publish), Orchestrator and Chaos Monkey
 
 ### 2.3.2
 * Fix Cumulative Fix Pack support due to new naming convention in AEM 6.3 for CFPs
