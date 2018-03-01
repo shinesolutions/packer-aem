@@ -7,7 +7,7 @@ Check out the [example configuration file](https://github.com/shinesolutions/pac
 
 | Name | Description |
 |------|-------------|
-| os_type | Operating System type, can be `rhel7`, `rhel6`, or `amazon-linux` |
+| os_type | Operating System type, can be `rhel7`, `rhel6`, `centos7`, or `amazon-linux` |
 | http_proxy | [Web proxy server](https://en.wikipedia.org/wiki/Proxy_server) for http URLs, leave empty if Packer EC2 instances can directly connect to the Internet |
 | https_proxy | [Web proxy server](https://en.wikipedia.org/wiki/Proxy_server) for https URLs, leave empty if Packer EC2 instances can directly connect to the Internet |
 | no_proxy | A comma separated value of domain suffixes that you don't want to use with the web proxy. |

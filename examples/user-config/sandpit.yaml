@@ -1,6 +1,7 @@
 ---
 
 os_type: rhel7
+# os_type: centos7
 
 http_proxy: ''
 https_proxy: ''
@@ -21,6 +22,8 @@ aws:
   #source_ami: ami-71867013
   # RHEL-7.4_HVM
   source_ami: ami-ccecf5af
+  # CentOS Linux 7 x86_64 HVM EBS 1801_01
+  # source_ami: ami-b6bb47d4
   instance_profile: S3Access
   aem_artifacts_base: s3://aem-artifacts/adobeaemcloud
   aem_certs_base: s3://aem-stack-builder/library
