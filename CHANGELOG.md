@@ -1,3 +1,6 @@
+### 2.4.1
+*
+
 ### 2.4.0
 * Explicit installation of libtool, autoconf, and automake for native package compilation
 * Add CentOS OS type support #65
