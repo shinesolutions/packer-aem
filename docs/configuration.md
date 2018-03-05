@@ -7,7 +7,7 @@ Check out the [example configuration file](https://github.com/shinesolutions/pac
 
 | Name | Description |
 |------|-------------|
-| os_type | Operating System type, can be `rhel7`, `rhel6`, or `amazon-linux` |
+| os_type | Operating System type, can be `rhel7`, `rhel6`, `centos7`, or `amazon-linux` |
 | http_proxy | [Web proxy server](https://en.wikipedia.org/wiki/Proxy_server) for http URLs, leave empty if Packer EC2 instances can directly connect to the Internet |
 | https_proxy | [Web proxy server](https://en.wikipedia.org/wiki/Proxy_server) for https URLs, leave empty if Packer EC2 instances can directly connect to the Internet |
 | no_proxy | A comma separated value of domain suffixes that you don't want to use with the web proxy. |
@@ -21,6 +21,7 @@ Check out the [example configuration file](https://github.com/shinesolutions/pac
 | aws.iam_instance_profile | IAM Instance Profile name as set up in [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) |
 | aws.aem_artifacts_base | S3 Bucket path for storing AEM artifacts as set up in [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) |
 | aws.aem_certs_base | S3 Bucket path for storing TLS certificate as prepared in [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) |
+| aws.install_ssm_agent | Set to `true` when SSM agent must be installed | 
 | aws.tags | An array of `Key` and `Value` pairs for tagging AWS resources (e.g. EC2 instance, AMI, EBS volume) created by Packer AEM following your organisation's tagging standard |
 | aem.profile | AEM Profile, check out the [list of available profiles](https://github.com/shinesolutions/puppet-aem-curator/blob/master/docs/aem-profiles-artifacts.md) |
 | aem.keystore_password | [Java Keystore](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores) password used in AEM Author and Publish |

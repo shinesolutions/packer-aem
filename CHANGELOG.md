@@ -1,5 +1,11 @@
-### 2.3.3
+### 2.4.1
+*
+
+### 2.4.0
 * Explicit installation of libtool, autoconf, and automake for native package compilation
+* Add CentOS OS type support #65
+* Add OS Type system tag
+* Add aws.install_ssm_agent configuration
 * Add CloudWatch logging for Dispatchers (Author and Publish), Orchestrator and Chaos Monkey
 
 ### 2.3.2
