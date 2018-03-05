@@ -3,6 +3,7 @@ timezone::locality: '{{ timezone.locality }}'
 cloudwatchlogs::region: '{{ aws.region }}'
 
 config::base::install_amazon_ssm_agent: {{ aws.install_ssm_agent }}
+config::base::install_cloudwatchlogs: {{ aws.install_cloudwatchlogs }}
 
 amazon_ssm_agent::proxy_url: {{ http_proxy }}
 
