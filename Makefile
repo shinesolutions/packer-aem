@@ -4,7 +4,7 @@ VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 ami_var_file ?= stage/ami-ids.json
 all_var_files := $(VAR_FILES) $(ami_var_file)
-stage_config_path = stage/conf
+stage_config_path = stage/user-config
 # version: version of machine images to be created
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
