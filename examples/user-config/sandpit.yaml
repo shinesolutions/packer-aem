@@ -1,8 +1,5 @@
 ---
 
-os_type: rhel7
-# os_type: centos7
-
 http_proxy: ''
 https_proxy: ''
 no_proxy: ''
@@ -12,18 +9,9 @@ timezone:
   locality: Melbourne
 
 aws:
-  user: ec2-user
   region: ap-southeast-2
   vpc_id: ''
   subnet_id: ''
-  # Amazon Linux AMI 2017.09.1 (HVM
-  #source_ami: ami-33996b51
-  # Amazon Linux 2 LTS Candidate AMI 2017.12.0 (HVM)
-  #source_ami: ami-71867013
-  # RHEL-7.4_HVM
-  source_ami: ami-ccecf5af
-  # CentOS Linux 7 x86_64 HVM EBS 1801_01
-  # source_ami: ami-b6bb47d4
   instance_profile: S3Access
   aem_artifacts_base: s3://aem-artifacts/adobeaemcloud
   aem_certs_base: s3://aem-stack-builder/library
@@ -38,10 +26,6 @@ aws:
       Value: 12345
 
 aem:
-  # AEM 6.2
-  profile: aem62_sp1_cfp9
-  # AEM 6.3
-  # profile: aem63_sp1_cfp2
   keystore_password: changeit
   author:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"

@@ -20,7 +20,8 @@ done
 echo "Extra vars:"
 echo "  ${extra_vars[*]}"
 
-ansible-playbook ansible/playbooks/set-config.yaml \
+ANSIBLE_CONFIG=ansible/ansible.cfg \
+  ansible-playbook ansible/playbooks/set-config.yaml \
   -i "localhost," \
   --module-path ansible/library/ \
   "${extra_vars[@]}"

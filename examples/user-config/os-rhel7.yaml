@@ -1,0 +1,8 @@
+---
+
+os_type: rhel7
+
+aws:
+  user: ec2-user
+  # RHEL-7.4_HVM
+  source_ami: ami-ccecf5af

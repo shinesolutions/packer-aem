@@ -4,6 +4,7 @@ VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 ami_var_file ?= stage/ami-ids.json
 all_var_files := $(VAR_FILES) $(ami_var_file)
+stage_config_path = stage/conf
 # version: version of machine images to be created
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
@@ -100,5 +101,31 @@ stage:
 
 stage/ami-ids.yaml: stage
 	scripts/create-ami-ids-yaml.py -o $@
+
+define config_examples
+	mkdir $(stage_config_path)
+	cp examples/user-config/sandpit.yaml $(stage_config_path)
+	cp examples/user-config/$(1).yaml $(stage_config_path)
+	cp examples/user-config/os-$(2).yaml $(stage_config_path)
+	scripts/set-config.sh $(stage_config_path)
+endef
+
+config-examples-aem62-rhel7: clean stage
+	$(call config_examples,aem62,rhel7)
+
+config-examples-aem62-amazon-linux2: clean stage
+	$(call config_examples,aem62,amazon-linux2)
+
+config-examples-aem62-centos7: clean stage
+	$(call config_examples,aem62,centos7)
+
+config-examples-aem63-rhel7: clean stage
+	$(call config_examples,aem63,rhel7)
+
+config-examples-aem63-amazon-linux2: clean stage
+	$(call config_examples,aem63,amazon-linux2)
+
+config-examples-aem63-centos7: clean stage
+	$(call config_examples,aem63,centos7)
 
 .PHONY: $(AMIS) amis-all ci clean config lint validate create-ami-ids-yaml var_files merge_var_files package

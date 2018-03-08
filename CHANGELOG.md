@@ -1,5 +1,7 @@
 ### 2.4.1
 * Fix SSM agent proxy configuration support
+* Set Ansible config hash behaviour to merge
+* Add examples-* make targets
 
 ### 2.4.0
 * Explicit installation of libtool, autoconf, and automake for native package compilation
