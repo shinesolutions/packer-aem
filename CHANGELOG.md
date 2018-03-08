@@ -1,5 +1,5 @@
 ### 2.4.1
-*
+* Fix SSM agent proxy configuration support
 
 ### 2.4.0
 * Explicit installation of libtool, autoconf, and automake for native package compilation
