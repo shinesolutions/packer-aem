@@ -1,0 +1,8 @@
+---
+
+os_type: centos7
+
+aws:
+  user: centos
+  # CentOS Linux 7 x86_64 HVM EBS 1801_01
+  source_ami: ami-b6bb47d4
