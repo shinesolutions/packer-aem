@@ -6,6 +6,6 @@ include aem_curator::install_author
 
 if $::config::base::install_cloudwatchlogs {
   config::cloudwatchlogs_aem { 'Setup CloudWatch for AEM Author':
-    aem_role => 'author',
+    aem_id => 'author',
   }
 }
