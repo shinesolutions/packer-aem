@@ -1,8 +1,8 @@
-define config::cloudwatchlogs (
-  $aem_role,
+define config::cloudwatchlogs_aem (
+  $aem_id,
 ) {
 
-  $aem_log_dir = "/opt/aem/${aem_role}/crx-quickstart/logs"
+  $aem_log_dir = "/opt/aem/${aem_id}/crx-quickstart/logs"
   $aem_apache_datetime_files = [ 'access.log', 'request.log' ]
   $aem_stdout_datetime_files = [ 'stdout.log', 'error.log', 'history.log' ]
   $aem_iso8601_datetime_files = [ 'gc_logs.log' ]

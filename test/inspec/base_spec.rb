@@ -20,7 +20,7 @@ if os[:family] == 'redhat'
   describe file('/etc/selinux/config') do
     it { should exist }
     it { should be_file }
-    it { should contain 'SELINUX=disabled' }
+    its('content') { should match /SELINUX=disabled/m }
   end
 
 end
@@ -56,6 +56,11 @@ if install_cloudwatchlogs == 'true'
   describe service('awslogs') do
     it { should be_enabled }
     it { should be_running }
+  end
+
+  describe file('/etc/awslogs/awslogs.conf') do
+    it { should exist }
+    it { should be_file }
   end
 
   # TODO: check that the region is the region specified by the cloudwatchlogs::region property

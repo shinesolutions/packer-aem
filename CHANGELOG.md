@@ -8,6 +8,7 @@
 * Add CentOS OS type support #65
 * Add OS Type system tag
 * Add aws.install_ssm_agent configuration
+* Add CloudWatch logging for Dispatchers (Author and Publish), Orchestrator and Chaos Monkey
 
 ### 2.3.2
 * Fix Cumulative Fix Pack support due to new naming convention in AEM 6.3 for CFPs
