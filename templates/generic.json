@@ -7,7 +7,7 @@
     "aws_security_group_id": "", 
     "no_proxy": "", 
     "aws_region": "ap-southeast-2", 
-    "root_volume_size": "10", 
+    "root_volume_size": "20", 
     "component": "", 
     "iam_instance_profile": "", 
     "ami_users": "", 
