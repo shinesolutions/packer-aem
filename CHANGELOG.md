@@ -1,3 +1,23 @@
+### 2.4.1
+* Fix SSM agent proxy configuration support
+* Set Ansible config hash behaviour to merge
+* Add config-examples-* make targets
+* Add CloudWatch logging for Dispatchers (Author and Publish), Orchestrator and Chaos Monkey
+
+### 2.4.0
+* Explicit installation of libtool, autoconf, and automake for native package compilation
+* Add CentOS OS type support #65
+* Add OS Type system tag
+* Add aws.install_ssm_agent configuration
+
+### 2.3.2
+* Fix Cumulative Fix Pack support due to new naming convention in AEM 6.3 for CFPs
+* Remove lint and validate dependency from Makefile package target #63
+* Move Collectd configuration from packer-aem to aem-aws-stack-provisioner
+
+### 2.3.1
+* Add support for AEM 6.3 SP1 CFP2
+
 ### 2.3.0
 * Enabled installation of Amazon SSM Agent by default
 * Add no_proxy, aws.vpc_id, and aws.subnet_id configurations

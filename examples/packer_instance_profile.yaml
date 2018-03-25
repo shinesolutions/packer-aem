@@ -1,13 +1,13 @@
 ---
 AWSTemplateFormatVersion: "2010-09-09"
 
-Description: Create Role for Packer
+Description: Create Instance Profile for Packer AEM
 
 Parameters:
 
 Resources:
 
-  PackerRole:
+  PackerAemRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -20,7 +20,7 @@ Resources:
               - sts:AssumeRole
       Path: /
       Policies:
-        - PolicyName: PackerRolePolicy
+        - PolicyName: PackerAemRolePolicy
           PolicyDocument:
             Statement:
               - Effect: Allow
@@ -70,9 +70,9 @@ Resources:
                   - arn:aws:logs:*:*:*
 
 
-  PackerInstanceProfile:
+  PackerAemInstanceProfile:
       Type: AWS::IAM::InstanceProfile
       Properties:
         Path: /
         Roles:
-          - Ref: PackerRole
+          - Ref: PackerAemRole
