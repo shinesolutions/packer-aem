@@ -32,19 +32,8 @@ class config (
   } -> package { 'ruby_aem':
     ensure   => '1.4.1',
     provider => 'puppet_gem',
-  }
-  # inspec '1.46.2' requires ruby > 2.2
-  # -> package { 'inspec':
-  #   ensure   => '1.46.2',
-  #   provider => 'puppet_gem',
-  # }
-  # work around to install inspec for ruby < 2.2
-  -> package { 'mixlib-shellout':
-    ensure   => '2.2.7',
-    provider => 'puppet_gem',
-  }
-  -> package { 'inspec':
-    ensure   => '1.17.0',
+  } -> package { 'inspec':
+    ensure   => '1.46.2',
     provider => 'puppet_gem',
   }
 }
