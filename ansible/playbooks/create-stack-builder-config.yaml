@@ -1,0 +1,14 @@
+---
+- name: Create Stack Builder configuration tasks
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+    - name: Create Stack Builder AMI IDs configuration file
+      stack_builder_ami_ids:
+        aem_profile: "{{ aem.profile }}"
+        os_type: "{{ os_type }}"
+        out_file: "../../stage/{{ os_type }}-{{ aem.profile }}-stack-builder-ami-ids.yaml"
+        region: "{{ aws.region }}"

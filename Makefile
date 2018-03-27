@@ -66,6 +66,9 @@ validate:
 config:
 	scripts/set-config.sh "${config_path}"
 
+ami-ids: stage
+	scripts/create-stack-builder-config.sh "${config_path}"
+
 $(AMIS): stage
 	mkdir -p logs/
 	PACKER_LOG_PATH=logs/packer-$@.log \
@@ -99,10 +102,8 @@ merge_var_files:
 stage:
 	mkdir -p stage/
 
-stage/ami-ids.yaml: stage
-	scripts/create-ami-ids-yaml.py -o $@
-
 define config_examples
+  rm -rf $(stage_config_path)
 	mkdir $(stage_config_path)
 	cp examples/user-config/sandpit.yaml $(stage_config_path)
 	cp examples/user-config/$(1).yaml $(stage_config_path)
@@ -110,22 +111,22 @@ define config_examples
 	scripts/set-config.sh $(stage_config_path)
 endef
 
-config-examples-aem62-rhel7: clean stage
+config-examples-aem62-rhel7:
 	$(call config_examples,aem62,rhel7)
 
-config-examples-aem62-amazon-linux2: clean stage
+config-examples-aem62-amazon-linux2:
 	$(call config_examples,aem62,amazon-linux2)
 
-config-examples-aem62-centos7: clean stage
+config-examples-aem62-centos7:
 	$(call config_examples,aem62,centos7)
 
-config-examples-aem63-rhel7: clean stage
+config-examples-aem63-rhel7:
 	$(call config_examples,aem63,rhel7)
 
-config-examples-aem63-amazon-linux2: clean stage
+config-examples-aem63-amazon-linux2:
 	$(call config_examples,aem63,amazon-linux2)
 
-config-examples-aem63-centos7: clean stage
+config-examples-aem63-centos7:
 	$(call config_examples,aem63,centos7)
 
 .PHONY: $(AMIS) amis-all ci clean config lint validate create-ami-ids-yaml var_files merge_var_files package
