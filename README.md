@@ -55,3 +55,4 @@ Further information about Packer AEM:
 
 * [AWS System Tags](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-system-tags.md)
 * [Frequently Asked Questions](https://github.com/shinesolutions/packer-aem/blob/master/docs/faq.md)
+* [Open Source AEM Platform: A Short Intro](https://www.slideshare.net/cliffano/open-source-aem-platform-a-short-intro-89967729)
