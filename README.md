@@ -26,7 +26,8 @@ Installation
   * [Packer Post-Processor JSON Updater](https://github.com/cliffano/packer-post-processor-json-updater) version 1.2 or later
   * [Ruby](https://www.ruby-lang.org/en/) version 2.1.0 or later
   * [Python](https://www.python.org/downloads/) version 2.7.x
-  * [GNU Make](https://www.gnu.org/software/make/)
+  * [GNU Make](https://www.gnu.org/software/make/)<br/>
+  
   Alternatively, you can use [AEM Platform BuildEnv](https://github.com/shinesolutions/aem-platform-buildenv) Docker container to run Packer AEM build targets on.
 - Resolve the [Puppet modules](https://github.com/shinesolutions/packer-aem/blob/master/Puppetfile), [Ruby gems](https://github.com/shinesolutions/packer-aem/blob/master/Gemfile), and [Python packages](https://github.com/shinesolutions/packer-aem/blob/master/requirements.txt) dependencies by running `make deps`
 
