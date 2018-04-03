@@ -33,6 +33,7 @@ Puppetfile.lock: Puppetfile
 	bundle exec r10k puppetfile install --verbose --moduledir modules
 
 Gemfile.lock: Gemfile
+	gem install bundler
 	bundle install --binstubs
 
 PythonRequirements.lock: requirements.txt
