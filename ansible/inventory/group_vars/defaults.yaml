@@ -19,6 +19,8 @@ aws:
   aem_certs_base: overwrite-me
   install_ssm_agent: true
   install_cloudwatchlogs: true
+  root_volume_size: 20
+  data_volume_size: 50
   tags:
     - Key: overwrite-me
       Value: overwrite-me

@@ -24,6 +24,8 @@ Check out the [example configuration files](https://github.com/shinesolutions/pa
 | aws.aem_certs_base | S3 Bucket path for storing TLS certificate as prepared in [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) |
 | aws.install_ssm_agent | Set to `true` when SSM agent must be installed |
 | aws.install_cloudwatchlogs | Set to `true` when CloudWatch logs agent must be installed |
+| aws.root_volume_size | The size of root volume in Gb, this is where the operating system and AEM installation reside |
+| aws.data_volume_size | The size of data volume in Gb, this is where AEM repository resides |
 | aws.tags | An array of `Key` and `Value` pairs for tagging AWS resources (e.g. EC2 instance, AMI, EBS volume) created by Packer AEM following your organisation's tagging standard |
 | aem.profile | AEM Profile, check out the [list of available profiles](https://github.com/shinesolutions/puppet-aem-curator/blob/master/docs/aem-profiles-artifacts.md) |
 | aem.keystore_password | [Java Keystore](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores) password used in AEM Author and Publish |
