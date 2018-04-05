@@ -1,4 +1,4 @@
-### 2.4.1
+### 2.5.0
 * Fix SSM agent proxy configuration support
 * Set Ansible config hash behaviour to merge
 * Add config-examples-* make targets
