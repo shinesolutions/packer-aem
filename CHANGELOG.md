@@ -4,6 +4,7 @@
 * Add config-examples-* make targets
 * Add CloudWatch logging for Dispatchers (Author and Publish), Orchestrator and Chaos Monkey
 * Replace Stack Builder AMI IDs config generation Python script with Ansible module
+* Add platform_type configuration #71
 
 ### 2.4.0
 * Explicit installation of libtool, autoconf, and automake for native package compilation

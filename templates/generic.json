@@ -125,15 +125,12 @@
         }
       ],
       "source_ami": "{{user `source_ami`}}",
-      "name": "ami_{{user `component`}}",
+      "name": "aws",
       "tags": {
         "Application Id": "Adobe Experience Manager (AEM)",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Profile": "{{user `profile`}}",
-        "Cost Centre": 12345,
-        "Project": "Open Source AEM Platform",
         "Version": "{{user `version`}}",
-        "Owner": "Shine Solutions AEM Team",
         "OS Type": "{{user `os_type`}}",
         "Application Role": "{{user `component`}} AMI"
       },
@@ -149,10 +146,7 @@
         "Application Id": "Adobe Experience Manager (AEM)",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Profile": "{{user `profile`}}",
-        "Cost Centre": 12345,
-        "Project": "Open Source AEM Platform",
         "Version": "{{user `version`}}",
-        "Owner": "Shine Solutions AEM Team",
         "OS Type": "{{user `os_type`}}",
         "Application Role": "{{user `component`}} AMI"
       },
@@ -161,10 +155,7 @@
         "Application Id": "Adobe Experience Manager (AEM)",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Profile": "{{user `profile`}}",
-        "Cost Centre": 12345,
-        "Project": "Open Source AEM Platform",
         "Version": "{{user `version`}}",
-        "Owner": "Shine Solutions AEM Team",
         "OS Type": "{{user `os_type`}}",
         "Application Role": "{{user `component`}} AMI"
       },

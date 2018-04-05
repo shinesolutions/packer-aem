@@ -7,6 +7,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/pa
 
 | Name | Description |
 |------|-------------|
+| platform_type | Platform type, currently only supports `aws` |
 | os_type | Operating System type, can be `rhel7`, `rhel6`, `centos7`, or `amazon-linux` |
 | http_proxy | [Web proxy server](https://en.wikipedia.org/wiki/Proxy_server) for http URLs, leave empty if Packer EC2 instances can directly connect to the Internet |
 | https_proxy | [Web proxy server](https://en.wikipedia.org/wiki/Proxy_server) for https URLs, leave empty if Packer EC2 instances can directly connect to the Internet |

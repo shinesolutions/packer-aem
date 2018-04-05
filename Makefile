@@ -79,6 +79,7 @@ $(AMIS): stage
 		-var-file=vars/components/$@.json \
 		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'version=$(version)' \
+		-only=aws \
 		templates/generic.json
 
 author-publish-dispatcher: stage
@@ -90,6 +91,7 @@ author-publish-dispatcher: stage
 		-var-file=vars/components/$@.json \
 		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'version=$(version)' \
+		-only=aws \
 		templates/$@.json
 
 amis-all: $(AMIS)

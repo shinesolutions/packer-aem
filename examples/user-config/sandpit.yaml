@@ -1,5 +1,4 @@
 ---
-
 http_proxy: ''
 https_proxy: ''
 no_proxy: ''
@@ -7,6 +6,8 @@ no_proxy: ''
 timezone:
   region: Australia
   locality: Melbourne
+
+platform_type: aws
 
 aws:
   region: ap-southeast-2
