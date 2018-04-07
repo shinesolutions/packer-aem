@@ -3,26 +3,16 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Entered the install phase...
-      # using an older version of packer, use 1.2.1 release when available as it fixes a bug - see https://github.com/hashicorp/packer/issues/5901
-      - curl -qL -o packer.zip https://releases.hashicorp.com/packer/1.1.2/packer_1.1.2_linux_amd64.zip && unzip packer.zip
-      - curl -qL -o packer-post-processor-json-updater https://github.com/cliffano/packer-post-processor-json-updater/releases/download/v1.2/packer-post-processor-json-updater_linux_amd64 && chmod +x ./packer-post-processor-json-updater
       - make deps
   pre_build:
     commands:
-      - echo Entered the pre_build phase...
-      - export PATH="$PWD:$PATH"
-      - make config config_path=examples/user-config/
+      - make config-examples-$AEM_VERSION-$OS_TYPE
   build:
     commands:
-      - make $AEM_COMPONENT version=$COMPONENT_VERSION
+      - make $COMPONENT version=$CODEBUILD_BUILD_ID
   post_build:
     commands:
-      - echo Entered the post_build phase...
-      # check if packer operation completed i.e fail build if packer failed
-      - test -e stage/ami-ids.json || exit 1
-      - echo Build completed on `date`
-
+      - make ami-ids config_path=stage/user-config/
 artifacts:
   files:
-    - stage/ami-ids.json
+    - stage/*-stack-builder-ami-ids.json
