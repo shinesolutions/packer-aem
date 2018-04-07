@@ -1,7 +1,7 @@
 ---
 AWSTemplateFormatVersion: "2010-09-09"
 
-Description: Create Instance Profile for Packer AEM
+Description: Create Instance Profile for running Packer AEM
 
 Parameters:
 
