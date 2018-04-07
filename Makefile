@@ -114,22 +114,22 @@ define config_examples
 	scripts/set-config.sh $(stage_config_path)
 endef
 
-config-examples-aem62-rhel7:
+config-examples-aem62-rhel7: stage
 	$(call config_examples,aem62,rhel7)
 
-config-examples-aem62-amazon-linux2:
+config-examples-aem62-amazon-linux2: stage
 	$(call config_examples,aem62,amazon-linux2)
 
-config-examples-aem62-centos7:
+config-examples-aem62-centos7: stage
 	$(call config_examples,aem62,centos7)
 
-config-examples-aem63-rhel7:
+config-examples-aem63-rhel7: stage
 	$(call config_examples,aem63,rhel7)
 
-config-examples-aem63-amazon-linux2:
+config-examples-aem63-amazon-linux2: stage
 	$(call config_examples,aem63,amazon-linux2)
 
-config-examples-aem63-centos7:
+config-examples-aem63-centos7: stage
 	$(call config_examples,aem63,centos7)
 
 .PHONY: $(AMIS) amis-all ci clean config lint validate create-ami-ids-yaml var_files merge_var_files package
