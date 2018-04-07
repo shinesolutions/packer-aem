@@ -5,7 +5,7 @@ The following configurations are available for users to customise the creation p
 
 Check out the [example configuration files](https://github.com/shinesolutions/packer-aem/blob/master/examples/user-config/) as reference.
 
-Global configuration properties:
+**Global configuration properties:**
 
 | Name | Description |
 |------|-------------|
@@ -17,7 +17,7 @@ Global configuration properties:
 | timezone.region | [Timezone region name as per tz database list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) |
 | timezone.locality | [Timezone locality name as per tz database list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) |
 
-AEM configuration properties:
+**AEM configuration properties:**
 
 | Name | Description |
 |------|-------------|
@@ -29,7 +29,7 @@ AEM configuration properties:
 | aem.publish.jvm_opts | AEM Publish's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
 | aem.dispatcher.version | AEM Dispatcher version, available version is documented on [Download Dispatcher Web Server Modules](https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher.html) page |
 
-AWS platform type configuration properties:
+**AWS platform type configuration properties:**
 
 | Name | Description |
 |------|-------------|
