@@ -27,8 +27,8 @@ Installation
   * [Ruby](https://www.ruby-lang.org/en/) version 2.1.0 or later
   * [Python](https://www.python.org/downloads/) version 2.7.x
   * [GNU Make](https://www.gnu.org/software/make/)<br/>
-  
-  Alternatively, you can use [AEM Platform BuildEnv](https://github.com/shinesolutions/aem-platform-buildenv) Docker container to run Packer AEM build targets on.
+
+  Alternatively, you can use [AEM Platform BuildEnv](https://github.com/shinesolutions/aem-platform-buildenv) Docker container to run Packer AEM build targets.
 - Resolve the [Puppet modules](https://github.com/shinesolutions/packer-aem/blob/master/Puppetfile), [Ruby gems](https://github.com/shinesolutions/packer-aem/blob/master/Gemfile), and [Python packages](https://github.com/shinesolutions/packer-aem/blob/master/requirements.txt) dependencies by running `make deps`
 
 Usage
@@ -36,7 +36,7 @@ Usage
 
 - Set up the required [AWS resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md)
 - Create [configuration file](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md)
-- Set up the configuration files by running `make config config_path=<path/to/config/dir>`
+- Apply the configuration files by running `make config config_path=<path/to/config/dir>`
 - Create the AMIs by running `make <component> version=<version>`, where AMI IDs will be written to stage/ami-ids.json (customisable with `ami_var_file` parameter)
 
 To retrieve the latest AMI IDs for all [AEM AWS Stack Builder](https://github.com/shinesolutions/aem-aws-stack-builder) components, run the command `make ami-ids config_path=<path/to/config/dir>`, and the AMI IDs will be written into `stage/*-stack-builder-ami-ids.yaml` file(s). These files can then be dropped in to AEM AWS Stack Builder configuration path.
@@ -47,7 +47,7 @@ Examples
 There a number of [example configuration files](https://github.com/shinesolutions/packer-aem/blob/master/examples/user-config/), you can use those examples as baseline configuration when creating your own machine images:
 
 1. Modify [sandpit.yaml](https://github.com/shinesolutions/packer-aem/blob/master/examples/user-config/sandpit.yaml) with the details of your own environment
-2. Run one of the convenient `make config-examples-<aem_version>-<os_type>` targets to prepare the configuration, for example, if you want to configure AEM 6.3 on RHEL7, run `make config-examples-aem63-rhel7`
+2. Run one of the convenient `make config-examples-<aem_version>-<os_type>` build targets to prepare the configuration, for example, if you want to configure AEM 6.3 on RHEL7, run `make config-examples-aem63-rhel7`
 3. Finally, create the machine images using the command `make <component> version=<version>`
 
 More
