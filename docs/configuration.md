@@ -5,6 +5,8 @@ The following configurations are available for users to customise the creation p
 
 Check out the [example configuration files](https://github.com/shinesolutions/packer-aem/blob/master/examples/user-config/) as reference.
 
+Global configuration properties:
+
 | Name | Description |
 |------|-------------|
 | platform_type | Platform type, currently only supports `aws` |
@@ -14,6 +16,23 @@ Check out the [example configuration files](https://github.com/shinesolutions/pa
 | no_proxy | A comma separated value of domain suffixes that you don't want to use with the web proxy. |
 | timezone.region | [Timezone region name as per tz database list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) |
 | timezone.locality | [Timezone locality name as per tz database list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) |
+
+AEM configuration properties:
+
+| Name | Description |
+|------|-------------|
+| aem.profile | AEM Profile, check out the [list of available profiles](https://github.com/shinesolutions/puppet-aem-curator/blob/master/docs/aem-profiles-artifacts.md) |
+| aem.keystore_password | [Java Keystore](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores) password used in AEM Author and Publish |
+| aem.author.jvm_mem_opts | AEM Author's memory-specific [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
+| aem.author.jvm_opts | AEM Author's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
+| aem.publish.jvm_mem_opts | AEM Publish's memory-specific [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
+| aem.publish.jvm_opts | AEM Publish's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
+| aem.dispatcher.version | AEM Dispatcher version, available version is documented on [Download Dispatcher Web Server Modules](https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher.html) page |
+
+AWS platform type configuration properties:
+
+| Name | Description |
+|------|-------------|
 | aws.user | SSH username which Packer will use to connect to EC2 instance based on `source-ami` |
 | aws.region | [AWS region name](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) |
 | aws.vpc_id | [VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html) ID where Packer creation will run from |
@@ -27,10 +46,3 @@ Check out the [example configuration files](https://github.com/shinesolutions/pa
 | aws.root_volume_size | The size of root volume in Gb, this is where the operating system and AEM installation reside |
 | aws.data_volume_size | The size of data volume in Gb, this is where AEM repository resides |
 | aws.tags | An array of `Key` and `Value` pairs for tagging AWS resources (e.g. EC2 instance, AMI, EBS volume) created by Packer AEM following your organisation's tagging standard |
-| aem.profile | AEM Profile, check out the [list of available profiles](https://github.com/shinesolutions/puppet-aem-curator/blob/master/docs/aem-profiles-artifacts.md) |
-| aem.keystore_password | [Java Keystore](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores) password used in AEM Author and Publish |
-| aem.author.jvm_mem_opts | AEM Author's memory-specific [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
-| aem.author.jvm_opts | AEM Author's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
-| aem.publish.jvm_mem_opts | AEM Publish's memory-specific [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
-| aem.publish.jvm_opts | AEM Publish's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
-| aem.dispatcher.version | AEM Dispatcher version, available version is documented on [Download Dispatcher Web Server Modules](https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher.html) page |
