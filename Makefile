@@ -25,7 +25,7 @@ stage/packer-aem-$(packer_aem_version).tar.gz: stage
 	    -czf \
 		$@ .
 
-ci: clean lint validate package
+ci: clean deps lint validate package
 
 deps:
 	gem install bundler
