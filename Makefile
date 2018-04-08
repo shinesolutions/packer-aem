@@ -27,16 +27,10 @@ stage/packer-aem-$(packer_aem_version).tar.gz: stage
 
 ci: clean lint validate package
 
-deps: Gemfile.lock Puppetfile.lock PythonRequirements.lock
-
-Puppetfile.lock: Puppetfile
-	bundle exec r10k puppetfile install --verbose --moduledir modules
-
-Gemfile.lock: Gemfile
+deps:
 	gem install bundler
 	bundle install --binstubs
-
-PythonRequirements.lock: requirements.txt
+	bundle exec r10k puppetfile install --verbose --moduledir modules
 	pip install -r requirements.txt
 
 clean:
