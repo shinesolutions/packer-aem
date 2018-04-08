@@ -15,4 +15,4 @@ phases:
       - make ami-ids config_path=stage/user-config/
 artifacts:
   files:
-    - stage/*-stack-builder-ami-ids.json
+    - stage/*-stack-builder-ami-ids.yaml
