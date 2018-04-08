@@ -9,7 +9,7 @@ phases:
       - make config-examples-$AEM_VERSION-$OS_TYPE
   build:
     commands:
-      - make $COMPONENT version=$CODEBUILD_SOURCE_VERSION
+      - make $COMPONENTS version=$CODEBUILD_SOURCE_VERSION
   post_build:
     commands:
       - make ami-ids config_path=stage/user-config/
