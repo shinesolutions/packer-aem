@@ -49,14 +49,14 @@ lint:
 	shellcheck $$(find provisioners scripts -name '*.sh')
 
 validate:
-	bundle exec puppet parser validate \
+	/opt/puppetlabs/puppet/bin/puppet parser validate \
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
 	packer validate \
 		-syntax-only \
 		$(VAR_PARAMS) \
 		-var "component=null" \
-		templates/generic.json
+		templates/*.json
 
 config:
 	scripts/set-config.sh "${config_path}"
