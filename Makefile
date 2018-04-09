@@ -56,7 +56,12 @@ validate:
 		-syntax-only \
 		$(VAR_PARAMS) \
 		-var "component=null" \
-		templates/*.json
+		templates/generic.json
+	packer validate \
+		-syntax-only \
+		$(VAR_PARAMS) \
+		-var "component=null" \
+		templates/author-publish-dispatcher.json
 
 config:
 	scripts/set-config.sh "${config_path}"
