@@ -34,7 +34,7 @@ deps:
 	pip install -r requirements.txt
 
 clean:
-	rm -rf .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
+	rm -rf bin .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
 
 lint:
 	bundle exec puppet-lint \
@@ -49,7 +49,7 @@ lint:
 	shellcheck $$(find provisioners scripts -name '*.sh')
 
 validate:
-	/opt/puppetlabs/puppet/bin/puppet parser validate \
+	bundle exec puppet parser validate \
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
 	packer validate \
