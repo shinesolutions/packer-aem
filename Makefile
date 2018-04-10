@@ -49,7 +49,7 @@ lint:
 	shellcheck $$(find provisioners scripts -name '*.sh')
 
 validate:
-	bundle exec puppet parser validate \
+	puppet parser validate \
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
 	packer validate \
