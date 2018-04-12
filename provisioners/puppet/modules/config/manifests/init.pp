@@ -30,10 +30,13 @@ class config (
   } -> package { [ 'bundler', 'io-console' ]:
     provider => 'gem',
   } -> package { 'ruby_aem':
-    ensure   => '1.4.1',
+    ensure   => '1.4.2',
+    provider => 'puppet_gem',
+  } -> package { 'ruby_aem_aws':
+    ensure   => '0.9.1',
     provider => 'puppet_gem',
   } -> package { 'inspec':
-    ensure   => '1.46.2',
+    ensure   => '1.51.6',
     provider => 'puppet_gem',
   }
 }

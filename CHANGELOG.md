@@ -1,5 +1,5 @@
 ### 2.5.1
-*
+* Add InSpec AEM testing support
 
 ### 2.5.0
 * Fix SSM agent proxy configuration support
