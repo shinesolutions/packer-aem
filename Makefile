@@ -8,7 +8,7 @@ stage_config_path = stage/user-config
 # version: version of machine images to be created
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
-packer_aem_version ?= 2.5.0
+packer_aem_version ?= 2.5.1
 
 package: stage/packer-aem-$(packer_aem_version).tar.gz
 

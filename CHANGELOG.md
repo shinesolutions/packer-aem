@@ -1,3 +1,6 @@
+### 2.5.1
+*
+
 ### 2.5.0
 * Fix SSM agent proxy configuration support
 * Set Ansible config hash behaviour to merge
