@@ -67,7 +67,7 @@ config:
 	scripts/set-config.sh "${config_path}"
 
 ami-ids: stage
-	scripts/create-stack-builder-config.sh "${config_path}"
+	scripts/run-playbook.sh create-stack-builder-config "${config_path}"
 
 $(AMIS): stage
 	mkdir -p logs/
@@ -130,5 +130,11 @@ config-examples-aem63-amazon-linux2: stage
 
 config-examples-aem63-centos7: stage
 	$(call config_examples,aem63,centos7)
+
+create-codebuild-projects:
+	scripts/run-playbook.sh create-codebuild-projects "${config_path}"
+
+delete-codebuild-projects:
+	scripts/run-playbook.sh delete-codebuild-projects "${config_path}"
 
 .PHONY: $(AMIS) amis-all ci clean config lint validate create-ami-ids-yaml var_files merge_var_files package

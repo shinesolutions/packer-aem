@@ -1,0 +1,40 @@
+---
+- name: Create AWS CodeBuild projects for creating machine images for various combination of AEM versions and OS types
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  vars:
+    platform_types: [aws]
+    aem_versions: [aem62, aem63, aem64]
+    os_types: [rhel7]
+    components: [java, dispatcher, author, publish, dispatcher, author-publish-dispatcher]
+
+  tasks:
+
+    - name: Ensure stage directory exists
+      file: path=../../stage/codebuilds/ state=directory
+
+    - name: Generate CodeBuild project configurations
+      template:
+        src: ../templates/codebuild-project.j2
+        dest: ../../stage/codebuilds/{{ item[0] }}-{{ item[1] }}-{{ item[2] }}-{{ item[3] }}.yaml
+        mode: 0644
+      with_nested:
+        - "{{ platform_types }}"
+        - "{{ aem_versions }}"
+        - "{{ os_types }}"
+        - "{{ components }}"
+
+    - name: Create CodeBuild projects
+      shell: |
+        aws codebuild create-project \
+        --name {{ item[0] }}-{{ item[1] }}-{{ item[2] }}-{{ item[3] }} \
+        --cli-input-json file://../../stage/codebuilds/{{ item[0] }}-{{ item[1] }}-{{ item[2] }}-{{ item[3] }}.yaml \
+        --region {{ aws.region }} \
+        --badge-enabled
+      with_nested:
+        - "{{ platform_types }}"
+        - "{{ aem_versions }}"
+        - "{{ os_types }}"
+        - "{{ components }}"

@@ -1,0 +1,62 @@
+{
+  "name": "packer-aem-{{ item[1] }}-{{ item[2] }}-{{ item[3] }}",
+  "description": "Create AMI for {{ item[1] }}-{{ item[2] }}-{{ item[3] }}",
+  "serviceRole": "packer-aem-codebuild-role",
+  "timeoutInMinutes": 120,
+  "tags": [
+    {
+      "key": "Project",
+      "value": "Open Source AEM Platform"
+    },
+    {
+      "key": "Owner",
+      "value": "Shine Solutions AEM Team"
+    }
+  ],
+  "artifacts": {
+    "namespaceType": "BUILD_ID",
+    "packaging": "ZIP",
+    "path": "/packer-aem-codebuild/",
+    "type": "S3",
+    "location": "aem-artifacts",
+    "name": "{{ item[1] }}-{{ item[2] }}-{{ item[3] }}"
+  },
+  "environment": {
+    "computeType": "BUILD_GENERAL1_SMALL",
+    "image": "shinesolutions/aem-platform-buildenv:latest",
+    "type": "LINUX_CONTAINER",
+    "environmentVariables": [
+      {
+        "name": "PLATFORM_TYPE",
+        "value": "{{ item[0] }}",
+        "type": "PLAINTEXT"
+      },
+      {
+        "name": "AEM_VERSION",
+        "value": "{{ item[1] }}",
+        "type": "PLAINTEXT"
+      },
+      {
+        "name": "OS_TYPE",
+        "value": "{{ item[2] }}",
+        "type": "PLAINTEXT"
+      },
+      {
+        "name": "COMPONENTS",
+        "value": "{{ item[3] }}",
+        "type": "PLAINTEXT"
+      },
+      {
+        "name": "VERSION",
+        "value": "codebuild",
+        "type": "PLAINTEXT"
+      }
+    ]
+  },
+  "source": {
+    "type": "GITHUB",
+    "location": "https://github.com/shinesolutions/packer-aem",
+    "buildspec": "buildspec.yml",
+    "gitCloneDepth": 1
+  }
+}

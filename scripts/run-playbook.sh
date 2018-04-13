@@ -2,12 +2,12 @@
 set -o errexit
 set -o nounset
 
-if [ "$#" -ne 1 ]; then
-  echo 'Usage: ./create-stack-builder-config.sh <config_path>'
+if [ "$#" -ne 2 ]; then
+  echo 'Usage: ./run-playbook.sh <config_path>'
   exit 1
 fi
 
-config_path=${1}
+config_path=${2}
 
 # Construct Ansible extra_vars flags. If `config_path` is set, all files
 # directly under the directory with extension `.yaml` or `.yml` will be added.
@@ -21,7 +21,7 @@ echo "Extra vars:"
 echo "  ${extra_vars[*]}"
 
 ANSIBLE_CONFIG=ansible/ansible.cfg \
-  ansible-playbook ansible/playbooks/create-stack-builder-config.yaml \
+  ansible-playbook ansible/playbooks/${1}.yaml \
   -i "localhost," \
   --module-path ansible/library/ \
   "${extra_vars[@]}"
