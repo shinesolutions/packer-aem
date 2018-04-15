@@ -1,6 +1,6 @@
 ### 2.5.1
 * Add InSpec AEM testing support
-* Add support to create AMIs on AWS CodeBuild
+* Add support to create AMIs on AWS CodeBuild and CodePipeline
 
 ### 2.5.0
 * Fix SSM agent proxy configuration support

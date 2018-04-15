@@ -18,7 +18,7 @@
     "packaging": "ZIP",
     "path": "/packer-aem-codebuild/",
     "type": "S3",
-    "location": "aem-artifacts",
+    "location": "{{ ci.aws.s3.bucket_name }}",
     "name": "{{ item[1] }}-{{ item[2] }}-{{ item[3] }}"
   },
   "environment": {
@@ -48,7 +48,7 @@
       },
       {
         "name": "VERSION",
-        "value": "codebuild",
+        "value": "ci-aws",
         "type": "PLAINTEXT"
       }
     ]

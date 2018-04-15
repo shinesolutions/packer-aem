@@ -34,3 +34,24 @@ aem:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
   dispatcher:
     version: 4.2.3
+
+ci:
+  aws:
+    platform_types:
+      - aws
+    aem_versions:
+      - aem62
+      - aem63
+      - aem64
+    os_types:
+      - rhel7
+    components:
+      - java
+      - author
+      - publish
+      - dispatcher
+      - author-publish-dispatcher
+    s3:
+      bucket_name: overwrite-me
+    iam:
+      role_arn: overwrite-me

@@ -131,10 +131,10 @@ config-examples-aem63-amazon-linux2: stage
 config-examples-aem63-centos7: stage
 	$(call config_examples,aem63,centos7)
 
-create-codebuild-projects:
-	scripts/run-playbook.sh create-codebuild-projects "${config_path}"
+create-ci-aws:
+	scripts/run-playbook.sh create-ci-aws "${config_path}"
 
-delete-codebuild-projects:
-	scripts/run-playbook.sh delete-codebuild-projects "${config_path}"
+delete-ci-aws:
+	scripts/run-playbook.sh delete-ci-aws "${config_path}"
 
 .PHONY: $(AMIS) amis-all ci clean config lint validate create-ami-ids-yaml var_files merge_var_files package
