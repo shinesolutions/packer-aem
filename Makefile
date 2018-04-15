@@ -36,6 +36,12 @@ deps:
 clean:
 	rm -rf bin .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
 
+init:
+	chmod +x scripts/*.sh
+
+stage: init
+	mkdir -p stage/
+
 lint:
 	bundle exec puppet-lint \
 		--fail-on-warnings \
@@ -63,7 +69,7 @@ validate:
 		-var "component=null" \
 		templates/author-publish-dispatcher.json
 
-config:
+config: stage
 	scripts/set-config.sh "${config_path}"
 
 ami-ids: stage
@@ -101,9 +107,6 @@ var_files:
 merge_var_files:
 	@jq -s 'reduce .[] as $$item ({}; . * $$item)' $(all_var_files)
 
-stage:
-	mkdir -p stage/
-
 define config_examples
   rm -rf $(stage_config_path)
 	mkdir $(stage_config_path)
@@ -137,4 +140,4 @@ create-ci-aws:
 delete-ci-aws:
 	scripts/run-playbook.sh delete-ci-aws "${config_path}"
 
-.PHONY: $(AMIS) amis-all ci clean config lint validate create-ami-ids-yaml var_files merge_var_files package
+.PHONY: init $(AMIS) amis-all ci clean config lint validate create-ami-ids-yaml var_files merge_var_files package
