@@ -134,6 +134,15 @@ config-examples-aem63-amazon-linux2: stage
 config-examples-aem63-centos7: stage
 	$(call config_examples,aem63,centos7)
 
+config-examples-aem64-rhel7: stage
+	$(call config_examples,aem64,rhel7)
+
+config-examples-aem64-amazon-linux2: stage
+	$(call config_examples,aem64,amazon-linux2)
+
+config-examples-aem64-centos7: stage
+	$(call config_examples,aem64,centos7)
+
 create-ci-aws:
 	scripts/run-playbook.sh create-ci-aws "${config_path}"
 
