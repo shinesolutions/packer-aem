@@ -70,7 +70,7 @@ validate:
 		templates/author-publish-dispatcher.json
 
 config: stage
-	scripts/set-config.sh "${config_path}"
+	scripts/run-playbook.sh set-config "${config_path}"
 
 ami-ids: stage
 	scripts/run-playbook.sh create-stack-builder-config "${config_path}"
@@ -113,7 +113,7 @@ define config_examples
 	cp examples/user-config/sandpit.yaml $(stage_config_path)
 	cp examples/user-config/$(1).yaml $(stage_config_path)
 	cp examples/user-config/os-$(2).yaml $(stage_config_path)
-	scripts/set-config.sh $(stage_config_path)
+	scripts/run-playbook.sh set-config $(stage_config_path)
 endef
 
 config-examples-aem62-rhel7: stage
