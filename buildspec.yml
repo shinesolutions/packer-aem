@@ -12,7 +12,7 @@ phases:
       - make $COMPONENTS version=$AMI_VERSION
   post_build:
     commands:
-      - make ami-ids config_path=stage/user-config/
+      - make ami-ids config_path=stage/user-config/$AEM_VERSION-$OS_TYPE/
 artifacts:
   files:
     - stage/*-stack-builder-ami-ids.yaml

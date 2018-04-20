@@ -4,7 +4,6 @@ VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 ami_var_file ?= stage/ami-ids.json
 all_var_files := $(VAR_FILES) $(ami_var_file)
-stage_config_path = stage/user-config
 # version: version of machine images to be created
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
@@ -108,12 +107,12 @@ merge_var_files:
 	@jq -s 'reduce .[] as $$item ({}; . * $$item)' $(all_var_files)
 
 define config_examples
-  rm -rf $(stage_config_path)
-	mkdir $(stage_config_path)
-	cp examples/user-config/sandpit.yaml $(stage_config_path)
-	cp examples/user-config/$(1).yaml $(stage_config_path)
-	cp examples/user-config/os-$(2).yaml $(stage_config_path)
-	scripts/run-playbook.sh set-config $(stage_config_path)
+  rm -rf stage/user-config/$(1)-$(2)
+	mkdir stage/user-config/$(1)-$(2)
+	cp examples/user-config/sandpit.yaml stage/user-config/$(1)-$(2)
+	cp examples/user-config/$(1).yaml stage/user-config/$(1)-$(2)
+	cp examples/user-config/os-$(2).yaml stage/user-config/$(1)-$(2)
+	scripts/run-playbook.sh set-config stage/user-config/$(1)-$(2)
 endef
 
 config-examples-aem62-rhel7: stage
