@@ -108,7 +108,7 @@ merge_var_files:
 
 define config_examples
   rm -rf stage/user-config/$(1)-$(2)
-	mkdir stage/user-config/$(1)-$(2)
+	mkdir -p stage/user-config/$(1)-$(2)
 	cp examples/user-config/sandpit.yaml stage/user-config/$(1)-$(2)
 	cp examples/user-config/$(1).yaml stage/user-config/$(1)-$(2)
 	cp examples/user-config/os-$(2).yaml stage/user-config/$(1)-$(2)
