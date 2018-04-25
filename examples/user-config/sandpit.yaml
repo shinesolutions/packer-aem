@@ -18,8 +18,8 @@ aws:
   aem_certs_base: s3://aem-stack-builder/library
   ami_users: ''
   install_ssm_agent: true
-  root_volume_size: 10
-  data_volume_size: 50
+  root_volume_size: 20
+  data_volume_size: 75
   tags:
     - Key: Project
       Value: Open Source AEM Platform
