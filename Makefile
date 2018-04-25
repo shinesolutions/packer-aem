@@ -142,6 +142,15 @@ config-examples-aem64-amazon-linux2: stage
 config-examples-aem64-centos7: stage
 	$(call config_examples,aem64,centos7)
 
+define ami_ids_examples
+  make config-examples-$(1)
+	make ami-ids config_path=stage/user-config/$(1)/
+endef
+
+ami-ids-examples: stage
+	$(call ami_ids_examples,aem62-rhel7)
+	$(call ami_ids_examples,aem63-rhel7)
+
 create-ci-aws:
 	scripts/run-playbook.sh create-ci-aws "${config_path}"
 
