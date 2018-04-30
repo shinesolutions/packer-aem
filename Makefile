@@ -107,40 +107,25 @@ merge_var_files:
 	@jq -s 'reduce .[] as $$item ({}; . * $$item)' $(all_var_files)
 
 define config_examples
-  rm -rf stage/user-config/$(1)-$(2)
-	mkdir -p stage/user-config/$(1)-$(2)
-	cp examples/user-config/sandpit.yaml stage/user-config/$(1)-$(2)
-	cp examples/user-config/$(1).yaml stage/user-config/$(1)-$(2)
-	cp examples/user-config/os-$(2).yaml stage/user-config/$(1)-$(2)
-	scripts/run-playbook.sh set-config stage/user-config/$(1)-$(2)
+  rm -rf stage/user-config/$(1)-$(2)-$(3)
+	mkdir -p stage/user-config/$(1)-$(2)-$(3)
+	cp examples/user-config/sandpit.yaml stage/user-config/$(1)-$(2)-$(3)/
+	cp examples/user-config/platform-$(1).yaml stage/user-config/$(1)-$(2)-$(3)/
+	cp examples/user-config/os-$(2).yaml stage/user-config/$(1)-$(2)-$(3)/
+	cp examples/user-config/$(3).yaml stage/user-config/$(1)-$(2)-$(3)/
+	scripts/run-playbook.sh set-config stage/user-config/$(1)-$(2)-$(3)/
 endef
 
-config-examples-aem62-rhel7: stage
-	$(call config_examples,aem62,rhel7)
-
-config-examples-aem62-amazon-linux2: stage
-	$(call config_examples,aem62,amazon-linux2)
-
-config-examples-aem62-centos7: stage
-	$(call config_examples,aem62,centos7)
-
-config-examples-aem63-rhel7: stage
-	$(call config_examples,aem63,rhel7)
-
-config-examples-aem63-amazon-linux2: stage
-	$(call config_examples,aem63,amazon-linux2)
-
-config-examples-aem63-centos7: stage
-	$(call config_examples,aem63,centos7)
-
-config-examples-aem64-rhel7: stage
-	$(call config_examples,aem64,rhel7)
-
-config-examples-aem64-amazon-linux2: stage
-	$(call config_examples,aem64,amazon-linux2)
-
-config-examples-aem64-centos7: stage
-	$(call config_examples,aem64,centos7)
+config-examples: stage
+	$(call config_examples,aws,rhel7,aem62)
+	$(call config_examples,aws,rhel7,aem63)
+	$(call config_examples,aws,rhel7,aem64)
+	$(call config_examples,aws,centos7,aem62)
+	$(call config_examples,aws,centos7,aem63)
+	$(call config_examples,aws,centos7,aem64)
+	$(call config_examples,aws,amazon-linux2,aem62)
+	$(call config_examples,aws,amazon-linux2,aem63)
+	$(call config_examples,aws,amazon-linux2,aem64)
 
 define ami_ids_examples
   make config-examples-$(1)

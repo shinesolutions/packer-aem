@@ -6,13 +6,13 @@ phases:
       - make deps
   pre_build:
     commands:
-      - make config-examples-$AEM_VERSION-$OS_TYPE
+      - make config-examples
   build:
     commands:
       - make $COMPONENTS version=$AMI_VERSION
   post_build:
     commands:
-      - make ami-ids config_path=stage/user-config/$AEM_VERSION-$OS_TYPE/
+      - make ami-ids config_path=stage/user-config/$PLATFORM_TYPE-$OS_TYPE-$AEM_VERSION/
 artifacts:
   files:
     - stage/*-stack-builder-ami-ids.yaml
