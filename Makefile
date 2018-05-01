@@ -118,31 +118,31 @@ endef
 
 config-examples: stage
 
-config-examples-aws-rhel7-aem62:
+config-examples-aws-rhel7-aem62: stage
 	$(call config_examples,aws,rhel7,aem62)
 
-config-examples-aws-rhel7-aem63:
+config-examples-aws-rhel7-aem63: stage
 	$(call config_examples,aws,rhel7,aem63)
 
-config-examples-aws-rhel7-aem64:
+config-examples-aws-rhel7-aem64: stage
 	$(call config_examples,aws,rhel7,aem64)
 
-config-examples-aws-centos7-aem62:
+config-examples-aws-centos7-aem62: stage
 	$(call config_examples,aws,centos7,aem62)
 
-config-examples-aws-centos7-aem63:
+config-examples-aws-centos7-aem63: stage
 	$(call config_examples,aws,centos7,aem63)
 
-config-examples-aws-centos7-aem64:
+config-examples-aws-centos7-aem64: stage
 	$(call config_examples,aws,centos7,aem64)
 
-config-examples-aws-amazon-linux2-aem62:
+config-examples-aws-amazon-linux2-aem62: stage
 	$(call config_examples,aws,amazon-linux2,aem62)
 
-config-examples-aws-amazon-linux2-aem63:
+config-examples-aws-amazon-linux2-aem63: stage
 	$(call config_examples,aws,amazon-linux2,aem63)
 
-config-examples-aws-amazon-linux2-aem64:
+config-examples-aws-amazon-linux2-aem64: stage
 	$(call config_examples,aws,amazon-linux2,aem64)
 
 define ami_ids_examples
