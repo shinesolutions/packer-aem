@@ -5,13 +5,13 @@ init_conf
 region = @hiera.lookup('timezone::region', nil, @scope)
 locality = @hiera.lookup('timezone::locality', nil, @scope)
 
-install_aws_cli = @hiera.lookup('base::install_aws_cli', nil, @scope)
+install_aws_cli = @hiera.lookup('config::base::install_aws_cli', nil, @scope)
 install_aws_cli ||= 'true'
 
-install_cloudwatchlogs = @hiera.lookup('base::install_cloudwatchlogs', nil, @scope)
+install_cloudwatchlogs = @hiera.lookup('config::base::install_cloudwatchlogs', nil, @scope)
 install_cloudwatchlogs ||= 'true'
 
-install_aws_agents = @hiera.lookup('base::install_aws_agents', nil, @scope)
+install_aws_agents = @hiera.lookup('config::base::install_aws_agents', nil, @scope)
 install_aws_agents ||= 'true'
 
 
@@ -32,7 +32,7 @@ end
 #   it { should be_linked_to "/usr/share/zoneinfo/#{region}/#{locality}" }
 # end
 
-if install_aws_cli == 'true'
+if install_aws_cli == true
 
   describe package(@hiera.lookup('base::python_package', 'python', @scope)) do
     it { should be_installed }
@@ -51,7 +51,7 @@ if install_aws_cli == 'true'
 
 end
 
-if install_cloudwatchlogs == 'true'
+if install_cloudwatchlogs == true
 
   describe service('awslogs') do
     it { should be_enabled }
@@ -67,7 +67,7 @@ if install_cloudwatchlogs == 'true'
 
 end
 
-# if install_aws_agents == 'true'
+# if install_aws_agents == true
 #
 #   describe service('awsagent') do
 #     it { should be_enabled }
