@@ -1,5 +1,6 @@
 export PATH := $(PWD)/bin:$(PATH)
 AWS_IMAGES = aws-java aws-author aws-publish aws-dispatcher
+DOCKER_IMAGES = docker-java docker-author docker-publish docker-dispatcher
 VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 ami_var_file ?= stage/ami-ids.json
@@ -94,6 +95,17 @@ aws-author-publish-dispatcher: stage
 		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'version=$(version)' \
 		templates/aws/author-publish-dispatcher.json
+
+$(DOCKER_IMAGES): stage
+	$(eval COMPONENT := $(shell echo $@ | sed -e 's/^docker-//g'))
+	PACKER_LOG_PATH=logs/packer-$@.log \
+		PACKER_LOG=1 \
+		packer build \
+		$(VAR_PARAMS) \
+		-var-file=vars/components/$(COMPONENT).json \
+		-var 'ami_var_file=$(ami_var_file)' \
+		-var 'version=$(version)' \
+		templates/docker/generic.json
 
 var_files:
 	@echo $(all_var_files)

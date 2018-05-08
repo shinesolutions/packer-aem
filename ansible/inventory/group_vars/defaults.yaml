@@ -26,6 +26,9 @@ aws:
     - Key: overwrite-me
       Value: overwrite-me
 
+docker:
+  source: overwrite-me
+
 aem:
   profile: aem62_sp1_cfp9
   keystore_password: changeit
