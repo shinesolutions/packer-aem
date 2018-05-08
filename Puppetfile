@@ -7,7 +7,7 @@ mod 'pcfens/rhn_register', '1.5.0'
 mod 'puppet/archive', '1.3.0'
 mod 'puppet/yum', '2.1.0'
 mod 'puppet-collectd', '5.3.0'
-mod 'shinesolutions/aem_curator', '0.9.26'
+mod 'shinesolutions/aem_curator', :git => 'https://github.com/shinesolutions/puppet-aem-curator'
 mod 'shinesolutions/amazon_ssm_agent', '0.9.2'
 mod 'saz/limits', '2.5.0'
 mod 'puppetlabs/concat', '4.1.0'
@@ -17,7 +17,7 @@ mod 'MiamiOH/tcpwrappers', '1.1.0'
 
 # puppet-aem-curator dependencies, TODO: resolve sub-dependencies without declaring deps in packer-aem
 mod 'aco-oracle_java', '2.8.3'
-mod 'bstopp/aem', :git => 'https://github.com/shinesolutions/puppet-aem',
+mod 'bstopp/aem', :git => 'https://github.com/shinesolutions/puppet-aem'
 mod 'puppet-healthcheck', '0.4.0'
 mod 'puppetlabs/apache', '2.3.0'
 mod 'puppetlabs/java_ks', '1.6.0'
