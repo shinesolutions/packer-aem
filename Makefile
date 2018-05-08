@@ -54,20 +54,21 @@ lint:
 		provisioners/puppet/modules/*/manifests/*.pp
 	shellcheck $$(find provisioners scripts -name '*.sh')
 
+define validate_packer_template
+	packer validate \
+		-syntax-only \
+		$(VAR_PARAMS) \
+		-var "component=null" \
+		$(1)
+endef
+
 validate:
 	puppet parser validate \
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
-	packer validate \
-		-syntax-only \
-		$(VAR_PARAMS) \
-		-var "component=null" \
-		templates/generic.json
-	packer validate \
-		-syntax-only \
-		$(VAR_PARAMS) \
-		-var "component=null" \
-		templates/author-publish-dispatcher.json
+	$(call validate_packer_template,templates/aws/generic.json)
+	$(call validate_packer_template,templates/aws/author-publish-dispatcher.json)
+	$(call validate_packer_template,templates/docker/generic.json)
 
 config: stage
 	scripts/run-playbook.sh set-config "${config_path}"
