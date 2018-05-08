@@ -28,6 +28,8 @@ Check out the [example configuration files](https://github.com/shinesolutions/pa
 | aem.publish.jvm_mem_opts | AEM Publish's memory-specific [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
 | aem.publish.jvm_opts | AEM Publish's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
 | aem.dispatcher.version | AEM Dispatcher version, available version is documented on [Download Dispatcher Web Server Modules](https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher.html) page |
+| aem.aem_artifacts_base | Source URL path of AEM artifacts. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it's an S3 Bucket, e.g. s3://somebucket/artifacts/ |
+| aem.aem_certs_base | Source URL path of TLS certificate. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it's an S3 Bucket, e.g. s3://somebucket/certs/ |
 
 **AWS platform type configuration properties:**
 
@@ -39,8 +41,6 @@ Check out the [example configuration files](https://github.com/shinesolutions/pa
 | aws.subnet_id | [Subnet](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html) ID where Packer creation will run from |
 | aws.source_ami | ID of the AMI used as the base of all component AMIs  |
 | aws.iam_instance_profile | IAM Instance Profile name as set up in [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) |
-| aws.aem_artifacts_base | S3 Bucket path for storing AEM artifacts as set up in [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) |
-| aws.aem_certs_base | S3 Bucket path for storing TLS certificate as prepared in [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) |
 | aws.install_ssm_agent | Set to `true` when SSM agent must be installed |
 | aws.install_cloudwatchlogs | Set to `true` when CloudWatch logs agent must be installed |
 | aws.root_volume_size | The size of root volume in Gb, this is where the operating system and AEM installation reside |

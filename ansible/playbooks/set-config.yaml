@@ -20,5 +20,7 @@
 
     - name: Add custom AWS tags to Packer template files
       packer_tags:
-        template_dir: ../../templates/
+        template_dir: "../../templates/{{ platform_type }}/"
         tags: "{{ aws['tags'] }}"
+      when:
+        platform_type == "aws"

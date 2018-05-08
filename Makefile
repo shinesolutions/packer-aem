@@ -1,5 +1,5 @@
 export PATH := $(PWD)/bin:$(PATH)
-AMIS = soe base java author publish dispatcher
+AWS_IMAGES = aws-java aws-author aws-publish aws-dispatcher
 VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 ami_var_file ?= stage/ami-ids.json
@@ -39,7 +39,7 @@ init:
 	chmod +x scripts/*.sh
 
 stage: init
-	mkdir -p stage/
+	mkdir -p stage/ logs/
 
 lint:
 	bundle exec puppet-lint \
@@ -74,31 +74,26 @@ config: stage
 ami-ids: stage
 	scripts/run-playbook.sh create-stack-builder-config "${config_path}"
 
-$(AMIS): stage
-	mkdir -p logs/
+$(AWS_IMAGES): stage
+	$(eval COMPONENT := $(shell echo $@ | sed -e 's/^aws-//g'))
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
-		-var-file=vars/components/$@.json \
+		-var-file=vars/components/$(COMPONENT).json \
 		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'version=$(version)' \
-		-only=aws \
-		templates/generic.json
+		templates/aws/generic.json
 
-author-publish-dispatcher: stage
-	mkdir -p logs/
+aws-author-publish-dispatcher: stage
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
-		-var-file=vars/components/$@.json \
+		-var-file=vars/components/author-publish-dispatcher.json \
 		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'version=$(version)' \
-		-only=aws \
-		templates/$@.json
-
-amis-all: $(AMIS)
+		templates/aws/author-publish-dispatcher.json
 
 var_files:
 	@echo $(all_var_files)
@@ -145,6 +140,12 @@ config-examples-aws-amazon-linux2-aem63: stage
 config-examples-aws-amazon-linux2-aem64: stage
 	$(call config_examples,aws,amazon-linux2,aem64)
 
+config-examples-docker-centos7-aem62: stage
+	$(call config_examples,docker,centos7,aem62)
+
+config-examples-docker-centos7-aem63: stage
+	$(call config_examples,docker,centos7,aem63)
+
 define ami_ids_examples
   make config-examples-$(1)
 	make ami-ids config_path=stage/user-config/$(1)/
@@ -160,4 +161,17 @@ create-ci-aws:
 delete-ci-aws:
 	scripts/run-playbook.sh delete-ci-aws "${config_path}"
 
-.PHONY: init $(AMIS) amis-all ci clean config lint validate create-ami-ids-yaml var_files merge_var_files package
+# convenient target for creating certificate using OpenSSL
+create-cert:
+	mkdir -p stage/certs/
+	openssl req \
+	    -new \
+	    -newkey rsa:4096 \
+			-nodes \
+	    -days 365 \
+	    -x509 \
+	    -subj "/C=AU/ST=Victoria/L=Melbourne/O=Sample Organisation/CN=*.example.com" \
+	    -keyout stage/certs/aem.key \
+	    -out stage/certs/aem.cert
+
+.PHONY: init $(AMIS) amis-all ci clean config lint validate create-ami-ids-yaml var_files merge_var_files package create-cert

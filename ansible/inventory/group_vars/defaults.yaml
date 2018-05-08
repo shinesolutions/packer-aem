@@ -13,10 +13,11 @@ timezone:
 aws:
   user: ec2-user
   region: overwrite-me
+  vpc_id: overwrite-me
+  subnet_id: overwrite-me
   source_ami: overwrite-me
+  ami_users: ''
   instance_profile: overwrite-me
-  aem_artifacts_base: overwrite-me
-  aem_certs_base: overwrite-me
   install_ssm_agent: true
   install_cloudwatchlogs: true
   root_volume_size: 20
@@ -34,6 +35,8 @@ aem:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
   dispatcher:
     version: 4.2.3
+  artifacts_base: overwrite-me
+  certs_base: overwrite-me
 
 ci:
   aws:
