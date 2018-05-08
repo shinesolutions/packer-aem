@@ -25,8 +25,10 @@ Check out the [example configuration files](https://github.com/shinesolutions/pa
 | aem.keystore_password | [Java Keystore](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores) password used in AEM Author and Publish |
 | aem.author.jvm_mem_opts | AEM Author's memory-specific [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
 | aem.author.jvm_opts | AEM Author's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
+| aem.author.start_opts | AEM Author's [start options](https://helpx.adobe.com/experience-manager/6-3/sites/deploying/using/custom-standalone-install.html#FurtheroptionsavailablefromtheQuickstartfile) |
 | aem.publish.jvm_mem_opts | AEM Publish's memory-specific [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
 | aem.publish.jvm_opts | AEM Publish's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) |
+| aem.publish.start_opts | AEM Publish's [start options](https://helpx.adobe.com/experience-manager/6-3/sites/deploying/using/custom-standalone-install.html#FurtheroptionsavailablefromtheQuickstartfile) |
 | aem.dispatcher.version | AEM Dispatcher version, available version is documented on [Download Dispatcher Web Server Modules](https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher.html) page |
 | aem.aem_artifacts_base | Source URL path of AEM artifacts. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it's an S3 Bucket, e.g. s3://somebucket/artifacts/ |
 | aem.aem_certs_base | Source URL path of TLS certificate. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it's an S3 Bucket, e.g. s3://somebucket/certs/ |

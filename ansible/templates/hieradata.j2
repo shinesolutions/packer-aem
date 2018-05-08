@@ -21,6 +21,7 @@ aem_curator::install_author::aem_jvm_opts:
 - '-XX:+PrintTenuringDistribution'
 - '-XX:+PrintGCApplicationStoppedTime'
 - '-XX:+HeapDumpOnOutOfMemoryError'
+aem_curator::install_author::aem_start_opts: "{{ aem.author.start_opts }}"
 
 aem_curator::install_publish::aem_profile: {{ aem.profile }}
 aem_curator::install_publish::aem_keystore_password: {{ aem.keystore_password }}
@@ -34,6 +35,7 @@ aem_curator::install_publish::aem_jvm_opts:
 - '-XX:+PrintTenuringDistribution'
 - '-XX:+PrintGCApplicationStoppedTime'
 - '-XX:+HeapDumpOnOutOfMemoryError'
+aem_curator::install_publish::aem_start_opts: "{{ aem.publish.start_opts }}"
 
 aem_curator::install_dispatcher::cert_base_url: {{ aem.certs_base }}
 aem_curator::install_dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86-64-ssl-{{ aem.dispatcher.version }}.tar.gz
