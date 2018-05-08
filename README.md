@@ -37,7 +37,7 @@ Usage
 - Set up the required [AWS resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md)
 - Create [configuration file](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md)
 - Apply the configuration files by running `make config config_path=<path/to/config/dir>`
-- Create the AMIs by running `make <component> version=<version>`
+- Create the AMIs by running `make <platform>-<component> version=<version>`, for example: `make aws-author version=1.2.3`
 
 To retrieve the latest AMI IDs for all [AEM AWS Stack Builder](https://github.com/shinesolutions/aem-aws-stack-builder) components, run the command `make ami-ids config_path=<path/to/config/dir>`, and the AMI IDs will be written into `stage/*-stack-builder-ami-ids.yaml` file(s). These files can then be dropped in to AEM AWS Stack Builder configuration path.
 
@@ -47,8 +47,8 @@ Examples
 There are a number of [example configuration files](https://github.com/shinesolutions/packer-aem/blob/master/examples/user-config/), you can use those examples as baseline configuration when creating your own machine images:
 
 1. Modify [sandpit.yaml](https://github.com/shinesolutions/packer-aem/blob/master/examples/user-config/sandpit.yaml) with the details of your own environment
-2. Run one of the convenient `make config-examples-<aem_version>-<os_type>` build targets to prepare the configuration, for example, if you want to configure AEM 6.3 on RHEL7, run `make config-examples-aem63-rhel7`
-3. Finally, create the machine images using the command `make <component> version=<version>`
+2. Run one of the convenient `make config-examples-<platform_type>-<os_type>-<aem_version>` build targets to prepare the configuration, for example, if you want to configure AEM 6.3 build on AWS running RHEL7, run `make config-examples-aws-rhel7-aem63`
+3. Finally, create the machine images using the command `make <platform_type>-<component> version=<version>`
 
 More
 ----
