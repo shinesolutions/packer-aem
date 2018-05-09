@@ -12,43 +12,39 @@
     - name: Generate CodeBuild project input JSON files
       template:
         src: ../templates/codebuild-project.j2
-        dest: ../../stage/ci-aws/codebuild-{{ item[0] }}-{{ item[1] }}-{{ item[2] }}-{{ item[3] }}.yaml
+        dest: ../../stage/ci-aws/codebuild-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }}.yaml
         mode: 0644
       with_nested:
-        - "{{ ci.aws.platform_types }}"
+        - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
-        - "{{ ci.aws.os_types }}"
         - "{{ ci.aws.components }}"
 
     - name: Create CodeBuild projects
       shell: |
         aws codebuild create-project \
-        --name packer-aem-{{ item[0] }}-{{ item[1] }}-{{ item[2] }}-{{ item[3] }} \
-        --cli-input-json file://../../stage/ci-aws/codebuild-{{ item[0] }}-{{ item[1] }}-{{ item[2] }}-{{ item[3] }}.yaml \
+        --name packer-aem-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }} \
+        --cli-input-json file://../../stage/ci-aws/codebuild-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }}.yaml \
         --region {{ aws.region }} \
         --badge-enabled
       with_nested:
-        - "{{ ci.aws.platform_types }}"
+        - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
-        - "{{ ci.aws.os_types }}"
         - "{{ ci.aws.components }}"
 
     - name: Generate CodePipeline pipeline input JSON files
       template:
         src: ../templates/codepipeline-pipeline.j2
-        dest: ../../stage/ci-aws/codepipeline-{{ item[0] }}-{{ item[1] }}-{{ item[2] }}.yaml
+        dest: ../../stage/ci-aws/codepipeline-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}.yaml
         mode: 0644
       with_nested:
-        - "{{ ci.aws.platform_types }}"
+        - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
-        - "{{ ci.aws.os_types }}"
 
     - name: Create CodePipeline pipelines
       shell: |
         aws codepipeline create-pipeline \
-        --cli-input-json file://../../stage/ci-aws/codepipeline-{{ item[0] }}-{{ item[1] }}-{{ item[2] }}.yaml \
+        --cli-input-json file://../../stage/ci-aws/codepipeline-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}.yaml \
         --region {{ aws.region }}
       with_nested:
-        - "{{ ci.aws.platform_types }}"
+        - "{{ ci.aws.hosts }}"
         - "{{ ci.aws.aem_versions }}"
-        - "{{ ci.aws.os_types }}"

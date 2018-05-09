@@ -9,7 +9,7 @@ phases:
       - make config-examples-$PLATFORM_TYPE-$OS_TYPE-$AEM_VERSION
   build:
     commands:
-      - make $COMPONENTS version=$AMI_VERSION config_path=stage/user-config/$PLATFORM_TYPE-$OS_TYPE-$AEM_VERSION/
+      - make $BUILD_TARGETS version=$BUILD_VERSION config_path=stage/user-config/$PLATFORM_TYPE-$OS_TYPE-$AEM_VERSION/
   post_build:
     commands:
       - make ami-ids config_path=stage/user-config/$PLATFORM_TYPE-$OS_TYPE-$AEM_VERSION/

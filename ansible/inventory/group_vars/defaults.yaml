@@ -45,14 +45,15 @@ aem:
 
 ci:
   aws:
-    platform_types:
-      - aws
+    hosts:
+      - platform_type: aws
+        os_type: rhel7
+      - platform_type: docker
+        os_type: centos7
     aem_versions:
       - aem62
       - aem63
       - aem64
-    os_types:
-      - rhel7
     components:
       - java
       - author

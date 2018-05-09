@@ -1,6 +1,6 @@
 {
     "pipeline": {
-        "name": "packer-aem-{{ item[0] }}-{{ item[1] }}-{{ item[2] }}",
+        "name": "packer-aem-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}",
         "version": 2,
         "roleArn": "{{ ci.aws.iam.role_arn }}",
         "stages": [
@@ -18,7 +18,7 @@
                         },
                         "outputArtifacts": [
                             {
-                                "name": "{{ item[0] }}-{{ item[1] }}-{{ item[2] }}"
+                                "name": "{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}"
                             }
                         ],
                         "configuration": {
@@ -39,7 +39,7 @@
                     {
                         "inputArtifacts": [
                             {
-                                "name": "{{ item[0] }}-{{ item[1] }}-{{ item[2] }}"
+                                "name": "{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}"
                             }
                         ],
                         "name": "{{ component }}",
@@ -51,7 +51,7 @@
                         },
                         "outputArtifacts": [],
                         "configuration": {
-                            "ProjectName": "packer-aem-{{ item[0] }}-{{ item[1] }}-{{ item[2] }}-{{ component }}"
+                            "ProjectName": "packer-aem-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ component }}"
                         },
                         "runOrder": 1
                     }
