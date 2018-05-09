@@ -32,6 +32,9 @@ deps:
 	bundle install --binstubs
 	bundle exec r10k puppetfile install --verbose --moduledir modules
 	pip install -r requirements.txt
+	# only needed while using shinesolutions/puppet-aem fork
+	# TODO: remove when switching back to bstopp/puppet-aem
+	rm -rf modules/aem/.git
 
 clean:
 	rm -rf bin .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
