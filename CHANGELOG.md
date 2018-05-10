@@ -1,5 +1,7 @@
-### 2.6.1
-*
+### 2.7.0
+* Rename all <component> targets to <platform>-<component> targets
+* Fix aws-cli and CloudWatch logs config flags conditional check
+* Initial experimental effort to support Docker platform type
 
 ### 2.6.0
 * Add InSpec AEM testing support
