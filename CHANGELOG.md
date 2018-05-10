@@ -1,3 +1,6 @@
+### 2.7.1
+*
+
 ### 2.7.0
 * Rename all <component> targets to <platform>-<component> targets
 * Fix aws-cli and CloudWatch logs config flags conditional check
