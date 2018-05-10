@@ -2,6 +2,7 @@
 *
 
 ### 2.7.0
+* Add AEM start options support
 * Rename all component targets to platform-component targets
 * Fix aws-cli and CloudWatch logs config flags conditional check
 * Initial experimental effort to support Docker platform type
