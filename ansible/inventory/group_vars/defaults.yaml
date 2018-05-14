@@ -13,7 +13,7 @@ timezone:
 
 aws:
   user: ec2-user
-  region: overwrite-me
+  region: 'ap-southeast-2'
   vpc_id: overwrite-me
   subnet_id: overwrite-me
   source_ami: overwrite-me
