@@ -5,7 +5,7 @@ The following configurations are available for users to customise the creation p
 
 Check out the [example configuration files](https://github.com/shinesolutions/packer-aem/blob/master/examples/user-config/) as reference.
 
-**Global configuration properties:**
+### Global configuration properties:
 
 | Name | Description | Required? | Default |
 |------|-------------|-----------|---------|
@@ -17,7 +17,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/pa
 | timezone.region | [Timezone region name as per tz database list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) | Optional | `Australia` |
 | timezone.locality | [Timezone locality name as per tz database list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) | Optional | `Melbourne` |
 
-**AEM configuration properties:**
+### AEM configuration properties:
 
 | Name | Description | Required? | Default |
 |------|-------------|-----------|---------|
@@ -33,7 +33,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/pa
 | aem.aem_artifacts_base | Source URL path of AEM artifacts, it could be `s3://...`, `http://...`, `https://...`, or `file://...`. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/artifacts/ | Mandatory | |
 | aem.aem_certs_base | Source URL path of TLS certificate, it could be `s3://...`, `http://...`, `https://...`, or `file://...`. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/certs/ | Mandatory | |
 
-**AWS platform type configuration properties:**
+### AWS platform type configuration properties:
 
 | Name | Description | Required? | Default |
 |------|-------------|-----------|---------|
