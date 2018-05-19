@@ -1,0 +1,22 @@
+platform_type: aws
+
+aem:
+  artifacts_base: s3://aem-artifacts/adobeaemcloud
+  certs_base: s3://aem-stack-builder/library
+
+aws:
+  region: ap-southeast-2
+  vpc_id: ''
+  subnet_id: ''
+  instance_profile: S3Access
+  ami_users: ''
+  install_ssm_agent: true
+  root_volume_size: 20
+  data_volume_size: 75
+  tags:
+    - Key: Project
+      Value: Open Source AEM Platform
+    - Key: Owner
+      Value: Shine Solutions AEM Team
+    - Key: Cost Centre
+      Value: 12345

@@ -1,3 +1,0 @@
----
-serverspec::owner: "%{hiera('packer_user')}"
-serverspec::group: "%{hiera('packer_user')}"

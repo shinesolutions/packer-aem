@@ -6,8 +6,7 @@
   - local
   - "%{::os.family}/%{::os.name}-%{::os.release.major}"
   - "%{::os.family}/%{::os.name}"
-  - "%{::packer_build_name}"
-  - serverspec
+  - "%{::component}"
   - common
 :logger: noop
 :merge_behavior: native

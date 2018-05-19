@@ -74,7 +74,7 @@ class config::base (
   $install_aws_cli = true,
   $install_cloudwatchlogs = true,
   $install_collectd = true,
-  $install_amazon_ssm_agent = false,
+  $install_amazon_ssm_agent = true,
   $collectd_cloudwatch_source_url = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
 
   $cloudwatchlogs_logfiles          = {},
@@ -86,6 +86,11 @@ class config::base (
   require ::config
 
   class { '::timezone': }
+
+  file { $tmp_dir:
+    ensure => directory,
+    mode   => '0700',
+  }
 
   if ($::osfamily == 'redhat') and ($::operatingsystem != 'Amazon') {
 
@@ -194,13 +199,12 @@ class config::base (
     }
     class { '::collectd::plugin::python':
       modulepaths => [
-        '/usr/lib/python2.7/dist-packages',
-        '/usr/local/lib/python2.7/site-packages',
         "${collectd_cloudwatch_base_dir}/src",
       ],
       logtraces   => true,
     }
     collectd::plugin::python::module {'cloudwatch_writer':
+      modulepath    => "${collectd_cloudwatch_base_dir}/src",
       script_source => 'puppet:///modules/config/cloudwatch_writer.py',
     }
     $cloudwatch_memory_stats = [

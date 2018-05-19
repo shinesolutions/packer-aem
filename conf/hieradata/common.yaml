@@ -5,8 +5,62 @@ timezone::region: 'Australia'
 timezone::locality: 'Melbourne'
 
 cloudwatchlogs::region: 'ap-southeast-2'
-jdk_oracle::version: '8'
-jdk_oracle::version_update: '131'
-jdk_oracle::version_build: '15'
 
-java::tmp_dir: "%{lookup('tmp_dir')}"
+oracle_java::version: '8'
+oracle_java::version_update: '141'
+oracle_java::version_build: '12'
+
+aem_curator::install_java::cert_base_url: s3://overwrite-me/certs/
+aem_curator::install_java::tmp_dir: "%{lookup('tmp_dir')}"
+
+aem_curator::install_author::tmp_dir: "%{lookup('tmp_dir')}"
+aem_curator::install_author::aem_host: localhost
+aem_curator::install_author::aem_healthcheck_version: "1.3.3"
+aem_curator::install_author::aem_artifacts_base: s3://overwrite-me/artifacts/
+aem_curator::install_author::aem_profile: 'aem62'
+aem_curator::install_author::cert_base_url: s3://overwrite-me/certs/
+aem_curator::install_author::aem_keystore_password: changeit
+aem_curator::install_author::aem_base: /opt
+aem_curator::install_author::aem_sample_content: false
+aem_curator::install_author::aem_jvm_opts:
+- '-XX:+PrintGCDetails'
+- '-XX:+PrintGCTimeStamps'
+- '-XX:+PrintGCDateStamps'
+- '-XX:+PrintTenuringDistribution'
+- '-XX:+PrintGCApplicationStoppedTime'
+- '-XX:+HeapDumpOnOutOfMemoryError'
+aem_curator::install_author::aem_jvm_mem_opts: "-Xss4m -Xmx8192m"
+aem_curator::install_author::setup_repository_volume: true
+aem_curator::install_author::repository_volume_device: /dev/xvdb
+aem_curator::install_author::repository_volume_mount_point: /mnt/ebs1
+
+aem_curator::install_publish::tmp_dir: "%{lookup('tmp_dir')}"
+aem_curator::install_publish::aem_host: localhost
+aem_curator::install_publish::aem_healthcheck_version: "1.3.3"
+aem_curator::install_publish::aem_artifacts_base: s3://overwrite-me/artifacts/
+aem_curator::install_publish::aem_profile: 'aem62'
+aem_curator::install_publish::cert_base_url: s3://overwrite-me/certs/
+aem_curator::install_publish::aem_keystore_password: 'changeit'
+aem_curator::install_publish::aem_base: /opt
+aem_curator::install_publish::aem_sample_content: false
+aem_curator::install_publish::aem_jvm_opts:
+- '-XX:+PrintGCDetails'
+- '-XX:+PrintGCTimeStamps'
+- '-XX:+PrintGCDateStamps'
+- '-XX:+PrintTenuringDistribution'
+- '-XX:+PrintGCApplicationStoppedTime'
+- '-XX:+HeapDumpOnOutOfMemoryError'
+aem_curator::install_publish::aem_jvm_mem_opts: "-Xss4m -Xmx8192m"
+aem_curator::install_publish::setup_repository_volume: true
+aem_curator::install_publish::repository_volume_device: /dev/xvdb
+aem_curator::install_publish::repository_volume_mount_point: /mnt/ebs1
+
+aem_curator::install_dispatcher::tmp_dir: "%{lookup('tmp_dir')}"
+aem_curator::install_dispatcher::cert_base_url: s3://overwrite-me/certs/
+aem_curator::install_dispatcher::cert_filename: /etc/ssl/aem.unified-dispatcher.cert
+aem_curator::install_dispatcher::apache_module_base_url: https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_9/file.res
+aem_curator::install_dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86-64-ssl-4.2.3.tar.gz
+aem_curator::install_dispatcher::apache_module_filename: dispatcher-apache2.4-4.2.3.so
+aem_curator::install_dispatcher::apache_module_temp_dir: "%{lookup('tmp_dir')}"
+aem_curator::install_dispatcher::apache_http_port: "80"
+aem_curator::install_dispatcher::apache_https_port: "443"

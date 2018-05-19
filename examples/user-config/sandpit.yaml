@@ -1,0 +1,26 @@
+---
+http_proxy: ''
+https_proxy: ''
+no_proxy: ''
+
+timezone:
+  region: Australia
+  locality: Melbourne
+
+aem:
+  keystore_password: changeit
+  author:
+    jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
+    start_opts: "-nofork"
+  publish:
+    jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
+    start_opts: "-nofork"
+  dispatcher:
+    version: 4.2.3
+
+ci:
+  aws:
+    s3:
+      bucket_name: aem-artifacts
+    iam:
+      role_arn: arn:aws:iam::918473058104:role/packer-aem-codebuild-role

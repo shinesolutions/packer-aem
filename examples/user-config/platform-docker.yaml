@@ -1,0 +1,12 @@
+platform_type: docker
+
+aem:
+  artifacts_base: /tmp/shinesolutions/packer-aem/artifacts
+  certs_base: /tmp/shinesolutions/packer-aem/certs
+
+docker:
+  source: 'centos:centos7'
+
+aws:
+  install_ssm_agent: false
+  install_cloudwatchlogs: false

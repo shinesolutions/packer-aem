@@ -1,12 +1,9 @@
-.librarian/
+ansible/playbooks/*.retry
+bin/
 .tmp/
 /modules/
 templates/_archive/
 .idea/
-Vagrantfile
-output-virtualbox-iso/
-*.box
-.vagrant/
 packer_cache/
 Gemfile.lock
 .DS_Store
@@ -18,3 +15,6 @@ crash.log
 !/provisioners/puppet/modules/
 .bundle/
 .gems/
+conf/hieradata/local.yaml
+vars/*local.json
+examples/user-config/zzz-local.yaml

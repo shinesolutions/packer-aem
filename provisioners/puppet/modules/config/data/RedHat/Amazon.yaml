@@ -1,6 +1,5 @@
 ---
 # Values that should only be applied to Amazon Linux
-config::newrelic_releasever: 6
 
 config::base::python_package: python27
 config::base::python_pip_package: python27-pip

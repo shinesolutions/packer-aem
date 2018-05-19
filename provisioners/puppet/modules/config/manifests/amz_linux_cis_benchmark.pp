@@ -54,7 +54,7 @@ class config::amz_linux_cis_benchmark (
     mode => '0600',
   }
 
-  # 1.4.2 Ensure authentication required for single user mode
+  # 1.4.3 Ensure authentication required for single user mode
   # 1.4.3 Ensure interactive boot is not enabled
   file { '/etc/sysconfig/init':
     ensure => present,

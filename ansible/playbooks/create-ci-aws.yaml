@@ -1,0 +1,50 @@
+---
+- name: Create Packer AEM internal CI on AWS CodeBuild and CodePipeline
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+    - name: Ensure stage directory exists
+      file: path=../../stage/ci-aws/ state=directory
+
+    - name: Generate CodeBuild project input JSON files
+      template:
+        src: ../templates/codebuild-project.j2
+        dest: ../../stage/ci-aws/codebuild-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }}.yaml
+        mode: 0644
+      with_nested:
+        - "{{ ci.aws.hosts }}"
+        - "{{ ci.aws.aem_versions }}"
+        - "{{ ci.aws.components }}"
+
+    - name: Create CodeBuild projects
+      shell: |
+        aws codebuild create-project \
+        --name packer-aem-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }} \
+        --cli-input-json file://../../stage/ci-aws/codebuild-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ item[2] }}.yaml \
+        --region {{ aws.region }} \
+        --badge-enabled
+      with_nested:
+        - "{{ ci.aws.hosts }}"
+        - "{{ ci.aws.aem_versions }}"
+        - "{{ ci.aws.components }}"
+
+    - name: Generate CodePipeline pipeline input JSON files
+      template:
+        src: ../templates/codepipeline-pipeline.j2
+        dest: ../../stage/ci-aws/codepipeline-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}.yaml
+        mode: 0644
+      with_nested:
+        - "{{ ci.aws.hosts }}"
+        - "{{ ci.aws.aem_versions }}"
+
+    - name: Create CodePipeline pipelines
+      shell: |
+        aws codepipeline create-pipeline \
+        --cli-input-json file://../../stage/ci-aws/codepipeline-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}.yaml \
+        --region {{ aws.region }}
+      with_nested:
+        - "{{ ci.aws.hosts }}"
+        - "{{ ci.aws.aem_versions }}"

@@ -1,0 +1,42 @@
+timezone::region: '{{ timezone.region }}'
+timezone::locality: '{{ timezone.locality }}'
+cloudwatchlogs::region: '{{ aws.region }}'
+
+config::base::install_amazon_ssm_agent: {{ aws.install_ssm_agent }}
+config::base::install_cloudwatchlogs: {{ aws.install_cloudwatchlogs }}
+
+amazon_ssm_agent::proxy_url: {{ http_proxy }}
+
+aem_curator::install_java::cert_base_url: {{ aem.certs_base }}
+
+aem_curator::install_author::aem_profile: {{ aem.profile }}
+aem_curator::install_author::aem_keystore_password: {{ aem.keystore_password }}
+aem_curator::install_author::cert_base_url: {{ aem.certs_base }}
+aem_curator::install_author::aem_artifacts_base: {{ aem.artifacts_base }}
+aem_curator::install_author::aem_jvm_mem_opts: "{{ aem.author.jvm_mem_opts }}"
+aem_curator::install_author::aem_jvm_opts:
+- '-XX:+PrintGCDetails'
+- '-XX:+PrintGCTimeStamps'
+- '-XX:+PrintGCDateStamps'
+- '-XX:+PrintTenuringDistribution'
+- '-XX:+PrintGCApplicationStoppedTime'
+- '-XX:+HeapDumpOnOutOfMemoryError'
+aem_curator::install_author::aem_start_opts: "{{ aem.author.start_opts }}"
+
+aem_curator::install_publish::aem_profile: {{ aem.profile }}
+aem_curator::install_publish::aem_keystore_password: {{ aem.keystore_password }}
+aem_curator::install_publish::cert_base_url: {{ aem.certs_base }}
+aem_curator::install_publish::aem_artifacts_base: {{ aem.artifacts_base }}
+aem_curator::install_publish::aem_jvm_mem_opts: "{{ aem.publish.jvm_mem_opts }}"
+aem_curator::install_publish::aem_jvm_opts:
+- '-XX:+PrintGCDetails'
+- '-XX:+PrintGCTimeStamps'
+- '-XX:+PrintGCDateStamps'
+- '-XX:+PrintTenuringDistribution'
+- '-XX:+PrintGCApplicationStoppedTime'
+- '-XX:+HeapDumpOnOutOfMemoryError'
+aem_curator::install_publish::aem_start_opts: "{{ aem.publish.start_opts }}"
+
+aem_curator::install_dispatcher::cert_base_url: {{ aem.certs_base }}
+aem_curator::install_dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86-64-ssl-{{ aem.dispatcher.version }}.tar.gz
+aem_curator::install_dispatcher::apache_module_filename: dispatcher-apache2.4-{{ aem.dispatcher.version }}.so

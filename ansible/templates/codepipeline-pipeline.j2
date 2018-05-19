@@ -1,0 +1,70 @@
+{
+    "pipeline": {
+        "name": "packer-aem-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}",
+        "version": 2,
+        "roleArn": "{{ ci.aws.iam.role_arn }}",
+        "stages": [
+            {
+                "name": "Source",
+                "actions": [
+              {
+                        "inputArtifacts": [],
+                        "name": "Source",
+                        "actionTypeId": {
+                            "category": "Source",
+                            "owner": "ThirdParty",
+                            "version": "1",
+                            "provider": "GitHub"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}"
+                            }
+                        ],
+                        "configuration": {
+                            "Owner": "shinesolutions",
+                            "Repo": "packer-aem",
+                            "PollForSourceChanges": "true",
+                            "Branch": "master",
+                            "OAuthToken": "ad9ebc57e8daf4ece3b602afd32188e1fcae0e41"
+                        },
+                        "runOrder": 1
+                    }
+                ]
+            },
+            {
+                "name": "Build",
+                "actions": [
+                {% for component in ci.aws.components %}
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}"
+                            }
+                        ],
+                        "name": "{{ component }}",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "version": "1",
+                            "provider": "CodeBuild"
+                        },
+                        "outputArtifacts": [],
+                        "configuration": {
+                            "ProjectName": "packer-aem-{{ item[0].platform_type }}-{{ item[0].os_type }}-{{ item[1] }}-{{ component }}"
+                        },
+                        "runOrder": 1
+                    }
+                    {% if not loop.last %}
+                    ,
+                    {% endif %}
+                {% endfor %}
+                ]
+            }
+        ],
+        "artifactStore": {
+            "type": "S3",
+            "location": "{{ ci.aws.s3.bucket_name }}"
+        }
+    }
+}

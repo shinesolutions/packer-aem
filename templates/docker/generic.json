@@ -1,0 +1,135 @@
+{
+  "variables": {
+    "docker_source": "",
+    "profile": "",
+    "tmp_dir": "/tmp/shinesolutions/packer-aem",
+    "https_proxy": "",
+    "no_proxy": "",
+    "component": "",
+    "http_proxy": "",
+    "puppet_bin_dir": "/opt/puppetlabs/bin",
+    "version": "x.x.x",
+    "instance_type": "",
+    "os_type": ""
+  },
+  "provisioners": [
+    {
+      "inline": [
+        "mkdir -p {{user `tmp_dir`}}"
+      ],
+      "type": "shell"
+    },
+    {
+      "execute_command": "{{ .Vars }} bash {{ .Path }}",
+      "type": "shell",
+      "environment_vars": [
+        "PUPPET_BIN_DIR={{user `puppet_bin_dir`}}",
+        "http_proxy={{user `http_proxy`}}",
+        "HTTP_PROXY={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "HTTPS_PROXY={{user `https_proxy`}}",
+        "no_proxy={{user `no_proxy`}}",
+        "NO_PROXY={{user `no_proxy`}}"
+      ],
+      "script": "provisioners/bash/{{user `os_type`}}.sh"
+    },
+    {
+      "source": "conf/",
+      "destination": "{{user `tmp_dir`}}",
+      "type": "file"
+    },
+    {
+      "source": "stage/certs/",
+      "destination": "{{user `tmp_dir`}}/certs/",
+      "type": "file"
+    },
+    {
+      "execute_command": "export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "type": "puppet-masterless",
+      "prevent_sudo": true,
+      "manifest_file": "provisioners/puppet/manifests/config.pp",
+      "module_paths": [
+        "provisioners/puppet/modules"
+      ]
+    },
+    {
+      "hiera_config_path": "conf/hiera.yaml",
+      "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
+      "module_paths": [
+        "modules",
+        "provisioners/puppet/modules"
+      ],
+      "execute_command": "export FACTER_component={{user `component`}} && export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "extra_arguments": [],
+      "type": "puppet-masterless",
+      "prevent_sudo": true
+    },
+    {
+      "source": "test/inspec",
+      "destination": "{{user `tmp_dir`}}",
+      "type": "file"
+    },
+    {
+      "inline": [
+        "set -o nounset",
+        "set -o errexit",
+        "export PATH=/opt/puppetlabs/puppet/bin/:/sbin:/usr/sbin:/usr/local/sbin:${PATH}",
+        "cd {{user `tmp_dir`}}/inspec",
+        "inspec exec base_spec.rb; inspec exec {{user `component`}}_spec.rb"
+      ],
+      "type": "shell",
+      "environment_vars": [
+        "FACTER_packer_build_name={{user `component`}}",
+        "FACTER_packer_staging_dir={{user `tmp_dir`}}",
+        "http_proxy={{user `http_proxy`}}",
+        "HTTP_PROXY={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "HTTPS_PROXY={{user `https_proxy`}}",
+        "no_proxy={{user `no_proxy`}}",
+        "NO_PROXY={{user `no_proxy`}}"
+      ]
+    },
+    {
+      "inline": [
+        "rm -rf {{user `tmp_dir`}}",
+        "/opt/puppetlabs/bin/facter resource host $(facter fqdn) ensure=absent",
+        "find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete",
+        "truncate --size 0 --no-create /var/log/wtmp /var/log/btmp"
+      ],
+      "type": "shell",
+      "environment_vars": [
+        "HISTFILE=/dev/null",
+        "http_proxy={{user `http_proxy`}}",
+        "HTTP_PROXY={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "HTTPS_PROXY={{user `https_proxy`}}",
+        "no_proxy={{user `no_proxy`}}",
+        "NO_PROXY={{user `no_proxy`}}"
+      ]
+    }
+  ],
+  "builders": [
+    {
+      "type": "docker",
+      "image": "{{user `docker_source`}}",
+      "commit": true,
+      "run_command": [
+        "--privileged", "-e", "container=docker", "-v", "/sys/fs/cgroup:/sys/fs/cgroup",
+        "-d", "-i", "-t", "{{.Image}}", "/usr/bin/bash"
+      ],
+      "changes": [
+        "ENV LANG en_US.UTF-8",
+        "ENV PATH /opt/puppetlabs/puppet/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "docker-tag",
+      "repository": "aem-{{user `component`}}-{{user `profile`}}-{{user `os_type`}}",
+      "tag": "{{user `version`}}"
+    }
+  ]
+}

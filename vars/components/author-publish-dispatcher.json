@@ -1,0 +1,5 @@
+{
+    "component": "author-publish-dispatcher",
+    "instance_type": "m4.2xlarge",
+    "data_volume_size": "100"
+}
