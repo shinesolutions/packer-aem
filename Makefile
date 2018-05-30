@@ -171,12 +171,6 @@ ami-ids-examples: stage
 	$(call ami_ids_examples,aem62-rhel7)
 	$(call ami_ids_examples,aem63-rhel7)
 
-create-ci-aws:
-	scripts/run-playbook.sh create-ci-aws "${config_path}"
-
-delete-ci-aws:
-	scripts/run-playbook.sh delete-ci-aws "${config_path}"
-
 # convenient target for creating certificate using OpenSSL
 create-cert:
 	mkdir -p stage/certs/

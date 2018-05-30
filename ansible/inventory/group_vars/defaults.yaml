@@ -43,25 +43,3 @@ aem:
     version: 4.2.3
   artifacts_base: overwrite-me
   certs_base: overwrite-me
-
-ci:
-  aws:
-    hosts:
-      - platform_type: aws
-        os_type: rhel7
-      - platform_type: docker
-        os_type: centos7
-    aem_versions:
-      - aem62
-      - aem63
-      - aem64
-    components:
-      - java
-      - author
-      - publish
-      - dispatcher
-      - author-publish-dispatcher
-    s3:
-      bucket_name: overwrite-me
-    iam:
-      role_arn: overwrite-me

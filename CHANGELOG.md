@@ -1,5 +1,5 @@
 ### 2.7.1
-*
+* Move CodeBuild and CodePipeline support to aem-platform-ci repo
 
 ### 2.7.0
 * Add AEM start options support
