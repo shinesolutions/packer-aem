@@ -168,8 +168,8 @@ define ami_ids_examples
 endef
 
 ami-ids-examples: stage
-	$(call ami_ids_examples,aem62-rhel7)
-	$(call ami_ids_examples,aem63-rhel7)
+	$(call ami_ids_examples,aws-rhel7-aem62)
+	$(call ami_ids_examples,aws-rhel7-aem63)
 
 # convenient target for creating certificate using OpenSSL
 create-cert:
