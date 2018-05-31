@@ -1,3 +1,6 @@
+### 2.7.2
+*
+
 ### 2.7.1
 * Move CodeBuild and CodePipeline support to aem-platform-ci repo
 * Add support for AEM 6.3 SP2 CFP1 AMI baking
