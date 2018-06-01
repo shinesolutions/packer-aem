@@ -1,3 +1,6 @@
+### 2.7.3
+*
+
 ### 2.7.2
 * Upgrade ruby-aem_aws to 1.0.0 
 
