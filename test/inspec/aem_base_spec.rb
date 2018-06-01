@@ -7,5 +7,5 @@ describe package('ruby_aem') do
 end
 
 describe package('ruby_aem_aws') do
-  it { should be_installed.by('gem').with_version('0.9.3') }
+  it { should be_installed.by('gem').with_version('1.0.0') }
 end
