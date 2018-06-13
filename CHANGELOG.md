@@ -1,8 +1,8 @@
 ### 2.7.3
-*
+* Upgrade ruby_aem_aws to 1.1.0
 
 ### 2.7.2
-* Upgrade ruby-aem_aws to 1.0.0 
+* Upgrade ruby_aem_aws to 1.0.0 
 
 ### 2.7.1
 * Move CodeBuild and CodePipeline support to aem-platform-ci repo
