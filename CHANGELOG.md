@@ -1,3 +1,6 @@
+### 3.0.0
+* Upgrade ruby_aem to 2.0.0 for AEM 6.4 support 
+
 ### 2.7.3
 * Upgrade ruby_aem_aws to 1.1.0
 

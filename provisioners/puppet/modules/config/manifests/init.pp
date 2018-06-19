@@ -29,8 +29,11 @@ class config (
     ensure => installed,
   } -> package { [ 'bundler', 'io-console' ]:
     provider => 'gem',
+  } -> package { 'nokogiri':
+    ensure   => '1.8.2',
+    provider => 'puppet_gem',
   } -> package { 'ruby_aem':
-    ensure   => '1.4.3',
+    ensure   => '2.0.0.beta.3',
     provider => 'puppet_gem',
   } -> package { 'ruby_aem_aws':
     ensure   => '1.1.0',
