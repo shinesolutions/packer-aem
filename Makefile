@@ -8,7 +8,7 @@ all_var_files := $(VAR_FILES) $(ami_var_file)
 # version: version of machine images to be created
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
-packer_aem_version ?= 2.7.1
+packer_aem_version ?= 2.7.3
 
 package: stage/packer-aem-$(packer_aem_version).tar.gz
 
@@ -168,14 +168,8 @@ define ami_ids_examples
 endef
 
 ami-ids-examples: stage
-	$(call ami_ids_examples,aem62-rhel7)
-	$(call ami_ids_examples,aem63-rhel7)
-
-create-ci-aws:
-	scripts/run-playbook.sh create-ci-aws "${config_path}"
-
-delete-ci-aws:
-	scripts/run-playbook.sh delete-ci-aws "${config_path}"
+	$(call ami_ids_examples,aws-rhel7-aem62)
+	$(call ami_ids_examples,aws-rhel7-aem63)
 
 # convenient target for creating certificate using OpenSSL
 create-cert:
