@@ -1,3 +1,6 @@
+### 3.0.0
+*
+
 ### 2.7.3
 * Upgrade ruby_aem_aws to 1.1.0
 * Lock down nokogiri to 1.8.2 due to additional package dependencies in 1.8.3
