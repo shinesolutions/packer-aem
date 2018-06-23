@@ -170,6 +170,7 @@ endef
 ami-ids-examples: stage
 	$(call ami_ids_examples,aws-rhel7-aem62)
 	$(call ami_ids_examples,aws-rhel7-aem63)
+	$(call ami_ids_examples,aws-rhel7-aem64)
 
 # convenient target for creating certificate using OpenSSL
 create-cert:
