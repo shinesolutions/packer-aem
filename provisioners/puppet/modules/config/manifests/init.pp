@@ -33,7 +33,7 @@ class config (
     ensure   => '1.8.2',
     provider => 'puppet_gem',
   } -> package { 'ruby_aem':
-    ensure   => '2.0.0.beta.3',
+    ensure   => '2.0.0',
     provider => 'puppet_gem',
   } -> package { 'ruby_aem_aws':
     ensure   => '1.1.0',
