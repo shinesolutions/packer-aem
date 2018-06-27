@@ -1,5 +1,5 @@
-### 3.0.0
-*
+### 2.8.0
+* Add CloudWatch config for content health check cron log
 
 ### 2.7.3
 * Upgrade ruby_aem_aws to 1.1.0
