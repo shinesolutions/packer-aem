@@ -31,5 +31,6 @@ config::base::cloudwatchlogs_logfiles:
     /var/log/shinesolutions/cron-stack-offline-compaction-snapshot.log: {}
     /var/log/shinesolutions/cron-live-snapshot-backup.log: {}
     /var/log/shinesolutions/cron-export-backups.log: {}
+    /var/log/shinesolutions/cron-content-health-check.log: {}
     /var/log/cloud-init-output.log: {}
     /var/log/dmesg: {}
