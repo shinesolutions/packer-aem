@@ -10,7 +10,7 @@ Frequently Asked Questions
   aws:
     tags:
     - Key: Project
-      Value: Open Source AEM Platform
+      Value: AEM OpenCloud
     - Key: Owner
       Value: Shine Solutions AEM Team
     - Key: Cost Centre
