@@ -1,8 +1,8 @@
 platform_type: aws
 
 aem:
-  artifacts_base: s3://aem-artifacts/adobeaemcloud
-  certs_base: s3://aem-stack-builder/library
+  artifacts_base: s3://aem-opencloud/adobeaemcloud
+  certs_base: s3://aem-opencloud/certs
 
 aws:
   region: ap-southeast-2
@@ -15,7 +15,7 @@ aws:
   data_volume_size: 75
   tags:
     - Key: Project
-      Value: Open Source AEM Platform
+      Value: AEM OpenCloud
     - Key: Owner
       Value: Shine Solutions AEM Team
     - Key: Cost Centre
