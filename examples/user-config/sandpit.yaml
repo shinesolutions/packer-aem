@@ -17,10 +17,3 @@ aem:
     start_opts: "-nofork"
   dispatcher:
     version: 4.2.3
-
-ci:
-  aws:
-    s3:
-      bucket_name: aem-artifacts
-    iam:
-      role_arn: arn:aws:iam::918473058104:role/packer-aem-codebuild-role
