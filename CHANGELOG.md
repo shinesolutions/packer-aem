@@ -1,3 +1,6 @@
+### 3.0.1
+*
+
 ### 3.0.0
 * Upgrade ruby_aem to 2.0.0, puppet-aem-resources to 3.0.0, and puppet-aem-curator to 1.0.0 for AEM 6.4 support 
 
