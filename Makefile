@@ -36,6 +36,14 @@ deps:
 	# TODO: remove when switching back to bstopp/puppet-aem
 	rm -rf modules/aem/.git
 
+# copy local Puppet modules
+# the repositories must be located on the same directory as packer-aem
+deps-local:
+	rm -rf modules/aem_resources/*
+	rm -rf modules/aem_curator/*
+	cp -R ../puppet-aem-resources/* modules/aem_resources/
+	cp -R ../puppet-aem-curator/* modules/aem_curator/
+
 clean:
 	rm -rf bin .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
 
