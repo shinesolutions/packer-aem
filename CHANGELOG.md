@@ -1,3 +1,6 @@
+### 3.0.2
+*
+
 ### 3.0.1
 * Upgrade example config AEM profiles to aem62_sp1_cfp15, aem63_sp2_cfp2, and aem64_sp1
 
