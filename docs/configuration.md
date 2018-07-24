@@ -32,6 +32,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/pa
 | aem.dispatcher.version | AEM Dispatcher version, available version is documented on [Download Dispatcher Web Server Modules](https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher.html) page | Mandatory | `4.2.3` |
 | aem.aem_artifacts_base | Source URL path of AEM artifacts, it could be `s3://...`, `http://...`, `https://...`, or `file://...`. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/artifacts/ | Mandatory | |
 | aem.aem_certs_base | Source URL path of TLS certificate, it could be `s3://...`, `http://...`, `https://...`, or `file://...`. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/certs/ | Mandatory | |
+| aem.enable_custom_image_provisioner | Set to `true` when Custom Image Provisioner pre and post steps will be executed , note: place `aem-custom-image-provisioner.tar.gz` artifact in `stage/custom/` directory | Optional | `false` |
 
 ### AWS platform type configuration properties:
 

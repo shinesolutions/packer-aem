@@ -51,7 +51,7 @@ init:
 	chmod +x scripts/*.sh
 
 stage: init
-	mkdir -p stage/ logs/
+	mkdir -p stage/ stage/custom/ logs/
 
 lint:
 	bundle exec puppet-lint \

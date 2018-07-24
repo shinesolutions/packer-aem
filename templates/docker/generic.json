@@ -20,6 +20,11 @@
       "type": "shell"
     },
     {
+      "source": "stage/custom",
+      "destination": "{{user `tmp_dir`}}",
+      "type": "file"
+    },
+    {
       "execute_command": "{{ .Vars }} bash {{ .Path }}",
       "type": "shell",
       "environment_vars": [
@@ -55,6 +60,18 @@
     },
     {
       "hiera_config_path": "conf/hiera.yaml",
+      "manifest_file": "provisioners/puppet/manifests/custom_stage_pre.pp",
+      "module_paths": [
+        "modules",
+        "provisioners/puppet/modules"
+      ],
+      "execute_command": "export FACTER_component={{user `component`}} && export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "extra_arguments": [],
+      "type": "puppet-masterless"
+    },
+    {
+      "hiera_config_path": "conf/hiera.yaml",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "module_paths": [
         "modules",
@@ -65,6 +82,18 @@
       "extra_arguments": [],
       "type": "puppet-masterless",
       "prevent_sudo": true
+    },
+    {
+      "hiera_config_path": "conf/hiera.yaml",
+      "manifest_file": "provisioners/puppet/manifests/custom_stage_post.pp",
+      "module_paths": [
+        "modules",
+        "provisioners/puppet/modules"
+      ],
+      "execute_command": "export FACTER_component={{user `component`}} && export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}",
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}",
+      "extra_arguments": [],
+      "type": "puppet-masterless"
     },
     {
       "source": "test/inspec",
