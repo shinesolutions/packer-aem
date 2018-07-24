@@ -5,6 +5,8 @@ cloudwatchlogs::region: '{{ aws.region }}'
 config::base::install_amazon_ssm_agent: {{ aws.install_ssm_agent }}
 config::base::install_cloudwatchlogs: {{ aws.install_cloudwatchlogs }}
 
+config::custom_image_provisioner::enable_custom_image_provisioner: {{ aem.enable_custom_image_provisioner }}
+
 amazon_ssm_agent::proxy_url: {{ http_proxy }}
 
 aem_curator::install_java::cert_base_url: {{ aem.certs_base }}

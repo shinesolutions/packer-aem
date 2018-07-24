@@ -17,3 +17,4 @@ aem:
     start_opts: "-nofork"
   dispatcher:
     version: 4.2.3
+  enable_custom_image_provisioner: true

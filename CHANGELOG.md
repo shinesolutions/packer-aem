@@ -1,5 +1,6 @@
 ### 2.8.1
 * Upgrade example config AEM profiles to aem62_sp1_cfp15, aem63_sp2_cfp2, and aem64_sp1
+* Add Custom Image Provisioner pre and post steps support #77
 
 ### 2.8.0
 * Add CloudWatch config for content health check cron log
@@ -9,7 +10,7 @@
 * Lock down nokogiri to 1.8.2 due to additional package dependencies in 1.8.3
 
 ### 2.7.2
-* Upgrade ruby_aem_aws to 1.0.0 
+* Upgrade ruby_aem_aws to 1.0.0
 
 ### 2.7.1
 * Move CodeBuild and CodePipeline support to aem-platform-ci repo
