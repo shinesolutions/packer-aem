@@ -16,3 +16,6 @@ Frequently Asked Questions
     - Key: Cost Centre
       Value: 12345
   ```
+  
+* __Q:__ How to debug the cause of my Custom Image Provisioner failure?<br/>
+  __A:__ You can inspect what's going on within the EC2 instance being created by [debugging Packer](https://www.packer.io/docs/other/debugging.html). This can be done by adding `-debug` flag to `packer build` command within Packer AEM's `Makefile`.
