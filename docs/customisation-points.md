@@ -22,6 +22,6 @@ For example, if you need to set up component-specific configuration for the Splu
 In order to use Custom Image Provisioner, you need to:
 1. Set the configuration property `aem.enable_custom_image_provisioner` to `true`
 2. Place the artifact at `stage/custom/aem-custom-image-provisioner.tar.gz`
-3. Optionally, if you want to pass in additional runtime info to the provisioner, you can pass an environment variable to the build command `CUSTOM_STAGE_RUN_INFO="Build 123 using Custom Image Provisioner 456" make aws-java config_path=<path/to/config/dir>"`
+3. Optionally, if you want to pass in additional runtime info to the provisioner, you can pass an environment variable to the build command `CUSTOM_STAGE_RUN_INFO="Build 123 using Custom Image Provisioner 456" make aws-java config_path=<path/to/config/dir>"`. This info is accessible as a global Facter fact `::custom_stage_run_info`.
 
 To get an idea how this artifact should be structured, please have a look at the example repository [AEM Hello World Custom Image Provisioner](https://github.com/shinesolutions/aem-helloworld-custom-image-provisioner).
