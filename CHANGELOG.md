@@ -1,3 +1,6 @@
+### 2.9.1
+*
+
 ### 2.9.0
 * Upgrade example config AEM profiles to aem62_sp1_cfp15, aem63_sp2_cfp2, and aem64_sp1
 * Add Custom Image Provisioner pre and post steps support #77
