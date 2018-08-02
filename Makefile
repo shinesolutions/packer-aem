@@ -38,7 +38,7 @@ deps:
 
 # copy local Puppet modules
 # the repositories must be located on the same directory as packer-aem
-deps-local:
+deps-local: deps
 	cd ../puppet-aem-resources && make clean deps lint
 	cd ../puppet-aem-curator && make clean deps lint
 	rm -rf modules/aem_resources/*
@@ -173,7 +173,10 @@ config-examples-docker-centos7-aem63: stage
 	$(call config_examples,docker,centos7,aem63)
 
 test-integration-local-aws-rhel7-aem62: config-examples-aws-rhel7-aem62 deps-local
-	./test/integration/test-examples-local.sh $(test_id) aws rhel7 aem62
+	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem62
+
+test-integration-aws-rhel7-aem62: config-examples-aws-rhel7-aem62 deps
+	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem62
 
 define ami_ids_examples
   make config-examples-$(1)
