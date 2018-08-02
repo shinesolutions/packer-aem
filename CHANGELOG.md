@@ -1,7 +1,8 @@
-### 2.8.1
+### 2.9.0
 * Upgrade example config AEM profiles to aem62_sp1_cfp15, aem63_sp2_cfp2, and aem64_sp1
 * Add Custom Image Provisioner pre and post steps support #77
 * Upgrade ruby_aem to 1.5.0
+* Upgrade aem_curator and aem_resources to support new system users provisioning
 
 ### 2.8.0
 * Add CloudWatch config for content health check cron log
