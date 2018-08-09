@@ -7,3 +7,9 @@ config::base::tmp_dir: /tmp/shinesolutions/packer-aem
 config::custom_image_provisioner::source_file: "%{hiera('config::base::tmp_dir')}/aem-custom-image-provisioner.tar.gz"
 # don't include trailing slash on the install_dir below, this is because Puppet Exec command can't handle double slashes
 config::custom_image_provisioner::install_dir: "%{hiera('config::base::tmp_dir')}/aem-custom-image-provisioner"
+
+# allow custom stage pre and post steps to run for 1 hour each
+# if the steps require more than 1 hour then it shouldn't be part of custom
+# image provisioner, instead it should be baked into a base AMI
+config::custom_image_provisioner::pre::timeout: 3600
+config::custom_image_provisioner::post::timeout: 3600

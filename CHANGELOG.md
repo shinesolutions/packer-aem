@@ -1,5 +1,6 @@
 ### 2.9.1
 * Add AEM Hello World Custom Image Provisioner to integration test #79
+* Add custom stage pre and post steps' timeout, default set to 1 hour
 
 ### 2.9.0
 * Upgrade example config AEM profiles to aem62_sp1_cfp15, aem63_sp2_cfp2, and aem64_sp1
