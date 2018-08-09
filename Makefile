@@ -9,6 +9,7 @@ all_var_files := $(VAR_FILES) $(ami_var_file)
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
 packer_aem_version ?= 3.1.0
+aem_helloworld_custom_image_provisioner_version = 0.9.0
 
 package: stage/packer-aem-$(packer_aem_version).tar.gz
 
@@ -45,6 +46,15 @@ deps-local: deps
 	rm -rf modules/aem_curator/*
 	cp -R ../puppet-aem-resources/* modules/aem_resources/
 	cp -R ../puppet-aem-curator/* modules/aem_curator/
+
+deps-test:
+	wget "https://github.com/shinesolutions/aem-helloworld-custom-image-provisioner/releases/download/${aem_helloworld_custom_image_provisioner_version}/aem-helloworld-custom-image-provisioner-${aem_helloworld_custom_image_provisioner_version}.tar.gz" \
+	  -O stage/custom/aem-custom-image-provisioner.tar.gz
+
+deps-test-local:
+	cd ../aem-helloworld-custom-image-provisioner && make clean deps lint package
+	rm -rf stage/custom/aem-custom-image-provisioner.tar.gz
+	cp ../aem-helloworld-custom-image-provisioner/stage/*.tar.gz stage/custom/custom/aem-custom-image-provisioner.tar.gz
 
 clean:
 	rm -rf bin .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
@@ -172,10 +182,10 @@ config-examples-docker-centos7-aem62: stage
 config-examples-docker-centos7-aem63: stage
 	$(call config_examples,docker,centos7,aem63)
 
-test-integration-local-aws-rhel7-aem62: config-examples-aws-rhel7-aem62 deps-local
+test-integration-local-aws-rhel7-aem62: config-examples-aws-rhel7-aem62 deps-local deps-test-local
 	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem62
 
-test-integration-aws-rhel7-aem62: config-examples-aws-rhel7-aem62 deps
+test-integration-aws-rhel7-aem62: config-examples-aws-rhel7-aem62 deps deps-test
 	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem62
 
 define ami_ids_examples

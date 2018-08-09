@@ -1,6 +1,7 @@
 ### 3.1.0
 * Upgrade ruby_aem to 2.1.0
 * Upgrade aem_curator and aem_resources to support new system users provisioning
+* Add AEM Hello World Custom Image Provisioner to integration test #79
 
 ### 3.0.1
 * Upgrade example config AEM profiles to aem62_sp1_cfp15, aem63_sp2_cfp2, and aem64_sp1
