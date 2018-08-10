@@ -133,10 +133,14 @@ class config::base (
     }
   }
 
+  if ($::operatingsystem == 'Amazon') and ($::operatingsystemmajrelease == '2') {
+    $service_name = 'awslogsd'
+  } else { $service_name = 'awslogs'}
+
   if $install_cloudwatchlogs {
     class { '::cloudwatchlogs': }
     Cloudwatchlogs::Log {
-      notify => Service['awslogs'],
+      notify => Service[$service_name],
     }
     create_resources(
       cloudwatchlogs::log,
@@ -151,7 +155,7 @@ class config::base (
         group   => 'root',
         mode    => '0644',
         content => epp('config/cloudwatch_proxy.conf.epp'),
-        notify  => Service['awslogs'],
+        notify  => Service[$service_name],
       }
     }
   }

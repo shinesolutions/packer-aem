@@ -12,25 +12,25 @@ define config::cloudwatchlogs_aem (
   ]
   $aem_unknown_datetime_files.each |$file| {
     cloudwatchlogs::log { "${aem_log_dir}/${file}":
-      notify          => Service['awslogs'],
+      notify          => Service[$service_name],
     }
   }
   $aem_apache_datetime_files.each |$file| {
     cloudwatchlogs::log { "${aem_log_dir}/${file}":
       datetime_format => '%d/%b/%Y:%H:%M:%S %z',
-      notify          => Service['awslogs'],
+      notify          => Service[$service_name],
     }
   }
   $aem_stdout_datetime_files.each |$file| {
     cloudwatchlogs::log { "${aem_log_dir}/${file}":
       datetime_format => '%d.%m.%Y %H:%M:%S.%f',
-      notify          => Service['awslogs'],
+      notify          => Service[$service_name],
     }
   }
   $aem_iso8601_datetime_files.each |$file| {
     cloudwatchlogs::log { "${aem_log_dir}/${file}":
       datetime_format => '%Y-%m-%dT%H:%M:%S.%f%z',
-      notify          => Service['awslogs'],
+      notify          => Service[$service_name],
     }
   }
 
