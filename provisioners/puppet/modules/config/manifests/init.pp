@@ -38,8 +38,8 @@ class config (
   } -> package { 'ruby_aem_aws':
     ensure   => '1.1.0',
     provider => 'puppet_gem',
-  } -> package { 'inspec':
-    ensure   => '1.51.6',
-    provider => 'puppet_gem',
-  }
+  } #-> package { 'inspec':
+  #   ensure   => '1.51.6',
+  #   provider => 'puppet_gem',
+  # }
 }
