@@ -7,6 +7,9 @@ config::base::install_cloudwatchlogs: {{ aws.install_cloudwatchlogs }}
 
 config::custom_image_provisioner::enable_custom_image_provisioner: {{ aem.enable_custom_image_provisioner }}
 
+config::custom_image_provisioner::pre::timeout: {{ custom_image_provisioner.pre.timeout }}
+config::custom_image_provisioner::post::timeout: {{ custom_image_provisioner.post.timeout }}
+
 amazon_ssm_agent::proxy_url: {{ http_proxy }}
 
 aem_curator::install_java::cert_base_url: {{ aem.certs_base }}

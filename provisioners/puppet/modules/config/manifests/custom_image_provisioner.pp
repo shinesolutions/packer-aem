@@ -16,6 +16,10 @@ class config::custom_image_provisioner (
 
 }
 
+# allow custom stage pre and post steps to run for 1 hour each
+# if the steps require more than 1 hour then it shouldn't be part of custom
+# image provisioner, instead it should be baked into a base AMI
+
 class config::custom_image_provisioner::pre (
   $timeout,
 ) {

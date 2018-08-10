@@ -11,6 +11,12 @@ timezone:
   region: Australia
   locality: Melbourne
 
+custom_image_provisioner:
+  pre:
+    timeout: 3600
+  post:
+    timeout: 3600
+
 aws:
   user: ec2-user
   region: 'ap-southeast-2'
