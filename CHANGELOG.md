@@ -1,3 +1,6 @@
+### 2.9.2
+*
+
 ### 2.9.1
 * Add AEM Hello World Custom Image Provisioner to integration test #79
 * Add new configuration custom_image_provisioner.pre.timeout and custom_image_provisioner.post.timeout
