@@ -1,3 +1,6 @@
+### 3.1.1
+*
+
 ### 3.1.0
 * Upgrade ruby_aem to 2.1.0
 * Upgrade aem_curator and aem_resources to support new system users provisioning
