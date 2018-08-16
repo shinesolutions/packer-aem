@@ -1,7 +1,7 @@
 Customisation Points
 --------------------
 
-Since every user has a unique standard operating environment and security requirements, Packer AEM provides two customisation points where user can provision any specific setup.
+Since every user has a unique standard operating environment and security requirements, Packer AEM provides three customisation points where user can provision any specific setup.
 
 ### Source Image
 
@@ -12,6 +12,13 @@ For example, if you need to install additional software such as [Splunk Universa
 For AWS, the source AMI ID can be configured in `aws.source_ami`.
 
 For Docker, the source Docker image name can be configured in `docker.source`.
+
+### Configuration
+
+You can set up a number of [configuration properties](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md) to suit your requirements.
+Have a look at the [user config examples](https://github.com/shinesolutions/packer-aem/tree/master/examples/user-config) for reference on what configuration values you need to set for various AEM versions, various OS types, and various platforms.
+
+This allows you to create a number of configuration profiles. For example, if your team is primarily using AEM 6.3 on RHEL 7 but there is also an effort to upgrade to AEM 6.4 happening in parallel, then you need two configuration profiles, one for AEM 6.3 RHEL 7, the other one is AEM 6.4 RHEL 7.
 
 ### Custom Image Provisioner
 
