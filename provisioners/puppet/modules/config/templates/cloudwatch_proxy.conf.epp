@@ -1,3 +1,3 @@
-HTTP_PROXY=http://<%= $config::base::proxy_server_name %>:<%= $config::base::proxy_server_port %>
-HTTPS_PROXY=https://<%= $config::base::proxy_server_name %>:<%= $config::base::proxy_server_port %>
-NO_PROXY=169.254.169.254
+HTTP_PROXY=<%= $config::base::http_proxy %>
+HTTPS_PROXY=<%= $config::base::https_proxy %>
+NO_PROXY=169.254.169.254,<%= $config::base::no_proxy %>
