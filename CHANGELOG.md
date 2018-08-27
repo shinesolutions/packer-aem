@@ -1,5 +1,5 @@
 ### 3.1.1
-*
+* Add proxy settings for CloudWatch in /var/awslogs/etc/proxy.conf.
 
 ### 3.1.0
 * Upgrade ruby_aem to 2.1.0
