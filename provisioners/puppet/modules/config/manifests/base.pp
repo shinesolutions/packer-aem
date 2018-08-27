@@ -45,15 +45,17 @@
 # [*collectd_packages*]
 #   An array of extra packages to install when installing collectd.
 #
-# [*proxy_server_name*]
-#   Date type: String
-#   Name of proxy host should cloudwatch logs need to communicate via a proxy
+# [*http_proxy*]
+#   Http proxy setting should cloudwatch logs need to communicate via a proxy
 #   Default value: undef
 #
-# [*proxy_server_port*]
-#   Date type: String
-#   Port on proxy host should cloudwatch logs need to communicate via a proxy
-#   Default value: 3128
+# [*https_proxy*]
+#   Https proxy setting should cloudwatch logs need to communicate via a proxy
+#   Default value: undef
+#
+# [*no_proxy*]
+#   No proxy setting should cloudwatch logs need to communicate via a proxy
+#   Default value: undef
 #
 #
 # === Authors
@@ -80,8 +82,9 @@ class config::base (
   $cloudwatchlogs_logfiles          = {},
   $cloudwatchlogs_logfiles_defaults = {},
   $collectd_packages = [],
-  $proxy_server_name = undef,
-  $proxy_server_port = '3128',
+  $http_proxy = undef,
+  $https_proxy = undef,
+  $no_proxy = undef,
 ){
   require ::config
 
@@ -144,7 +147,8 @@ class config::base (
       $cloudwatchlogs_logfiles_defaults,
     )
 
-    if defined('$proxy_server_name') {
+    if defined('$https_proxy') {
+      # Including /etc/... proxy configuration for backward compatibility
       file {'/etc/awslogs/proxy.conf':
         ensure  => present,
         owner   => 'root',
@@ -152,6 +156,24 @@ class config::base (
         mode    => '0644',
         content => epp('config/cloudwatch_proxy.conf.epp'),
         notify  => Service['awslogs'],
+      }
+      file_line { 'Set CloudWatch Proxy: http_proxy':
+        path    => '/var/awslogs/etc/proxy.conf',
+        line    => "HTTP_PROXY=${http_proxy}",
+        match   => '^HTTP_PROXY=.*$',
+        require => Class['::cloudwatchlogs'],
+      }
+      file_line { 'Set CloudWatch Proxy: https_proxy':
+        path    => '/var/awslogs/etc/proxy.conf',
+        line    => "HTTPS_PROXY=${https_proxy}",
+        match   => '^HTTPS_PROXY=.*$',
+        require => Class['::cloudwatchlogs'],
+      }
+      file_line { 'Set CloudWatch Proxy: no_proxy':
+        path    => '/var/awslogs/etc/proxy.conf',
+        line    => "NO_PROXY=${no_proxy}",
+        match   => '^NO_PROXY=.*$',
+        require => Class['::cloudwatchlogs'],
       }
     }
   }
