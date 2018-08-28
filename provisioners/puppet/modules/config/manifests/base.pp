@@ -148,15 +148,6 @@ class config::base (
     )
 
     if defined('$https_proxy') {
-      # Including /etc/... proxy configuration for backward compatibility
-      file {'/etc/awslogs/proxy.conf':
-        ensure  => present,
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        content => epp('config/cloudwatch_proxy.conf.epp'),
-        notify  => Service['awslogs'],
-      }
       file_line { 'Set CloudWatch Proxy: http_proxy':
         path    => '/var/awslogs/etc/proxy.conf',
         line    => "HTTP_PROXY=${http_proxy}",
