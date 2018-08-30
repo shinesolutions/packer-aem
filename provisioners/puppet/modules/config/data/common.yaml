@@ -3,6 +3,7 @@ config::base::python_package: python
 config::base::python_pip_package: python-pip
 config::base::python_cheetah_package: python-cheetah
 config::base::tmp_dir: /tmp/shinesolutions/packer-aem
+config::base::awslogs_proxy_path: /var/awslogs/etc/proxy.conf
 
 config::custom_image_provisioner::source_file: "%{hiera('config::base::tmp_dir')}/aem-custom-image-provisioner.tar.gz"
 # don't include trailing slash on the install_dir below, this is because Puppet Exec command can't handle double slashes

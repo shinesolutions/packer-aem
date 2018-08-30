@@ -71,6 +71,7 @@ class config::base (
   $python_package,
   $python_pip_package,
   $python_cheetah_package,
+  $awslogs_proxy_path,
   $rhn_register = false,
   $disable_selinux = true,
   $install_aws_cli = true,
@@ -147,26 +148,31 @@ class config::base (
       $cloudwatchlogs_logfiles_defaults,
     )
 
-    if defined('$https_proxy') {
+    if defined('$http_proxy') {
       file_line { 'Set CloudWatch Proxy: http_proxy':
-        path    => '/var/awslogs/etc/proxy.conf',
-        line    => "HTTP_PROXY=${http_proxy}",
-        match   => '^HTTP_PROXY=.*$',
-        require => Class['::cloudwatchlogs'],
-      }
-      file_line { 'Set CloudWatch Proxy: https_proxy':
-        path    => '/var/awslogs/etc/proxy.conf',
-        line    => "HTTPS_PROXY=${https_proxy}",
-        match   => '^HTTPS_PROXY=.*$',
-        require => Class['::cloudwatchlogs'],
-      }
-      file_line { 'Set CloudWatch Proxy: no_proxy':
-        path    => '/var/awslogs/etc/proxy.conf',
-        line    => "NO_PROXY=${no_proxy}",
-        match   => '^NO_PROXY=.*$',
-        require => Class['::cloudwatchlogs'],
+        path      => $awslogs_proxy_path,
+        line      => "HTTP_PROXY=${http_proxy}",
+        match     => '^HTTP_PROXY=.*$',
+        subscribe => Service['awslogs'],
       }
     }
+    if defined('$https_proxy') {
+      file_line { 'Set CloudWatch Proxy: https_proxy':
+        path      => $awslogs_proxy_path,
+        line      => "HTTPS_PROXY=${https_proxy}",
+        match     => '^HTTPS_PROXY=.*$',
+        subscribe => Service['awslogs'],
+      }
+    }
+    if defined('$no_proxy') {
+      file_line { 'Set CloudWatch Proxy: no_proxy':
+        path      => $awslogs_proxy_path,
+        line      => "NO_PROXY=${no_proxy}",
+        match     => '^NO_PROXY=.*$',
+        subscribe => Service['awslogs'],
+      }
+    }
+
   }
 
   if $install_collectd {
