@@ -1,5 +1,5 @@
 ### 2.9.2
-*
+* Modify proxy setting config file for CloudWatch to /var/awslogs/etc/proxy.conf
 
 ### 2.9.1
 * Add AEM Hello World Custom Image Provisioner to integration test #79
