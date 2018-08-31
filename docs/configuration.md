@@ -16,6 +16,8 @@ Check out the [example configuration files](https://github.com/shinesolutions/pa
 | no_proxy | A comma separated value of domain suffixes that you don't want to use with the web proxy. | Optional | Empty string |
 | timezone.region | [Timezone region name as per tz database list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) | Optional | `Australia` |
 | timezone.locality | [Timezone locality name as per tz database list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) | Optional | `Melbourne` |
+| custom_image_provisioner.pre.timeout | The maximum duration (in seconds) allowed for Custom Image Provisioner pre step to run. | Optional | `3600` |
+| custom_image_provisioner.post.timeout | The maximum duration (in seconds) allowed for Custom Image Provisioner post step to run. | Optional | `3600` |
 
 ### AEM configuration properties:
 
