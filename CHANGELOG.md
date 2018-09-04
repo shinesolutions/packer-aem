@@ -1,4 +1,4 @@
-### 2.9.3
+### 2.10.0
 * Remove AMI ID variable file support
 
 ### 2.9.2
