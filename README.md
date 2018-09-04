@@ -23,7 +23,6 @@ Installation
 - Either clone Packer AEM `git clone https://github.com/shinesolutions/packer-aem.git` or download one of the [released versions](https://github.com/shinesolutions/packer-aem/releases)
 - Install the following required tools:
   * [Packer](https://www.packer.io/) version 1.0.0 or later
-  * [Packer Post-Processor JSON Updater](https://github.com/cliffano/packer-post-processor-json-updater) version 1.2 or later
   * [Ruby](https://www.ruby-lang.org/en/) version 2.1.0 or later
   * [Python](https://www.python.org/downloads/) version 2.7.x
   * [GNU Make](https://www.gnu.org/software/make/)<br/>

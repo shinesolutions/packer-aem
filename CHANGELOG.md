@@ -1,5 +1,5 @@
 ### 3.1.1
-*
+* Remove AMI ID variable file support
 
 ### 3.1.0
 * Upgrade ruby_aem to 2.1.0
