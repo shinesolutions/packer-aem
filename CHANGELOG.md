@@ -1,5 +1,5 @@
 ### 2.9.3
-*
+* Remove AMI ID variable file support
 
 ### 2.9.2
 * Modify proxy setting config file for CloudWatch to /var/awslogs/etc/proxy.conf
