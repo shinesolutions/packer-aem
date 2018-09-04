@@ -3,8 +3,7 @@ AWS_IMAGES = aws-java aws-author aws-publish aws-dispatcher
 DOCKER_IMAGES = docker-java docker-author docker-publish docker-dispatcher
 VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
-ami_var_file ?= stage/ami-ids.json
-all_var_files := $(VAR_FILES) $(ami_var_file)
+all_var_files := $(VAR_FILES)
 # version: version of machine images to be created
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
@@ -106,7 +105,6 @@ $(AWS_IMAGES): stage
 		packer build \
 		$(VAR_PARAMS) \
 		-var-file=vars/components/$(COMPONENT).json \
-		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'version=$(version)' \
 		templates/aws/generic.json
 
@@ -116,7 +114,6 @@ aws-author-publish-dispatcher: stage
 		packer build \
 		$(VAR_PARAMS) \
 		-var-file=vars/components/author-publish-dispatcher.json \
-		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'version=$(version)' \
 		templates/aws/author-publish-dispatcher.json
 
@@ -127,7 +124,6 @@ $(DOCKER_IMAGES): stage
 		packer build \
 		$(VAR_PARAMS) \
 		-var-file=vars/components/$(COMPONENT).json \
-		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'version=$(version)' \
 		templates/docker/generic.json
 

@@ -229,15 +229,5 @@
       "type": "amazon-ebs",
       "ssh_pty": true
     }
-  ],
-  "post-processors": [
-    {
-      "ami_id": {
-        "{{user `ami_var_file`}}": [
-          "{{user `component`}}"
-        ]
-      },
-      "type": "json-updater"
-    }
   ]
 }

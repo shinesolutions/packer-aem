@@ -1,5 +1,6 @@
 ### 3.1.1
-* Add proxy settings for CloudWatch in /var/awslogs/etc/proxy.conf.
+* Modify proxy setting config file for CloudWatch to /var/awslogs/etc/proxy.conf
+* Remove AMI ID variable file support
 
 ### 3.1.0
 * Upgrade ruby_aem to 2.1.0
