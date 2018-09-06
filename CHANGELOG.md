@@ -1,3 +1,7 @@
+### 2.10.1
+* Add CloudWatch config for SSM commands offline-snapshot
+* Add CloudWatch config for SSM commands offline-compaction-snapshot
+* 
 ### 2.10.0
 * Remove AMI ID variable file support
 

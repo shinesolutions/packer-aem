@@ -25,7 +25,7 @@ config::base::cloudwatchlogs_logfiles:
         datetime_format: '%Y-%m-%d %H:%M:%S'
     /var/log/shinesolutions/puppet-stack-init.log:
         datetime_format: '%Y-%m-%d %H:%M:%S %z'
-        
+
     /var/log/shinesolutions/puppet-deploy-artifacts-init.log: {}
     /var/log/shinesolutions/cron-offline-compaction.log: {}
     /var/log/shinesolutions/cron-stack-offline-snapshot.log: {}
@@ -33,5 +33,7 @@ config::base::cloudwatchlogs_logfiles:
     /var/log/shinesolutions/cron-live-snapshot-backup.log: {}
     /var/log/shinesolutions/cron-export-backups.log: {}
     /var/log/shinesolutions/cron-content-health-check.log: {}
+    /var/log/shinesolutions/ssm-offline-compaction-snapshot.log: {}
+    /var/log/shinesolutions/ssm-offline-snapshot: {}
     /var/log/cloud-init-output.log: {}
     /var/log/dmesg: {}
