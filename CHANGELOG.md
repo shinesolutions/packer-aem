@@ -1,8 +1,7 @@
-### 2.10.1
+### 2.10.0
 * Add CloudWatch config for SSM commands offline-snapshot
 * Add CloudWatch config for SSM commands offline-compaction-snapshot
-* 
-### 2.10.0
+* Lock down awscli version to 1.16.7 let it determine boto dependencies when awscli installation is enabled
 * Remove AMI ID variable file support
 
 ### 2.9.2
