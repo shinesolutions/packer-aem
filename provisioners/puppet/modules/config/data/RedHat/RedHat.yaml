@@ -38,4 +38,5 @@ config::base::cloudwatchlogs_logfiles:
     /var/log/shinesolutions/ssm-offline-snapshot: {}
     /var/log/shinesolutions/ssm-wait-until-service-rady.log: {}
     /var/log/shinesolutions/ssm-manage-service.log: {}
+
     /var/log/dmesg: {}
