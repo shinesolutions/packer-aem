@@ -1,3 +1,11 @@
+### 2.10.1
+* Add CloudWatch config for SSM commands offline-snapshot
+* Add CloudWatch config for SSM commands offline-compaction-snapshot
+* Add CloudWatch config for SSM commands manage-service
+* Add CloudWatch config for SSM commands wait-until-ready
+* Update Cloudwatch config date format for cloud init logfile
+*
+
 ### 2.10.0
 * Remove AMI ID variable file support
 
