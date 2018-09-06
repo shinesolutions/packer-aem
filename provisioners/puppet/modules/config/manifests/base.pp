@@ -121,16 +121,22 @@ class config::base (
     ensure => latest,
   }
 
-  package { [ 'boto3', 'requests', 'retrying', 'sh' ]:
+  package { [ 'requests', 'retrying', 'sh' ]:
     ensure   => latest,
     provider => 'pip',
   }
 
   if $install_aws_cli {
     package { 'awscli':
-      ensure   => latest,
+      ensure   => '1.16.7',
       provider => 'pip',
     }
+  }
+
+  # allow awscli to control boto and boto3 versions if it's enabled, otherwise install
+  package { [ 'boto', 'boto3' ]:
+    ensure   => present,
+    provider => 'pip',
   }
 
   if $install_cloudwatchlogs {

@@ -1,3 +1,6 @@
+### 2.7.4
+* Lock down awscli version to 1.16.7 let it determine boto dependencies when awscli installation is enabled
+
 ### 2.7.3
 * Upgrade ruby_aem_aws to 1.1.0
 * Lock down nokogiri to 1.8.2 due to additional package dependencies in 1.8.3
