@@ -1,12 +1,10 @@
-### 2.10.1
+### 2.10.0
 * Add CloudWatch config for SSM commands offline-snapshot
 * Add CloudWatch config for SSM commands offline-compaction-snapshot
 * Add CloudWatch config for SSM commands manage-service
 * Add CloudWatch config for SSM commands wait-until-ready
 * Update Cloudwatch config date format for cloud init logfile
-*
-
-### 2.10.0
+* Lock down awscli version to 1.16.7 let it determine boto de
 * Remove AMI ID variable file support
 
 ### 2.9.2
