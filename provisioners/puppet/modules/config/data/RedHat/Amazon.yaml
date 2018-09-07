@@ -12,7 +12,9 @@ config::base::cloudwatchlogs_logfiles:
     /var/log/messages:
         datetime_format: '%b %d %H:%M:%S'
     /var/log/cloud-init.log:
-        datetime_format: '%b %d %H:%M:%S'
+        datetime_format: '%Y-%m-%d %H:%M:%S,%L'
+    /var/log/cloud-init-output.log:
+        datetime_format: '%Y-%m-%d %H:%M:%S,%L'
     /var/log/secure:
         datetime_format: '%b %d %H:%M:%S'
     /var/log/yum.log:
@@ -35,5 +37,7 @@ config::base::cloudwatchlogs_logfiles:
     /var/log/shinesolutions/cron-content-health-check.log: {}
     /var/log/shinesolutions/ssm-offline-compaction-snapshot.log: {}
     /var/log/shinesolutions/ssm-offline-snapshot: {}
-    /var/log/cloud-init-output.log: {}
+    /var/log/shinesolutions/ssm-wait-until-service-rady.log: {}
+    /var/log/shinesolutions/ssm-manage-service.log: {}
+
     /var/log/dmesg: {}
