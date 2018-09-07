@@ -4,7 +4,8 @@
 * Add CloudWatch config for SSM commands manage-service
 * Add CloudWatch config for SSM commands wait-until-ready
 * Update Cloudwatch config date format for cloud init logfile
-* Lock down awscli version to 1.16.7 let it determine boto de
+* Lock down awscli version to 1.16.7 let it determine boto dependencies when awscli installation is enabled
+* Lock down boto3 to 1.8.5
 * Remove AMI ID variable file support
 
 ### 2.9.2
