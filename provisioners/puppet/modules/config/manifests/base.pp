@@ -132,7 +132,7 @@ class config::base (
 
   if $install_aws_cli {
     package { 'awscli':
-      ensure   => '1.16.6',
+      ensure   => '1.16.10',
       provider => 'pip',
     }
   }
