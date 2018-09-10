@@ -128,14 +128,18 @@ class config::base (
 
   if $install_aws_cli {
     package { 'awscli':
-      ensure   => '1.16.7',
+      ensure   => '1.15.41',
       provider => 'pip',
     }
   }
-
-  # allow awscli to control boto and boto3 versions if it's enabled, otherwise install
-  package { [ 'boto', 'boto3' ]:
+  # allow awscli to control boto version if it's enabled, otherwise install
+  package { 'boto':
     ensure   => present,
+    provider => 'pip',
+  }
+
+  package { 'boto3':
+    ensure   => '1.7.41',
     provider => 'pip',
   }
 
