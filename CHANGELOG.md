@@ -1,5 +1,7 @@
 ### 3.1.1
 * Remove AMI ID variable file support
+* Lock down awscli version to 1.16.10 let it determine boto dependencies when awscli installation is enabled
+* Lock down boto3 to 1.8.5
 
 ### 3.1.0
 * Upgrade ruby_aem to 2.1.0
