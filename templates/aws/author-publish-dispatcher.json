@@ -166,10 +166,7 @@
         "Application Id": "Adobe Experience Manager (AEM)",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Profile": "{{user `profile`}}",
-        "Cost Centre": 12345,
-        "Project": "AEM OpenCloud",
         "Version": "{{user `version`}}",
-        "Owner": "Shine Solutions AEM Team",
         "OS Type": "{{user `os_type`}}",
         "Application Role": "{{user `component`}} AMI"
       },
@@ -185,10 +182,7 @@
         "Application Id": "Adobe Experience Manager (AEM)",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Profile": "{{user `profile`}}",
-        "Cost Centre": 12345,
-        "Project": "AEM OpenCloud",
         "Version": "{{user `version`}}",
-        "Owner": "Shine Solutions AEM Team",
         "OS Type": "{{user `os_type`}}",
         "Application Role": "{{user `component`}} AMI"
       },
@@ -197,10 +191,7 @@
         "Application Id": "Adobe Experience Manager (AEM)",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Profile": "{{user `profile`}}",
-        "Cost Centre": 12345,
-        "Project": "AEM OpenCloud",
         "Version": "{{user `version`}}",
-        "Owner": "Shine Solutions AEM Team",
         "OS Type": "{{user `os_type`}}",
         "Application Role": "{{user `component`}} AMI"
       },
