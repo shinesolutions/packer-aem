@@ -1,3 +1,6 @@
+### 2.11.0
+*
+
 ### 2.10.0
 * Add CloudWatch config for SSM commands offline-snapshot
 * Add CloudWatch config for SSM commands offline-compaction-snapshot
