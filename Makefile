@@ -7,7 +7,7 @@ all_var_files := $(VAR_FILES)
 # version: version of machine images to be created
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
-packer_aem_version ?= 3.2.0
+packer_aem_version ?= 3.2.1
 aem_helloworld_custom_image_provisioner_version = 0.9.0
 
 package: stage/packer-aem-$(packer_aem_version).tar.gz
