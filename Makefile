@@ -145,6 +145,8 @@ endef
 
 config-examples: stage
 
+config-examples-all: config-examples-aws-rhel7-aem62 config-examples-aws-rhel7-aem63 config-examples-aws-rhel7-aem64 config-examples-aws-centos7-aem62 config-examples-aws-centos7-aem63 config-examples-aws-centos7-aem64 config-examples-aws-amazon-linux2-aem62 config-examples-aws-amazon-linux2-aem63 config-examples-aws-amazon-linux2-aem64 config-examples-docker-centos7-aem62 config-examples-docker-centos7-aem63
+
 config-examples-aws-rhel7-aem62: stage
 	$(call config_examples,aws,rhel7,aem62)
 
