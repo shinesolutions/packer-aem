@@ -1,12 +1,9 @@
-### 3.1.2
+### 3.2.0
 * Add CloudWatch config for SSM commands offline-snapshot
 * Add CloudWatch config for SSM commands offline-compaction-snapshot
 * Add CloudWatch config for SSM commands manage-service
 * Add CloudWatch config for SSM commands wait-until-ready
 * Update Cloudwatch config date format for cloud init logfile
-* 
-
-### 3.1.1
 * Modify proxy setting config file for CloudWatch to /var/awslogs/etc/proxy.conf
 * Remove AMI ID variable file support
 * Lock down awscli version to 1.16.10 let it determine boto dependencies when awscli installation is enabled
