@@ -4,7 +4,7 @@ set -o errexit
 
 yum -y upgrade
 
-rpm -ivh --force https://yum.puppetlabs.com/puppet5/puppet-release-el-7.noarch.rpm
+rpm -ivh --force https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm
 yum -y install puppet-agent epel-release
 
 # Enable the rhui-REGION-rhel-server-optional to install ruby-devel
