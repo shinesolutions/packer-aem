@@ -28,7 +28,7 @@ stage/packer-aem-$(packer_aem_version).tar.gz: stage
 ci: clean deps lint validate package
 
 deps:
-	gem install bundler
+	gem install bundler -v 1.17.3
 	bundle install --binstubs
 	bundle exec r10k puppetfile install --verbose --moduledir modules
 	pip install -r requirements.txt
