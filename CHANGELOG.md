@@ -1,5 +1,5 @@
 ### 2.11.0
-*
+* Fix Puppet installation error due to renamed rpm URL
 
 ### 2.10.0
 * Add CloudWatch config for SSM commands offline-snapshot
