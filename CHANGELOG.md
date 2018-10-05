@@ -1,5 +1,6 @@
 ### 3.2.1
 * Fix Puppet installation error due to renamed rpm URL
+* Upgrade puppet-aem-resources to 3.2.0, puppet-aem-curator to 1.2.0
 
 ### 3.2.0
 * Add CloudWatch config for SSM commands offline-snapshot
