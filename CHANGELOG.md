@@ -1,6 +1,7 @@
 ### 2.11.0
 * Fix Puppet installation error due to renamed rpm URL
 * Upgrade puppet-aem-resources to 2.4.0, puppet-aem-curator to 0.11.2
+* Add collectd plugins java and generic-jmx needed by AEM metric collection via JMX
 
 ### 2.10.0
 * Add CloudWatch config for SSM commands offline-snapshot
