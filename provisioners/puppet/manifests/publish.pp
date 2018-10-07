@@ -11,8 +11,9 @@ if $::config::base::install_cloudwatchlogs {
 }
 
 if $::config::base::install_collectd {
-  config::collectd_java { 'Setup collectd for Java': }
-  collectd::plugin { ['generic-jmx']:
-    ensure => present,
+  collectd::plugin::java { 'Install collectd Java plugin':
+    manage_package => true,
+  } -> collectd::plugin::genericjmx { 'Install collectd JMX plugin':
+    manage_package => true,
   }
 }
