@@ -19,9 +19,9 @@ if $::config::base::install_cloudwatchlogs {
 include aem_curator::install_dispatcher
 
 if $::config::base::install_collectd {
-  collectd::plugin::java { 'Install collectd Java plugin':
+  class { 'collectd::plugin::java':
     manage_package => true,
-  } -> collectd::plugin::genericjmx { 'Install collectd JMX plugin':
+  } -> class { 'collectd::plugin::genericjmx':
     manage_package => true,
   }
 }
