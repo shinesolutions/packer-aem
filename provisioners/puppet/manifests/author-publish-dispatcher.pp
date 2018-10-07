@@ -17,3 +17,10 @@ if $::config::base::install_cloudwatchlogs {
 }
 
 include aem_curator::install_dispatcher
+
+if $::config::base::install_collectd {
+  config::collectd_java { 'Setup collectd for Java': }
+  collectd::plugin { ['generic-jmx']:
+    ensure => present,
+  }
+}
