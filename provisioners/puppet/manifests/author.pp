@@ -9,3 +9,10 @@ if $::config::base::install_cloudwatchlogs {
     aem_id => 'author',
   }
 }
+
+if $::config::base::install_collectd {
+  config::collectd_java { 'Setup collectd for Java': }
+  collectd::plugin { ['generic-jmx']:
+    ensure => present,
+  }
+}
