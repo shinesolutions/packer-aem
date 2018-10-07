@@ -7,5 +7,7 @@ if $::config::base::install_cloudwatchlogs {
 }
 
 if $::config::base::install_collectd {
-  config::collectd_java { 'Setup collectd for Java': }
+  collectd::plugin::java { 'Install collectd Java plugin':
+    manage_package => true,
+  }
 }
