@@ -11,9 +11,7 @@ if $::config::base::install_cloudwatchlogs {
 }
 
 if $::config::base::install_collectd {
-class { 'collectd::plugin::java':
-  manage_package => true,
-} -> class { 'collectd::plugin::genericjmx':
-  manage_package => true,
-}
+  class { 'collectd::plugin::genericjmx':
+    manage_package => true,
+  }
 }
