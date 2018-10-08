@@ -19,7 +19,5 @@ if $::config::base::install_cloudwatchlogs {
 include aem_curator::install_dispatcher
 
 if $::config::base::install_collectd {
-  class { 'collectd::plugin::genericjmx':
-    manage_package => true,
-  }
+  config::collectd_jmx { 'Setup collectd-generic-jmx plugin': }
 }
