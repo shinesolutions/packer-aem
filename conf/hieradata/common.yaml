@@ -13,6 +13,9 @@ oracle_java::version_build: '12'
 aem_curator::install_java::cert_base_url: s3://overwrite-me/certs/
 aem_curator::install_java::tmp_dir: "%{lookup('tmp_dir')}"
 
+# disable collectd-java plugin installation when collectd-generic-jmx is provisioned
+collectd::plugin::java::ensure: absent
+
 aem_curator::install_author::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_author::aem_host: localhost
 aem_curator::install_author::aem_healthcheck_version: "1.3.3"
