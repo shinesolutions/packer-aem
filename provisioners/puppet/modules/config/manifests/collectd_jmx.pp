@@ -7,6 +7,7 @@ define config::collectd_jmx (
   class { 'collectd::plugin::genericjmx':
     manage_package => true,
   } -> exec { 'alternatives --set java /usr/java/jdk1.8.0_141/jre/bin/java':
+    path => [ '/bin', '/sbin', '/usr/bin', '/usr/sbin' ],
   }
 
 }
