@@ -15,6 +15,8 @@ package: stage/packer-aem-$(packer_aem_version).tar.gz
 stage/packer-aem-$(packer_aem_version).tar.gz: stage
 	tar \
 	    --exclude='stage*' \
+			--exclude='.bundle' \
+			--exclude='bin' \
 	    --exclude='.git*' \
 	    --exclude='.tmp*' \
 	    --exclude='.idea*' \
@@ -56,7 +58,7 @@ deps-test-local:
 	cp ../aem-helloworld-custom-image-provisioner/stage/*.tar.gz stage/custom/custom/aem-custom-image-provisioner.tar.gz
 
 clean:
-	rm -rf bin .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
+	rm -rf bin .bundle .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
 
 init:
 	chmod +x scripts/*.sh
