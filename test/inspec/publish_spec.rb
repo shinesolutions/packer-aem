@@ -45,6 +45,10 @@ describe service('aem-publish') do
   it { should_not be_running }
 end
 
+describe file('/opt/aem/publish/crx-quickstart/conf/cq.pid') do
+  it { should_not exist }
+end
+
 describe file('/etc/puppetlabs/puppet/publish.yaml') do
   it { should be_file }
   it { should exist }

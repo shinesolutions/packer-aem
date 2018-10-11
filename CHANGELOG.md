@@ -1,5 +1,5 @@
 ### 2.11.1
-*
+* Add InSpec check to ensure cq.pid doesn't exist on author, publish, author-publish-dispatcher components
 
 ### 2.11.0
 * Fix Puppet installation error due to renamed rpm URL
