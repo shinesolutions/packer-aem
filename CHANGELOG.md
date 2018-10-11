@@ -1,3 +1,6 @@
+### 2.11.2
+*
+
 ### 2.11.1
 * Add InSpec check to ensure cq.pid doesn't exist on author, publish, author-publish-dispatcher components
 
