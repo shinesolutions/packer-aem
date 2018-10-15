@@ -8,6 +8,7 @@ packer_cache/
 Gemfile.lock
 .DS_Store
 stage/
+vendor/
 *.pem
 logs/
 .gem
