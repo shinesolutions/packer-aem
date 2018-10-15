@@ -46,7 +46,7 @@ describe service('aem-author') do
   it { should_not be_running }
 end
 
-describe file('/opt/aem/author/crx-quickstart/conf/cq.pid') do
+describe file("#{aem_base}/aem/author/crx-quickstart/conf/cq.pid") do
   it { should_not exist }
 end
 
@@ -102,7 +102,7 @@ describe service('aem-publish') do
   it { should_not be_running }
 end
 
-describe file('/opt/aem/publish/crx-quickstart/conf/cq.pid') do
+describe file("#{aem_base}/aem/publish/crx-quickstart/conf/cq.pid") do
   it { should_not exist }
 end
 
