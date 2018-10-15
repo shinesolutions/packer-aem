@@ -1,5 +1,5 @@
 ### 2.11.2
-*
+* Increase post AEM stop delay to 5 minutes, to match service post stop timeout
 
 ### 2.11.1
 * Add InSpec check to ensure cq.pid doesn't exist on author, publish, author-publish-dispatcher components
