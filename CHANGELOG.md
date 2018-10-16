@@ -1,3 +1,6 @@
+### 2.11.3
+*
+
 ### 2.11.2
 * Increase post AEM stop delay to 5 minutes, to match service post stop timeout
 * Move Puppet AEM resource stopped status check from Packer templates to puppet-aem-curator
