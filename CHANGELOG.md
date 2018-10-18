@@ -1,3 +1,6 @@
+### 3.2.2
+* Add tomcat service installation for java component #89
+
 ### 3.2.1
 * Fix Puppet installation error due to renamed rpm URL
 * Upgrade puppet-aem-resources to 3.2.0, puppet-aem-curator to 1.2.2
