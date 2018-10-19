@@ -33,6 +33,7 @@ aem_curator::install_author::aem_jvm_mem_opts: "-Xss4m -Xmx8192m"
 aem_curator::install_author::setup_repository_volume: true
 aem_curator::install_author::repository_volume_device: /dev/xvdb
 aem_curator::install_author::repository_volume_mount_point: /mnt/ebs1
+aem_curator::install_author::post_stop_sleep_secs: 300
 
 aem_curator::install_publish::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_publish::aem_host: localhost
@@ -54,6 +55,7 @@ aem_curator::install_publish::aem_jvm_mem_opts: "-Xss4m -Xmx8192m"
 aem_curator::install_publish::setup_repository_volume: true
 aem_curator::install_publish::repository_volume_device: /dev/xvdb
 aem_curator::install_publish::repository_volume_mount_point: /mnt/ebs1
+aem_curator::install_author::post_stop_sleep_secs: 300
 
 aem_curator::install_dispatcher::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_dispatcher::cert_base_url: s3://overwrite-me/certs/

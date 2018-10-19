@@ -1,4 +1,5 @@
 ### 3.2.1
+* Increase post AEM stop delay to 5 minutes, to match service post stop timeout
 * Add InSpec check to ensure cq.pid doesn't exist on author, publish, author-publish-dispatcher components
 * Fix Puppet installation error due to renamed rpm URL
 * Upgrade puppet-aem-resources to 3.2.0, puppet-aem-curator to 1.2.2
