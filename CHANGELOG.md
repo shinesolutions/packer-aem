@@ -1,5 +1,6 @@
 ### 2.11.3
 * Add tomcat service installation for java component #89
+* Upgrade aem_curator to 0.11.6 and aem_resources to 2.4.1
 
 ### 2.11.2
 * Increase post AEM stop delay to 5 minutes, to match service post stop timeout
