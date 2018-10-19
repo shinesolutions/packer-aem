@@ -1,4 +1,4 @@
-### 2.11.3
+### 2.12.0
 * Add tomcat service installation for java component #89
 * Upgrade aem_curator to 0.11.6 and aem_resources to 2.4.1
 
