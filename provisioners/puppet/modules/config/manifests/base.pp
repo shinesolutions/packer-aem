@@ -187,7 +187,7 @@ class config::base (
 
   if $install_collectd {
     $collectd_plugins = [
-      'syslog', 'cpu', 'interface', 'load', 'memory',
+      'syslog', 'cpu', 'interface', 'load', 'memory'
     ]
     package { $collectd_packages:
       ensure => installed,
