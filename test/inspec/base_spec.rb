@@ -53,7 +53,7 @@ end
 
 if install_cloudwatchlogs == true
 
-  describe service('awslogs') do
+  describe service(@hiera.lookup('base::awslogs_service', 'awslogs', @scope)) do
     it { should be_enabled }
     it { should be_running }
   end
