@@ -19,7 +19,7 @@ mod 'MiamiOH/tcpwrappers', '1.1.0'
 mod 'aco-oracle_java', '2.8.3'
 mod 'bstopp/aem', :git => 'https://github.com/shinesolutions/puppet-aem', :commit => '2d39c43e0625fcb625184b8724c8c475f4bb4ebd'
 mod 'puppet-healthcheck', '0.4.0'
-mod 'puppetlabs/apache', :git => 'https://github.com/shinesolutions/puppetlabs-apache', :commit => '8aaf1dec566454d5f74510e324b29a899b98f53c'
+mod 'puppetlabs/apache', :git => 'https://github.com/engshine/puppetlabs-apache'
 mod 'puppetlabs/java_ks', '1.6.0'
 mod 'shinesolutions/aem_resources', '3.1.0'
 
