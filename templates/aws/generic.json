@@ -151,7 +151,7 @@
           "volume_size": "{{user `data_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "/dev/sdb"
+          "device_name": "/dev/xvdc"
         }
       ],
       "communicator": "ssh",
