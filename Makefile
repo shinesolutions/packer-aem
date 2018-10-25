@@ -32,6 +32,8 @@ deps:
 	gem install bundler
 	bundle install --binstubs
 	bundle exec r10k puppetfile install --verbose --moduledir modules
+	# this is just a hack for now to forcibly uninstall PyYAML and re-install via pip
+	rpm -e --nodeps PyYAML
 	pip install -r requirements.txt
 	# only needed while using shinesolutions/puppet-aem fork
 	# TODO: remove when switching back to bstopp/puppet-aem
