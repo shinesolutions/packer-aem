@@ -1,5 +1,5 @@
 ### 3.3.1
-*
+* Upgrade puppet-amazon-ssm-agent to 0.9.3
 
 ### 3.3.0
 * Add tomcat service installation for java component #89
