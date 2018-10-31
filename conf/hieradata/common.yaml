@@ -66,3 +66,5 @@ aem_curator::install_dispatcher::apache_module_filename: dispatcher-apache2.4-4.
 aem_curator::install_dispatcher::apache_module_temp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_dispatcher::apache_http_port: "80"
 aem_curator::install_dispatcher::apache_https_port: "443"
+
+base::awslogs_proxy_path: /var/awslogs/etc/proxy.conf

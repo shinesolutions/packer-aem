@@ -167,7 +167,7 @@ class config::base (
         path      => $awslogs_proxy_path,
         line      => "HTTP_PROXY=${http_proxy}",
         match     => '^HTTP_PROXY=.*$',
-        subscribe => Service['awslogs'],
+        subscribe => Service[$service_name],
       }
     }
     if defined('$https_proxy') {
@@ -175,7 +175,7 @@ class config::base (
         path      => $awslogs_proxy_path,
         line      => "HTTPS_PROXY=${https_proxy}",
         match     => '^HTTPS_PROXY=.*$',
-        subscribe => Service['awslogs'],
+        subscribe => Service[$service_name],
       }
     }
     if defined('$no_proxy') {
@@ -183,7 +183,7 @@ class config::base (
         path      => $awslogs_proxy_path,
         line      => "NO_PROXY=${no_proxy}",
         match     => '^NO_PROXY=.*$',
-        subscribe => Service['awslogs'],
+        subscribe => Service[$service_name],
       }
     }
 
