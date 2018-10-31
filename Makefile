@@ -3,12 +3,11 @@ AWS_IMAGES = aws-java aws-author aws-publish aws-dispatcher
 DOCKER_IMAGES = docker-java docker-author docker-publish docker-dispatcher
 VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
-ami_var_file ?= stage/ami-ids.json
-all_var_files := $(VAR_FILES) $(ami_var_file)
+all_var_files := $(VAR_FILES)
 # version: version of machine images to be created
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
-packer_aem_version ?= 3.1.1
+packer_aem_version ?= 3.3.1
 aem_helloworld_custom_image_provisioner_version = 0.9.0
 
 package: stage/packer-aem-$(packer_aem_version).tar.gz
@@ -16,6 +15,8 @@ package: stage/packer-aem-$(packer_aem_version).tar.gz
 stage/packer-aem-$(packer_aem_version).tar.gz: stage
 	tar \
 	    --exclude='stage*' \
+			--exclude='.bundle' \
+			--exclude='bin' \
 	    --exclude='.git*' \
 	    --exclude='.tmp*' \
 	    --exclude='.idea*' \
@@ -59,7 +60,7 @@ deps-test-local:
 	cp ../aem-helloworld-custom-image-provisioner/stage/*.tar.gz stage/custom/custom/aem-custom-image-provisioner.tar.gz
 
 clean:
-	rm -rf bin .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
+	rm -rf bin .bundle .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
 
 init:
 	chmod +x scripts/*.sh
@@ -108,7 +109,6 @@ $(AWS_IMAGES): stage
 		packer build \
 		$(VAR_PARAMS) \
 		-var-file=vars/components/$(COMPONENT).json \
-		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'version=$(version)' \
 		templates/aws/generic.json
 
@@ -118,7 +118,6 @@ aws-author-publish-dispatcher: stage
 		packer build \
 		$(VAR_PARAMS) \
 		-var-file=vars/components/author-publish-dispatcher.json \
-		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'version=$(version)' \
 		templates/aws/author-publish-dispatcher.json
 
@@ -129,7 +128,6 @@ $(DOCKER_IMAGES): stage
 		packer build \
 		$(VAR_PARAMS) \
 		-var-file=vars/components/$(COMPONENT).json \
-		-var 'ami_var_file=$(ami_var_file)' \
 		-var 'version=$(version)' \
 		templates/docker/generic.json
 
@@ -150,6 +148,8 @@ define config_examples
 endef
 
 config-examples: stage
+
+config-examples-all: config-examples-aws-rhel7-aem62 config-examples-aws-rhel7-aem63 config-examples-aws-rhel7-aem64 config-examples-aws-centos7-aem62 config-examples-aws-centos7-aem63 config-examples-aws-centos7-aem64 config-examples-aws-amazon-linux2-aem62 config-examples-aws-amazon-linux2-aem63 config-examples-aws-amazon-linux2-aem64 config-examples-docker-centos7-aem62 config-examples-docker-centos7-aem63
 
 config-examples-aws-rhel7-aem62: stage
 	$(call config_examples,aws,rhel7,aem62)

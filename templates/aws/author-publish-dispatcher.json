@@ -15,12 +15,12 @@
     "aws_security_group_id": "",
     "puppet_bin_dir": "/opt/puppetlabs/bin",
     "version": "x.x.x",
+    "custom_stage_run_info": "{{env `CUSTOM_STAGE_RUN_INFO`}}",
     "source_ami": "",
     "instance_type": "",
     "aws_user": "ec2-user",
     "os_type": "",
-    "aws_vpc_id": "",
-    "custom_stage_run_info": "{{env `CUSTOM_STAGE_RUN_INFO`}}"
+    "aws_vpc_id": ""
   },
   "provisioners": [
     {
@@ -127,7 +127,6 @@
     {
       "inline": [
         "sudo rm -rf {{user `tmp_dir`}}",
-        "sudo /opt/puppetlabs/bin/puppet resource service aem-aem ensure=stopped",
         "sudo /opt/puppetlabs/bin/facter resource host $(facter fqdn) ensure=absent",
         "sudo -E find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete",
         "sudo truncate --size 0 --no-create /var/log/wtmp /var/log/btmp"
@@ -167,10 +166,7 @@
         "Application Id": "Adobe Experience Manager (AEM)",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Profile": "{{user `profile`}}",
-        "Cost Centre": 12345,
-        "Project": "AEM OpenCloud",
         "Version": "{{user `version`}}",
-        "Owner": "Shine Solutions AEM Team",
         "OS Type": "{{user `os_type`}}",
         "Application Role": "{{user `component`}} AMI"
       },
@@ -186,10 +182,7 @@
         "Application Id": "Adobe Experience Manager (AEM)",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Profile": "{{user `profile`}}",
-        "Cost Centre": 12345,
-        "Project": "AEM OpenCloud",
         "Version": "{{user `version`}}",
-        "Owner": "Shine Solutions AEM Team",
         "OS Type": "{{user `os_type`}}",
         "Application Role": "{{user `component`}} AMI"
       },
@@ -197,10 +190,7 @@
         "Application Id": "Adobe Experience Manager (AEM)",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
         "Application Profile": "{{user `profile`}}",
-        "Cost Centre": 12345,
-        "Project": "AEM OpenCloud",
         "Version": "{{user `version`}}",
-        "Owner": "Shine Solutions AEM Team",
         "OS Type": "{{user `os_type`}}",
         "Application Role": "{{user `component`}} AMI"
       },
@@ -228,16 +218,6 @@
       "ami_users": "{{user `ami_users`}}",
       "type": "amazon-ebs",
       "ssh_pty": true
-    }
-  ],
-  "post-processors": [
-    {
-      "ami_id": {
-        "{{user `ami_var_file`}}": [
-          "{{user `component`}}"
-        ]
-      },
-      "type": "json-updater"
     }
   ]
 }

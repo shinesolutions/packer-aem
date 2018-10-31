@@ -45,15 +45,17 @@
 # [*collectd_packages*]
 #   An array of extra packages to install when installing collectd.
 #
-# [*proxy_server_name*]
-#   Date type: String
-#   Name of proxy host should cloudwatch logs need to communicate via a proxy
+# [*http_proxy*]
+#   Http proxy setting should cloudwatch logs need to communicate via a proxy
 #   Default value: undef
 #
-# [*proxy_server_port*]
-#   Date type: String
-#   Port on proxy host should cloudwatch logs need to communicate via a proxy
-#   Default value: 3128
+# [*https_proxy*]
+#   Https proxy setting should cloudwatch logs need to communicate via a proxy
+#   Default value: undef
+#
+# [*no_proxy*]
+#   No proxy setting should cloudwatch logs need to communicate via a proxy
+#   Default value: undef
 #
 #
 # === Authors
@@ -69,6 +71,7 @@ class config::base (
   $python_package,
   $python_pip_package,
   $python_cheetah_package,
+  $awslogs_proxy_path,
   $rhn_register = false,
   $disable_selinux = true,
   $install_aws_cli = true,
@@ -80,8 +83,9 @@ class config::base (
   $cloudwatchlogs_logfiles          = {},
   $cloudwatchlogs_logfiles_defaults = {},
   $collectd_packages = [],
-  $proxy_server_name = undef,
-  $proxy_server_port = '3128',
+  $http_proxy = undef,
+  $https_proxy = undef,
+  $no_proxy = undef,
 ){
   require ::config
 
@@ -121,16 +125,26 @@ class config::base (
     ensure => latest,
   }
 
-  package { [ 'boto3', 'requests', 'retrying', 'sh' ]:
+  package { [ 'requests', 'retrying', 'sh' ]:
     ensure   => latest,
     provider => 'pip',
   }
 
   if $install_aws_cli {
     package { 'awscli':
-      ensure   => latest,
+      ensure   => '1.16.10',
       provider => 'pip',
     }
+  }
+  # allow awscli to control boto version if it's enabled, otherwise install
+  package { 'boto':
+    ensure   => present,
+    provider => 'pip',
+  }
+
+  package { 'boto3':
+    ensure   => '1.8.5',
+    provider => 'pip',
   }
 
   if ($::operatingsystem == 'Amazon') and ($::operatingsystemmajrelease == '2') {
@@ -148,21 +162,36 @@ class config::base (
       $cloudwatchlogs_logfiles_defaults,
     )
 
-    if defined('$proxy_server_name') {
-      file {'/etc/awslogs/proxy.conf':
-        ensure  => present,
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        content => epp('config/cloudwatch_proxy.conf.epp'),
-        notify  => Service[$service_name],
+    if defined('$http_proxy') {
+      file_line { 'Set CloudWatch Proxy: http_proxy':
+        path      => $awslogs_proxy_path,
+        line      => "HTTP_PROXY=${http_proxy}",
+        match     => '^HTTP_PROXY=.*$',
+        subscribe => Service['awslogs'],
       }
     }
+    if defined('$https_proxy') {
+      file_line { 'Set CloudWatch Proxy: https_proxy':
+        path      => $awslogs_proxy_path,
+        line      => "HTTPS_PROXY=${https_proxy}",
+        match     => '^HTTPS_PROXY=.*$',
+        subscribe => Service['awslogs'],
+      }
+    }
+    if defined('$no_proxy') {
+      file_line { 'Set CloudWatch Proxy: no_proxy':
+        path      => $awslogs_proxy_path,
+        line      => "NO_PROXY=${no_proxy}",
+        match     => '^NO_PROXY=.*$',
+        subscribe => Service['awslogs'],
+      }
+    }
+
   }
 
   if $install_collectd {
     $collectd_plugins = [
-      'syslog', 'cpu', 'interface', 'load', 'memory',
+      'syslog', 'cpu', 'interface', 'load', 'memory'
     ]
     package { $collectd_packages:
       ensure => installed,

@@ -9,3 +9,7 @@ if $::config::base::install_cloudwatchlogs {
     aem_id => 'publish',
   }
 }
+
+if $::config::base::install_collectd {
+  config::collectd_jmx { 'Setup collectd-generic-jmx plugin': }
+}

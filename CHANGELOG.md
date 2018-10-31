@@ -1,5 +1,28 @@
-### 3.1.1
-*
+### 3.3.1
+* Upgrade puppet-amazon-ssm-agent to 0.9.3
+
+### 3.3.0
+* Add tomcat service installation for java component #89
+* Upgrade aem_resources to 3.2.1, aem_curator to 1.2.3
+* Upgrade example config AEM profile for AEM 6.4 to aem64_sp2
+
+### 3.2.1
+* Increase post AEM stop delay to 5 minutes, to match service post stop timeout
+* Move Puppet AEM resource stopped status check from Packer templates to puppet-aem-curator
+* Add InSpec check to ensure cq.pid doesn't exist on author, publish, author-publish-dispatcher components
+* Fix Puppet installation error due to renamed rpm URL
+* Upgrade puppet-aem-resources to 3.2.0, puppet-aem-curator to 1.2.2
+
+### 3.2.0
+* Add CloudWatch config for SSM commands offline-snapshot
+* Add CloudWatch config for SSM commands offline-compaction-snapshot
+* Add CloudWatch config for SSM commands manage-service
+* Add CloudWatch config for SSM commands wait-until-ready
+* Update Cloudwatch config date format for cloud init logfile
+* Modify proxy setting config file for CloudWatch to /var/awslogs/etc/proxy.conf
+* Remove AMI ID variable file support
+* Lock down awscli version to 1.16.10 let it determine boto dependencies when awscli installation is enabled
+* Lock down boto3 to 1.8.5
 
 ### 3.1.0
 * Upgrade ruby_aem to 2.1.0
