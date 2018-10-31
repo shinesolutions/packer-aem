@@ -1,12 +1,18 @@
-### 3.0.2
+### 3.1.1
 *
+
+### 3.1.0
+* Upgrade ruby_aem to 2.1.0
+* Upgrade aem_curator and aem_resources to support new system users provisioning
+* Add AEM Hello World Custom Image Provisioner to integration test #79
+* Add new configuration custom_image_provisioner.pre.timeout and custom_image_provisioner.post.timeout
 
 ### 3.0.1
 * Upgrade example config AEM profiles to aem62_sp1_cfp15, aem63_sp2_cfp2, and aem64_sp1
 * Add Custom Image Provisioner pre and post steps support #77
 
 ### 3.0.0
-* Upgrade ruby_aem to 2.0.0, puppet-aem-resources to 3.0.0, and puppet-aem-curator to 1.0.0 for AEM 6.4 support 
+* Upgrade ruby_aem to 2.0.0, puppet-aem-resources to 3.0.0, and puppet-aem-curator to 1.0.0 for AEM 6.4 support
 
 ### 2.8.0
 * Add CloudWatch config for content health check cron log

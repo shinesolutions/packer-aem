@@ -22,7 +22,7 @@ class config (
     host_aliases => $facts['hostname'],
   }
   # needed for running Serverspec, used for testing baked AMIs and provisioned EC instances
-  package { [ 'gcc', 'ruby-devel', 'zlib-devel' ]:
+  package { [ 'gcc', 'gcc-c++', 'ruby-devel', 'zlib-devel' ]:
     ensure  => 'installed',
   # needed for ffi (a ruby_aem dependency) native compilation
   } -> package { [ 'autoconf', 'automake', 'libtool' ]:
@@ -33,13 +33,13 @@ class config (
     ensure   => '1.8.2',
     provider => 'puppet_gem',
   } -> package { 'ruby_aem':
-    ensure   => '2.0.0',
+    ensure   => '2.1.0',
     provider => 'puppet_gem',
   } -> package { 'ruby_aem_aws':
     ensure   => '1.1.0',
     provider => 'puppet_gem',
   } -> package { 'inspec':
-    ensure   => '1.51.6',
+    ensure   => '3.0.9',
     provider => 'puppet_gem',
   }
 }
