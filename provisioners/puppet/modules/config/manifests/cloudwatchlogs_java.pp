@@ -1,4 +1,5 @@
 define config::cloudwatchlogs_java (
+  $service_name = lookup('config::base::awslogs_service_name')
 ) {
 
   # Orchestrator Logs

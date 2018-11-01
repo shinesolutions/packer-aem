@@ -1,5 +1,6 @@
 define config::cloudwatchlogs_aem (
   $aem_id,
+  $service_name = lookup('config::base::awslogs_service_name')
 ) {
 
   $aem_log_dir = "/opt/aem/${aem_id}/crx-quickstart/logs"

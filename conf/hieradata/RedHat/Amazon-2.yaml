@@ -2,5 +2,5 @@
 
 base::python_cheetah_package: python-cheetah
 
-base::awslogs_service: 'awslogsd.service'
+base::awslogs_service_name: 'awslogsd.service'
 base::awslogs_proxy_path: /etc/awslogs/proxy.conf

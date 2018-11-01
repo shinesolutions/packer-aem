@@ -71,6 +71,7 @@ class config::base (
   $python_package,
   $python_pip_package,
   $python_cheetah_package,
+  $awslogs_service_name,
   $awslogs_proxy_path,
   $rhn_register = false,
   $disable_selinux = true,
@@ -147,14 +148,10 @@ class config::base (
     provider => 'pip',
   }
 
-  if ($::operatingsystem == 'Amazon') and ($::operatingsystemmajrelease == '2') {
-    $service_name = 'awslogsd'
-  } else { $service_name = 'awslogs'}
-
   if $install_cloudwatchlogs {
     class { '::cloudwatchlogs': }
     Cloudwatchlogs::Log {
-      notify => Service[$service_name],
+      notify => Service[$awslogs_service_name],
     }
     create_resources(
       cloudwatchlogs::log,
@@ -167,7 +164,7 @@ class config::base (
         path      => $awslogs_proxy_path,
         line      => "HTTP_PROXY=${http_proxy}",
         match     => '^HTTP_PROXY=.*$',
-        subscribe => Service[$service_name],
+        subscribe => Service[$awslogs_service_name],
       }
     }
     if defined('$https_proxy') {
@@ -175,7 +172,7 @@ class config::base (
         path      => $awslogs_proxy_path,
         line      => "HTTPS_PROXY=${https_proxy}",
         match     => '^HTTPS_PROXY=.*$',
-        subscribe => Service[$service_name],
+        subscribe => Service[$awslogs_service_name],
       }
     }
     if defined('$no_proxy') {
@@ -183,7 +180,7 @@ class config::base (
         path      => $awslogs_proxy_path,
         line      => "NO_PROXY=${no_proxy}",
         match     => '^NO_PROXY=.*$',
-        subscribe => Service[$service_name],
+        subscribe => Service[$awslogs_service_name],
       }
     }
 

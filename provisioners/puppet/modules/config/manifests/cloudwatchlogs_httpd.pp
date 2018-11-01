@@ -1,4 +1,5 @@
 define config::cloudwatchlogs_httpd (
+  $service_name = lookup('config::base::awslogs_service_name')
 ) {
 
   $httpd_log_dir = '/var/log/httpd'
