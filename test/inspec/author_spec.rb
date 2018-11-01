@@ -8,7 +8,6 @@ aem_base ||= '/opt'
 aem_port = @hiera.lookup('author::aem_port', nil, @scope)
 aem_port ||= '4502'
 
-
 describe file("#{aem_base}/aem") do
   it { should be_directory }
   it { should exist }
@@ -57,3 +56,4 @@ describe file('/etc/puppetlabs/puppet/author.yaml') do
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
 end
+

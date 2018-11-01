@@ -1,5 +1,7 @@
 include ::config::base
 
+include ::config::certs
+
 include aem_curator::install_java
 
 include aem_curator::install_publish

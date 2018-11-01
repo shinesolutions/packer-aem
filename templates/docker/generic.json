@@ -124,6 +124,7 @@
     {
       "inline": [
         "rm -rf {{user `tmp_dir`}}",
+        "sudo history -c",
         "/opt/puppetlabs/bin/facter resource host $(facter fqdn) ensure=absent",
         "find /root /home -type f \\( -name authorized_keys -o -name .bash_history \\) -print -delete",
         "truncate --size 0 --no-create /var/log/wtmp /var/log/btmp"

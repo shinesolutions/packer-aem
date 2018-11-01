@@ -2,13 +2,12 @@ platform_type: aws
 
 aem:
   artifacts_base: s3://aem-opencloud/adobeaemcloud
-  certs_base: s3://aem-opencloud/certs
 
 aws:
   region: ap-southeast-2
   vpc_id: ''
   subnet_id: ''
-  instance_profile: S3Access
+  instance_profile: PackerAEMInstanceProfile
   ami_users: ''
   install_ssm_agent: true
   root_volume_size: 20
@@ -20,3 +19,5 @@ aws:
       Value: Shine Solutions AEM Team
     - Key: Cost Centre
       Value: 12345
+  certificate_arn: ''
+  certificate_key_arn: ''
