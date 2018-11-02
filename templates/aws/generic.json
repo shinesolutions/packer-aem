@@ -150,7 +150,7 @@
           "volume_size": "{{user `data_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "/dev/xvdc"
+          "device_name": "{{user `devicemap_data_b`}}"
         }
       ],
       "communicator": "ssh",
@@ -194,13 +194,13 @@
           "volume_size": "{{user `root_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "/dev/xvda"
+          "device_name": "{{user `devicemap_root`}}"
         },
         {
           "volume_size": "{{user `data_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "/dev/xvdb"
+          "device_name": "{{user `devicemap_data_b`}}"
         }
       ],
       "ami_users": "{{user `ami_users`}}",
