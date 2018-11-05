@@ -34,6 +34,8 @@ deps:
 	bundle install --binstubs
 	bundle exec r10k puppetfile install --verbose --moduledir modules
 	pip install -r requirements.txt
+	# this is just a hack for now to override the default rpm installed version of PyYAML
+	pip install PyYAML>=3.12 --ignore-installed
 	# only needed while using shinesolutions/puppet-aem fork
 	# TODO: remove when switching back to bstopp/puppet-aem
 	rm -rf modules/aem/.git

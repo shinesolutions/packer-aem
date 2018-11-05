@@ -55,6 +55,7 @@ aem_curator::install_publish::aem_jvm_mem_opts: "-Xss4m -Xmx8192m"
 aem_curator::install_publish::setup_repository_volume: true
 aem_curator::install_publish::repository_volume_device: /dev/xvdb
 aem_curator::install_publish::repository_volume_mount_point: /mnt/ebs1
+aem_curator::install_publish::post_stop_sleep_secs: 300
 
 aem_curator::install_dispatcher::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_dispatcher::cert_base_url: "file://%{lookup('tmp_dir')}/certs"
@@ -65,3 +66,6 @@ aem_curator::install_dispatcher::apache_module_filename: dispatcher-apache2.4-4.
 aem_curator::install_dispatcher::apache_module_temp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_dispatcher::apache_http_port: "80"
 aem_curator::install_dispatcher::apache_https_port: "443"
+
+base::awslogs_service_name: 'awslogs'
+base::awslogs_proxy_path: /var/awslogs/etc/proxy.conf

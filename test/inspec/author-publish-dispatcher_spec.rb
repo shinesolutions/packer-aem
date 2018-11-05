@@ -46,9 +46,9 @@ describe service('aem-author') do
   it { should_not be_running }
 end
 
-describe file("#{aem_base}/aem/author/crx-quickstart/conf/cq.pid") do
-  it { should_not exist }
-end
+# describe file("#{aem_base}/aem/author/crx-quickstart/conf/cq.pid") do
+#   it { should_not exist }
+# end
 
 describe file('/etc/puppetlabs/puppet/author.yaml') do
   it { should be_file }
@@ -102,9 +102,9 @@ describe service('aem-publish') do
   it { should_not be_running }
 end
 
-describe file("#{aem_base}/aem/publish/crx-quickstart/conf/cq.pid") do
-  it { should_not exist }
-end
+# describe file("#{aem_base}/aem/publish/crx-quickstart/conf/cq.pid") do
+#   it { should_not exist }
+# end
 
 describe file('/etc/puppetlabs/puppet/publish.yaml') do
   it { should be_file }

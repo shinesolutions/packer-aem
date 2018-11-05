@@ -151,15 +151,16 @@
           "volume_size": "{{user `data_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "/dev/sdb"
+          "device_name": "{{user `devicemap_data_b`}}"
         },
         {
           "volume_size": "{{user `data_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "/dev/sdc"
+          "device_name": "{{user `devicemap_data_c`}}"
         }
       ],
+      "communicator": "ssh",
       "source_ami": "{{user `source_ami`}}",
       "name": "aws",
       "tags": {
@@ -186,7 +187,6 @@
         "OS Type": "{{user `os_type`}}",
         "Application Role": "{{user `component`}} AMI"
       },
-      "vpc_id": "{{user `aws_vpc_id`}}",
       "run_volume_tags": {
         "Application Id": "Adobe Experience Manager (AEM)",
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})",
@@ -195,25 +195,25 @@
         "OS Type": "{{user `os_type`}}",
         "Application Role": "{{user `component`}} AMI"
       },
-      "communicator": "ssh",
+      "vpc_id": "{{user `aws_vpc_id`}}",
       "launch_block_device_mappings": [
         {
           "volume_size": "{{user `root_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "/dev/sda1"
+          "device_name": "{{user `devicemap_root`}}"
         },
         {
           "volume_size": "{{user `data_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "/dev/sdb"
+          "device_name": "{{user `devicemap_data_b`}}"
         },
         {
           "volume_size": "{{user `data_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "/dev/sdc"
+          "device_name": "{{user `devicemap_data_c`}}"
         }
       ],
       "ami_users": "{{user `ami_users`}}",
