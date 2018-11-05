@@ -8,6 +8,10 @@ config::base::http_proxy: {{ http_proxy }}
 config::base::https_proxy: {{ https_proxy }}
 config::base::no_proxy: {{ no_proxy }}
 
+config::certs::certificate_arn: {{ aws.certificate_arn }}
+config::certs::certificate_key_arn: {{ aws.certificate_key_arn }}
+config::certs::region: {{ aws.region }}
+
 config::custom_image_provisioner::enable_custom_image_provisioner: {{ aem.enable_custom_image_provisioner }}
 
 config::custom_image_provisioner::pre::timeout: {{ custom_image_provisioner.pre.timeout }}
@@ -15,11 +19,9 @@ config::custom_image_provisioner::post::timeout: {{ custom_image_provisioner.pos
 
 amazon_ssm_agent::proxy_url: {{ http_proxy }}
 
-aem_curator::install_java::cert_base_url: {{ aem.certs_base }}
 
 aem_curator::install_author::aem_profile: {{ aem.profile }}
 aem_curator::install_author::aem_keystore_password: {{ aem.keystore_password }}
-aem_curator::install_author::cert_base_url: {{ aem.certs_base }}
 aem_curator::install_author::aem_artifacts_base: {{ aem.artifacts_base }}
 aem_curator::install_author::aem_jvm_mem_opts: "{{ aem.author.jvm_mem_opts }}"
 aem_curator::install_author::aem_jvm_opts:
@@ -33,7 +35,6 @@ aem_curator::install_author::aem_start_opts: "{{ aem.author.start_opts }}"
 
 aem_curator::install_publish::aem_profile: {{ aem.profile }}
 aem_curator::install_publish::aem_keystore_password: {{ aem.keystore_password }}
-aem_curator::install_publish::cert_base_url: {{ aem.certs_base }}
 aem_curator::install_publish::aem_artifacts_base: {{ aem.artifacts_base }}
 aem_curator::install_publish::aem_jvm_mem_opts: "{{ aem.publish.jvm_mem_opts }}"
 aem_curator::install_publish::aem_jvm_opts:
@@ -45,6 +46,5 @@ aem_curator::install_publish::aem_jvm_opts:
 - '-XX:+HeapDumpOnOutOfMemoryError'
 aem_curator::install_publish::aem_start_opts: "{{ aem.publish.start_opts }}"
 
-aem_curator::install_dispatcher::cert_base_url: {{ aem.certs_base }}
 aem_curator::install_dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86-64-ssl-{{ aem.dispatcher.version }}.tar.gz
 aem_curator::install_dispatcher::apache_module_filename: dispatcher-apache2.4-{{ aem.dispatcher.version }}.so

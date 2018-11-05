@@ -32,6 +32,8 @@ aws:
   tags:
     - Key: overwrite-me
       Value: overwrite-me
+  certificate_arn: overwrite-me
+  certificate_key_arn: overwrite-me
 
 docker:
   source: overwrite-me
@@ -48,5 +50,4 @@ aem:
   dispatcher:
     version: 4.2.3
   artifacts_base: overwrite-me
-  certs_base: overwrite-me
   enable_custom_image_provisioner: false

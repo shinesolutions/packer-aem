@@ -56,3 +56,4 @@ describe file('/etc/puppetlabs/puppet/publish.yaml') do
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
 end
+

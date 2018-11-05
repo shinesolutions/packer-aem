@@ -25,6 +25,7 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
+                  - acm:GetCertificate
                   - ec2:AttachVolume
                   - ec2:AuthorizeSecurityGroupIngress
                   - ec2:CopyImage
@@ -58,6 +59,8 @@ Resources:
                   - ec2:StopInstances
                   - ec2:TerminateInstances
                   - iam:PassRole
+                  - kms:Decrypt
+                  - secretsmanager:GetSecretValue
                 Resource: "*"
               - Effect: Allow
                 Action:

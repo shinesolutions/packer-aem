@@ -6,6 +6,8 @@ config::base::tmp_dir: /tmp/shinesolutions/packer-aem
 config::base::awslogs_service_name: awslogs
 config::base::awslogs_proxy_path: /var/awslogs/etc/proxy.conf
 
+config::certs::tmp_dir: "%{lookup('tmp_dir')}"
+
 config::custom_image_provisioner::source_file: "%{hiera('config::base::tmp_dir')}/aem-custom-image-provisioner.tar.gz"
 # don't include trailing slash on the install_dir below, this is because Puppet Exec command can't handle double slashes
 config::custom_image_provisioner::install_dir: "%{hiera('config::base::tmp_dir')}/aem-custom-image-provisioner"
