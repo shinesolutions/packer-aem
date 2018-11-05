@@ -1,4 +1,5 @@
 define config::cloudwatchlogs_httpd (
+  $service_name = lookup('config::base::awslogs_service_name')
 ) {
 
   $httpd_log_dir = '/var/log/httpd'
@@ -13,12 +14,12 @@ define config::cloudwatchlogs_httpd (
   $httpd_apache_datetime_files.each |$file| {
     cloudwatchlogs::log { "${httpd_log_dir}/${file}":
       datetime_format => '%d/%b/%Y:%H:%M:%S %z',
-      notify          => Service['awslogs'],
+      notify          => Service[$service_name],
     }
   }
   $httpd_unknown_datetime_files.each |$file| {
     cloudwatchlogs::log { "${httpd_log_dir}/${file}":
-      notify          => Service['awslogs'],
+      notify          => Service[$service_name],
     }
   }
 

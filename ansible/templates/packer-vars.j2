@@ -13,5 +13,14 @@
   "os_type": "{{ os_type }}",
   "http_proxy": "{{ http_proxy }}",
   "https_proxy": "{{ https_proxy }}",
-  "no_proxy": "{{ no_proxy }}"
+  "no_proxy": "{{ no_proxy }}",
+{% if os_type == "amazon-linux2" %}
+  "devicemap_root" : "/dev/xvda",
+  "devicemap_data_b": "/dev/xvdb",
+  "devicemap_data_c": "/dev/xvdc"
+{% else %}
+  "devicemap_root" : "/dev/sda1",
+  "devicemap_data_b": "/dev/sdb",
+  "devicemap_data_c": "/dev/sdc"  
+{% endif %}
 }

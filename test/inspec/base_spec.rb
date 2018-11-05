@@ -14,7 +14,7 @@ install_cloudwatchlogs ||= 'true'
 install_aws_agents = @hiera.lookup('config::base::install_aws_agents', nil, @scope)
 install_aws_agents ||= 'true'
 
-awslogs_proxy_path = '/var/awslogs/etc/proxy.conf'
+awslogs_proxy_path = @hiera.lookup('base::awslogs_proxy_path', nil, @scope)
 
 if os[:family] == 'redhat'
 
@@ -54,7 +54,7 @@ end
 
 if install_cloudwatchlogs == true
 
-  describe service('awslogs') do
+  describe service(@hiera.lookup('base::awslogs_service_name', nil, @scope)) do
     it { should be_enabled }
     it { should be_running }
   end
