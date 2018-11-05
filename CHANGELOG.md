@@ -1,4 +1,6 @@
-### 3.3.1
+### 3.4.0
+* Move TLS certificate storage from S3 to AWS Certificate Manager #41
+* Move TLS private key storage from S3 to AWS Secrets Manager #47
 * Upgrade puppet-amazon-ssm-agent to 0.9.3
 * Upgrade puppet-aem-curator to 1.2.4
 
