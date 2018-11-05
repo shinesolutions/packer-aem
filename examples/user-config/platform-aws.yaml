@@ -7,7 +7,7 @@ aws:
   region: ap-southeast-2
   vpc_id: ''
   subnet_id: ''
-  instance_profile: PackerAEMInstanceProfile
+  instance_profile: PackerAemRole
   ami_users: ''
   install_ssm_agent: true
   root_volume_size: 20
