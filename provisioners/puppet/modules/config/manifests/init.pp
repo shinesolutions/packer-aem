@@ -39,7 +39,7 @@ class config (
     ensure   => '1.1.0',
     provider => 'puppet_gem',
   } -> package { 'inspec':
-    ensure   => '3.0.9',
+    ensure   => '1.51.6',
     provider => 'puppet_gem',
   }
 }
