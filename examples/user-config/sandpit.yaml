@@ -18,5 +18,3 @@ aem:
   dispatcher:
     version: 4.2.3
   enable_custom_image_provisioner: true
-  certificate_arn: "arn:aws:acm:ap-southeast-2:918473058104:certificate/3ca948bc-65a7-45c1-a8a5-f922cb7f1ca6"
-  aws.certificate_key_arn: "arn:aws:secretsmanager:ap-southeast-2:918473058104:secret:test/packer/cert/key-PICbM8"
