@@ -3,11 +3,12 @@
 * Move TLS certificate's private key storage from S3 to AWS Secrets Manager #47
 * Upgrade puppet-amazon-ssm-agent to 0.9.3
 * Upgrade puppet-aem-curator to 1.2.4
+* Upgrade puppet-aem-resources to 3.3.0
 * Upgrade ruby_aem to 2.2.0 for SAML support
 
 ### 3.3.0
 * Add tomcat service installation for java component #89
-* Upgrade aem_resources to 3.2.1, aem_curator to 1.2.3
+* Upgrade puppet-aem-resources to 3.2.1, puppet-aem-curator to 1.2.3
 * Upgrade example config AEM profile for AEM 6.4 to aem64_sp2
 
 ### 3.2.1
