@@ -34,6 +34,14 @@ aws:
       Value: overwrite-me
   certificate_arn: overwrite-me
   certificate_key_arn: overwrite-me
+  rhel7:
+    devicemap_root: /dev/sda1
+    devicemap_data_b: /dev/sdb
+    devicemap_data_c: /dev/sdc
+  amazon-linux2:
+    devicemap_root: /dev/xvda
+    devicemap_data_b: /dev/xvdb
+    devicemap_data_c: /dev/xvdc
 
 docker:
   source: overwrite-me
