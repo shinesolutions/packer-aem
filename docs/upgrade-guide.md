@@ -5,6 +5,8 @@ This upgrade guide covers the changes required when you already use Packer AEM a
 
 ### To 3.4.0
 
+* New service requirements: AWS Certificate Manager and AWS Secrets Manager
+* Add `acm:GetCertificate`, `kms:Decrypt`, and `secretsmanager:GetSecretValue` permissions to the role of the IAM Instance Profile's configured in `aws.iam_instance_profile`
 * Remove `aws.aem_certs_base` configuration property
 * Move TLS certificate from S3 to AWS Certificate Manager
 * Add `aws.certificate_arn` configuration property with value of the ARN of the TLS certificate in AWS Certificate Manager
