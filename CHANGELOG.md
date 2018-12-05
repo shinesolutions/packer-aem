@@ -1,4 +1,5 @@
 ### 3.4.2
+* Extend component test to verify AEM Keystore contains the imported key #95
 * Add component check to test for ruby library version #99
 
 ### 3.4.1
