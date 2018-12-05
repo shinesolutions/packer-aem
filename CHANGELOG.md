@@ -1,5 +1,5 @@
 ### 3.4.2
-*
+* Add component check to test for ruby library version #99
 
 ### 3.4.1
 * Upgrade ruby_aem to 2.2.1 for https truststore config fix
