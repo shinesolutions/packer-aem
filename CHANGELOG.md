@@ -1,5 +1,5 @@
 ### 3.4.1
-*
+* Upgrade ruby_aem to 2.2.1 for https truststore config fix
 
 ### 3.4.0
 * Move TLS certificate storage from S3 to AWS Certificate Manager #41
