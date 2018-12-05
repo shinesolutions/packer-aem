@@ -1,6 +1,7 @@
 ### 3.4.2
 * Extend component test to verify AEM Keystore contains the imported key #95
 
+
 ### 3.4.1
 * Upgrade ruby_aem to 2.2.1 for https truststore config fix
 
