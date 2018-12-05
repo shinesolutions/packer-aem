@@ -110,7 +110,7 @@
         "set -o errexit",
         "export PATH=/opt/puppetlabs/puppet/bin/:/sbin:/usr/sbin:/usr/local/sbin:${PATH}",
         "cd {{user `tmp_dir`}}/inspec",
-        "inspec exec base_spec.rb; inspec exec aem_base_spec.rb; inspec exec {{user `component`}}_spec.rb"
+        "inspec exec base_spec.rb; inspec exec {{user `component`}}_spec.rb"
       ],
       "type": "shell",
       "environment_vars": [
