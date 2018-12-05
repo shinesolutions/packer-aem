@@ -2,10 +2,26 @@ require './spec_helper'
 
 init_conf
 
-describe package('ruby_aem') do
-  it { should be_installed.by('gem').with_version('2.2.1') }
+component = @scope["::packer_build_name"]
+
+describe gem('ruby_aem', '/opt/puppetlabs/puppet/bin/gem') do
+  before do
+    skip if component.eql? 'java'
+    skip if component.eql? 'dispatcher'
+    skip if component.eql? 'base'
+  end
+
+  it { should be_installed }
+  its('version') { should eq '2.2.1' }
 end
 
-describe package('ruby_aem_aws') do
-  it { should be_installed.by('gem').with_version('1.1.0') }
+describe gem('ruby_aem_aws', '/opt/puppetlabs/puppet/bin/gem') do
+  before do
+    skip if component.eql? 'java'
+    skip if component.eql? 'dispatcher'
+    skip if component.eql? 'base'
+  end
+
+  it { should be_installed }
+  its('version') { should eq '1.1.0' }
 end
