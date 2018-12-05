@@ -8,6 +8,8 @@ aem_base ||= '/opt'
 aem_port = @hiera.lookup('publish::aem_port', nil, @scope)
 aem_port ||= '4503'
 
+aem_keystore_password = @hiera.lookup('aem_curator::install_publish::aem_keystore_password', nil, @scope)
+
 describe file("#{aem_base}/aem") do
   it { should be_directory }
   it { should exist }
@@ -43,6 +45,10 @@ end
 describe service('aem-publish') do
   it { should_not be_enabled }
   it { should_not be_running }
+end
+
+describe command("keytool -list -keystore #{aem_base}/aem/publish/ssl/aem.ks -alias cqse -storepass #{aem_keystore_password}") do
+  its('exit_status') { should eq 0 }
 end
 
 # describe file("#{aem_base}/aem/publish/crx-quickstart/conf/cq.pid") do
