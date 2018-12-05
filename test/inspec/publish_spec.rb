@@ -47,7 +47,7 @@ describe service('aem-publish') do
   it { should_not be_running }
 end
 
-describe command("keytool -list -keystore #{aem_base}/aem/publish/ssl/aem.ks -alias cqse -storepass #{aem_keystore_password}") do
+describe command("keytool -list -keystore #{aem_base}/aem/publish/crx-quickstart/ssl/aem.ks -alias cqse -storepass #{aem_keystore_password}") do
   its('exit_status') { should eq 0 }
 end
 
