@@ -47,9 +47,9 @@ describe service('aem-author') do
   it { should_not be_running }
 end
 
-describe command("keytool -list -keystore #{aem_base}/aem/author/crx-quickstart/ssl/aem.ks -alias cqse -storepass #{aem_keystore_password}") do
-  its('exit_status') { should eq 0 }
-end
+# describe command("keytool -list -keystore #{aem_base}/aem/author/crx-quickstart/ssl/aem.ks -alias cqse -storepass #{aem_keystore_password}") do
+#   its('exit_status') { should eq 0 }
+# end
 
 # describe file("#{aem_base}/aem/author/crx-quickstart/conf/cq.pid") do
 #   it { should_not exist }
@@ -109,9 +109,9 @@ describe service('aem-publish') do
   it { should_not be_running }
 end
 
-describe command("keytool -list -keystore #{aem_base}/aem/publish/crx-quickstart/ssl/aem.ks -alias cqse -storepass #{aem_keystore_password}") do
-  its('exit_status') { should eq 0 }
-end
+# describe command("keytool -list -keystore #{aem_base}/aem/publish/crx-quickstart/ssl/aem.ks -alias cqse -storepass #{aem_keystore_password}") do
+#   its('exit_status') { should eq 0 }
+# end
 
 # describe file("#{aem_base}/aem/publish/crx-quickstart/conf/cq.pid") do
 #   it { should_not exist }
