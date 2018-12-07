@@ -11,7 +11,6 @@ platform_type=${2:-aws}
 os_type=${3:-rhel7}
 aem_version=${4:-aem64}
 components="author-publish-dispatcher author publish dispatcher java"
-components="author"
 
 for component in $components
 do
