@@ -1,4 +1,4 @@
-VAR_FILES = $(sort $(wildcard vars/*.json))
+VAR_FILES = $(sort $(wildcard conf/packer/vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 
 # version: version of machine images to be created
@@ -89,9 +89,9 @@ lint:
 	puppet parser validate \
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
-	$(call validate_packer_template,templates/aws/generic.json)
-	$(call validate_packer_template,templates/aws/author-publish-dispatcher.json)
-	$(call validate_packer_template,templates/docker/generic.json)
+	$(call validate_packer_template,templates/packer/aws/generic.json)
+	$(call validate_packer_template,templates/packer/aws/author-publish-dispatcher.json)
+	$(call validate_packer_template,templates/packer/docker/generic.json)
 
 define validate_packer_template
 	packer validate \
@@ -114,7 +114,7 @@ config:
 ################################################################################
 
 # build AWS AMIs
-aws-java aws-author aws-publish aws-dispatcher: stage
+aws-java aws-author aws-publish aws-dispatcher: stage config
 	$(eval COMPONENT := $(shell echo $@ | sed -e 's/^aws-//g'))
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
@@ -125,7 +125,7 @@ aws-java aws-author aws-publish aws-dispatcher: stage
 		templates/aws/generic.json
 
 # build AWS AMIs for author-publish-dispatcher component
-aws-author-publish-dispatcher: stage
+aws-author-publish-dispatcher: stage config
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
@@ -135,7 +135,7 @@ aws-author-publish-dispatcher: stage
 		templates/aws/author-publish-dispatcher.json
 
 # build Docker images
-docker-java docker-author docker-publish docker-dispatcher: stage
+docker-java docker-author docker-publish docker-dispatcher: stage config
 	$(eval COMPONENT := $(shell echo $@ | sed -e 's/^docker-//g'))
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
@@ -148,15 +148,18 @@ docker-java docker-author docker-publish docker-dispatcher: stage
 ################################################################################
 # Integration test targets.
 # In order to save time, integration tests will only execute aws rhel7 aem64 combination.
-# The rest of the baking will be done through CodeBuild.
+# The complete tests will be done on AWS CodeBuild/CodePipeline.
 ################################################################################
 
 test-integration: deps deps-test
-	make config config_path=../aem-helloworld-config/packer-aem/aws-rhel7-aem64
+	cd stage && git clone https://github.com/shinesolutions/aem-helloworld-config
+	cp -R stage/aem-helloworld-examples/packer-aem/aws-rhel7-aem64 ../stage/user-config/aws-rhel7-aem64
+	make config config_path=../stage/user-config/aws-rhel7-aem64
 	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem64
 
 test-integration-local: deps-local deps-test-local
-	make config config_path=../aem-helloworld-config/packer-aem/aws-rhel7-aem64
+	cp -R ../aem-helloworld-examples/packer-aem/aws-rhel7-aem64 ../stage/user-config/aws-rhel7-aem64
+	make config config_path=../stage/user-config/aws-rhel7-aem64
 	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem64
 
 ################################################################################

@@ -9,18 +9,18 @@
     - name: Generate Hieradata configuration
       template:
         src: ../templates/hieradata.j2
-        dest: ../../conf/hieradata/local.yaml
+        dest: ../../conf/puppet/hieradata/local.yaml
         mode: 0644
 
     - name: Generate Packer Variables configuration
       template:
         src: ../templates/packer-vars.j2
-        dest: ../../vars/99_local.json
+        dest: ../../conf/packer/vars/99_local.json
         mode: 0644
 
     - name: Add custom AWS tags to Packer template files
       packer_tags:
-        template_dir: "../../templates/{{ platform_type }}/"
+        template_dir: "../../templates/packer/{{ platform_type }}/"
         tags: "{{ aws['tags'] }}"
       when:
         platform_type == "aws"
