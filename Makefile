@@ -60,12 +60,17 @@ deps-local:
 deps-test: stage
 	wget "https://github.com/shinesolutions/aem-helloworld-custom-image-provisioner/releases/download/${aem_helloworld_custom_image_provisioner_version}/aem-helloworld-custom-image-provisioner-${aem_helloworld_custom_image_provisioner_version}.tar.gz" \
 	  -O stage/custom/aem-custom-image-provisioner.tar.gz
+	rm -rf stage/aem-helloworld-config/ stage/user-config/*
+	cd stage && git clone https://github.com/shinesolutions/aem-helloworld-config
+	cp -R stage/aem-helloworld-config/packer-aem/* stage/user-config/
 
 # resolve test dependencies from local directories
 deps-test-local: stage
 	cd ../aem-helloworld-custom-image-provisioner && make package
 	rm -rf stage/custom/aem-custom-image-provisioner.tar.gz
 	cp ../aem-helloworld-custom-image-provisioner/stage/*.tar.gz stage/custom/aem-custom-image-provisioner.tar.gz
+	rm -rf stage/aem-helloworld-config/ stage/user-config/*
+	cp -R ../aem-helloworld-config/packer-aem/* stage/user-config/
 
 ################################################################################
 # Code styling check targets:
@@ -151,16 +156,11 @@ docker-java docker-author docker-publish docker-dispatcher: stage config
 # The complete tests will be done on AWS CodeBuild/CodePipeline.
 ################################################################################
 
-test-integration:
-	rm -rf stage/aem-helloworld-config/
-	mkdir -p stage/user-config/aws-rhel7-aem64/
-	cd stage && git clone https://github.com/shinesolutions/aem-helloworld-config
-	cp -R stage/aem-helloworld-config/packer-aem/aws-rhel7-aem64 stage/user-config/
+test-integration: deps deps-test
 	make config config_path=stage/user-config/aws-rhel7-aem64
 	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem64
 
 test-integration-local: deps-local deps-test-local
-	cp -R ../aem-helloworld-config/packer-aem/aws-rhel7-aem64 ../stage/user-config/aws-rhel7-aem64
 	make config config_path=../stage/user-config/aws-rhel7-aem64
 	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem64
 

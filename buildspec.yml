@@ -6,7 +6,8 @@ phases:
       - make deps
   pre_build:
     commands:
-      - make config-examples-$PLATFORM_TYPE-$OS_TYPE-$AEM_VERSION
+      - make deps-test
+      - make config config_path=stage/user-config/$PLATFORM_TYPE-$OS_TYPE-$AEM_VERSION/
   build:
     commands:
       - make $BUILD_TARGETS version=$BUILD_ID config_path=stage/user-config/$PLATFORM_TYPE-$OS_TYPE-$AEM_VERSION/
