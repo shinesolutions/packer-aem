@@ -73,8 +73,9 @@ deps-test-local: stage
 	cp -R ../aem-helloworld-config/packer-aem/* stage/user-config/
 
 ################################################################################
-# Code styling check targets:
-# - lint Ansible inventory files
+# Code styling check and validation targets:
+# - lint Packer variable files and templates
+# - lint Ansible inventory files, tools configuration files
 # - lint Gemfile and InSpec test files
 # - lint Puppet manifests
 # - check shell scripts
@@ -83,6 +84,7 @@ deps-test-local: stage
 ################################################################################
 
 lint:
+	jsonlint conf/packer/vars/components/*.json templates/packer/*/*.json
 	yaml-lint conf/ansible/inventory/group_vars/* *.yml .*.yml
 	bundle exec rubocop Gemfile test/inspec/*.rb
 	bundle exec puppet-lint \

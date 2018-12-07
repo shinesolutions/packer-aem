@@ -56,6 +56,9 @@ GEM
       train (~> 0.32)
     jaro_winkler (1.5.1)
     json (2.1.0)
+    jsonlint (0.2.0)
+      oj (~> 2)
+      trollop (~> 2)
     little-plugger (1.1.4)
     locale (2.1.2)
     log4r (1.1.10)
@@ -72,6 +75,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
     nori (2.6.0)
+    oj (2.18.5)
     parallel (1.12.1)
     parser (2.5.3.0)
       ast (~> 2.4.0)
@@ -138,6 +142,7 @@ GEM
       net-ssh (>= 2.9, < 5.0)
       winrm (~> 2.0)
       winrm-fs (~> 1.0)
+    trollop (2.9.9)
     unicode-display_width (1.4.0)
     winrm (2.3.0)
       builder (>= 2.1.2)
@@ -160,6 +165,7 @@ PLATFORMS
 
 DEPENDENCIES
   inspec (= 1.51.6)
+  jsonlint
   puppet-lint
   r10k
   rake
