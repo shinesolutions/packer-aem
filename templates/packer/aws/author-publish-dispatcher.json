@@ -64,7 +64,7 @@
       ]
     },
     {
-      "hiera_config_path": "conf/hiera.yaml",
+      "hiera_config_path": "conf/puppet/hiera.yaml",
       "manifest_file": "provisioners/puppet/manifests/custom_stage_pre.pp",
       "module_paths": [
         "modules",
@@ -76,7 +76,7 @@
       "type": "puppet-masterless"
     },
     {
-      "hiera_config_path": "conf/hiera.yaml",
+      "hiera_config_path": "conf/puppet/hiera.yaml",
       "manifest_file": "provisioners/puppet/manifests/{{user `component`}}.pp",
       "module_paths": [
         "modules",
@@ -88,7 +88,7 @@
       "type": "puppet-masterless"
     },
     {
-      "hiera_config_path": "conf/hiera.yaml",
+      "hiera_config_path": "conf/puppet/hiera.yaml",
       "manifest_file": "provisioners/puppet/manifests/custom_stage_post.pp",
       "module_paths": [
         "modules",

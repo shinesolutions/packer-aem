@@ -13,7 +13,7 @@ clean:
 	rm -rf bin .bundle .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
 
 stage:
-	mkdir -p stage/ stage/custom/ logs/
+	mkdir -p stage/ stage/custom/ stage/user-config/ logs/
 
 package: stage
 	tar \
@@ -120,9 +120,9 @@ aws-java aws-author aws-publish aws-dispatcher: stage config
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
-		-var-file=vars/components/$(COMPONENT).json \
+		-var-file=conf/packer/vars/components/$(COMPONENT).json \
 		-var 'version=$(version)' \
-		templates/aws/generic.json
+		templates/packer/aws/generic.json
 
 # build AWS AMIs for author-publish-dispatcher component
 aws-author-publish-dispatcher: stage config
@@ -130,9 +130,9 @@ aws-author-publish-dispatcher: stage config
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
-		-var-file=vars/components/author-publish-dispatcher.json \
+		-var-file=conf/packer/vars/components/author-publish-dispatcher.json \
 		-var 'version=$(version)' \
-		templates/aws/author-publish-dispatcher.json
+		templates/packer/aws/author-publish-dispatcher.json
 
 # build Docker images
 docker-java docker-author docker-publish docker-dispatcher: stage config
@@ -141,9 +141,9 @@ docker-java docker-author docker-publish docker-dispatcher: stage config
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
-		-var-file=vars/components/$(COMPONENT).json \
+		-var-file=conf/packer/vars/components/$(COMPONENT).json \
 		-var 'version=$(version)' \
-		templates/docker/generic.json
+		templates/packer/docker/generic.json
 
 ################################################################################
 # Integration test targets.
@@ -151,14 +151,16 @@ docker-java docker-author docker-publish docker-dispatcher: stage config
 # The complete tests will be done on AWS CodeBuild/CodePipeline.
 ################################################################################
 
-test-integration: deps deps-test
+test-integration:
+	rm -rf stage/aem-helloworld-config/
+	mkdir -p stage/user-config/aws-rhel7-aem64/
 	cd stage && git clone https://github.com/shinesolutions/aem-helloworld-config
-	cp -R stage/aem-helloworld-examples/packer-aem/aws-rhel7-aem64 ../stage/user-config/aws-rhel7-aem64
-	make config config_path=../stage/user-config/aws-rhel7-aem64
+	cp -R stage/aem-helloworld-config/packer-aem/aws-rhel7-aem64 stage/user-config/
+	make config config_path=stage/user-config/aws-rhel7-aem64
 	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem64
 
 test-integration-local: deps-local deps-test-local
-	cp -R ../aem-helloworld-examples/packer-aem/aws-rhel7-aem64 ../stage/user-config/aws-rhel7-aem64
+	cp -R ../aem-helloworld-config/packer-aem/aws-rhel7-aem64 ../stage/user-config/aws-rhel7-aem64
 	make config config_path=../stage/user-config/aws-rhel7-aem64
 	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem64
 
