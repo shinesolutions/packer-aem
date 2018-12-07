@@ -4,7 +4,7 @@ VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 # version: version of machine images to be created
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
-packer_aem_version ?= 3.4.1
+packer_aem_version ?= 3.4.2
 aem_helloworld_custom_image_provisioner_version = 0.9.0
 
 ci: clean deps lint package

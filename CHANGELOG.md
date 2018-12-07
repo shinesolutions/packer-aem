@@ -1,3 +1,6 @@
+### 3.4.2
+*
+
 ### 3.4.1
 * Add component check to test for ruby library version #99
 * Fixed AEM Keystore path for component tests
