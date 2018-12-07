@@ -6,6 +6,7 @@ phases:
       - make deps
   pre_build:
     commands:
+      - chmod +x scripts/*.sh
       - make deps-test
       - make config config_path=stage/user-config/$PLATFORM_TYPE-$OS_TYPE-$AEM_VERSION/
   build:
