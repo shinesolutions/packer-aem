@@ -85,7 +85,7 @@ deps-test-local: stage
 
 lint:
 	jsonlint conf/packer/vars/components/*.json templates/packer/*/*.json
-	yaml-lint conf/ansible/inventory/group_vars/* *.yml .*.yml
+	yaml-lint *.yml .*.yml conf/ansible/inventory/group_vars/* conf/puppet/hieradata/*.yaml conf/puppet/hieradata/*/*.yaml
 	bundle exec rubocop Gemfile test/inspec/*.rb
 	bundle exec puppet-lint \
 		--fail-on-warnings \
