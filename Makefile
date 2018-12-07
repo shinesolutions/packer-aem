@@ -1,18 +1,21 @@
-export PATH := $(PWD)/bin:$(PATH)
-AWS_IMAGES = aws-java aws-author aws-publish aws-dispatcher
-DOCKER_IMAGES = docker-java docker-author docker-publish docker-dispatcher
 VAR_FILES = $(sort $(wildcard vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
-all_var_files := $(VAR_FILES)
+
 # version: version of machine images to be created
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
 packer_aem_version ?= 3.4.1
 aem_helloworld_custom_image_provisioner_version = 0.9.0
 
-package: stage/packer-aem-$(packer_aem_version).tar.gz
+ci: clean deps lint package
 
-stage/packer-aem-$(packer_aem_version).tar.gz: stage
+clean:
+	rm -rf bin .bundle .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
+
+stage:
+	mkdir -p stage/ stage/custom/ logs/
+
+package: stage
 	tar \
 	    --exclude='stage*' \
 			--exclude='.bundle' \
@@ -25,46 +28,52 @@ stage/packer-aem-$(packer_aem_version).tar.gz: stage
 	    --exclude='*.retry' \
 	    --exclude='*.iml' \
 	    -czf \
-		$@ .
+		stage/packer-aem-$(packer_aem_version).tar.gz .
 
-ci: clean deps lint validate package
+################################################################################
+# Dependencies resolution targets.
+# For deps-local and deps-test-local targets, the local dependencies must be
+# available on the same directory level where packer-aem is at. The idea is
+# that you can test Packer AEM while also developing those dependencies locally.
+################################################################################
 
+# resolve dependencies from remote artifact registries
 deps:
 	gem install bundler
 	bundle install --binstubs
 	bundle exec r10k puppetfile install --verbose --moduledir modules
 	pip install -r requirements.txt
-	# only needed while using shinesolutions/puppet-aem fork
 	# TODO: remove when switching back to bstopp/puppet-aem
+	# only needed while using shinesolutions/puppet-aem fork
 	rm -rf modules/aem/.git
 
-# copy local Puppet modules
-# the repositories must be located on the same directory as packer-aem
-deps-local: deps
-	cd ../puppet-aem-resources && make clean deps lint
-	cd ../puppet-aem-curator && make clean deps lint
+# resolve AEM OpenCloud's Puppet module dependencies from local directories
+deps-local:
 	rm -rf modules/aem_resources/*
 	rm -rf modules/aem_curator/*
+	rm -rf modules/amazon_ssm_agent/*
 	cp -R ../puppet-aem-resources/* modules/aem_resources/
 	cp -R ../puppet-aem-curator/* modules/aem_curator/
+	cp -R ../puppet-amazon-ssm-agent/* modules/amazon_ssm_agent/
 
-deps-test:
+# resolve test dependencies from remote artifact registries
+deps-test: stage
 	wget "https://github.com/shinesolutions/aem-helloworld-custom-image-provisioner/releases/download/${aem_helloworld_custom_image_provisioner_version}/aem-helloworld-custom-image-provisioner-${aem_helloworld_custom_image_provisioner_version}.tar.gz" \
 	  -O stage/custom/aem-custom-image-provisioner.tar.gz
 
-deps-test-local:
-	cd ../aem-helloworld-custom-image-provisioner && make clean deps lint package
+# resolve test dependencies from local directories
+deps-test-local: stage
+	cd ../aem-helloworld-custom-image-provisioner && make package
 	rm -rf stage/custom/aem-custom-image-provisioner.tar.gz
-	cp ../aem-helloworld-custom-image-provisioner/stage/*.tar.gz stage/custom/custom/aem-custom-image-provisioner.tar.gz
+	cp ../aem-helloworld-custom-image-provisioner/stage/*.tar.gz stage/custom/aem-custom-image-provisioner.tar.gz
 
-clean:
-	rm -rf bin .bundle .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
-
-init:
-	chmod +x scripts/*.sh
-
-stage: init
-	mkdir -p stage/ stage/custom/ logs/
+################################################################################
+# Code styling check targets:
+# - lint Puppet manifests
+# - check shell scripts
+# - validate Puppet manifests
+# - validate Packer templates
+################################################################################
 
 lint:
 	bundle exec puppet-lint \
@@ -77,6 +86,12 @@ lint:
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
 	shellcheck $$(find provisioners scripts -name '*.sh')
+	puppet parser validate \
+		provisioners/puppet/manifests/*.pp \
+		provisioners/puppet/modules/*/manifests/*.pp
+	$(call validate_packer_template,templates/aws/generic.json)
+	$(call validate_packer_template,templates/aws/author-publish-dispatcher.json)
+	$(call validate_packer_template,templates/docker/generic.json)
 
 define validate_packer_template
 	packer validate \
@@ -86,21 +101,20 @@ define validate_packer_template
 		$(1)
 endef
 
-validate:
-	puppet parser validate \
-		provisioners/puppet/manifests/*.pp \
-		provisioners/puppet/modules/*/manifests/*.pp
-	$(call validate_packer_template,templates/aws/generic.json)
-	$(call validate_packer_template,templates/aws/author-publish-dispatcher.json)
-	$(call validate_packer_template,templates/docker/generic.json)
+################################################################################
+# Configuration targets.
+################################################################################
 
-config: stage
+# Set Puppet Hieradata, Packer variables and templates based on Packer AEM configuration
+config:
 	scripts/run-playbook.sh set-config "${config_path}"
 
-ami-ids: stage
-	scripts/run-playbook.sh create-stack-builder-config "${config_path}"
+################################################################################
+# Machine image build targets.
+################################################################################
 
-$(AWS_IMAGES): stage
+# build AWS AMIs
+aws-java aws-author aws-publish aws-dispatcher: stage
 	$(eval COMPONENT := $(shell echo $@ | sed -e 's/^aws-//g'))
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
@@ -110,6 +124,7 @@ $(AWS_IMAGES): stage
 		-var 'version=$(version)' \
 		templates/aws/generic.json
 
+# build AWS AMIs for author-publish-dispatcher component
 aws-author-publish-dispatcher: stage
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
@@ -119,7 +134,8 @@ aws-author-publish-dispatcher: stage
 		-var 'version=$(version)' \
 		templates/aws/author-publish-dispatcher.json
 
-$(DOCKER_IMAGES): stage
+# build Docker images
+docker-java docker-author docker-publish docker-dispatcher: stage
 	$(eval COMPONENT := $(shell echo $@ | sed -e 's/^docker-//g'))
 	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
@@ -129,76 +145,43 @@ $(DOCKER_IMAGES): stage
 		-var 'version=$(version)' \
 		templates/docker/generic.json
 
-var_files:
-	@echo $(all_var_files)
+################################################################################
+# Integration test targets.
+# In order to save time, integration tests will only execute aws rhel7 aem64 combination.
+# The rest of the baking will be done through CodeBuild.
+################################################################################
 
-merge_var_files:
-	@jq -s 'reduce .[] as $$item ({}; . * $$item)' $(all_var_files)
+test-integration: deps deps-test
+	make config config_path=../aem-helloworld-config/packer-aem/aws-rhel7-aem64
+	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem64
 
-define config_examples
-  rm -rf stage/user-config/$(1)-$(2)-$(3)
-	mkdir -p stage/user-config/$(1)-$(2)-$(3)
-	cp examples/user-config/sandpit.yaml stage/user-config/$(1)-$(2)-$(3)/
-	cp examples/user-config/platform-$(1).yaml stage/user-config/$(1)-$(2)-$(3)/
-	cp examples/user-config/os-$(2).yaml stage/user-config/$(1)-$(2)-$(3)/
-	cp examples/user-config/$(3).yaml stage/user-config/$(1)-$(2)-$(3)/
-	scripts/run-playbook.sh set-config stage/user-config/$(1)-$(2)-$(3)/
-endef
+test-integration-local: deps-local deps-test-local
+	make config config_path=../aem-helloworld-config/packer-aem/aws-rhel7-aem64
+	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem64
 
-config-examples: stage
+################################################################################
+# Utility targets.
+################################################################################
 
-config-examples-all: config-examples-aws-rhel7-aem62 config-examples-aws-rhel7-aem63 config-examples-aws-rhel7-aem64 config-examples-aws-centos7-aem62 config-examples-aws-centos7-aem63 config-examples-aws-centos7-aem64 config-examples-aws-amazon-linux2-aem62 config-examples-aws-amazon-linux2-aem63 config-examples-aws-amazon-linux2-aem64 config-examples-docker-centos7-aem62 config-examples-docker-centos7-aem63
+# retrieve latest AMI IDs and create AEM AWS Stack Builder configuration files
+ami-ids: stage
+	scripts/run-playbook.sh create-stack-builder-config "${config_path}"
 
-config-examples-aws-rhel7-aem62: stage
-	$(call config_examples,aws,rhel7,aem62)
-
-config-examples-aws-rhel7-aem63: stage
-	$(call config_examples,aws,rhel7,aem63)
-
-config-examples-aws-rhel7-aem64: stage
-	$(call config_examples,aws,rhel7,aem64)
-
-config-examples-aws-centos7-aem62: stage
-	$(call config_examples,aws,centos7,aem62)
-
-config-examples-aws-centos7-aem63: stage
-	$(call config_examples,aws,centos7,aem63)
-
-config-examples-aws-centos7-aem64: stage
-	$(call config_examples,aws,centos7,aem64)
-
-config-examples-aws-amazon-linux2-aem62: stage
-	$(call config_examples,aws,amazon-linux2,aem62)
-
-config-examples-aws-amazon-linux2-aem63: stage
-	$(call config_examples,aws,amazon-linux2,aem63)
-
-config-examples-aws-amazon-linux2-aem64: stage
-	$(call config_examples,aws,amazon-linux2,aem64)
-
-config-examples-docker-centos7-aem62: stage
-	$(call config_examples,docker,centos7,aem62)
-
-config-examples-docker-centos7-aem63: stage
-	$(call config_examples,docker,centos7,aem63)
-
-test-integration-local-aws-rhel7-aem62: config-examples-aws-rhel7-aem62 deps-local deps-test-local
-	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem62
-
-test-integration-aws-rhel7-aem62: config-examples-aws-rhel7-aem62 deps deps-test
-	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem62
-
-define ami_ids_examples
-  make config-examples-$(1)
-	make ami-ids config_path=stage/user-config/$(1)/
-endef
-
+# retrieve latest AMI IDs for a predefined combination of environments
+# using the AEM Hello World Configuration examples
 ami-ids-examples: stage
 	$(call ami_ids_examples,aws-rhel7-aem62)
 	$(call ami_ids_examples,aws-rhel7-aem63)
 	$(call ami_ids_examples,aws-rhel7-aem64)
+	$(call ami_ids_examples,aws-amazon-linux2-aem62)
+	$(call ami_ids_examples,aws-amazon-linux2-aem63)
+	$(call ami_ids_examples,aws-amazon-linux2-aem64)
 
-# convenient target for creating certificate using OpenSSL
+define ami_ids_examples
+	make ami-ids config_path=../aem-helloworld-config/packer-aem/$(1)/
+endef
+
+# convenient target for creating self-signed certificate using OpenSSL
 create-cert:
 	mkdir -p stage/certs/
 	openssl req \
@@ -211,4 +194,4 @@ create-cert:
 	    -keyout stage/certs/aem.key \
 	    -out stage/certs/aem.cert
 
-.PHONY: init $(AMIS) amis-all ci clean config lint validate create-ami-ids-yaml var_files merge_var_files package create-cert
+.PHONY: ci clean stage package deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher test-integration test-integration-local ami-ids create-cert
