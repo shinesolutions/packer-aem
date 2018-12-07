@@ -74,6 +74,7 @@ deps-test-local: stage
 
 ################################################################################
 # Code styling check targets:
+# - lint Gemfile and InSpec test files
 # - lint Puppet manifests
 # - check shell scripts
 # - validate Puppet manifests
@@ -81,6 +82,7 @@ deps-test-local: stage
 ################################################################################
 
 lint:
+	bundle exec rubocop Gemfile test/inspec/*.rb
 	bundle exec puppet-lint \
 		--fail-on-warnings \
 		--no-140chars-check \

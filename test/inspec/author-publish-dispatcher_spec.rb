@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './spec_helper'
 
 init_conf
@@ -8,7 +10,7 @@ aem_base ||= '/opt'
 aem_port = @hiera.lookup('author::aem_port', nil, @scope)
 aem_port ||= '4502'
 
-aem_keystore_password = @hiera.lookup('aem_curator::install_author::aem_keystore_password', nil, @scope)
+# aem_keystore_password = @hiera.lookup('aem_curator::install_author::aem_keystore_password', nil, @scope)
 
 describe file("#{aem_base}/aem") do
   it { should be_directory }
@@ -63,14 +65,13 @@ describe file('/etc/puppetlabs/puppet/author.yaml') do
   it { should be_grouped_into 'root' }
 end
 
-
 aem_base = @hiera.lookup('publish::aem_base', nil, @scope)
 aem_base ||= '/opt'
 
 aem_port = @hiera.lookup('publish::aem_port', nil, @scope)
 aem_port ||= '4503'
 
-aem_keystore_password = @hiera.lookup('aem_curator::install_publish::aem_keystore_password', nil, @scope)
+# aem_keystore_password = @hiera.lookup('aem_curator::install_publish::aem_keystore_password', nil, @scope)
 
 describe file("#{aem_base}/aem") do
   it { should be_directory }
@@ -133,20 +134,20 @@ apache_https_port = @hiera.lookup('aem_curator::install_dispatcher::apache_https
 
 cert_filename = @hiera.lookup('aem_curator::install_dispatcher::cert_filename', nil, @scope)
 
-describe package("#{apache_package}") do
+describe package(apache_package) do
   it { should be_installed }
 end
 
 describe service('httpd') do
   it { should be_enabled }
-#  it { should be_running }
+  # it { should be_running }
 end
 
-describe port("#{apache_http_port}") do
+describe port(apache_http_port) do
   it { should be_listening }
 end
 
-describe port("#{apache_https_port}") do
+describe port(apache_https_port) do
   it { should be_listening }
 end
 
@@ -156,5 +157,5 @@ describe file(cert_filename) do
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
   its('mode') { should cmp '00600' }
-  its('size') { should be > 0 }
+  its('size') { should be.positive? }
 end

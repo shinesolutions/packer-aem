@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './spec_helper'
 
 init_conf
@@ -8,7 +10,7 @@ aem_base ||= '/opt'
 aem_port = @hiera.lookup('author::aem_port', nil, @scope)
 aem_port ||= '4502'
 
-aem_keystore_password = @hiera.lookup('aem_curator::install_author::aem_keystore_password', nil, @scope)
+# aem_keystore_password = @hiera.lookup('aem_curator::install_author::aem_keystore_password', nil, @scope)
 
 describe file("#{aem_base}/aem") do
   it { should be_directory }

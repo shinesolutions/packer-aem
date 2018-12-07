@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require './spec_helper'
 
 init_conf
 
-component = @scope["::packer_build_name"]
+component = @scope['::packer_build_name']
 
 describe gem('ruby_aem', '/opt/puppetlabs/puppet/bin/gem') do
   before do

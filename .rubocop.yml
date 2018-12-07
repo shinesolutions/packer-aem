@@ -1,0 +1,14 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  DisplayCopNames: true
+  Exclude:
+    - .bundle/*
+    - bin/*
+Metrics/BlockLength:
+  Exclude:
+    - "**/**/*_spec.rb"
+Metrics/LineLength:
+  Max: 200
+Naming/FileName:
+  Exclude:
+    - "**/**/*_spec.rb"
