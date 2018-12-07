@@ -7,11 +7,11 @@
   tasks:
 
     - name: Ensure stage directory exists
-      file: path=../../stage/stack-builder-configs/ state=directory
+      file: path=../../../stage/stack-builder-configs/ state=directory
 
     - name: Create Stack Builder AMI IDs configuration file
       stack_builder_ami_ids:
         aem_profile: "{{ aem.profile }}"
         os_type: "{{ os_type }}"
-        out_file: "../../stage/stack-builder-configs/{{ aem.profile }}-{{ os_type }}-stack-builder-ami-ids.yaml"
+        out_file: "../../../stage/stack-builder-configs/{{ aem.profile }}-{{ os_type }}-stack-builder-ami-ids.yaml"
         region: "{{ aws.region }}"
