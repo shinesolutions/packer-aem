@@ -153,6 +153,7 @@ GEM
       logging (>= 1.6.1, < 3.0)
       rubyzip (~> 1.1)
       winrm (~> 2.0)
+    yaml-lint (0.0.10)
 
 PLATFORMS
   ruby
@@ -163,6 +164,7 @@ DEPENDENCIES
   r10k
   rake
   rubocop
+  yaml-lint
 
 BUNDLED WITH
    1.17.1

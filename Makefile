@@ -74,6 +74,7 @@ deps-test-local: stage
 
 ################################################################################
 # Code styling check targets:
+# - lint Ansible inventory files
 # - lint Gemfile and InSpec test files
 # - lint Puppet manifests
 # - check shell scripts
@@ -82,6 +83,7 @@ deps-test-local: stage
 ################################################################################
 
 lint:
+	yaml-lint conf/ansible/inventory/group_vars/* *.yml .*.yml
 	bundle exec rubocop Gemfile test/inspec/*.rb
 	bundle exec puppet-lint \
 		--fail-on-warnings \
