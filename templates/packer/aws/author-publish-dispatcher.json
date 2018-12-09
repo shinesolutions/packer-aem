@@ -50,7 +50,7 @@
       "script": "provisioners/bash/{{user `os_type`}}.sh"
     },
     {
-      "source": "conf/",
+      "source": "conf/puppet/",
       "destination": "{{user `tmp_dir`}}",
       "type": "file"
     },
