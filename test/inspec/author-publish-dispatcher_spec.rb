@@ -157,5 +157,5 @@ describe file(cert_filename) do
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
   its('mode') { should cmp '00600' }
-  its('size') { should be.positive? }
+  its('size') { should be > 0 }
 end

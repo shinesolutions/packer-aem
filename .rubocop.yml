@@ -12,3 +12,6 @@ Metrics/LineLength:
 Naming/FileName:
   Exclude:
     - "**/**/*_spec.rb"
+Style/NumericPredicate:
+  Exclude:
+    - "**/**/*_spec.rb"
