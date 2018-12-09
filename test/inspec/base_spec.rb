@@ -23,7 +23,7 @@ if os[:family] == 'redhat'
   describe file('/etc/selinux/config') do
     it { should exist }
     it { should be_file }
-    its('content') { should match '/SELINUX=disabled/m' }
+    its('content') { should match(/SELINUX=disabled/m) }
   end
 
 end
