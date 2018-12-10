@@ -207,4 +207,4 @@ create-cert:
 	    -keyout stage/certs/aem.key \
 	    -out stage/certs/aem.cert
 
-.PHONY: ci clean stage package deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher test-integration test-integration-local ami-ids create-cert
+.PHONY: ci clean stage package deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher test-integration test-integration-local ami-ids ami-ids-examples create-cert
