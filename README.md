@@ -18,11 +18,11 @@ The AMIs produced by Packer AEM will then be used by [AEM AWS Stack Builder](htt
 Learn more about Packer AEM:
 
 * [Installation](https://github.com/shinesolutions/packer-aem#installation)
+* [Configuration](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md)
 * [Usage](https://github.com/shinesolutions/packer-aem#usage)
 * [Testing](https://github.com/shinesolutions/packer-aem#testing)
 * [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md)
 * [AWS System Tags](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-system-tags.md)
-* [Configuration](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md)
 * [Customisation Points](https://github.com/shinesolutions/packer-aem/blob/master/docs/customisation-points.md)
 * [Frequently Asked Questions](https://github.com/shinesolutions/packer-aem/blob/master/docs/faq.md)
 * [Upgrade Guide](https://github.com/shinesolutions/packer-aem/blob/master/docs/upgrade-guide.md)
