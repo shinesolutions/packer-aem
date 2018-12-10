@@ -43,9 +43,9 @@ To retrieve the latest AMI IDs for all [AEM AWS Stack Builder](https://github.co
 Examples
 --------
 
-There are a number of [example configuration files](https://github.com/shinesolutions/packer-aem/blob/master/examples/user-config/), you can use those examples as baseline configuration when creating your own machine images:
+There are a number of [example configuration files](https://github.com/shinesolutions/aem-helloworld-config/tree/master/packer-aem/), you can use those examples as baseline configuration when creating your own machine images:
 
-1. Modify [sandpit.yaml](https://github.com/shinesolutions/packer-aem/blob/master/examples/user-config/sandpit.yaml) with the details of your own environment
+1. Modify [sandpit.yaml](https://github.com/shinesolutions/aem-helloworld-config/blob/master/packer-aem/src/sandpit.yaml) with the details of your own environment
 2. Run one of the convenient `make config-examples-<platform_type>-<os_type>-<aem_version>` build targets to prepare the configuration, for example, if you want to configure AEM 6.3 build on AWS running RHEL7, run `make config-examples-aws-rhel7-aem63`
 3. Finally, create the machine images using the command `make <platform_type>-<component> version=<version>`
 

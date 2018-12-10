@@ -14,4 +14,3 @@ conf/packer/vars/*local.json
 conf/puppet/hieradata/local.yaml
 provisioners/ansible/playbooks/*.retry
 !/provisioners/puppet/modules/
-examples/user-config/zzz-local.yaml

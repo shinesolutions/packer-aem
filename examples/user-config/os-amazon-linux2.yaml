@@ -1,8 +1,0 @@
----
-
-os_type: amazon-linux2
-
-aws:
-  user: ec2-user
-  # Amazon Linux 2 AMI 2.0.20181008 x86_64 HVM gp2
-  source_ami: ami-02d039674ab9ba947

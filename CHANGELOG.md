@@ -1,5 +1,5 @@
 ### 3.4.2
-*
+* Move examples user config to https://github.com/shinesolutions/aem-helloworld-config
 
 ### 3.4.1
 * Add component check to test for ruby library version #99
