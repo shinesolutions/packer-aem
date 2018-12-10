@@ -1,5 +1,5 @@
 ### 3.4.2
-* Add JSON, YAML, and Rubocop checks to lint target
+* Add JSON, YAML, Python, and Rubocop checks to lint target
 * Move examples user config to https://github.com/shinesolutions/aem-helloworld-config
 
 ### 3.4.1

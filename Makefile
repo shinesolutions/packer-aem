@@ -78,6 +78,7 @@ deps-test-local: stage
 # - lint Ansible inventory files, tools configuration files
 # - lint Gemfile and InSpec test files
 # - lint Puppet manifests
+# - lint custom Ansible modules
 # - check shell scripts
 # - validate Puppet manifests
 # - validate Packer templates
@@ -96,6 +97,7 @@ lint:
 		--no-selector_inside_resource-check \
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
+	pylint provisioners/ansible/library/*.py
 	shellcheck $$(find provisioners scripts -name '*.sh')
 	puppet parser validate \
 		provisioners/puppet/manifests/*.pp \
