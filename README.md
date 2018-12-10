@@ -15,7 +15,7 @@ Packer AEM is a set of [Packer](https://www.packer.io/) templates for creating [
 
 The AMIs produced by Packer AEM will then be used by [AEM AWS Stack Builder](https://github.com/shinesolutions/aem-aws-stack-builder) to create an AEM environment on [AWS](https://aws.amazon.com/).
 
-Packer AEM is part of [AEM OpenCloud](https://aemopencloud.io) platform.
+Learn more about Packer AEM:
 
 * [Installation](https://github.com/shinesolutions/packer-aem#installation)
 * [Usage](https://github.com/shinesolutions/packer-aem#usage)
@@ -26,6 +26,8 @@ Packer AEM is part of [AEM OpenCloud](https://aemopencloud.io) platform.
 * [Customisation Points](https://github.com/shinesolutions/packer-aem/blob/master/docs/customisation-points.md)
 * [Frequently Asked Questions](https://github.com/shinesolutions/packer-aem/blob/master/docs/faq.md)
 * [Upgrade Guide](https://github.com/shinesolutions/packer-aem/blob/master/docs/upgrade-guide.md)
+
+Packer AEM is part of [AEM OpenCloud](https://aemopencloud.io) platform.
 
 Installation
 ------------
