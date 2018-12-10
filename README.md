@@ -15,7 +15,17 @@ Packer AEM is a set of [Packer](https://www.packer.io/) templates for creating [
 
 The AMIs produced by Packer AEM will then be used by [AEM AWS Stack Builder](https://github.com/shinesolutions/aem-aws-stack-builder) to create an AEM environment on [AWS](https://aws.amazon.com/).
 
-Packer AEM is part of [AEM OpenCloud](https://shinesolutions.github.io/aem-opencloud/) platform.
+Packer AEM is part of [AEM OpenCloud](https://aemopencloud.io) platform.
+
+* [Installation](https://github.com/shinesolutions/packer-aem#installation)
+* [Usage](https://github.com/shinesolutions/packer-aem#usage)
+* [Testing](https://github.com/shinesolutions/packer-aem#testing)
+* [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md)
+* [AWS System Tags](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-system-tags.md)
+* [Configuration](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md)
+* [Customisation Points](https://github.com/shinesolutions/packer-aem/blob/master/docs/customisation-points.md)
+* [Frequently Asked Questions](https://github.com/shinesolutions/packer-aem/blob/master/docs/faq.md)
+* [Upgrade Guide](https://github.com/shinesolutions/packer-aem/blob/master/docs/upgrade-guide.md)
 
 Installation
 ------------
@@ -23,7 +33,7 @@ Installation
 - Either clone Packer AEM `git clone https://github.com/shinesolutions/packer-aem.git` or download one of the [released versions](https://github.com/shinesolutions/packer-aem/releases)
 - Install the following required tools:
   * [Packer](https://www.packer.io/) version 1.0.0 or later
-  * [Ruby](https://www.ruby-lang.org/en/) version 2.1.0 or later
+  * [Ruby](https://www.ruby-lang.org/en/) version 2.3.0 or later
   * [Python](https://www.python.org/downloads/) version 2.7.x
   * [GNU Make](https://www.gnu.org/software/make/)<br/>
 
@@ -38,24 +48,12 @@ Usage
 - Apply the configuration files by running `make config config_path=<path/to/config/dir>`
 - Create the AMIs by running `make <platform>-<component> version=<version>`, for example: `make aws-author version=1.2.3`
 
-To retrieve the latest AMI IDs for all [AEM AWS Stack Builder](https://github.com/shinesolutions/aem-aws-stack-builder) components, run the command `make ami-ids config_path=<path/to/config/dir>`, and the AMI IDs will be written into `stage/*-stack-builder-ami-ids.yaml` file(s). These files can then be dropped in to AEM AWS Stack Builder configuration path.
+To retrieve the latest AMI IDs for all [AEM AWS Stack Builder](https://github.com/shinesolutions/aem-aws-stack-builder) components, run the command `make ami-ids config_path=<path/to/config/dir>`, and the AMI IDs will be written into `stage/stack-builder-configs/<aem_profile>-<os_type>-stack-builder-ami-ids.yaml` file(s). These files can then be dropped in to AEM AWS Stack Builder configuration path.
 
-Examples
---------
+Testing
+-------
 
-There are a number of [example configuration files](https://github.com/shinesolutions/aem-helloworld-config/tree/master/packer-aem/), you can use those examples as baseline configuration when creating your own machine images:
+You can run integration test for creating the AMIs for all components:
 
-1. Modify [sandpit.yaml](https://github.com/shinesolutions/aem-helloworld-config/blob/master/packer-aem/src/sandpit.yaml) with the details of your own environment
-2. Run one of the convenient `make config-examples-<platform_type>-<os_type>-<aem_version>` build targets to prepare the configuration, for example, if you want to configure AEM 6.3 build on AWS running RHEL7, run `make config-examples-aws-rhel7-aem63`
-3. Finally, create the machine images using the command `make <platform_type>-<component> version=<version>`
-
-More
-----
-
-Further information about Packer AEM:
-
-* [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md)
-* [AWS System Tags](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-system-tags.md)
-* [Configuration](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md)
-* [Customisation Points](https://github.com/shinesolutions/packer-aem/blob/master/docs/customisation-points.md)
-* [Frequently Asked Questions](https://github.com/shinesolutions/packer-aem/blob/master/docs/faq.md)
+- Run `make test-integration test_id=<sometestid>` for integration testing using remote dependencies.
+- Alternatively, run `make test-integration-local test_id=<sometestid>` for integration testing using local dependencies. This is handy when you're developing [Puppet AEM Resources](https://github.com/shinesolutions/puppet-aem-resources), [Puppet AEM Curator](https://github.com/shinesolutions/puppet-aem-curator), [Puppet Amazon SSM Agent](https://github.com/shinesolutions/puppet-amazon-ssm-agent), [AEM Hello World Custom Image Provisioner](https://github.com/shinesolutions/aem-helloworld-custom-image-provisioner), [AEM Hello World Config](https://github.com/shinesolutions/aem-helloworld-config), and would like to test them locally.
