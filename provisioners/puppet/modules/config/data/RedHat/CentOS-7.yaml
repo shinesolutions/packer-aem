@@ -1,3 +1,9 @@
 ---
 # Values that should only be applied to CentOS 7
+
+config::base::os_package_manager_packages:
+  - bind-utils
+  - unzip
+  - jq
+
 config::base::python_pip_package: python2-pip
