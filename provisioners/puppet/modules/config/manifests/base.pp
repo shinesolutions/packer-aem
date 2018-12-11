@@ -57,6 +57,9 @@
 #   No proxy setting should cloudwatch logs need to communicate via a proxy
 #   Default value: undef
 #
+# [*os_package_manager_packages*]
+#   List of packages which should be installed with OS default package manager.
+#
 #
 # === Authors
 #
@@ -68,6 +71,7 @@
 #
 class config::base (
   $tmp_dir,
+  $os_package_manager_packages,
   $python_package,
   $python_pip_package,
   $python_cheetah_package,
@@ -80,7 +84,6 @@ class config::base (
   $install_collectd = true,
   $install_amazon_ssm_agent = true,
   $collectd_cloudwatch_source_url = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
-
   $cloudwatchlogs_logfiles          = {},
   $cloudwatchlogs_logfiles_defaults = {},
   $collectd_packages = [],
@@ -118,7 +121,7 @@ class config::base (
     line => 'Defaults    env_keep += "ftp_proxy http_proxy https_proxy no_proxy"',
   }
 
-  package { [ 'unzip', 'jq' ]:
+  package { $os_package_manager_packages:
     ensure => installed,
   }
 

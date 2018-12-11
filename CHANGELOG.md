@@ -1,3 +1,7 @@
+### 3.4.3
+* Update OS base package installation
+* Add os base package bind-utils
+
 ### 3.4.2
 * Add JSON, YAML, Python, and Rubocop checks to lint target
 * Move examples user config to https://github.com/shinesolutions/aem-helloworld-config

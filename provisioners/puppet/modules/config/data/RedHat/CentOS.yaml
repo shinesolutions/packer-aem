@@ -1,2 +1,7 @@
 ---
 # Values that should only be applied to CentOS Linux
+
+config::base::os_package_manager_packages:
+  - bind-utils
+  - unzip
+  - jq
