@@ -47,8 +47,7 @@ Usage
 
 - Set up the required [AWS resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md)
 - Create [configuration file](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md)
-- Apply the configuration files by running `make config config_path=<path/to/config/dir>`
-- Create the AMIs by running `make <platform>-<component> version=<version>`, for example: `make aws-author version=1.2.3`
+- Create the AMIs by running `make <platform>-<component> version=<version> config_path=<path/to/config/dir>`, for example: `make aws-author version=1.2.3 config_path=stage/user-config/aws-rhel7-aem64/`
 
 To retrieve the latest AMI IDs for all [AEM AWS Stack Builder](https://github.com/shinesolutions/aem-aws-stack-builder) components, run the command `make ami-ids config_path=<path/to/config/dir>`, and the AMI IDs will be written into `stage/stack-builder-configs/<aem_profile>-<os_type>-stack-builder-ami-ids.yaml` file(s). These files can then be dropped in to AEM AWS Stack Builder configuration path.
 
