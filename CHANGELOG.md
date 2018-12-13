@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Move examples user config to https://github.com/shinesolutions/aem-helloworld-config
 
-### [3.4.1] - 2018-12-05
+## [3.4.1] - 2018-12-05
 
 ### Added
 - Add component check to test for ruby library version #99
