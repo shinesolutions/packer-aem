@@ -57,7 +57,7 @@ end
 if install_cloudwatchlogs == true
 
   # inspec version 1.51.6. doesn't support Amazon Linux 2. It assumes it uses Upstart.
-  # inspec version is locked to 1.51.6 for the locked down train version so to not bring in the aws-sdk dependency:
+  # inspec version is locked to 1.51.6 to use train version 0.32 because it doesn't have an aws-sdk dependency:
   # https://github.com/inspec/inspec/blob/v1.51.6/inspec.gemspec#L29
   # inspec supports amazon linux 2 from version v2.1.30 (2018-04-05)
   # https://github.com/inspec/inspec/blob/master/CHANGELOG.md#v2130-2018-04-05
