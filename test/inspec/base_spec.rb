@@ -61,8 +61,8 @@ if install_cloudwatchlogs == true
   # https://github.com/inspec/inspec/blob/v1.51.6/inspec.gemspec#L29
   # inspec supports amazon linux 2 from version v2.1.30 (2018-04-05)
   # https://github.com/inspec/inspec/blob/master/CHANGELOG.md#v2130-2018-04-05
-  # remove this handling once upgraded.
-  if %w{amazon}.include?(os[:name]) && !os[:release].start_with?('20\d\d')
+  # remove this bespoke handling once upgraded.
+  if %w[amazon].include?(os[:name]) && !os[:release].start_with?('20\d\d')
 
     describe systemd_service(@hiera.lookup('base::awslogs_service_name', nil, @scope)) do
       it { should be_enabled }
