@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Update default Dispatcher download URL #103
 - Update Apache Dispatcher Module version to 4.3.1
+- Upgrade aem_resources to 3.4.0, aem_curator to 1.4.0
 
 ### Removed
 
