@@ -53,9 +53,13 @@ end
 #   its('exit_status') { should eq 0 }
 # end
 
-# describe file("#{aem_base}/aem/author/crx-quickstart/conf/cq.pid") do
-#   it { should_not exist }
-# end
+if File.file?("/lib/systemd/system/aem-author.service")
+
+  describe file("#{aem_base}/aem/author/crx-quickstart/conf/cq.pid") do
+    it { should_not exist }
+  end
+
+end
 
 describe file('/etc/puppetlabs/puppet/author.yaml') do
   it { should be_file }
