@@ -60,6 +60,6 @@ aem:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
     start_opts: ''
   dispatcher:
-    version: 4.2.3
+    version: 4.3.1
   artifacts_base: overwrite-me
   enable_custom_image_provisioner: false

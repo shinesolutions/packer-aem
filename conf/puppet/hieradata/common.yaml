@@ -60,9 +60,10 @@ aem_curator::install_publish::post_stop_sleep_secs: 300
 aem_curator::install_dispatcher::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_dispatcher::cert_base_url: "file://%{lookup('tmp_dir')}/certs"
 aem_curator::install_dispatcher::cert_filename: /etc/ssl/aem.unified-dispatcher.cert
-aem_curator::install_dispatcher::apache_module_base_url: https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher/_jcr_content/top/download_9/file.res
-aem_curator::install_dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86-64-ssl-4.2.3.tar.gz
-aem_curator::install_dispatcher::apache_module_filename: dispatcher-apache2.4-4.2.3.so
+
+aem_curator::install_dispatcher::apache_module_base_url: http://download.macromedia.com/dispatcher/download
+aem_curator::install_dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86_64-ssl-4.3.1.tar.gz
+aem_curator::install_dispatcher::apache_module_filename: dispatcher-apache2.4-4.3.1.so
 aem_curator::install_dispatcher::apache_module_temp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_dispatcher::apache_http_port: "80"
 aem_curator::install_dispatcher::apache_https_port: "443"
