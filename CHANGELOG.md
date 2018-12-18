@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Parameter for defining aem healthcheck version
 
 ### Changed
 - Update default Dispatcher download URL #103
@@ -14,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade aem_resources to 3.4.0, aem_curator to 1.4.0
 
 ### Removed
+- Hiera config paramter duplications
 
 ## [3.4.2] - 2018-12-12
 
