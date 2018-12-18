@@ -17,7 +17,7 @@ mod 'MiamiOH/tcpwrappers', '1.1.0'
 
 # puppet-aem-curator dependencies, TODO: resolve sub-dependencies without declaring deps in packer-aem
 mod 'aco-oracle_java', '2.8.3'
-mod 'bstopp/aem', :git => 'https://github.com/shinesolutions/puppet-aem', :commit => '2d39c43e0625fcb625184b8724c8c475f4bb4ebd'
+mod 'bstopp/aem', :git => 'https://github.com/shinesolutions/puppet-aem', :commit => 'fffb3c5688f272c1f10eb63b2cdba990e577f885'
 mod 'puppet-healthcheck', '0.4.0'
 mod 'puppetlabs/apache', :git => 'https://github.com/shinesolutions/puppetlabs-apache', :commit => 'd4f89389faae77e8ef5618069085e429ce50e427'
 mod 'puppetlabs/java_ks', '1.6.0'
