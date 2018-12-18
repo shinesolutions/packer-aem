@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Hiera config paramter duplications
 
+### Fixed
+- InSpec awslogs service enabled and running test #60
+- InSpec cq.pid file not exists test #60 
+
 ## [3.4.2] - 2018-12-12
 
 ### Changed
