@@ -11,7 +11,16 @@ describe package(apache_package) do
   it { should be_installed }
 end
 
-describe service('httpd') do
-  it { should be_enabled }
-  # it { should be_running }
+if %w[amazon].include?(os[:name]) && !os[:release].start_with?('20\d\d')
+
+  describe systemd_service('httpd') do
+    it { should be_enabled }
+  end
+
+else
+
+  describe service('httpd') do
+    it { should be_enabled }
+  end
+
 end
