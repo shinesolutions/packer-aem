@@ -18,7 +18,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | timezone.locality | [Timezone locality name as per tz database list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) | Optional | `Melbourne` |
 | custom_image_provisioner.pre.timeout | The maximum duration (in seconds) allowed for Custom Image Provisioner pre step to run. | Optional | `3600` |
 | custom_image_provisioner.post.timeout | The maximum duration (in seconds) allowed for Custom Image Provisioner post step to run. | Optional | `3600` |
-| library.aem_password_reset_version | The version number of [AEM Password Reset](https://github.com/shinesolutions/aem-password-reset/) library. | Optional | 1.3.3 |
+| library.aem_healthcheck_version | The version number of [AEM Health Check](https://github.com/shinesolutions/aem-healthcheck/) library. | Optional | 1.3.3 |
 
 ### AEM configuration properties:
 
