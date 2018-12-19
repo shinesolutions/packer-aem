@@ -10,7 +10,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | Name | Description | Required? | Default |
 |------|-------------|-----------|---------|
 | platform_type | Platform type, currently only supports `aws` | Optional | `aws` |
-| os_type | Operating System type, can be `rhel7`, `rhel6`, `centos7`, or `amazon-linux` | Optional | `rhel7` |
+| os_type | Operating System type, can be `rhel7`, `amazon-linux2`, or `centos7` | Optional | `rhel7` |
 | http_proxy | [Web proxy server](https://en.wikipedia.org/wiki/Proxy_server) for http URLs, leave empty if Packer EC2 instances can directly connect to the Internet | Optional | Empty string |
 | https_proxy | [Web proxy server](https://en.wikipedia.org/wiki/Proxy_server) for https URLs, leave empty if Packer EC2 instances can directly connect to the Internet | Optional | Empty string |
 | no_proxy | A comma separated value of domain suffixes that you don't want to use with the web proxy. | Optional | Empty string |
