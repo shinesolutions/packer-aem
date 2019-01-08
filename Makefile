@@ -13,7 +13,7 @@ clean:
 	rm -rf bin .bundle .tmp Puppetfile.lock Gemfile.lock .gems modules packer_cache stage logs/
 
 stage:
-	mkdir -p stage/ stage/custom/ stage/user-config/ logs/
+	mkdir -p stage/ stage/custom/ stage/user-config/ stage/certs/ logs/
 
 package: stage
 	tar \
@@ -129,7 +129,7 @@ config:
 # build AWS AMIs
 aws-java aws-author aws-publish aws-dispatcher: stage config
 	$(eval COMPONENT := $(shell echo $@ | sed -e 's/^aws-//g'))
-	PACKER_LOG_PATH=logs/packer-aws-$@.log \
+	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
@@ -139,7 +139,7 @@ aws-java aws-author aws-publish aws-dispatcher: stage config
 
 # build AWS AMI for author-publish-dispatcher component
 aws-author-publish-dispatcher: stage config
-	PACKER_LOG_PATH=logs/packer-aws-$@.log \
+	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
@@ -150,7 +150,7 @@ aws-author-publish-dispatcher: stage config
 # build Docker images
 docker-java docker-author docker-publish docker-dispatcher: stage config
 	$(eval COMPONENT := $(shell echo $@ | sed -e 's/^docker-//g'))
-	PACKER_LOG_PATH=logs/packer-docker-$@.log \
+	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
@@ -160,7 +160,7 @@ docker-java docker-author docker-publish docker-dispatcher: stage config
 
 # build Docker image for author-publish-dispatcher component
 docker-author-publish-dispatcher: stage config
-	PACKER_LOG_PATH=logs/packer-docker-$@.log \
+	PACKER_LOG_PATH=logs/packer-$@.log \
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
@@ -205,8 +205,7 @@ define ami_ids_examples
 endef
 
 # convenient target for creating self-signed certificate using OpenSSL
-create-cert:
-	mkdir -p stage/certs/
+create-cert: stage
 	openssl req \
 	    -new \
 	    -newkey rsa:4096 \
