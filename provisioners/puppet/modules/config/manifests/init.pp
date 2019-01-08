@@ -35,7 +35,7 @@ class config (
     ensure   => '1.17.3',
     provider => 'gem',
   } -> package { 'nokogiri':
-    ensure   => '1.8.2',
+    ensure   => '1.8.5',
     provider => 'puppet_gem',
   } -> package { 'ruby_aem':
     ensure   => '2.4.0',
