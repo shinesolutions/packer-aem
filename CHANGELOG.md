@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update default Dispatcher download URL #103
 - Update Apache Dispatcher Module version to 4.3.1
 - Upgrade aem_resources to 3.5.0, aem_curator to 1.5.0
+- Upgrade ruby_aem to 2.4.0
 
 ### Removed
 - Hiera config paramter duplications
