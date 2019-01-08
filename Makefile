@@ -129,7 +129,7 @@ config:
 # build AWS AMIs
 aws-java aws-author aws-publish aws-dispatcher: stage config
 	$(eval COMPONENT := $(shell echo $@ | sed -e 's/^aws-//g'))
-	PACKER_LOG_PATH=logs/packer-$@.log \
+	PACKER_LOG_PATH=logs/packer-aws-$@.log \
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
@@ -137,9 +137,9 @@ aws-java aws-author aws-publish aws-dispatcher: stage config
 		-var 'version=$(version)' \
 		templates/packer/aws/generic.json
 
-# build AWS AMIs for author-publish-dispatcher component
+# build AWS AMI for author-publish-dispatcher component
 aws-author-publish-dispatcher: stage config
-	PACKER_LOG_PATH=logs/packer-$@.log \
+	PACKER_LOG_PATH=logs/packer-aws-$@.log \
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
@@ -150,13 +150,23 @@ aws-author-publish-dispatcher: stage config
 # build Docker images
 docker-java docker-author docker-publish docker-dispatcher: stage config
 	$(eval COMPONENT := $(shell echo $@ | sed -e 's/^docker-//g'))
-	PACKER_LOG_PATH=logs/packer-$@.log \
+	PACKER_LOG_PATH=logs/packer-docker-$@.log \
 		PACKER_LOG=1 \
 		packer build \
 		$(VAR_PARAMS) \
 		-var-file=conf/packer/vars/components/$(COMPONENT).json \
 		-var 'version=$(version)' \
 		templates/packer/docker/generic.json
+
+# build Docker image for author-publish-dispatcher component
+docker-author-publish-dispatcher: stage config
+	PACKER_LOG_PATH=logs/packer-docker-$@.log \
+		PACKER_LOG=1 \
+		packer build \
+		$(VAR_PARAMS) \
+		-var-file=conf/packer/vars/components/author-publish-dispatcher.json \
+		-var 'version=$(version)' \
+		templates/packer/docker/author-publish-dispatcher.json
 
 ################################################################################
 # Integration test targets.
@@ -207,4 +217,4 @@ create-cert:
 	    -keyout stage/certs/aem.key \
 	    -out stage/certs/aem.cert
 
-.PHONY: ci clean stage package deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher test-integration test-integration-local ami-ids ami-ids-examples create-cert
+.PHONY: ci clean stage package deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher docker-author-publish-dispatcher test-integration test-integration-local ami-ids ami-ids-examples create-cert
