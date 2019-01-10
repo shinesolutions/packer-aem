@@ -6,6 +6,7 @@
   - local
   - "%{::os.family}/%{::os.name}-%{::os.release.major}"
   - "%{::os.family}/%{::os.name}"
+  - "%{::platform_type}"
   - "%{::component}"
   - common
 :logger: noop

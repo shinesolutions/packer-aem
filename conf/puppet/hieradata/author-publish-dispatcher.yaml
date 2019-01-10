@@ -1,10 +1,6 @@
 ---
-# Values that should only be applied to author-publish-dispatcher
-
-aem_curator::install_author::setup_repository_volume: true
 aem_curator::install_author::repository_volume_device: /dev/xvdb
 aem_curator::install_author::repository_volume_mount_point: /mnt/ebs1
 
-aem_curator::install_publish::setup_repository_volume: true
 aem_curator::install_publish::repository_volume_device: /dev/xvdc
 aem_curator::install_publish::repository_volume_mount_point: /mnt/ebs2
