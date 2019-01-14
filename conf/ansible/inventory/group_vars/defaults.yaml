@@ -33,7 +33,6 @@ aws:
     - Key: overwrite-me
       Value: overwrite-me
   certificate_arn: overwrite-me
-  certificate_key_arn: overwrite-me
   rhel7:
     devicemap_root: /dev/sda1
     devicemap_data_b: /dev/sdb

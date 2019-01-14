@@ -60,7 +60,6 @@ Resources:
                   - ec2:TerminateInstances
                   - iam:PassRole
                   - kms:Decrypt
-                  - secretsmanager:GetSecretValue
                 Resource: "*"
               - Effect: Allow
                 Action:
