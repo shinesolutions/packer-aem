@@ -23,6 +23,7 @@
 # Copyright © 2018	Shine Solutions Group, unless otherwise noted.
 #
 class config::certs (
+  $certs_base,
   $certificate_arn,
   $tmp_dir,
   $region,
@@ -47,6 +48,17 @@ class config::certs (
   }
 
   file { "${tmp_dir}/certs/aem.cert":
+    ensure => file,
+    mode   => '0600',
+  }
+
+  archive { "${tmp_dir}/certs/aem.key":
+    ensure  => present,
+    source  => "${certs_base}/aem.key",
+    require => File["${tmp_dir}/certs"],
+  }
+
+  file { "${tmp_dir}/certs/aem.key":
     ensure => file,
     mode   => '0600',
   }
