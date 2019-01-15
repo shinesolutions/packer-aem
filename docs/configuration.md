@@ -52,4 +52,3 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.data_volume_size | The size of data volume in Gb, this is where AEM repository resides | Optional | `75` |
 | aws.tags | An array of `Key` and `Value` pairs for tagging AWS resources (e.g. EC2 instance, AMI, EBS volume) created by Packer AEM following your organisation's tagging standard | Optional | None |
 | aws.certificate_arn | The ARN of the Certificate in the [AWS Certificate Manager (ACM)](https://console.aws.amazon.com/acm/home) | Mandatory | |
-| aws.certificate_key_arn | The ARN of the secret containing the Certificate's Secret Key in the [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) | Mandatory | |

@@ -8,9 +8,6 @@
 # [*certificate_arn*]
 #   ARN of certificate to retrieve from AWS Certificate Manager (ACM)
 #
-# [*certificate_key_arn*]
-#   ARN of certificate key to retrieve from AWS Secrets Manager
-#
 # [*tmp_dir*]
 #   Directory to store the certs and key in before they are removed.
 #
@@ -26,8 +23,8 @@
 # Copyright © 2018	Shine Solutions Group, unless otherwise noted.
 #
 class config::certs (
+  $certs_base,
   $certificate_arn,
-  $certificate_key_arn,
   $tmp_dir,
   $region,
 ) {
@@ -55,10 +52,9 @@ class config::certs (
     mode   => '0600',
   }
 
-  exec { 'Download Secret from AWS Secret Manager using cli':
-    creates => "${tmp_dir}/certs/aem.key",
-    command => "aws secretsmanager get-secret-value --region ${region} --secret-id ${certificate_key_arn} --output text --query SecretString > ${tmp_dir}/certs/aem.key",
-    path    => '/usr/local/bin/:/bin/',
+  archive { "${tmp_dir}/certs/aem.key":
+    ensure  => present,
+    source  => "${certs_base}/aem.key",
     require => File["${tmp_dir}/certs"],
   }
 
@@ -68,4 +64,3 @@ class config::certs (
   }
 
 }
-
