@@ -49,11 +49,14 @@ deps:
 
 # resolve AEM OpenCloud's Puppet module dependencies from local directories
 deps-local:
+	[ ! -d ../puppet-aem-resources ] && git clone https://github.com/shinesolutions/puppet-aem-resources
 	rm -rf modules/aem_resources/*
-	rm -rf modules/aem_curator/*
-	rm -rf modules/amazon_ssm_agent/*
 	cp -R ../puppet-aem-resources/* modules/aem_resources/
+	[ ! -d ../puppet-aem-curator ] && git clone https://github.com/shinesolutions/puppet-aem-curator
+	rm -rf modules/aem_curator/*
 	cp -R ../puppet-aem-curator/* modules/aem_curator/
+	[ ! -d ../puppet-amazon-ssm-agent ] && git clone https://github.com/shinesolutions/puppet-amazon-ssm-agent
+	rm -rf modules/amazon_ssm_agent/*
 	cp -R ../puppet-amazon-ssm-agent/* modules/amazon_ssm_agent/
 
 # resolve test dependencies from remote artifact registries
@@ -66,11 +69,13 @@ deps-test: stage
 
 # resolve test dependencies from local directories
 deps-test-local: stage
+	[ ! -d ../aem-helloworld-config ] && git clone https://github.com/shinesolutions/aem-helloworld-config
+	rm -rf stage/aem-helloworld-config/ stage/user-config/*
+	cp -R ../aem-helloworld-config/packer-aem/* stage/user-config/
+	[ ! -d ../aem-helloworld-custom-image-provisioner ] && git clone https://github.com/shinesolutions/aem-helloworld-custom-image-provisioner
 	cd ../aem-helloworld-custom-image-provisioner && make package
 	rm -rf stage/custom/aem-custom-image-provisioner.tar.gz
 	cp ../aem-helloworld-custom-image-provisioner/stage/*.tar.gz stage/custom/aem-custom-image-provisioner.tar.gz
-	rm -rf stage/aem-helloworld-config/ stage/user-config/*
-	cp -R ../aem-helloworld-config/packer-aem/* stage/user-config/
 
 ################################################################################
 # Code styling check and validation targets:
