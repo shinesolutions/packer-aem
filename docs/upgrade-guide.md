@@ -5,8 +5,8 @@ This upgrade guide covers the changes required when you already use Packer AEM a
 
 ### [Unreleased]
 
-* The `secretsmanager:GetSecretValue` permission is not required if using the S3 Bucket for storing the TLS key
-* Add back `aws.aem_certs_base` configuration property
+* The `secretsmanager:GetSecretValue` permission is now optional, it's only needed when using AWS Secrets Manager to store the TLS certificate private key, it's not needed when an S3 bucket is used
+* Re-add `aws.aem_certs_base` configuration property and it's only needed when S3 bucket is used to store the TLS certificate private key
 
 ### To 3.4.0
 
