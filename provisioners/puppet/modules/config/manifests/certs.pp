@@ -5,6 +5,12 @@
 #
 # === Parameters
 #
+# [*certs_base*]
+#   Source URL path of TLS certificate and key, it could be s3://..., http://..., https://..., or file://....
+#
+# [*certificate_key_arn*]
+#   ARN of certificate key to retrieve from AWS Secrets Manager
+#
 # [*certificate_arn*]
 #   ARN of certificate to retrieve from AWS Certificate Manager (ACM)
 #
@@ -24,6 +30,7 @@
 #
 class config::certs (
   $certs_base,
+  $certificate_key_arn,
   $certificate_arn,
   $tmp_dir,
   $region,
@@ -52,10 +59,22 @@ class config::certs (
     mode   => '0600',
   }
 
-  archive { "${tmp_dir}/certs/aem.key":
-    ensure  => present,
-    source  => "${certs_base}/aem.key",
-    require => File["${tmp_dir}/certs"],
+  # Get certificate private key from Secrets Manager
+  if ! ($certificate_key_arn in [ '', 'overwrite-me' ]) {
+    exec { 'Download Secret from AWS Secrets Manager using cli':
+      creates => "${tmp_dir}/certs/aem.key",
+      command => "aws secretsmanager get-secret-value --region ${region} --secret-id ${certificate_key_arn} --output text --query SecretString > ${tmp_dir}/certs/aem.key",
+      path    => '/usr/local/bin/:/bin/',
+    }
+  }
+  else {
+    # S3 is the fallback as AWS Secrets Manager isn't currently SOC2 compliant
+    # The support for S3 as a fallback can be removed as soon as AWS Secrets Manager is SOC2 compliant and listed on [ASM Compliance with Standards](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html#asm_compliance)
+    archive { "${tmp_dir}/certs/aem.key":
+      ensure  => present,
+      source  => "${certs_base}/aem.key",
+      require => File["${tmp_dir}/certs"],
+    }
   }
 
   file { "${tmp_dir}/certs/aem.key":
