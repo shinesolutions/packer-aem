@@ -34,6 +34,7 @@ aws:
       Value: overwrite-me
   certificate_arn: overwrite-me
   certificate_key_arn: overwrite-me
+  aem_certs_base: overwrite-me
   rhel7:
     devicemap_root: /dev/sda1
     devicemap_data_b: /dev/sdb
@@ -63,7 +64,6 @@ aem:
     version: 4.3.1
   artifacts_base: overwrite-me
   enable_custom_image_provisioner: false
-  certs_base: overwrite-me
 
 library:
   aem_healthcheck_version: 1.3.3
