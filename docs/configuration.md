@@ -35,7 +35,6 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aem.dispatcher.version | AEM Dispatcher version, available version is documented on [Download Dispatcher Web Server Modules](https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher.html) page | Mandatory | `4.2.3` |
 | aem.artifacts_base | Source URL path of AEM artifacts, it could be `s3://...`, `http://...`, `https://...`, or `file://...`. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/artifacts/ | Mandatory | |
 | aem.enable_custom_image_provisioner | Set to `true` when Custom Image Provisioner pre and post steps will be executed , note: place `aem-custom-image-provisioner.tar.gz` artifact in `stage/custom/` directory | Optional | `false` |
-| aem.certs_base | Source URL path of TLS certificate, it could be s3://..., http://..., https://..., or file://.... In [AWS Resources](https://github.com/shinesolutions/aem-aws-stack-builder/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/certs/  | Optional | |
 
 ### AWS platform type configuration properties:
 
@@ -54,3 +53,4 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.tags | An array of `Key` and `Value` pairs for tagging AWS resources (e.g. EC2 instance, AMI, EBS volume) created by Packer AEM following your organisation's tagging standard | Optional | None |
 | aws.certificate_arn | The ARN of the Certificate in the [AWS Certificate Manager (ACM)](https://console.aws.amazon.com/acm/home) | Mandatory | |
 | aws.certificate_key_arn | The ARN of the secret containing the Certificate's Secret Key in the [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) | Optional | |
+| aws.aem_certs_base | Source URL path of TLS certificate, it could be s3://..., http://..., https://..., or file://.... In [AWS Resources](https://github.com/shinesolutions/aem-aws-stack-builder/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/certs/  | Optional | |

@@ -3,6 +3,11 @@ Upgrade Guide
 
 This upgrade guide covers the changes required when you already use Packer AEM and you need to upgrade it to a higher version.
 
+### [Unreleased]
+
+* The `secretsmanager:GetSecretValue` permission is not required if using the S3 Bucket for storing the TLS key
+* Add back `aws.aem_certs_base` configuration property
+
 ### To 3.4.0
 
 * New service requirements: AWS Certificate Manager and AWS Secrets Manager
