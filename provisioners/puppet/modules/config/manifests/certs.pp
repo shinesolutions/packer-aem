@@ -68,8 +68,8 @@ class config::certs (
     }
   }
   else {
-    # S3 is the fallback as Secrets Manager isn't SOC2 compliant (a requirement for some organizations)
-    # See Support Case '5590144671' in our AWS account
+    # S3 is the fallback as AWS Secrets Manager isn't currently SOC2 compliant
+    # The support for S3 as a fallback can be removed as soon as AWS Secrets Manager is SOC2 compliant and listed on [ASM Compliance with Standards](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html#asm_compliance)
     archive { "${tmp_dir}/certs/aem.key":
       ensure  => present,
       source  => "${certs_base}/aem.key",
