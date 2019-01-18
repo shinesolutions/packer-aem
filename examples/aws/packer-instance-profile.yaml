@@ -61,6 +61,10 @@ Resources:
                   - iam:PassRole
                   - kms:Decrypt
                   - secretsmanager:GetSecretValue
+                  - ssm:GetParameterHistory
+                  - ssm:GetParametersByPath
+                  - ssm:GetParameters
+                  - ssm:GetParameter
                 Resource: "*"
               - Effect: Allow
                 Action:

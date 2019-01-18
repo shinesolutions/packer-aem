@@ -2,6 +2,8 @@ include ::config::base
 
 include ::config::certs
 
+include ::config::license
+
 include aem_curator::install_java
 
 include aem_curator::install_author

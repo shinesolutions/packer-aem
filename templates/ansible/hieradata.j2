@@ -13,6 +13,11 @@ config::certs::certificate_key_arn: {{ aws.certificate_key_arn }}
 config::certs::certificate_arn: {{ aws.certificate_arn }}
 config::certs::region: {{ aws.region }}
 
+config::license::aem_profile: {{ aem.profile }}
+config::license::aem_license: {{ aws.aem_license }}
+config::license::aem_license_base: {{ aws.aem_license_base }}
+config::license::region: {{ aws.region }}
+
 config::custom_image_provisioner::enable_custom_image_provisioner: {{ aem.enable_custom_image_provisioner }}
 
 config::custom_image_provisioner::pre::timeout: {{ custom_image_provisioner.pre.timeout }}
