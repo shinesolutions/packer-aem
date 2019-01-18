@@ -54,3 +54,5 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.certificate_arn | The ARN of the Certificate in the [AWS Certificate Manager (ACM)](https://console.aws.amazon.com/acm/home) | Mandatory | |
 | aws.certificate_key_arn | The ARN of the secret containing the Certificate's Secret Key in the [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) | Optional | |
 | aws.aem_certs_base | Source URL path of TLS certificate, it could be s3://..., http://..., https://..., or file://.... In [AWS Resources](https://github.com/shinesolutions/aem-aws-stack-builder/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/certs/  | Optional | |
+| aws.aem_license | AWS Systems Manager parameter containing the License content  | Optional | |
+| aws.aem_license_base | Source URL folder path of License file, it could be s3://..., http://..., https://..., or file://.... In [AWS Resources](https://github.com/shinesolutions/aem-aws-stack-builder/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/license/  | Optional | |
