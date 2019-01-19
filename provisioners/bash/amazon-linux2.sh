@@ -2,9 +2,6 @@
 set -o nounset
 set -o errexit
 
-# Disable cloud-init log forwarding to syslog in order to prevent 'serial8250: too much work for irq4'
-sed -i 's/ - \[ \*log_base, \*log_file \]/# - \[ \*log_base, \*log_file \]/g' /etc/cloud/cloud.cfg.d/05_logging.cfg
-
 # yum-utils is needed by Amazon Linux 2 Docker image which doesn't include yum-config-manager
 yum -y install yum-utils
 
