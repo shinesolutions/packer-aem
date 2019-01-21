@@ -33,6 +33,7 @@ Installation
 ------------
 
 - Either clone Packer AEM `git clone https://github.com/shinesolutions/packer-aem.git` or download one of the [released versions](https://github.com/shinesolutions/packer-aem/releases)
+- Run `make deps` to download the dependencies
 - Install the following required tools:
   * [Packer](https://www.packer.io/) version 1.0.0 or later
   * [Ruby](https://www.ruby-lang.org/en/) version 2.3.0 or later
