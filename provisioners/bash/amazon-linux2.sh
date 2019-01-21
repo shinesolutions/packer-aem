@@ -2,6 +2,11 @@
 set -o nounset
 set -o errexit
 
+# Tomcat 8.x was moved to amazon-linux-extras https://aws.amazon.com/amazon-linux-2/faqs/#Amazon_Linux_Extras
+# need to enable the package in order to access it via yum from Puppet manifest
+# enabling tomcat8.5 will set Tomcat 8.5 as the default tomcat package installation
+amazon-linux-extras enable tomcat8.5
+
 # yum-utils is needed by Amazon Linux 2 Docker image which doesn't include yum-config-manager
 yum -y install yum-utils
 
