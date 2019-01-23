@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Update default Dispatcher download URL #103
 - Update Apache Dispatcher Module version to 4.3.1
-- Upgrade aem_resources to 3.5.0, aem_curator to 1.5.0
+- Upgrade aem_resources to 3.5.0, aem_curator to 1.6.0
 - Upgrade ruby_aem to 2.4.0
 - Lock down bundler on host gem to version 1.17.3 in order to support Ruby older than 2.3.0
 - Modified TLS private key to download from AWS Secrets Manager or S3 as a fallback
