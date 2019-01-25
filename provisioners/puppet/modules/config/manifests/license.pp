@@ -5,6 +5,15 @@
 #
 # === Parameters
 #
+# [*aem_profile*]
+#   AEM Profile consisting of version, service pack etc..
+#
+# [*aem_license*]
+#   AWS Systems Manager parameter containing the License content.
+#
+# [*aem_license_base*]
+#   Source URL folder path of License file, it could be s3://..., http://..., https://..., or file://.....
+#
 # [*tmp_dir*]
 #   Directory to store the certs and key in before they are removed.
 #

@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade ruby_aem to 2.4.0
 - Lock down bundler on host gem to version 1.17.3 in order to support Ruby older than 2.3.0
 - Modified TLS private key to download from AWS Secrets Manager or S3 as a fallback
+- Move AEM license storage from S3 to AWS Systems Manager Parameter Store secure string
 
 ### Removed
 - Hiera config paramter duplications
