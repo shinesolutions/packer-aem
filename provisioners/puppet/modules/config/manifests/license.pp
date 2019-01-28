@@ -64,14 +64,6 @@ class config::license (
       path    => '/usr/local/bin/:/bin/',
     }
   }
-  else {
-    # Download the License file from S3
-    archive { "${tmp_dir}/license/license-${aem_version}.properties":
-      ensure  => present,
-      source  => "${aem_license_base}/license-${aem_version}.properties",
-      require => File["${tmp_dir}/license"],
-    }
-  }
 
   file { "${tmp_dir}/license/license-${aem_version}.properties":
     ensure => file,

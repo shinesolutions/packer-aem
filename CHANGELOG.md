@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move AEM license storage from S3 to AWS Systems Manager Parameter Store secure string
 
 ### Removed
-- Hiera config paramter duplications
+- Hiera config parameter duplications
 
 ### Fixed
 - InSpec awslogs service enabled and running test #60
