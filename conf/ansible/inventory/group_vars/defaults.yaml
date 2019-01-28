@@ -54,7 +54,7 @@ docker:
   source: overwrite-me
 
 aem:
-  profile: aem62_sp1_cfp9
+  profile: aem64_sp3
   keystore_password: changeit
   author:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
