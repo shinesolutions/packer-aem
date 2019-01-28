@@ -56,10 +56,7 @@ Testing
 
 ### Testing with remote dependencies
 
-You can run integration test for creating the AMIs for all components:
-
-- Run `make deps-test` to set up example configuration files from [AEM Hello World Config](https://github.com/shinesolutions/aem-helloworld-config). If you run this test in your own environment, you have to prepare the configuration files for your own test environment.
-- Run `make test-integration test_id=<sometestid>` for integration testing using remote dependencies.
+You can run integration test for creating the AMIs for all components using the command `make test-integration test_id=<sometestid>`, which downloads the dependencies from the Internet.
 
 ### Testing with local dependencies
 
@@ -67,8 +64,7 @@ If you're working on the dependencies of Packer AEM and would like to test them 
 
 - Clone the dependency repos [Puppet AEM Resources](https://github.com/shinesolutions/puppet-aem-resources), [Puppet AEM Curator](https://github.com/shinesolutions/puppet-aem-curator), and [Puppet Amazon SSM Agent](https://github.com/shinesolutions/puppet-amazon-ssm-agent), [AEM Hello World Custom Image Provisioner](https://github.com/shinesolutions/aem-helloworld-custom-image-provisioner), [AEM Hello World Config](https://github.com/shinesolutions/aem-helloworld-config) at the same directory level as Packer AEM
 - Make your code changes against those dependency repos
-- Run `make deps-local deps-test-local` to copy those local dependencies to Packer AEM, and create the AMIs `make <platform>-<component> version=<version> config_path=<path/to/config/dir>`
-- Alternatively, run `make test-integration-local test_id=<sometestid>` for integration testing using local dependencies
+- Run `make test-integration-local test_id=<sometestid>` for integration testing using local dependencies, which copies those local dependency repos to Packer AEM and use them as part of the test
 
 ### Debugging
 
