@@ -67,7 +67,7 @@ class config::certs (
       path    => '/usr/local/bin/:/bin/',
     }
   }
-  else {
+  elsif ! ($certs_base in [ '', 'overwrite-me' ]) {
     # S3 is the fallback as AWS Secrets Manager isn't currently SOC2 compliant
     # The support for S3 as a fallback can be removed as soon as AWS Secrets Manager is SOC2 compliant and listed on [ASM Compliance with Standards](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html#asm_compliance)
     archive { "${tmp_dir}/certs/aem.key":
