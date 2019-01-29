@@ -1,5 +1,5 @@
 ### 2.12.1
-*
+* Lock down bundler on host gem to version 1.17.3 in order to support Ruby older than 2.3.0
 
 ### 2.12.0
 * Add tomcat service installation for java component #89
