@@ -56,13 +56,11 @@ class config::license (
     mode   => '0700',
   }
 
-  if ! ($aem_license in [ '', 'overwrite-me' ]) {
-    # Download the License file from Parameter Store
-    exec { 'Download License file from AWS Systems Manager Parameter Store':
-      creates => "${tmp_dir}/license/license-${aem_version}.properties",
-      command => "aws ssm get-parameters --region ${region} --names ${aem_license} --with-decryption --output text --query Parameters[0].Value > ${tmp_dir}/license/license-${aem_version}.properties",
-      path    => '/usr/local/bin/:/bin/',
-    }
+  # Download the License file from Parameter Store
+  exec { 'Download License file from AWS Systems Manager Parameter Store':
+    creates => "${tmp_dir}/license/license-${aem_version}.properties",
+    command => "aws ssm get-parameters --region ${region} --names ${aem_license} --with-decryption --output text --query Parameters[0].Value > ${tmp_dir}/license/license-${aem_version}.properties",
+    path    => '/usr/local/bin/:/bin/',
   }
 
   file { "${tmp_dir}/license/license-${aem_version}.properties":
