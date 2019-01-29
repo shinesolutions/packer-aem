@@ -4,8 +4,28 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: Create Instance Profile for running Packer AEM
 
 Parameters:
+  AemOpencloudS3Bucket:
+    Type: String
+    Description: Name of the S3 Bucket where the artifacts are stored. Eg <clientcode>-aem-opencloud
 
 Resources:
+
+  PackerAemArtefactBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref AemOpencloudS3Bucket
+
+  PackerAemBucketPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+        - Action: ['s3:GetObject', 's3:ListBucket']
+          Effect: Allow
+          Resource:
+          - !Join ['', ['arn:aws:s3:::', !Ref 'PackerAemArtefactBucket']]
+      PolicyName: PackerAemBucketPolicy
+      Roles: [!Ref 'PackerAemRole']
 
   PackerAemRole:
     Type: AWS::IAM::Role
