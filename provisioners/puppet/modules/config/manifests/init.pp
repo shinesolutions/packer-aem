@@ -27,8 +27,12 @@ class config (
   # needed for ffi (a ruby_aem dependency) native compilation
   } -> package { [ 'autoconf', 'automake', 'libtool' ]:
     ensure => installed,
-  } -> package { [ 'bundler', 'io-console' ]:
+  } -> package { 'io-console':
     provider => 'gem',
+  # TODO: upgrade to bundler >= 2.0.1 when all machine images includes Ruby >= 2.3.0
+  # This bundler is used for the initial gem installation on the host
+  } -> package { 'bundler':
+    ensure   => '1.17.3',
   } -> package { 'nokogiri':
     ensure   => '1.8.2',
     provider => 'puppet_gem',
