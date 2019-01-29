@@ -33,6 +33,7 @@ class config (
   # This bundler is used for the initial gem installation on the host
   } -> package { 'bundler':
     ensure   => '1.17.3',
+    provider => 'gem',
   } -> package { 'nokogiri':
     ensure   => '1.8.2',
     provider => 'puppet_gem',
