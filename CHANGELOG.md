@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Upgrade aem_resources to 3.6.0, aem_curator to 1.9.0
-- Upgrade ruby_aem to 2.5.0
+- Upgrade ruby_aem to 2.5.1
 
 ## [3.5.0] - 2019-01-31
 
