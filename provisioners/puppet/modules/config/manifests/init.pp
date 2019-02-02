@@ -38,7 +38,7 @@ class config (
     ensure   => '1.8.5',
     provider => 'puppet_gem',
   } -> package { 'ruby_aem':
-    ensure   => '2.5.0',
+    ensure   => '2.5.1',
     provider => 'puppet_gem',
   } -> package { 'ruby_aem_aws':
     ensure   => '1.1.0',
