@@ -4,6 +4,7 @@
     "aws_subnet_id": "",
     "root_volume_size": "20",
     "tmp_dir": "/tmp/shinesolutions/packer-aem",
+    "inspec_dir": "/opt/puppetlabs/puppet/bin",
     "https_proxy": "",
     "no_proxy": "",
     "component": "",
@@ -26,9 +27,11 @@
   "provisioners": [
     {
       "inline": [
-        "sudo mount -t tmpfs tmpfs /tmp",
-        "mkdir -p {{user `tmp_dir`}}"
-      ],
+        "mount -t tmpfs tmpfs /tmp", 
+        "mkdir -p {{user `tmp_dir`}}", 
+        "chown -R {{user `aws_user`}} /tmp/shinesolutions"
+       ], 
+       "execute_command": "{{ .Vars }} sudo -E bash {{ .Path }}", 
       "type": "shell"
     },
     {
@@ -109,9 +112,9 @@
       "inline": [
         "set -o nounset",
         "set -o errexit",
-        "export PATH=/opt/puppetlabs/puppet/bin/:/sbin:/usr/sbin:/usr/local/sbin:${PATH}",
+        "export PATH={{user `inspec_dir`}}:/sbin:/usr/sbin:/usr/local/sbin:${PATH}",
         "cd {{user `tmp_dir`}}/inspec",
-        "inspec exec base_spec.rb; inspec exec aem_base_spec.rb; inspec exec {{user `component`}}_spec.rb"
+        "sudo -E {{user `inspec_dir`}}/inspec exec base_spec.rb; sudo -E {{user `inspec_dir`}}/inspec exec aem_base_spec.rb; sudo -E {{user `inspec_dir`}}/inspec exec dispatcher_spec.rb"
       ],
       "type": "shell",
       "environment_vars": [
