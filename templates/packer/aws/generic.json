@@ -26,9 +26,11 @@
   "provisioners": [
     {
       "inline": [
-        "sudo mount -t tmpfs tmpfs /tmp",
-        "mkdir -p {{user `tmp_dir`}}"
+         "mount -t tmpfs tmpfs /tmp", 
+         "mkdir -p {{user `tmp_dir`}}", 
+         "chown -R {{user `aws_user`}} /tmp/shinesolutions"
       ],
+      "execute_command": "{{ .Vars }} sudo -E bash {{ .Path }}",
       "type": "shell"
     },
     {
@@ -111,7 +113,7 @@
         "set -o errexit",
         "export PATH=/opt/puppetlabs/puppet/bin/:/sbin:/usr/sbin:/usr/local/sbin:${PATH}",
         "cd {{user `tmp_dir`}}/inspec",
-        "inspec exec base_spec.rb; inspec exec aem_base_spec.rb; inspec exec {{user `component`}}_spec.rb"
+	"sudo -E /opt/puppetlabs/puppet/bin/inspec exec base_spec.rb; sudo -E /opt/puppetlabs/puppet/bin/inspec exec aem_base_spec.rb; sudo -E /opt/puppetlabs/puppet/bin/inspec exec dispatcher_spec.rb"
       ],
       "type": "shell",
       "environment_vars": [
