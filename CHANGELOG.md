@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Update Apache Dispatcher Module version to 4.3.2 from 4.3.1
 - Upgrade aem_curator to 1.10.0
+- Changes to packer AMI steps to adhere CIS hardened SOE 
+
 
 ## [3.6.0] - 2019-02-04
 
