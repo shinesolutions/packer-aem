@@ -27,11 +27,11 @@
   "provisioners": [
     {
       "inline": [
-        "mount -t tmpfs tmpfs /tmp", 
-        "mkdir -p {{user `tmp_dir`}}", 
+        "mount -t tmpfs tmpfs /tmp",
+        "mkdir -p {{user `tmp_dir`}}",
         "chown -R {{user `aws_user`}} /tmp/shinesolutions"
-       ], 
-      "execute_command": "{{ .Vars }} sudo -E bash {{ .Path }}", 
+       ],
+      "execute_command": "{{ .Vars }} sudo -E bash {{ .Path }}",
       "type": "shell"
     },
     {
@@ -113,7 +113,7 @@
         "set -o nounset",
         "set -o errexit",
         "cd {{user `tmp_dir`}}/inspec",
-        "sudo -E {{user `rubygems_bin_dir`}}/inspec exec base_spec.rb; sudo -E {{user `rubygems_bin_dir`}}/inspec exec aem_base_spec.rb; sudo -E {{user `rubygems_bin_dir`}}/inspec exec dispatcher_spec.rb"
+        "sudo -E {{user `rubygems_bin_dir`}}/inspec exec base_spec.rb; sudo -E {{user `rubygems_bin_dir`}}/inspec exec aem_base_spec.rb; sudo -E {{user `rubygems_bin_dir`}}/inspec exec {{user `component`}}_spec.rb"
       ],
       "type": "shell",
       "environment_vars": [
