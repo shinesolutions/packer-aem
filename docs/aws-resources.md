@@ -1,7 +1,9 @@
 AWS Resources
 -------------
 
-For creating AEM AWS AMIs, a number of AWS resources must be available.
+For creating AEM AWS AMIs, a number of AWS resources must be available as prerequisites.
+
+### CloudFormation stack
 
 If you have the permission to provision the AWS resources using a CloudFormation stack, run the this command to create or update the resources:
 
@@ -10,6 +12,8 @@ If you have the permission to provision the AWS resources using a CloudFormation
 And to delete the resources within the CloudFormation stack:
 
     make delete-aws-resources stack_prefix=<stack_prefix> config_path=stage/user-config/
+
+### Manual provisioning
 
 Alternatively, if you have to provision these resources manually, or to integrate them into your pre-existing provisioning mechanism, you can follow the steps below or these steps as a reference:
 
