@@ -3,7 +3,7 @@ set -o errexit
 set -o nounset
 
 if [ "$#" -ne 2 ]; then
-  echo 'Usage: ./run-playbook.sh <config_path>'
+  echo 'Usage: ./run-playbook.sh <playbook_type> <config_path>'
   exit 1
 fi
 

@@ -22,6 +22,9 @@ aws:
   region: 'ap-southeast-2'
   vpc_id: overwrite-me
   subnet_id: overwrite-me
+  resources:
+    stack_name: packer-aem-resources-stack
+    s3_bucket: overwrite-me
   source_ami: overwrite-me
   ami_users: ''
   instance_profile: overwrite-me

@@ -11,7 +11,7 @@ Parameters:
     Default: ''
     Description: Used to Namespace the Exported Resources
     Type: String
-    
+
 Resources:
 
   PackerAemArtefactBucket:

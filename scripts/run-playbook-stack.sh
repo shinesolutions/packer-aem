@@ -2,15 +2,14 @@
 set -o errexit
 set -o nounset
 
-if [[ "$#" -lt 2 ]] || [[ "$#" -gt 3 ]]; then
-  echo 'Usage: ./run-playbook.sh <config_path> [stack_prefix]'
+if [ "$#" -ne 3 ]; then
+  echo 'Usage: ./run-playbook-stack.sh <playbook_type> <config_path> <stack_prefix>'
   exit 1
 fi
 
+playbook_type=${1}
 config_path=${2}
 stack_prefix=${3}
-
-tag=delete
 
 # Construct Ansible extra_vars flags. If `config_path` is set, all files
 # directly under the directory with extension `.yaml` or `.yml` will be added.
@@ -25,8 +24,7 @@ echo "Extra vars:"
 echo "  ${extra_vars[*]}"
 
 ANSIBLE_CONFIG=conf/ansible/ansible.cfg \
-  ansible-playbook "provisioners/ansible/playbooks/${1}.yaml" \
+  ansible-playbook "provisioners/ansible/playbooks/${playbook_type}.yaml" \
   -i conf/ansible/inventory/hosts \
   --module-path provisioners/ansible/library/ \
-  --tags "${tag}" \
   "${extra_vars[@]}"

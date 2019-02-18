@@ -123,6 +123,16 @@ config:
 	scripts/run-playbook.sh set-config "${config_path}"
 
 ################################################################################
+# AWS resources targets.
+################################################################################
+
+create-aws-resources:
+	scripts/run-playbook-stack.sh create-aws-resources "${config_path}" "${stack_prefix}"
+
+delete-aws-resources:
+	scripts/run-playbook-stack.sh delete-aws-resources "${config_path}" "${stack_prefix}"
+
+################################################################################
 # Machine image build targets.
 ################################################################################
 
