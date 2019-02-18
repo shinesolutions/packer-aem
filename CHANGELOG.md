@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add support for CIS hardened source AMI
+
 ## [3.7.0] - 2019-02-17
 
 ### Added
@@ -13,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Update Apache Dispatcher Module version to 4.3.2 from 4.3.1
+- Upgrade aem_curator to 1.10.0
 - Upgrade aem_resources to 3.8.0 aem_curator to 1.11.0
 
 ## [3.6.0] - 2019-02-04
