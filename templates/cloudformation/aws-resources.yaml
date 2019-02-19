@@ -15,6 +15,10 @@ Parameters:
     Default: 'change-me'
     Description: AEM License for Deployment
     Type: String
+  AEMKeyStorePasswordParameter:
+    Default: 'change-me'
+    Description: Java Keystore password used in AEM Author and Publish
+    Type: String
 
 Resources:
 
@@ -26,8 +30,14 @@ Resources:
   AEMLicense:
     Type: AWS::SSM::Parameter
     Properties:
-      Type: "String"
       Value: !Ref AEMLicenseParameter
+      Type: String
+
+  AEMKeystorePassword:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Value: !Ref AEMKeyStorePasswordParameter
+      Type: String
 
   PackerAemBucketPolicy:
     Type: AWS::IAM::Policy
