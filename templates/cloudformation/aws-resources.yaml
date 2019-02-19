@@ -7,9 +7,13 @@ Parameters:
   PackerAemS3BucketParameter:
     Type: String
     Description: Name of the S3 Bucket where the artifacts are to be stored
-  StackPrefix:
+  StackPrefixParameter:
     Default: ''
     Description: Used to Namespace the Exported Resources
+    Type: String
+  AEMLicenseParameter:
+    Default: 'change-me'
+    Description: AEM License for Deployment
     Type: String
 
 Resources:
@@ -18,6 +22,12 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Ref PackerAemS3BucketParameter
+
+  AEMLicense:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: "String"
+      Value: !Ref AEMLicenseParameter
 
   PackerAemBucketPolicy:
     Type: AWS::IAM::Policy
