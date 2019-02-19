@@ -23,6 +23,12 @@ Resources:
     Properties:
       BucketName: !Ref PackerAemS3BucketParameter
 
+  AEMLicense:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: "String"
+      Value: !Ref AEMLicenseParameter
+
   PackerAemBucketPolicy:
     Type: AWS::IAM::Policy
     Properties:
