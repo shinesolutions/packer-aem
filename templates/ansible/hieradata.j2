@@ -9,7 +9,7 @@ config::base::https_proxy: {{ https_proxy }}
 config::base::no_proxy: {{ no_proxy }}
 
 config::certs::certs_base: {{ aws.aem_certs_base }}
-config::certs::certificate_key_arn: {{ lookup('vars', 'aws.certificate_key_arn') | default("", true) }}
+config::certs::certificate_key_arn: {{ 'aws.certificate_key_arn' | default("false") }}
 config::certs::certificate_arn: {{ aws.certificate_arn }}
 config::certs::region: {{ aws.region }}
 
