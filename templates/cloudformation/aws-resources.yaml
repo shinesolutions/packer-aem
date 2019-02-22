@@ -1,10 +1,10 @@
 ---
 AWSTemplateFormatVersion: "2010-09-09"
 Conditions:
-  CreateCertificateKeyARNCondition:
+  CertificateKeyARN:
       Fn::Equals:
-        - Ref: CertificateKeyARN
-        - 'false'
+        - Ref: CertificateKeyARNParameter
+        - 'true'
 
 Description: Create Instance Profile for running Packer AEM
 Parameters:
@@ -23,8 +23,7 @@ Parameters:
     Default: 'change-me'
     Description: Java Keystore password used in AEM Author and Publish
     Type: String
-  CertificateKeyARN:
-    Default: ''
+  CertificateKeyARNParameter:
     Description: The ARN of the Certificate in the AWS Certificate Manager
     Type: String
 
@@ -46,6 +45,11 @@ Resources:
     Properties:
       Value: !Ref AEMKeyStorePasswordParameter
       Type: String
+
+  CertificateKeyARN:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      SecretString: !Ref CertificateKeyARNParameter
 
   PackerAemBucketPolicy:
     Type: AWS::IAM::Policy
@@ -127,7 +131,6 @@ Resources:
                   - logs:*
                 Resource:
                   - arn:aws:logs:*:*:*
-
 
   PackerAemInstanceProfile:
       Type: AWS::IAM::InstanceProfile

@@ -9,7 +9,7 @@ config::base::https_proxy: {{ https_proxy }}
 config::base::no_proxy: {{ no_proxy }}
 
 config::certs::certs_base: {{ aws.aem_certs_base }}
-config::certs::certificate_key_arn: {{ aws.certificate_key_arn | default("") }}
+config::certs::certificate_key_arn: {{ 'aws.certificate_key_arn' | default("false") }}
 config::certs::certificate_arn: {{ aws.certificate_arn }}
 config::certs::region: {{ aws.region }}
 
@@ -27,7 +27,7 @@ amazon_ssm_agent::proxy_url: {{ http_proxy }}
 
 
 aem_curator::install_author::aem_profile: {{ aem.profile }}
-aem_curator::install_author::aem_keystore_password: {{ aem.keystore_password | default("") }}
+aem_curator::install_author::aem_keystore_password: {{ aem.keystore_password }}
 aem_curator::install_author::aem_artifacts_base: {{ aem.artifacts_base }}
 aem_curator::install_author::aem_jvm_mem_opts: "{{ aem.author.jvm_mem_opts }}"
 aem_curator::install_author::aem_jvm_opts:
@@ -40,7 +40,7 @@ aem_curator::install_author::aem_jvm_opts:
 aem_curator::install_author::aem_start_opts: "{{ aem.author.start_opts }}"
 
 aem_curator::install_publish::aem_profile: {{ aem.profile }}
-aem_curator::install_publish::aem_keystore_password: {{ aem.keystore_password  | default("") }}
+aem_curator::install_publish::aem_keystore_password: {{ aem.keystore_password }}
 aem_curator::install_publish::aem_artifacts_base: {{ aem.artifacts_base }}
 aem_curator::install_publish::aem_jvm_mem_opts: "{{ aem.publish.jvm_mem_opts }}"
 aem_curator::install_publish::aem_jvm_opts:
