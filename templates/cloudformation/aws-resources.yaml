@@ -20,7 +20,6 @@ Parameters:
     Description: AEM License for Deployment
     Type: String
   AEMKeyStorePasswordParameter:
-    Default: 'change-me'
     Description: Java Keystore password used in AEM Author and Publish
     Type: String
   CertificateKeyARNParameter:
