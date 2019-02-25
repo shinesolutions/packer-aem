@@ -17,4 +17,4 @@
         template_parameters:
           StackPrefixParameter: "{{ stack_prefix }}"
           PackerAemS3BucketParameter: "{{ aws.resources.s3_bucket }}"
-          CertificateKeyARNParameter: "{{ aws.certificate_key_arn }}"
+          CertificateKeyParameter: "{{ aws.certificate_key_arn }}"
