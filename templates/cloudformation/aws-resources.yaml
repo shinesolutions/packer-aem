@@ -2,9 +2,10 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Conditions:
   CertificateKeyCondition:
-      Fn::Equals:
-        - Ref: CertificateKeyParameter
-        - 'true'
+      Fn::Not:
+        - Fn::Equals:
+          - Ref: CertificateKeyParameter
+          - ''
 
 Description: Create Instance Profile for running Packer AEM
 Parameters:
@@ -24,7 +25,8 @@ Resources:
   PackerAemArtefactBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Ref PackerAemS3BucketParameter
+      BucketName: 
+        Ref: PackerAemS3BucketParameter
 
   AEMLicense:
     Type: AWS::SSM::Parameter
@@ -40,14 +42,14 @@ Resources:
       Type: String
 
   CertificateKey:
-    Type: AWS::SecretsManager::Secret
+    Type: AWS::SSM::Parameter
     Properties:
       Value: 
         Fn::If:
-          - CertificateKeyCondition
-          - Ref: CertificateKeyParameter
-          - Ref: AWS::NoValue
-      SecretString: !Ref CertificateKeyParameter
+        - CertificateKeyCondition
+        - Ref: CertificateKeyParameter
+        - "overwrite-me"
+      Type: String
 
   PackerAemBucketPolicy:
     Type: AWS::IAM::Policy
@@ -57,9 +59,9 @@ Resources:
         - Action: ['s3:GetObject', 's3:ListBucket']
           Effect: Allow
           Resource:
-          - !Join ['', ['arn:aws:s3:::', !Ref 'PackerAemArtefactBucket']]
+          - Join: ['', ['arn:aws:s3:::', Ref: 'PackerAemArtefactBucket']]
       PolicyName: PackerAemBucketPolicy
-      Roles: [!Ref 'PackerAemRole']
+      Roles: [Ref: 'PackerAemRole']
 
   PackerAemRole:
     Type: AWS::IAM::Role
