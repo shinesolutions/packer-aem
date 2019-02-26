@@ -1,4 +1,4 @@
 ansible==2.5.8
 awscli==1.16.10
 boto3==1.8.5
-pylint==1.9.3
+pylint==2.2
