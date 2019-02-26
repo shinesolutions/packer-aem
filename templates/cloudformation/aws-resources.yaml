@@ -17,6 +17,7 @@ Parameters:
     Type: String
   CertificateKeyParameter:
     Description: The key of the Certificate in the AWS Certificate Manager
+    Default: false
     AllowedValues:
       - true
       - false
