@@ -2,10 +2,9 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Conditions:
   CertificateKeyCondition:
-      Fn::Not:
-        - Fn::Equals:
-          - Ref: CertificateKeyParameter
-          - ''
+      Fn::Equals:
+        - Ref: CertificateKeyParameter
+        - true
 
 Description: Create Instance Profile for running Packer AEM
 Parameters:
@@ -17,11 +16,13 @@ Parameters:
     Description: Used to Namespace the Exported Resources
     Type: String
   CertificateKeyParameter:
-    Description: The ARN of the Certificate in the AWS Certificate Manager
+    Description: The key of the Certificate in the AWS Certificate Manager
+    AllowedValues:
+      - true
+      - false
     Type: String
 
 Resources:
-
   PackerAemArtefactBucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -42,14 +43,11 @@ Resources:
       Type: String
 
   CertificateKey:
-    Type: AWS::SSM::Parameter
+    Type: AWS::SecretsManager::Secret
+    Condition: CertificateKeyCondition
     Properties:
-      Value: 
-        Fn::If:
-        - CertificateKeyCondition
-        - Ref: CertificateKeyParameter
-        - "overwrite-me"
-      Type: String
+      SecretString: "overwrite-me"
+      Name: "CertificateKey"
 
   PackerAemBucketPolicy:
     Type: AWS::IAM::Policy
