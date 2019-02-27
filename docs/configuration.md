@@ -53,7 +53,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.data_volume_size | The size of data volume in Gb, this is where AEM repository resides | Optional | `75` |
 | aws.tags | An array of `Key` and `Value` pairs for tagging AWS resources (e.g. EC2 instance, AMI, EBS volume) created by Packer AEM following your organisation's tagging standard | Optional | None |
 | aws.certificate_arn | The ARN of the Certificate in the [AWS Certificate Manager (ACM)](https://console.aws.amazon.com/acm/home) | Mandatory | |
-| aws.certificate_key_arn | The ARN of the secret containing the Certificate's Secret Key in the [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) | Optional | |
-| aws.certificate_key_enabled | A Boolean value to indicate if AEM OpenCloud should use Amazon Secrets Manager for the Private Key [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) | Optional | |
+| aws.certificate_key_arn | The ARN of the secret containing TLS certificate's secret key in the [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) | Optional | |
+| aws.secrets_manager_enabled | A boolean value to indicate if AEM OpenCloud can provision AWS Secrets Manager resource, which is currently supported for storing TLS certificate's private key  | Optional | true |
 | aws.aem_certs_base | Source URL path of TLS certificate, it could be s3://..., http://..., https://..., or file://.... In [AWS Resources](https://github.com/shinesolutions/aem-aws-stack-builder/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/certs/  | Optional | |
-| aws.aem_license | AWS Systems Manager parameter containing the License content  | Mandatory | |
+| aws.aem_license | AWS Systems Manager parameter containing the multi-line AEM license content  | Mandatory | |
