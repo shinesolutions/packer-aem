@@ -16,6 +16,9 @@ Frequently Asked Questions
     - Key: Cost Centre
       Value: 12345
   ```
-  
+
 * __Q:__ How to debug the cause of my Custom Image Provisioner failure?<br/>
   __A:__ You can inspect what's going on within the EC2 instance being created by [debugging Packer](https://www.packer.io/docs/other/debugging.html). This can be done by adding `-debug` flag to `packer build` command within Packer AEM's `Makefile`.
+
+* __Q:__ Why do I get an unsupported operation related to encrypted snapshots sharing error `Error modify AMI attributes: UnsupportedOperation: The requested operation is not supported. Images associated with encrypted Snapshots can not be shared.`?
+  __A:__ This error can happen when you use a source AMI with an encrypted volume and then you're trying to share it with another AWS account, and this is not supported by AWS. To fix this, you need to remove the user configuration property `aws.ami_users` so that Packer AEM wouldn't try to modify the generated AMI by sharing it with another AWS account.
