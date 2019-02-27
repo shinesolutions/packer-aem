@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add support for CIS hardened source AMI
+- Add JDK keystore password and TLS private key resource provisioning to aws-resources CF stack #124 #126
 
 ## [3.7.0] - 2019-02-17
 
