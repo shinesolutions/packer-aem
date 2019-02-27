@@ -1,33 +1,52 @@
 ---
 AWSTemplateFormatVersion: "2010-09-09"
+Conditions:
+  CertificateKeyCondition:
+    Fn::Equals:
+      - Ref: CertificateKeyConditionParameter
+      - "True"
 
 Description: Create Instance Profile for running Packer AEM
-
 Parameters:
   PackerAemS3BucketParameter:
     Type: String
     Description: Name of the S3 Bucket where the artifacts are to be stored
   StackPrefixParameter:
-    Default: ''
     Description: Used to Namespace the Exported Resources
     Type: String
-  AEMLicenseParameter:
-    Default: 'change-me'
-    Description: AEM License for Deployment
+  CertificateKeyConditionParameter:
+    Description: The Boolean value parameter that creates an AWS secret manager secret if True
     Type: String
 
 Resources:
-
   PackerAemArtefactBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Ref PackerAemS3BucketParameter
+      BucketName: 
+        Ref: PackerAemS3BucketParameter
 
   AEMLicense:
     Type: AWS::SSM::Parameter
     Properties:
-      Type: "String"
-      Value: !Ref AEMLicenseParameter
+      Value: "overwrite-me"
+      Type: String
+
+  AEMKeystorePassword:
+    #TODO: Move to SecureString when it is supported on AWS Cloudformation. For more information see: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-parameter.html
+    Type: AWS::SSM::Parameter
+    Properties:
+      Value: "overwrite-me"
+      Type: String
+
+  CertificateKey:
+    Type: AWS::SecretsManager::Secret
+    Condition: CertificateKeyCondition
+    Properties:
+      Description: 
+        Fn::Join: ['', ['The Private Key used for TLS on ELBs and AEM OpenCloud for: ', Ref: 'StackPrefixParameter']]
+      SecretString: "overwrite-me"
+      Name: 
+        Fn::Join: ['-', ['aem-opencloud', Ref: 'StackPrefixParameter', 'certificatekey']]
 
   PackerAemBucketPolicy:
     Type: AWS::IAM::Policy
@@ -37,9 +56,9 @@ Resources:
         - Action: ['s3:GetObject', 's3:ListBucket']
           Effect: Allow
           Resource:
-          - !Join ['', ['arn:aws:s3:::', !Ref 'PackerAemArtefactBucket']]
+          - Fn::Join: ['', ['arn:aws:s3:::', Ref: 'PackerAemArtefactBucket']]
       PolicyName: PackerAemBucketPolicy
-      Roles: [!Ref 'PackerAemRole']
+      Roles: [Ref: 'PackerAemRole']
 
   PackerAemRole:
     Type: AWS::IAM::Role
@@ -109,7 +128,6 @@ Resources:
                   - logs:*
                 Resource:
                   - arn:aws:logs:*:*:*
-
 
   PackerAemInstanceProfile:
       Type: AWS::IAM::InstanceProfile
