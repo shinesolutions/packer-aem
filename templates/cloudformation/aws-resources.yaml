@@ -2,9 +2,9 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Conditions:
   CertificateKeyCondition:
-      Fn::Equals:
-        - Ref: CertificateKeyParameter
-        - true
+    Fn::Equals:
+      - Ref: CertificateKeyConditionParameter
+      - "True"
 
 Description: Create Instance Profile for running Packer AEM
 Parameters:
@@ -12,15 +12,10 @@ Parameters:
     Type: String
     Description: Name of the S3 Bucket where the artifacts are to be stored
   StackPrefixParameter:
-    Default: ''
     Description: Used to Namespace the Exported Resources
     Type: String
-  CertificateKeyParameter:
-    Description: The key of the Certificate in the AWS Certificate Manager
-    Default: false
-    AllowedValues:
-      - true
-      - false
+  CertificateKeyConditionParameter:
+    Description: The Boolean value parameter that creates an AWS secret manager secret if True
     Type: String
 
 Resources:
@@ -48,7 +43,8 @@ Resources:
     Condition: CertificateKeyCondition
     Properties:
       SecretString: "overwrite-me"
-      Name: "CertificateKey"
+      Name: 
+        Fn::Join: ['-', ['aem-opencloud', Ref: 'StackPrefixParameter', 'certificatekey']]
 
   PackerAemBucketPolicy:
     Type: AWS::IAM::Policy
@@ -58,7 +54,7 @@ Resources:
         - Action: ['s3:GetObject', 's3:ListBucket']
           Effect: Allow
           Resource:
-          - Join: ['', ['arn:aws:s3:::', Ref: 'PackerAemArtefactBucket']]
+          - Fn::Join: ['', ['arn:aws:s3:::', Ref: 'PackerAemArtefactBucket']]
       PolicyName: PackerAemBucketPolicy
       Roles: [Ref: 'PackerAemRole']
 
