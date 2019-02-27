@@ -42,6 +42,8 @@ Resources:
     Type: AWS::SecretsManager::Secret
     Condition: CertificateKeyCondition
     Properties:
+      Description: 
+        Fn::Join: ['', ['The Private Key used for TLS on ELBs and AEM OpenCloud for: ', Ref: 'StackPrefixParameter']]
       SecretString: "overwrite-me"
       Name: 
         Fn::Join: ['-', ['aem-opencloud', Ref: 'StackPrefixParameter', 'certificatekey']]
