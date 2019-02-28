@@ -8,6 +8,12 @@ For creating AEM AWS AMIs, a number of AWS resources must be available as prereq
 If you have the permission to provision the AWS resources using a CloudFormation stack, run the this command to create or update the resources:
 
     make create-aws-resources stack_prefix=<stack_prefix> config_path=stage/user-config/
+    
+After the aws-resources stack is created, you need to supply the secrets on the following resources: (TODO: add more info to this section)
+
+- AEM license parameter store
+- AEM keystore password parameter store
+- TLS certificate's private key on either AWS Secrets Manager or S3
 
 And to delete the resources within the CloudFormation stack:
 
