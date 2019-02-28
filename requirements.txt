@@ -1,4 +1,6 @@
 ansible==2.5.8
 awscli==1.16.10
 boto3==1.8.5
+# TODO: Remove the manual isort version locking when they fix this issue: https://github.com/timothycrosley/isort/issues/849
+isort==4.3.4
 pylint==1.9.3
