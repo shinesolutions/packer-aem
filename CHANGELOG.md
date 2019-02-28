@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add support for CIS hardened source AMI
 - Add JDK keystore password and TLS private key resource provisioning to aws-resources CF stack #124 #126
 
+### Fixed
+- Fix AEM install directory clean up at the end of AEM provisioning phase #78
+
 ## [3.7.0] - 2019-02-17
 
 ### Added
