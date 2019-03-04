@@ -34,7 +34,6 @@ aem_curator::install_dispatcher::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_dispatcher::cert_base_url: "file://%{lookup('tmp_dir')}/certs"
 aem_curator::install_dispatcher::cert_filename: /etc/ssl/aem.unified-dispatcher.cert
 
-aem_curator::install_dispatcher::apache_module_base_url: http://download.macromedia.com/dispatcher/download
 aem_curator::install_dispatcher::apache_module_temp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_dispatcher::apache_http_port: "80"
 aem_curator::install_dispatcher::apache_https_port: "443"
