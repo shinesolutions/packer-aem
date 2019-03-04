@@ -75,5 +75,5 @@ end
 # growth, e.g. a bug in AEM 6.2 where a large AEM package would get reinstalled
 # and added to the repo, but not compacted for a period of time.
 describe Dir.empty?("#{aem_base}/aem/publish/crx-quickstart/install") do
-  it {should be true}
+  it { should be true }
 end
