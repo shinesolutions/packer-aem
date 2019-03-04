@@ -68,6 +68,7 @@ aem:
     start_opts: ''
   dispatcher:
     version: 4.3.2
+    apache_module_base_url: http://download.macromedia.com/dispatcher/download
   artifacts_base: overwrite-me
   enable_custom_image_provisioner: false
 
