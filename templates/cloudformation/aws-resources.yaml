@@ -3,19 +3,27 @@ AWSTemplateFormatVersion: "2010-09-09"
 Conditions:
   AemCertificateKeyCondition:
     Fn::Equals:
-      - Ref: AemCertificateKeyConditionParameter
-      - "True"
+      - Ref: CreateAemCertificateKey
+      - "true"
+  PackerIAMRoleCondition:
+    Fn::Equals:
+      - Ref: CreatePackerIAMRole
+      - "true"
 
 Description: Create Instance Profile for running Packer AEM
 Parameters:
-  PackerAemS3BucketParameter:
+  PackerAemS3Bucket:
     Type: String
     Description: Name of the S3 Bucket where the artifacts are to be stored
-  StackPrefixParameter:
+  StackPrefix:
     Description: Used to Namespace the Exported Resources
     Type: String
-  AemCertificateKeyConditionParameter:
-    Description: The Boolean value parameter that creates an AWS secret manager secret if True
+  CreateAemCertificateKey:
+    Description: Toggle creating an AWS Secrets Manager secret (true/false)
+    Type: String
+  CreatePackerIAMRole:
+    Description: Toggle creating a Packer IAM role/instance profile (true/false)
+    Default: "true"
     Type: String
 
 Resources:
@@ -23,7 +31,7 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName:
-        Ref: PackerAemS3BucketParameter
+        Ref: PackerAemS3Bucket
 
   AemLicense:
     Type: AWS::SSM::Parameter
@@ -31,8 +39,10 @@ Resources:
       Value: "overwrite-me"
       Type: String
 
+  # TODO: Move to SecureString when it is supported on AWS Cloudformation.
+  # For more information see:
+  #   https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-parameter.html
   AemKeystorePassword:
-    #TODO: Move to SecureString when it is supported on AWS Cloudformation. For more information see: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-parameter.html
     Type: AWS::SSM::Parameter
     Properties:
       Value: "overwrite-me"
@@ -43,13 +53,14 @@ Resources:
     Condition: AemCertificateKeyCondition
     Properties:
       Description:
-        Fn::Join: ['', ['The Private Key used for TLS on ELBs and AEM OpenCloud for: ', Ref: 'StackPrefixParameter']]
+        Fn::Join: ['', ['The Private Key used for TLS on ELBs and AEM OpenCloud for: ', Ref: 'StackPrefix']]
       SecretString: "overwrite-me"
       Name:
-        Fn::Join: ['/', ['aem-opencloud', Ref: 'StackPrefixParameter', 'certificate-key']]
+        Fn::Join: ['/', ['aem-opencloud', Ref: 'StackPrefix', 'certificate-key']]
 
   PackerAemBucketPolicy:
     Type: AWS::IAM::Policy
+    Condition: PackerIAMRoleCondition
     Properties:
       PolicyDocument:
         Statement:
@@ -62,6 +73,7 @@ Resources:
 
   PackerAemRole:
     Type: AWS::IAM::Role
+    Condition: PackerIAMRoleCondition
     Properties:
       AssumeRolePolicyDocument:
         Statement:
@@ -130,8 +142,9 @@ Resources:
                   - arn:aws:logs:*:*:*
 
   PackerAemInstanceProfile:
-      Type: AWS::IAM::InstanceProfile
-      Properties:
-        Path: /
-        Roles:
-          - Ref: PackerAemRole
+    Type: AWS::IAM::InstanceProfile
+    Condition: PackerIAMRoleCondition
+    Properties:
+      Path: /
+      Roles:
+        - Ref: PackerAemRole

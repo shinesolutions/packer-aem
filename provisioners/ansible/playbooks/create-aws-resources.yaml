@@ -15,6 +15,7 @@
         disable_rollback: true
         template: "../../../templates/cloudformation/aws-resources.yaml"
         template_parameters:
-          StackPrefixParameter: "{{ stack_prefix }}"
-          PackerAemS3BucketParameter: "{{ aws.resources.s3_bucket }}"
-          AemCertificateKeyConditionParameter: "{{ aws.secrets_manager_enabled }}"
+          StackPrefix: "{{ stack_prefix }}"
+          PackerAemS3Bucket: "{{ aws.resources.s3_bucket }}"
+          CreateAemCertificateKey: "{{ aws.secrets_manager_enabled }}"
+          CreatePackerIAMRole: "{{ aws.create_iam_packer_role }}"
