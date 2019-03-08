@@ -1,6 +1,11 @@
+### 2.7.5
+*
+
 ### 2.7.4
-* Lock down awscli version to 1.15.41 let it determine boto dependency when awscli installation is enabled
+* Lock down bundler on host gem to version 1.17.3 in order to support Ruby older than 2.3.0
+* localk down awscli version to 1.15.41 let it determine boto dependency when awscli installation is enabled
 * Lock down boto3 version to 1.7.41
+* Fix Puppet installation error due to renamed rpm URL
 
 ### 2.7.3
 * Upgrade ruby_aem_aws to 1.1.0
