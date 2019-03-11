@@ -1,9 +1,9 @@
 ---
 AWSTemplateFormatVersion: "2010-09-09"
 Conditions:
-  AemCertificateKeyCondition:
+  EnableSecretsManagerCondition:
     Fn::Equals:
-      - Ref: CreateAemCertificateKey
+      - Ref: EnableSecretsManager
       - "true"
   PackerIAMRoleCondition:
     Fn::Equals:
@@ -18,7 +18,7 @@ Parameters:
   StackPrefix:
     Description: Used to Namespace the Exported Resources
     Type: String
-  CreateAemCertificateKey:
+  EnableSecretsManager:
     Description: Toggle creating an AWS Secrets Manager secret (true/false)
     Type: String
   CreatePackerIAMRole:
@@ -48,9 +48,9 @@ Resources:
       Value: "overwrite-me"
       Type: String
 
-  AemCertificateKey:
+  SecretsManagerAemCertificateKey:
     Type: AWS::SecretsManager::Secret
-    Condition: AemCertificateKeyCondition
+    Condition: EnableSecretsManagerCondition
     Properties:
       Description:
         Fn::Join: ['', ['The Private Key used for TLS on ELBs and AEM OpenCloud for: ', Ref: 'StackPrefix']]

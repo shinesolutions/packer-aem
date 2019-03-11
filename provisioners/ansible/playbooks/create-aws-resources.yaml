@@ -17,5 +17,5 @@
         template_parameters:
           StackPrefix: "{{ stack_prefix }}"
           PackerAemS3Bucket: "{{ aws.resources.s3_bucket }}"
-          CreateAemCertificateKey: "{{ aws.secrets_manager_enabled }}"
+          EnableSecretsManager: "{{ aws.enable_secrets_manager }}"
           CreatePackerIAMRole: "{{ aws.create_iam_packer_role }}"
