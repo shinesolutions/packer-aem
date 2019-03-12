@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new configuration property aem.dispatcher.apache_module_base_url
 - Add new configuration property aws.create_iam_packer_role
 
+### Changed
+- Upgrade aem_curator to 1.13.0
+
+### Fixed
+- Fix AEM install directory clean up at the end of AEM provisioning phase #78
+
 ## [3.7.0] - 2019-02-17
 
 ### Added
