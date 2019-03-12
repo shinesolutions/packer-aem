@@ -37,7 +37,7 @@ aws:
       Value: overwrite-me
   certificate_arn: overwrite-me
   certificate_key_arn: overwrite-me
-  secrets_manager_enabled: true
+  enable_secrets_manager: true
   aem_certs_base: overwrite-me
   aem_license: overwrite-me
   aem_license_base: overwrite-me
