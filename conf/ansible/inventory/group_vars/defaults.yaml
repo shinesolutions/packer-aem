@@ -38,6 +38,7 @@ aws:
   certificate_arn: overwrite-me
   certificate_key_arn: overwrite-me
   enable_secrets_manager: true
+  create_iam_packer_role: true
   aem_certs_base: overwrite-me
   aem_license: overwrite-me
   aem_license_base: overwrite-me
