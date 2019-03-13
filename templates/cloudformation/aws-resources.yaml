@@ -9,6 +9,10 @@ Conditions:
     Fn::Equals:
       - Ref: CreatePackerIAMRole
       - "true"
+  PackerBucketCondition:
+    Fn::Equals:
+      - Ref: CreatePackerBucket
+      - "true"
 
 Description: Create Instance Profile for running Packer AEM
 Parameters:
@@ -21,6 +25,9 @@ Parameters:
   EnableSecretsManager:
     Description: Toggle creating an AWS Secrets Manager secret (true/false)
     Type: String
+  CreatePackerBucket:
+    Description: Toggle creating an S3 Bucket for Packer AEM (true/false)
+    Type: String
   CreatePackerIAMRole:
     Description: Toggle creating a Packer IAM role/instance profile (true/false)
     Default: "true"
@@ -29,6 +36,7 @@ Parameters:
 Resources:
   PackerAemArtefactBucket:
     Type: AWS::S3::Bucket
+    Condition: PackerBucketCondition
     Properties:
       BucketName:
         Ref: PackerAemS3Bucket

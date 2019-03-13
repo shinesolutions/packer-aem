@@ -55,7 +55,10 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.tags | An array of `Key` and `Value` pairs for tagging AWS resources (e.g. EC2 instance, AMI, EBS volume) created by Packer AEM following your organisation's tagging standard | Optional | None |
 | aws.certificate_arn | The ARN of the Certificate in the [AWS Certificate Manager (ACM)](https://console.aws.amazon.com/acm/home) | Mandatory | |
 | aws.certificate_key_arn | The ARN of the secret containing TLS certificate's secret key in the [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) | Optional | |
-| aws.enable_secrets_manager | A boolean value to indicate if AEM OpenCloud can provision AWS Secrets Manager resource, which is currently supported for storing TLS certificate's private key  | Optional | true |
-| aws.create_iam_packer_role | A boolean value to indicate if Packer-AEM create-aws-resources should provision an IAM Role/InstanceProfile for packer when baking AMIs  | Optional | true |
+| aws.resources.stack_name | Appended string for Packer AEM Resources stack-name created by `make create-aws-resources`| Optional | `packer-aem-resources-stack`|
+| aws.resources.s3_bucket | Name of bucket created by `make create-aws-resources` | Mandatory | `overwrite-me` |
+| aws.enable_secrets_manager | A `'true'` or `'false'` string value to indicate if AEM OpenCloud can provision AWS Secrets Manager resource, which is currently supported for storing TLS certificate's private key  | Optional | `'true'` |
+| aws.create_packer_bucket | A `'true'` or `'false'` string value to indicate if Packer-AEM create-aws-resources should provision an S3 Bucket for packer when baking AMIs | Optional | `'true'` |
+| aws.create_iam_packer_role | A `'true'` or `'false'` string value to indicate if Packer-AEM create-aws-resources should provision an IAM Role/InstanceProfile for packer when baking AMIs  | Optional | `'true'` |
 | aws.aem_certs_base | Source URL path of TLS certificate, it could be s3://..., http://..., https://..., or file://.... In [AWS Resources](https://github.com/shinesolutions/aem-aws-stack-builder/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/certs/  | Optional | |
 | aws.aem_license | AWS Systems Manager parameter containing the multi-line AEM license content  | Mandatory | |
