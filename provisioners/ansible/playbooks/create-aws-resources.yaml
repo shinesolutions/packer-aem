@@ -19,3 +19,4 @@
           PackerAemS3Bucket: "{{ aws.resources.s3_bucket }}"
           EnableSecretsManager: "{{ aws.enable_secrets_manager }}"
           CreatePackerIAMRole: "{{ aws.create_iam_packer_role }}"
+          CreatePackerBucket: "{{ aws.create_packer_bucket }}"
