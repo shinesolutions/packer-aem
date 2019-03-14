@@ -14,6 +14,7 @@ mod 'puppetlabs/concat', '4.1.0'
 mod 'puppetlabs/stdlib', '4.25.1'
 mod 'thias/sysctl', '1.0.6'
 mod 'MiamiOH/tcpwrappers', '1.1.0'
+mod 'luizvasconceloss-hiera_ssm_paramstore', '0.2.2'
 
 # puppet-aem-curator dependencies, TODO: resolve sub-dependencies without declaring deps in packer-aem
 mod 'aco-oracle_java', '2.8.3'
