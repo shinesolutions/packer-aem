@@ -12,7 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new configuration property aem.dispatcher.apache_module_base_url
 
 ### Changed
-- Upgrade aem_curator to 1.13.0
+- Upgrade aem_curator to 1.14.0
+- Ensure crx-quickstart/install directory is empty only after AEM is stopped
 
 ### Fixed
 - Fix AEM install directory clean up at the end of AEM provisioning phase #78
