@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add support for CIS hardened source AMI
 - Add JDK keystore password and TLS private key resource provisioning to aws-resources CF stack #124 #126
 - Add new configuration property aem.dispatcher.apache_module_base_url
-- Add new configuration property aws.create_iam_packer_role
+- Add new configuration property aws.resource.create_iam_packer_role
 
 ### Changed
 - Upgrade aem_curator to 1.13.0
