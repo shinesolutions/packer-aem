@@ -1,14 +1,17 @@
 ---
-:backends: yaml
-:yaml:
-  :datadir: "/tmp/shinesolutions/packer-aem/hieradata"
-:hierarchy:
-  - local
-  - "%{::os.family}/%{::os.name}-%{::os.release.major}"
-  - "%{::os.family}/%{::os.name}"
-  - "%{::platform_type}"
-  - "%{::component}"
-  - common
-:logger: noop
-:merge_behavior: native
-:deep_merge_options: {}
+version: 5
+defaults:
+  datadir: "/tmp/shinesolutions/packer-aem/hieradata"
+  data_hash: yaml_data
+hierarchy:
+  - name: Hiera Data
+    paths: 
+      - aws.yaml
+      - docker.yaml
+      - author-publish-dispatcher.yaml
+      - local.yaml
+      - "%{::os.family}/%{::os.name}-%{::os.release.major}.yaml"
+      - "%{::os.family}/%{::os.name}.yaml"
+      - "%{::platform_type}.yaml"
+      - "%{::component}.yaml"
+      - common.yaml
