@@ -2,7 +2,6 @@
 
 source 'https://rubygems.org'
 
-gem 'aws-sdk-core'
 gem 'aws-sdk-ssm', require: false
 gem 'inspec', '1.51.6', require: false
 gem 'jsonlint', require: false

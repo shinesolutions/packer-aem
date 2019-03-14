@@ -18,7 +18,6 @@ aem_curator::install_author::repository_volume_device: /dev/xvdb
 aem_curator::install_author::repository_volume_mount_point: /mnt/ebs1
 aem_curator::install_author::post_stop_sleep_secs: 300
 aem_curator::install_author::aem_license_base: "%{lookup('tmp_dir')}/license"
-aem_curator::install_author::aem_keystore_password: "%{lookup('AEM_Keystore_Password')}"
 
 aem_curator::install_publish::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_publish::aem_host: localhost

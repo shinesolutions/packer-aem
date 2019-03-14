@@ -16,11 +16,3 @@ hierarchy:
       - "%{::component}.yaml"
       - common.yaml
 
-  - name: "AWS Parameter Store"
-    lookup_key: hiera_ssm_paramstore
-    uris:
-      - /
-      - /hiera/%{facts.os.family}/
-    options:
-      region: ap-southeast-2
-      get_all: false
