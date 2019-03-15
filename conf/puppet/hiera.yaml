@@ -6,9 +6,6 @@ defaults:
 hierarchy:
   - name: Hiera Data
     paths: 
-      - aws.yaml
-      - docker.yaml
-      - author-publish-dispatcher.yaml
       - local.yaml
       - "%{::os.family}/%{::os.name}-%{::os.release.major}.yaml"
       - "%{::os.family}/%{::os.name}.yaml"
