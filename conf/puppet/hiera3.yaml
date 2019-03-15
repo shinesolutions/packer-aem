@@ -3,6 +3,7 @@
 :yaml:
   :datadir: "/tmp/shinesolutions/packer-aem/hieradata"
 :hierarchy:
+  - "local-%{::component}"
   - local
   - "%{::os.family}/%{::os.name}-%{::os.release.major}"
   - "%{::os.family}/%{::os.name}"

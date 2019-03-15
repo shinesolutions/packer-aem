@@ -5,11 +5,11 @@ defaults:
   data_hash: yaml_data
 hierarchy:
   - name: Hiera Data
-    paths: 
+    paths:
+      - "local-%{::component}.yaml"
       - local.yaml
       - "%{::os.family}/%{::os.name}-%{::os.release.major}.yaml"
       - "%{::os.family}/%{::os.name}.yaml"
       - "%{::platform_type}.yaml"
       - "%{::component}.yaml"
       - common.yaml
-

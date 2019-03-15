@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fix AEM install directory clean up at the end of AEM provisioning phase #78
+- Fix repository volume device hieradata configuration to consume user config and handle component-specific config #127
 
 ## [3.7.0] - 2019-02-17
 

@@ -1,0 +1,6 @@
+---
+aem_curator::install_author::repository_volume_device: "{{ aws[os_type].devicemap_data_b }}"
+aem_curator::install_author::repository_volume_mount_point: /mnt/ebs1
+
+aem_curator::install_publish::repository_volume_device: "{{ aws[os_type].devicemap_data_c }}"
+aem_curator::install_publish::repository_volume_mount_point: /mnt/ebs2

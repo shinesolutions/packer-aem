@@ -12,6 +12,14 @@
         dest: ../../../conf/puppet/hieradata/local.yaml
         mode: 0644
 
+    - name: Generate component-specific Hieradata configuration
+      template:
+        src: ../../../templates/ansible/hieradata-{{ item }}.j2
+        dest: ../../../conf/puppet/hieradata/local-{{ item }}.yaml
+        mode: 0644
+      loop:
+        - author-publish-dispatcher
+
     - name: Generate Packer Variables configuration
       template:
         src: ../../../templates/ansible/packer-vars.j2
