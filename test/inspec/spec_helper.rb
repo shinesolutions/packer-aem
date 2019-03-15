@@ -8,5 +8,6 @@ def init_conf
     '::packer_build_name' => Facter.value(:packer_build_name),
     '::os' => Facter.value(:os)
   }
-  @hiera = Hiera.new(config: Facter.value(:packer_staging_dir) + '/hiera.yaml')
+  # TODO: Fix this when inspec has a path from hiera 3 to 5. More Details: https://tickets.puppetlabs.com/browse/HI-598
+  @hiera = Hiera.new(config: Facter.value(:packer_staging_dir) + '/hiera3.yaml')
 end
