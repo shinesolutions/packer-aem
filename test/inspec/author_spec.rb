@@ -44,6 +44,14 @@ describe file("#{aem_base}/aem/author/aem-author-#{aem_port}.jar") do
   it { should be_grouped_into 'aem-author' }
 end
 
+describe file("#{aem_base}/aem/author/crx-quickstart/ssl/aem.ks") do
+  it { should be_file }
+  it { should exist }
+  its('mode') { should cmp '00640' }
+  it { should be_owned_by 'aem-author' }
+  it { should be_grouped_into 'aem-author' }
+end
+
 describe service('aem-author') do
   it { should_not be_enabled }
   it { should_not be_running }

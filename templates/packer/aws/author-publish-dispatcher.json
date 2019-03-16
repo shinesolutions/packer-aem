@@ -172,6 +172,7 @@
         "Cost Centre": 12345, 
         "Project": "AEM OpenCloud", 
         "Version": "{{user `version`}}", 
+        "overwrite-me": "overwrite-me", 
         "Owner": "Shine Solutions AEM Team", 
         "OS Type": "{{user `os_type`}}", 
         "Application Role": "{{user `component`}} AMI"
@@ -191,6 +192,7 @@
         "Cost Centre": 12345, 
         "Project": "AEM OpenCloud", 
         "Version": "{{user `version`}}", 
+        "overwrite-me": "overwrite-me", 
         "Owner": "Shine Solutions AEM Team", 
         "OS Type": "{{user `os_type`}}", 
         "Application Role": "{{user `component`}} AMI"
@@ -202,6 +204,7 @@
         "Cost Centre": 12345, 
         "Project": "AEM OpenCloud", 
         "Version": "{{user `version`}}", 
+        "overwrite-me": "overwrite-me", 
         "Owner": "Shine Solutions AEM Team", 
         "OS Type": "{{user `os_type`}}", 
         "Application Role": "{{user `component`}} AMI"

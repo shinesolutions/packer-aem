@@ -13,8 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new configuration property aws.resource.create_iam_packer_role
 
 ### Changed
-- Upgrade aem_curator to 1.14.0
+- Upgrade aem_curator to 1.15.0
 - Ensure crx-quickstart/install directory is empty only after AEM is stopped
+- AEM Java keystore should be owned by AEM service user #129
 
 ### Fixed
 - Fix AEM install directory clean up at the end of AEM provisioning phase #78
