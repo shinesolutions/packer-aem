@@ -1,19 +1,22 @@
 ---
-version: 4
+version: 5
+defaults:
+  datadir: data
+  data_hash: yaml_data
 
 hierarchy:
   - name: OS family, name and major release
     path: "%{::os.family}/%{::os.name}-%{::os.release.major}.yaml"
-    backend: yaml
+    data_hash: yaml_data
 
   - name: OS family and name
     path: "%{::os.family}/%{::os.name}.yaml"
-    backend: yaml
+    data_hash: yaml_data
 
   - name: OS family
     path: "%{::os.family}.yaml"
-    backend: yaml
+    data_hash: yaml_data
 
   - name: Common
     path: common.yaml
-    backend: yaml
+    data_hash: yaml_data

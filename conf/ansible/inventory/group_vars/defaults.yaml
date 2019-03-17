@@ -37,14 +37,16 @@ aws:
       Value: overwrite-me
   certificate_arn: overwrite-me
   certificate_key_arn: overwrite-me
-  certificate_key_enabled: false
+  enable_secrets_manager: 'true'
+  create_iam_packer_role: 'true'
+  create_packer_bucket: 'true'
   aem_certs_base: overwrite-me
   aem_license: overwrite-me
   aem_license_base: overwrite-me
   rhel7:
     devicemap_root: /dev/sda1
-    devicemap_data_b: /dev/sdb
-    devicemap_data_c: /dev/sdc
+    devicemap_data_b: /dev/xvdb
+    devicemap_data_c: /dev/xvdc
   centos7:
     devicemap_root: /dev/sda1
     devicemap_data_b: /dev/sdb
@@ -59,6 +61,7 @@ docker:
 
 aem:
   profile: aem64_sp3
+  keystore_password: overwrite-me
   author:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
     start_opts: ''
@@ -67,6 +70,7 @@ aem:
     start_opts: ''
   dispatcher:
     version: 4.3.2
+    apache_module_base_url: http://download.macromedia.com/dispatcher/download
   artifacts_base: overwrite-me
   enable_custom_image_provisioner: false
 

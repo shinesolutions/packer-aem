@@ -33,7 +33,8 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aem.publish.jvm_opts | AEM Publish's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) | Optional |
 | aem.publish.start_opts | AEM Publish's [start options](https://helpx.adobe.com/experience-manager/6-3/sites/deploying/using/custom-standalone-install.html#FurtheroptionsavailablefromtheQuickstartfile) | Optional | Empty string |
 | aem.dispatcher.version | AEM Dispatcher version, available version is documented on [Download Dispatcher Web Server Modules](https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher.html) page | Mandatory | `4.2.3` |
-| aem.artifacts_base | Source URL path of AEM artifacts, it could be `s3://...`, `http://...`, `https://...`, or `file://...`. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/artifacts/ | Mandatory | |
+| aem.dispatcher.apache_module_base_url | AEM Dispatcher Apache library base URL.  Source URL can be: `s3://...`, `http://...`, `https://...`, or `file://...`  | Optional | `http://download.macromedia.com/dispatcher/download` |
+| aem.artifacts_base | Source URL path of AEM artifacts, it could be `s3://...`, `http://...`, `https://...`, or `file://...`. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/artifacts/.  Object name must be: `aem.key` | Mandatory | |
 | aem.enable_custom_image_provisioner | Set to `true` when Custom Image Provisioner pre and post steps will be executed , note: place `aem-custom-image-provisioner.tar.gz` artifact in `stage/custom/` directory | Optional | `false` |
 
 ### AWS platform type configuration properties:
@@ -45,6 +46,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.vpc_id | [VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html) ID where Packer creation will run from | Mandatory | |
 | aws.subnet_id | [Subnet](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html) ID where Packer creation will run from | Mandatory | |
 | aws.source_ami | ID of the AMI used as the base of all component AMIs  | Mandatory | |
+| aws.ami_users | Optional | A list of AWS account IDs to share the created AMIs with |
 | aws.iam_instance_profile | IAM Instance Profile name as set up in [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) | Mandatory | |
 | aws.install_ssm_agent | Set to `true` when SSM agent must be installed | Optional | `true` |
 | aws.install_cloudwatchlogs | Set to `true` when CloudWatch logs agent must be installed | Optional | `true` |
@@ -52,7 +54,11 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.data_volume_size | The size of data volume in Gb, this is where AEM repository resides | Optional | `75` |
 | aws.tags | An array of `Key` and `Value` pairs for tagging AWS resources (e.g. EC2 instance, AMI, EBS volume) created by Packer AEM following your organisation's tagging standard | Optional | None |
 | aws.certificate_arn | The ARN of the Certificate in the [AWS Certificate Manager (ACM)](https://console.aws.amazon.com/acm/home) | Mandatory | |
-| aws.certificate_key_arn | The ARN of the secret containing the Certificate's Secret Key in the [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) | Optional | |
-| aws.certificate_key_enabled | A Boolean value to indicate if AEM OpenCloud should use Amazon Secrets Manager for the Private Key [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) | Optional | |
+| aws.certificate_key_arn | The ARN of the secret containing TLS certificate's secret key in the [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) | Optional | |
+| aws.resources.stack_name | Appended string for Packer AEM Resources stack-name created by `make create-aws-resources`| Optional | `packer-aem-resources-stack`|
+| aws.resources.packer_bucket | Name of bucket for packer-aem created by `make create-aws-resources` or an existing bucket that can be used | Mandatory | `overwrite-me` |
+| aws.resources.enable_secrets_manager | A `'true'` or `'false'` string value to indicate if AEM OpenCloud can provision AWS Secrets Manager resource, which is currently supported for storing TLS certificate's private key  | Optional | `'true'` |
+| aws.resources.create_packer_bucket | A `'true'` or `'false'` string value to indicate if Packer-AEM create-aws-resources should provision an S3 Bucket for packer when baking AMIs | Optional | `'true'` |
+| aws.resources.create_iam_packer_role | A `'true'` or `'false'` string value to indicate if Packer-AEM create-aws-resources should provision an IAM Role/InstanceProfile for packer when baking AMIs  | Optional | `'true'` |
 | aws.aem_certs_base | Source URL path of TLS certificate, it could be s3://..., http://..., https://..., or file://.... In [AWS Resources](https://github.com/shinesolutions/aem-aws-stack-builder/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/certs/  | Optional | |
-| aws.aem_license | AWS Systems Manager parameter containing the License content  | Mandatory | |
+| aws.aem_license | AWS Systems Manager parameter containing the multi-line AEM license content  | Mandatory | |

@@ -1,0 +1,15 @@
+---
+:backends: yaml
+:yaml:
+  :datadir: "/tmp/shinesolutions/packer-aem/hieradata"
+:hierarchy:
+  - "local-%{::component}"
+  - local
+  - "%{::os.family}/%{::os.name}-%{::os.release.major}"
+  - "%{::os.family}/%{::os.name}"
+  - "%{::platform_type}"
+  - "%{::component}"
+  - common
+:logger: noop
+:merge_behavior: native
+:deep_merge_options: {}

@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add support for CIS hardened source AMI
+- Add JDK keystore password and TLS private key resource provisioning to aws-resources CF stack #124 #126
+- Add new configuration property aem.dispatcher.apache_module_base_url
+- Add new configuration property aws.resource.create_iam_packer_role
+
+### Changed
+- Upgrade aem_curator to 1.15.0
+- Ensure crx-quickstart/install directory is empty only after AEM is stopped
+- AEM Java keystore should be owned by AEM service user #129
+
+### Fixed
+- Fix AEM install directory clean up at the end of AEM provisioning phase #78
+- Fix repository volume device hieradata configuration to consume user config and handle component-specific config #127
 
 ## [3.7.0] - 2019-02-17
 
