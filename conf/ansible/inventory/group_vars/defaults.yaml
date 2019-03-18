@@ -45,8 +45,8 @@ aws:
   aem_license_base: overwrite-me
   rhel7:
     devicemap_root: /dev/sda1
-    devicemap_data_b: /dev/xvdb
-    devicemap_data_c: /dev/xvdc
+    devicemap_data_b: /dev/sdb
+    devicemap_data_c: /dev/sdc
   centos7:
     devicemap_root: /dev/sda1
     devicemap_data_b: /dev/sdb
