@@ -46,6 +46,8 @@ Resources:
     Properties:
       Value: "overwrite-me"
       Type: String
+      Name: 
+        Fn::Join: ['', [Ref: 'StackPrefix', '-AemLicense']]
 
   # TODO: Move to SecureString when it is supported on AWS Cloudformation.
   # For more information see:
@@ -55,6 +57,8 @@ Resources:
     Properties:
       Value: "overwrite-me"
       Type: String
+      Name: 
+        Fn::Join: ['', [Ref: 'StackPrefix', '-AemKeystorePassword']]
 
   SecretsManagerAemCertificateKey:
     Type: AWS::SecretsManager::Secret
