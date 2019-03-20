@@ -18,7 +18,6 @@ hierarchy:
     lookup_key: hiera_ssm_paramstore
     uris:
       - /
-      - /hiera/%{facts.os.family}/
     options:
       region: "%{::aws_region}"
       get_all: false
