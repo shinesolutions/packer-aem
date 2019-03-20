@@ -20,5 +20,5 @@ hierarchy:
       - /
       - /hiera/%{facts.os.family}/
     options:
-      region: ap-southeast-2
+      region: "%{::aws_region}"
       get_all: false
