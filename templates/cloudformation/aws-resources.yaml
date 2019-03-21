@@ -46,6 +46,8 @@ Resources:
     Properties:
       Value: "overwrite-me"
       Type: String
+      Description:
+        Fn::Join: ['', ['The AEM License String for: ', Ref: 'StackPrefix']]
       Name: 
         Fn::Join: ['', ['/aem-opencloud/', Ref: 'StackPrefix', '/AemLicense']]
 
@@ -57,6 +59,8 @@ Resources:
     Properties:
       Value: "overwrite-me"
       Type: String
+      Description:
+        Fn::Join: ['', ['The AEM Keystore Password String for: ', Ref: 'StackPrefix']]
       Name: 
         # Workaround for bug where delimiter does not apply and triggers an invalid QDN on cloudformation. 
         Fn::Join: ['', ['/aem-opencloud/', Ref: 'StackPrefix', '/AemKeystorePassword']]
