@@ -11,6 +11,7 @@ This upgrade guide covers the changes required when you already use Packer AEM a
 * Remove AEM license files from S3, they used to be stored under the path specified in `aws.aem_certs_base` configuration property
 * Migrated AEM Java Keystore Value from plain text to AWS Systems Manager Parameters.
 * Migrated AEM License parameter to AWS Systems Manager Parameters
+* Add support for additional certificate locations in `aws.certificate_arn` (ARN for either ACM/IAM ServerCertificates or an S3 key path)
 
 ### To 3.4.0
 
