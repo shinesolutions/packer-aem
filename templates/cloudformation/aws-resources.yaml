@@ -49,7 +49,7 @@ Resources:
       Description:
         Fn::Join: ['', ['The AEM License String for: ', Ref: 'StackPrefix']]
       Name: 
-        Fn::Join: ['', ['/aem-opencloud/', Ref: 'StackPrefix', '/AemLicense']]
+        Fn::Join: ['', ['/aem-opencloud/', Ref: 'StackPrefix', '/aem-license']]
 
   # TODO: Move to SecureString when it is supported on AWS Cloudformation.
   # For more information see:
@@ -63,7 +63,7 @@ Resources:
         Fn::Join: ['', ['The AEM Keystore Password String for: ', Ref: 'StackPrefix']]
       Name: 
         # Workaround for bug where delimiter does not apply and triggers an invalid QDN on cloudformation. 
-        Fn::Join: ['', ['/aem-opencloud/', Ref: 'StackPrefix', '/AemKeystorePassword']]
+        Fn::Join: ['', ['/aem-opencloud/', Ref: 'StackPrefix', '/aem-keystore-password']]
 
   SecretsManagerAemCertificateKey:
     Type: AWS::SecretsManager::Secret
