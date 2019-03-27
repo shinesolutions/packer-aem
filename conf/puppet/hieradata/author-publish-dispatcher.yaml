@@ -1,6 +1,6 @@
 ---
-aem_curator::install_author::repository_volume_device: /dev/xvdb
-aem_curator::install_author::repository_volume_mount_point: /mnt/ebs1
+aem_curator::install_author::data_volume_device: /dev/xvdb
+aem_curator::install_author::data_volume_mount_point: /mnt/ebs1
 
-aem_curator::install_publish::repository_volume_device: /dev/xvdc
-aem_curator::install_publish::repository_volume_mount_point: /mnt/ebs2
+aem_curator::install_publish::data_volume_device: /dev/xvdc
+aem_curator::install_publish::data_volume_mount_point: /mnt/ebs2
