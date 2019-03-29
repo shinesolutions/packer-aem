@@ -3,7 +3,7 @@
     "http_proxy": "", 
     "custom_stage_run_info": "{{env `CUSTOM_STAGE_RUN_INFO`}}", 
     "source_ami": "", 
-    "instance_type": "", 
+    "platform_type": "", 
     "no_proxy": "", 
     "root_volume_size": "20", 
     "iam_instance_profile": "", 
@@ -20,7 +20,7 @@
     "aws_security_group_id": "", 
     "puppet_bin_dir": "/opt/puppetlabs/bin", 
     "rubygems_bin_dir": "/opt/puppetlabs/puppet/bin", 
-    "platform_type": "", 
+    "instance_type": "", 
     "os_type": "", 
     "aws_user": "ec2-user"
   }, 
@@ -40,8 +40,8 @@
       "type": "file"
     }, 
     {
-      "type": "shell", 
       "execute_command": "{{ .Vars }} sudo -E bash {{ .Path }}", 
+      "type": "shell", 
       "environment_vars": [
         "PUPPET_BIN_DIR={{user `puppet_bin_dir`}}", 
         "http_proxy={{user `http_proxy`}}", 
@@ -59,9 +59,9 @@
       "type": "file"
     }, 
     {
-      "type": "puppet-masterless", 
-      "puppet_bin_dir": "{{user `puppet_bin_dir`}}", 
       "execute_command": "export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}", 
+      "puppet_bin_dir": "{{user `puppet_bin_dir`}}", 
+      "type": "puppet-masterless", 
       "manifest_file": "provisioners/puppet/manifests/config.pp", 
       "module_paths": [
         "provisioners/puppet/modules"
@@ -74,7 +74,7 @@
         "modules", 
         "provisioners/puppet/modules"
       ], 
-      "execute_command": "export FACTER_component={{user `component`}} && export FACTER_platform_type={{user `platform_type`}} && export FACTER_custom_stage_run_info=\"{{user `custom_stage_run_info`}}\" && export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}", 
+      "execute_command": "export FACTER_component={{user `component`}} && export FACTER_platform_type={{user `platform_type`}} && export FACTER_aws_region={{user `aws_region`}} && export FACTER_custom_stage_run_info=\"{{user `custom_stage_run_info`}}\" && export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}", 
       "puppet_bin_dir": "{{user `puppet_bin_dir`}}", 
       "extra_arguments": [], 
       "type": "puppet-masterless"
@@ -86,7 +86,7 @@
         "modules", 
         "provisioners/puppet/modules"
       ], 
-      "execute_command": "export FACTER_component={{user `component`}} && export FACTER_platform_type={{user `platform_type`}} && export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}", 
+      "execute_command": "export FACTER_component={{user `component`}} && export FACTER_platform_type={{user `platform_type`}} && export FACTER_aws_region={{user `aws_region`}} && export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}", 
       "puppet_bin_dir": "{{user `puppet_bin_dir`}}", 
       "extra_arguments": [], 
       "type": "puppet-masterless"
@@ -98,7 +98,7 @@
         "modules", 
         "provisioners/puppet/modules"
       ], 
-      "execute_command": "export FACTER_component={{user `component`}} && export FACTER_platform_type={{user `platform_type`}} && export FACTER_custom_stage_run_info=\"{{user `custom_stage_run_info`}}\" && export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}", 
+      "execute_command": "export FACTER_component={{user `component`}} && export FACTER_platform_type={{user `platform_type`}} && export FACTER_aws_region={{user `aws_region`}} && export FACTER_custom_stage_run_info=\"{{user `custom_stage_run_info`}}\" && export http_proxy={{user `http_proxy`}} && export HTTP_PROXY={{user `http_proxy`}} && export https_proxy={{user `https_proxy`}} && export HTTPS_PROXY={{user `https_proxy`}} && export no_proxy={{user `no_proxy`}} && export NO_PROXY={{user `no_proxy`}} && cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{.PuppetBinDir}}/puppet apply --verbose --modulepath='{{.ModulePath}}' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} --detailed-exitcodes {{.ManifestFile}}", 
       "puppet_bin_dir": "{{user `puppet_bin_dir`}}", 
       "extra_arguments": [], 
       "type": "puppet-masterless"
@@ -156,7 +156,6 @@
           "device_name": "{{user `devicemap_data_b`}}"
         }
       ], 
-      "communicator": "ssh", 
       "source_ami": "{{user `source_ami`}}", 
       "name": "aws", 
       "tags": {
@@ -191,6 +190,7 @@
         "OS Type": "{{user `os_type`}}", 
         "Application Role": "{{user `component`}} AMI"
       }, 
+      "vpc_id": "{{user `aws_vpc_id`}}", 
       "run_volume_tags": {
         "Application Id": "Adobe Experience Manager (AEM)", 
         "Name": "Packer Builder - {{user `component`}} AMI ({{user `version`}})", 
@@ -203,7 +203,7 @@
         "OS Type": "{{user `os_type`}}", 
         "Application Role": "{{user `component`}} AMI"
       }, 
-      "vpc_id": "{{user `aws_vpc_id`}}", 
+      "communicator": "ssh", 
       "launch_block_device_mappings": [
         {
           "volume_size": "{{user `root_volume_size`}}", 
