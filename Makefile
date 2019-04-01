@@ -30,6 +30,14 @@ package: stage
 	    -czf \
 		stage/packer-aem-$(packer_aem_version).tar.gz .
 
+publish:
+	putasset \
+	  --owner shinesolutions \
+	  --repo packer-aem \
+		--tag $(packer_aem_version) \
+		--file stage/packer-aem-$(packer_aem_version).tar \
+		--show-url
+
 ################################################################################
 # Dependencies resolution targets.
 # For deps-local and deps-test-local targets, the local dependencies must be
@@ -226,4 +234,4 @@ create-cert: stage
 	    -keyout stage/certs/aem.key \
 	    -out stage/certs/aem.cert
 
-.PHONY: ci clean stage package deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher docker-author-publish-dispatcher test-integration test-integration-local ami-ids ami-ids-examples create-cert
+.PHONY: ci clean stage package publish deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher docker-author-publish-dispatcher test-integration test-integration-local ami-ids ami-ids-examples create-cert
