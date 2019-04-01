@@ -14,8 +14,8 @@ aem_curator::install_author::cert_base_url: "file://%{lookup('tmp_dir')}/certs"
 aem_curator::install_author::aem_base: /opt
 aem_curator::install_author::aem_sample_content: false
 aem_curator::install_author::setup_repository_volume: true
-aem_curator::install_author::repository_volume_device: /dev/xvdb
-aem_curator::install_author::repository_volume_mount_point: /mnt/ebs1
+aem_curator::install_author::data_volume_device: /dev/xvdb
+aem_curator::install_author::data_volume_mount_point: /mnt/ebs1
 aem_curator::install_author::post_stop_sleep_secs: 300
 aem_curator::install_author::aem_license_base: "%{lookup('tmp_dir')}/license"
 
@@ -25,8 +25,8 @@ aem_curator::install_publish::cert_base_url: "file://%{lookup('tmp_dir')}/certs"
 aem_curator::install_publish::aem_base: /opt
 aem_curator::install_publish::aem_sample_content: false
 aem_curator::install_publish::setup_repository_volume: true
-aem_curator::install_publish::repository_volume_device: /dev/xvdb
-aem_curator::install_publish::repository_volume_mount_point: /mnt/ebs1
+aem_curator::install_publish::data_volume_device: /dev/xvdb
+aem_curator::install_publish::data_volume_mount_point: /mnt/ebs1
 aem_curator::install_publish::post_stop_sleep_secs: 300
 aem_curator::install_publish::aem_license_base: "%{lookup('tmp_dir')}/license"
 
