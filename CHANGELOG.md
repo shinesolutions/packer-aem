@@ -6,9 +6,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-- Changed hiera parameters for repository volume to data volume
-
 ### Added
 - Add support for CIS hardened source AMI
 - Add JDK keystore password and TLS private key resource provisioning to aws-resources CF stack #124 #126
@@ -16,7 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new configuration property aws.resource.create_iam_packer_role
 
 ### Changed
+- Changed hiera parameters for repository volume to data volume
 - Upgrade aem_curator to 1.15.0
+- Upgrade aem_resources to 3.9.0
 - Ensure crx-quickstart/install directory is empty only after AEM is stopped
 - AEM Java keystore should be owned by AEM service user #129
 
