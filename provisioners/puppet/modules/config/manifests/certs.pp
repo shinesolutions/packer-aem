@@ -77,7 +77,7 @@ class config::certs (
       }
     }
     default: {
-      fail("Certificate ARN can only be of types: ( arn:aws:acm | arn:aws:iam | s3: )")
+      fail('Certificate ARN can only be of types: ( arn:aws:acm | arn:aws:iam | s3: )')
     }
   }
 
