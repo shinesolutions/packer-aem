@@ -13,3 +13,11 @@ hierarchy:
       - "%{::platform_type}.yaml"
       - "%{::component}.yaml"
       - common.yaml
+
+  - name: "AWS Parameter Store"
+    lookup_key: hiera_ssm_paramstore
+    uris:
+      - /aem-opencloud/
+    options:
+      region: "%{::aws_region}"
+      get_all: true

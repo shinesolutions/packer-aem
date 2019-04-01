@@ -2,6 +2,7 @@
 
 source 'https://rubygems.org'
 
+gem 'aws-sdk-core', '3.47.0'
 gem 'inspec', '1.51.6', require: false
 gem 'jsonlint', require: false
 gem 'puppet-lint', require: false

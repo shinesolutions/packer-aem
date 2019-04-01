@@ -27,7 +27,7 @@ amazon_ssm_agent::proxy_url: {{ http_proxy }}
 
 
 aem_curator::install_author::aem_profile: {{ aem.profile }}
-aem_curator::install_author::aem_keystore_password: {{ aem.keystore_password }}
+aem_curator::install_author::aem_keystore_password: lookup({{ aem.keystore_password_parameter }})
 aem_curator::install_author::aem_artifacts_base: {{ aem.artifacts_base }}
 aem_curator::install_author::aem_jvm_mem_opts: "{{ aem.author.jvm_mem_opts }}"
 aem_curator::install_author::aem_jvm_opts:
@@ -41,7 +41,7 @@ aem_curator::install_author::aem_start_opts: "{{ aem.author.start_opts }}"
 aem_curator::install_author::repository_volume_device: "{{ aws[os_type].devicemap_data_b }}"
 
 aem_curator::install_publish::aem_profile: {{ aem.profile }}
-aem_curator::install_publish::aem_keystore_password: {{ aem.keystore_password }}
+aem_curator::install_publish::aem_keystore_password: lookup({{ aem.keystore_password_parameter }})
 aem_curator::install_publish::aem_artifacts_base: {{ aem.artifacts_base }}
 aem_curator::install_publish::aem_jvm_mem_opts: "{{ aem.publish.jvm_mem_opts }}"
 aem_curator::install_publish::aem_jvm_opts:
