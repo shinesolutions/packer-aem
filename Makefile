@@ -35,7 +35,7 @@ publish:
 	  --owner shinesolutions \
 	  --repo packer-aem \
 		--tag $(packer_aem_version) \
-		--file stage/packer-aem-$(packer_aem_version).tar \
+		--file stage/packer-aem-$(packer_aem_version).tar.gz \
 		--show-url
 
 ################################################################################
