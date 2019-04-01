@@ -76,6 +76,9 @@ class config::certs (
         require => File["${tmp_dir}/certs"],
       }
     }
+    default: {
+      fail("Certificate ARN can only be of types: ( arn:aws:acm | arn:aws:iam | s3: )")
+    }
   }
 
   # chmod the certificate
