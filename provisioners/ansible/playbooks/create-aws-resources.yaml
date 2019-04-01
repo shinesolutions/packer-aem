@@ -16,7 +16,7 @@
         template: "../../../templates/cloudformation/aws-resources.yaml"
         template_parameters:
           StackPrefix: "{{ stack_prefix }}"
-          PackerAemS3Bucket: "{{ aws.resources.packer_bucket }}"
-          EnableSecretsManager: "{{ aws.resources.enable_secrets_manager }}"
-          CreatePackerIAMRole: "{{ aws.resources.create_iam_packer_role }}"
-          CreatePackerBucket: "{{ aws.resources.create_packer_bucket }}"
+          PackerAemS3Bucket: "{{ aws.resources.s3_bucket }}"
+          EnableSecretsManager: "{{ aws.resources.enable_secrets_manager | bool }}"
+          CreatePackerIAMRole: "{{ aws.resources.create_iam_packer_role | bool }}"
+          CreatePackerBucket: "{{ aws.resources.create_s3_bucket | bool }}"
