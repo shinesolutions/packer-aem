@@ -47,13 +47,41 @@ class config::certs (
     mode   => '0700',
   }
 
-  exec { 'Download Certificate from AWS Certificate Manager using cli':
-    creates => "${tmp_dir}/certs/aem.cert",
-    command => "aws acm get-certificate --region ${region} --certificate-arn ${certificate_arn} --output text --query Certificate > ${tmp_dir}/certs/aem.cert",
-    path    => '/usr/local/bin/:/bin/',
-    require => File["${tmp_dir}/certs"],
+  # Get SSL certificate based on ARN from:
+  #  - Certificate Manager (arn:aws:acm)
+  #  - IAM Server Certificates (arn:aws:iam)
+  #  - S3 (s3:)
+  case $certificate_arn {
+    /^arn:aws:acm/: {
+      exec { 'Download Certificate from AWS Certificate Manager using cli':
+        creates => "${tmp_dir}/certs/aem.cert",
+        command => "aws acm get-certificate --region ${region} --certificate-arn ${certificate_arn} --output text --query Certificate > ${tmp_dir}/certs/aem.cert",
+        path    => '/usr/local/bin/:/bin/',
+        require => File["${tmp_dir}/certs"],
+      }
+    }
+    /^arn:aws:iam/: {
+      $certificate_name = $certificate_arn.split('/')[1]
+      exec { 'Download Certificate from IAM (Server Certificates) using cli':
+        creates => "${tmp_dir}/certs/aem.cert",
+        command => "aws iam get-server-certificate --server-certificate-name ${certificate_name} --query 'ServerCertificate.CertificateBody' --output text > ${tmp_dir}/certs/aem.cert",
+        path    => '/usr/local/bin/:/bin/',
+        require => File["${tmp_dir}/certs"],
+      }
+    }
+    /^s3:/: {
+      archive { "${tmp_dir}/certs/aem.cert":
+        ensure  => present,
+        source  => "${$certificate_arn}",
+        require => File["${tmp_dir}/certs"],
+      }
+    }
+    default: {
+      fail('Certificate ARN can only be of types: ( arn:aws:acm | arn:aws:iam | s3: )')
+    }
   }
 
+  # chmod the certificate
   file { "${tmp_dir}/certs/aem.cert":
     ensure => file,
     mode   => '0600',
