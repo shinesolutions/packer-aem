@@ -4,15 +4,15 @@ Conditions:
   EnableSecretsManagerCondition:
     Fn::Equals:
       - Ref: EnableSecretsManager
-      - "true"
+      - "True"
   PackerIAMRoleCondition:
     Fn::Equals:
       - Ref: CreatePackerIAMRole
-      - "true"
+      - "True"
   PackerBucketCondition:
     Fn::Equals:
       - Ref: CreatePackerBucket
-      - "true"
+      - "True"
 
 Description: Create Instance Profile for running Packer AEM
 Parameters:

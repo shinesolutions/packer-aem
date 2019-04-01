@@ -25,6 +25,9 @@ aws:
   resources:
     stack_name: packer-aem-resources-stack
     s3_bucket: overwrite-me
+    enable_secrets_manager: true
+    create_iam_packer_role: true
+    create_s3_bucket: true
   source_ami: overwrite-me
   ami_users: ''
   instance_profile: overwrite-me
@@ -37,9 +40,6 @@ aws:
       Value: overwrite-me
   certificate_arn: overwrite-me
   certificate_key_arn: overwrite-me
-  enable_secrets_manager: 'true'
-  create_iam_packer_role: 'true'
-  create_packer_bucket: 'true'
   aem_certs_base: overwrite-me
   aem_license: overwrite-me
   aem_license_base: overwrite-me
