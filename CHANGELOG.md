@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.2 - 2019-04-05]
+
 ### Changed
 - Changed hiera parameters for repository volume to data volume
 - Upgrade aem_curator to 1.11.1
