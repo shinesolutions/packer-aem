@@ -12,6 +12,7 @@ This upgrade guide covers the changes required when you already use Packer AEM a
 * Migrated AEM Java Keystore Value from plain text to AWS Systems Manager Parameters.
 * Migrated AEM License parameter to AWS Systems Manager Parameters
 * Add support for additional certificate locations in `aws.certificate_arn` (ARN for either ACM/IAM ServerCertificates or an S3 key path)
+* rhel7 default data volumes are now `/dev/xvdb` and `/dev/xvdc`, if you used to rely on the previous defaults of `/dev/sdb` and `/dev/sdc`, then you have to explicitly define those configurations
 
 ### To 3.4.0
 
