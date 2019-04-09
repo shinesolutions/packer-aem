@@ -22,7 +22,8 @@
     "rubygems_bin_dir": "/opt/puppetlabs/puppet/bin", 
     "platform_type": "", 
     "os_type": "", 
-    "aws_user": "ec2-user"
+    "aws_user": "ec2-user",
+    "ssh_interface": "private_ip"
   }, 
   "provisioners": [
     {
