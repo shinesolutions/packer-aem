@@ -62,9 +62,9 @@ You can run integration test for creating the AMIs for all components using the 
 
 If you're working on the dependencies of Packer AEM and would like to test them as part of machine images creation before pushing the changes upstream, you need to:
 
-- Clone the dependency repos [Puppet AEM Resources](https://github.com/shinesolutions/puppet-aem-resources), [Puppet AEM Curator](https://github.com/shinesolutions/puppet-aem-curator), and [Puppet Amazon SSM Agent](https://github.com/shinesolutions/puppet-amazon-ssm-agent), [AEM Hello World Custom Image Provisioner](https://github.com/shinesolutions/aem-helloworld-custom-image-provisioner), [AEM Hello World Config](https://github.com/shinesolutions/aem-helloworld-config) at the same directory level as Packer AEM
+- Clone the dependency repos [Puppet AEM Resources](https://github.com/shinesolutions/puppet-aem-resources), [Puppet AEM Curator](https://github.com/shinesolutions/puppet-aem-curator), [Puppet Amazon SSM Agent](https://github.com/shinesolutions/puppet-amazon-ssm-agent), [AEM Hello World Custom Image Provisioner](https://github.com/shinesolutions/aem-helloworld-custom-image-provisioner), [AEM Hello World Config](https://github.com/shinesolutions/aem-helloworld-config) at the same directory level as Packer AEM
 - Make your code changes against those dependency repos
-- Run `make test-integration-local test_id=<sometestid>` for integration testing using local dependencies, which copies those local dependency repos to Packer AEM and use them as part of the test
+- Run `make test-integration-local test_id=<sometestid>` for integration testing using local dependencies, which copies those local dependency repos to Packer AEM and uses them as part of the test
 
 ### Debugging
 
