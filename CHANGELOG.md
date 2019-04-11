@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## Unreleased
+
+## [4.0.0] - 2019-04-07
 
 ### Added
 - Add support for CIS hardened source AMI
@@ -13,7 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new configuration property aws.resource.create_iam_packer_role
 
 ### Changed
-- Upgrade aem_curator to 1.15.0
+- Changed hiera parameters for repository volume to data volume
+- Upgrade aem_curator to 1.19.0
+- Upgrade aem_resources to 3.9.0
 - Ensure crx-quickstart/install directory is empty only after AEM is stopped
 - AEM Java keystore should be owned by AEM service user #129
 
@@ -142,6 +146,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Upgrade example config AEM profiles to aem62_sp1_cfp15, aem63_sp2_cfp2, and aem64_sp1
+- Upgrade ruby_aem_aws to 1.2.0
 
 ## [3.0.0] - 2018-07-07
 

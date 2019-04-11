@@ -4,7 +4,7 @@ VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 # version: version of machine images to be created
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
-packer_aem_version ?= 3.8.0-pre.0
+packer_aem_version ?= 4.1.0-pre.0
 aem_helloworld_custom_image_provisioner_version = 0.9.0
 
 ci: clean deps lint package
@@ -29,6 +29,14 @@ package: stage
 	    --exclude='*.iml' \
 	    -czf \
 		stage/packer-aem-$(packer_aem_version).tar.gz .
+
+publish:
+	putasset \
+	  --owner shinesolutions \
+	  --repo packer-aem \
+		--tag $(packer_aem_version) \
+		--file stage/packer-aem-$(packer_aem_version).tar.gz \
+		--show-url
 
 ################################################################################
 # Dependencies resolution targets.
@@ -226,4 +234,4 @@ create-cert: stage
 	    -keyout stage/certs/aem.key \
 	    -out stage/certs/aem.cert
 
-.PHONY: ci clean stage package deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher docker-author-publish-dispatcher test-integration test-integration-local ami-ids ami-ids-examples create-cert
+.PHONY: ci clean stage package publish deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher docker-author-publish-dispatcher test-integration test-integration-local ami-ids ami-ids-examples create-cert
