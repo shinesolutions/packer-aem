@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade aem_curator to 1.22.0
+- Upgrade aem_resources to 3.10.0
+
 ## [4.0.0] - 2019-04-07
 
 ### Added
