@@ -34,6 +34,7 @@ class config::license (
   $aem_license_base,
   $tmp_dir,
   $region,
+  $license_value = lookup("${aem_license}"),
 ) {
 
   # TODO: This code is a workaround, this needs a better conversion that can map any aem_profile into any aem_version
@@ -56,16 +57,10 @@ class config::license (
     mode   => '0700',
   }
 
-  # Download the License file from Parameter Store
-  exec { 'Download License file from AWS Systems Manager Parameter Store':
-    creates => "${tmp_dir}/license/license-${aem_version}.properties",
-    command => "aws ssm get-parameters --region ${region} --names ${aem_license} --with-decryption --output text --query Parameters[0].Value > ${tmp_dir}/license/license-${aem_version}.properties",
-    path    => '/usr/local/bin/:/bin/',
-  }
-
   file { "${tmp_dir}/license/license-${aem_version}.properties":
-    ensure => file,
-    mode   => '0644',
+    ensure  => file,
+    mode    => '0644',
+    content => $license_value,
   }
 
 }
