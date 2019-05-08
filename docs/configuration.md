@@ -25,9 +25,9 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | Name | Description | Required? | Default |
 |------|-------------|-----------|---------|
 | aem.profile | AEM Profile, check out the [list of available profiles](https://github.com/shinesolutions/puppet-aem-curator/blob/master/docs/aem-profiles-artifacts.md) | Optional | `aem62_sp1_cfp9` |
-| aem.keystore_password | [Java Keystore](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores) password used in AEM Author and Publish | Optional (but you should change it) | `changeit` |
+| aem.keystore_password_parameter | Parameter store object which contains [Java Keystore](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores) password used in AEM Author and Publish | Mandatory | |
 | aem.author.jvm_mem_opts | AEM Author's memory-specific [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) | Optional | `-Xss4m -Xms4096m -Xmx8192m` |
-| aem.author.jvm_opts | AEM Author's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) | Optional |
+| aem.author.jvm_opts | AEM Author's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) | Optional | |
 | aem.author.start_opts | AEM Author's [start options](https://helpx.adobe.com/experience-manager/6-3/sites/deploying/using/custom-standalone-install.html#FurtheroptionsavailablefromtheQuickstartfile) | Optional | Empty string |
 | aem.author.run_modes | A list of AEM Author's feature [run modes](https://helpx.adobe.com/experience-manager/6-5/sites/deploying/using/configure-runmodes.html), e.g. `dynamicmedia_scene7`. There is no need to specify `author` run mode here, it will automatically be added. | Optional | Empty list |
 | aem.publish.jvm_mem_opts | AEM Publish's memory-specific [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) | Optional | `-Xss4m -Xms4096m -Xmx8192m` |
