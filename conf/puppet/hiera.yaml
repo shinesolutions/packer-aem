@@ -21,3 +21,4 @@ hierarchy:
     options:
       region: "%{::aws_region}"
       get_all: true
+      recursive: true
