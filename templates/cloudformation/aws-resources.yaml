@@ -85,7 +85,7 @@ Resources:
         - Action: ['s3:GetObject', 's3:ListBucket']
           Effect: Allow
           Resource:
-          - Fn::Join: ['', ['arn:aws:s3:::', Ref: 'PackerAemArtefactBucket']]
+          - Fn::Join: ['', ['arn:aws:s3:::', Ref: 'PackerAemS3Bucket']]
       PolicyName: PackerAemBucketPolicy
       Roles: [Ref: 'PackerAemRole']
 
