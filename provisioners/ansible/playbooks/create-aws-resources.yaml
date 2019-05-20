@@ -12,7 +12,7 @@
         name: "/aem-opencloud/{{ stack_prefix }}/aem-license"
         description: "License for {{ stack_prefix }} Stack. Delete using the delete job in AEM Opencloud Manager."
         string_type: "SecureString"
-        value: "changeme"
+        value: "overwrite-me"
 
     - name: Create AWS resources stack
       cloudformation:
