@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade aem_curator to 1.24.1
+- Upgrade aem_resources to 3.10.1
+- Upgrade amazon_ssm_agent to 0.9.4
+
 ## [4.2.0] - 2019-04-18
 
 ### Changed
