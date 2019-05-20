@@ -2,11 +2,11 @@
 
 source 'https://rubygems.org'
 
-gem 'aws-sdk-core', '3.47.0'
-gem 'inspec', '1.51.6', require: false
-gem 'jsonlint', require: false
-gem 'puppet-lint', require: false
-gem 'r10k', require: false
-gem 'rake', require: false
-gem 'rubocop', require: false
-gem 'yaml-lint', require: false
+gem 'aws-sdk-core', '3.50.0'
+gem 'inspec', '4.3.2', require: false
+gem 'jsonlint', '0.2.0', require: false
+gem 'puppet-lint', '2.3.6', require: false
+gem 'r10k', '3.2.0', require: false
+gem 'rake', '12.3.2', require: false
+gem 'rubocop', '0.68.1', require: false
+gem 'yaml-lint', '0.0.10', require: false
