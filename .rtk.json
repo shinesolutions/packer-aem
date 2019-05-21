@@ -4,7 +4,7 @@
       "path": "Makefile",
       "type": "makefile",
       "params": {
-        "variable": "version"
+        "variable": "packer_aem_version"
       }
     },
     {
