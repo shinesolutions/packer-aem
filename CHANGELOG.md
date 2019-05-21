@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add aem65 to to ami-ids-examples make target
+
 ### Changed
 - Upgrade aem_curator to 1.24.1
 - Upgrade aem_resources to 3.10.1

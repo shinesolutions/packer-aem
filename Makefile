@@ -214,9 +214,11 @@ ami-ids-examples: stage
 	$(call ami_ids_examples,aws-rhel7-aem62)
 	$(call ami_ids_examples,aws-rhel7-aem63)
 	$(call ami_ids_examples,aws-rhel7-aem64)
+	$(call ami_ids_examples,aws-rhel7-aem65)
 	$(call ami_ids_examples,aws-amazon-linux2-aem62)
 	$(call ami_ids_examples,aws-amazon-linux2-aem63)
 	$(call ami_ids_examples,aws-amazon-linux2-aem64)
+	$(call ami_ids_examples,aws-amazon-linux2-aem65)
 
 define ami_ids_examples
 	make ami-ids config_path=../aem-helloworld-config/packer-aem/$(1)/
