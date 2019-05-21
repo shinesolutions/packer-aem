@@ -5,7 +5,7 @@ VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 version ?= 1.0.0
 # packer_aem_version: version of packer-aem to be packaged
 packer_aem_version ?= 4.3.0-pre.0
-aem_helloworld_custom_image_provisioner_version = 0.9.0
+aem_helloworld_custom_image_provisioner_version = 0.9.1
 
 ci: clean deps lint package
 
