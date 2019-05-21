@@ -5,18 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.0.0 - 2019-05-21
-### Added
-- Add aem65 to to ami-ids-examples make target
-
-### Changed
-- Upgrade aem_curator to 1.24.1
-- Upgrade aem_resources to 3.10.1
-- Upgrade amazon_ssm_agent to 0.9.4
-- Upgrade ruby_aem_aws to 1.2.1
-- Upgrade aem-helloworld-custom-image-provisioner to 0.9.1
-
-## 4.2.0 - 2019-04-18
+## 4.3.0 - 2019-05-21
 ### Changed
 - Upgrade aem_curator to 1.22.1
 
@@ -284,6 +273,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update to Java Version 8u131
 - Update puppet module aco-oracle_java - support Java '8u131'
 - Upgrade ruby_aem to 1.3.0
+
+## 1.0.0 - 2019-05-21
+### Added
+- Add aem65 to to ami-ids-examples make target
+
+### Changed
+- Upgrade aem_curator to 1.24.1
+- Upgrade aem_resources to 3.10.1
+- Upgrade amazon_ssm_agent to 0.9.4
+- Upgrade ruby_aem_aws to 1.2.1
+- Upgrade aem-helloworld-custom-image-provisioner to 0.9.1
 
 ## 1.0.0 - 2017-05-22
 ### Added

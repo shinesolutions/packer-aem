@@ -1,11 +1,12 @@
-VAR_FILES = $(sort $(wildcard conf/packer/vars/*.json))
-VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
-
+# packer_aem_version: version of packer-aem to be packaged
+packer_aem_version ?= 4.3.0
 # version: version of machine images to be created
 version ?= 1.0.0
-# packer_aem_version: version of packer-aem to be packaged
-packer_aem_version ?= 4.3.0-pre.0
+# custom image provisioner version for testing
 aem_helloworld_custom_image_provisioner_version = 0.9.1
+
+VAR_FILES = $(sort $(wildcard conf/packer/vars/*.json))
+VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 
 ci: clean deps lint package
 
