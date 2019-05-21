@@ -7,12 +7,19 @@
 
   tasks:
 
-    - name: "Create AWS SSM Secure String Parameters"
+    - name: "Create AWS SSM License Secure String Parameter"
       aws_ssm_parameter_store:
         name: "/aem-opencloud/{{ stack_prefix }}/aem-license"
         description: "License for {{ stack_prefix }} Stack. Delete using the delete job in AEM Opencloud Manager."
         string_type: "SecureString"
-        value: "overwrite-me"
+        value: "changeme"
+
+    - name: "Create AWS SSM Keystore Password Secure String Parameter"
+      aws_ssm_parameter_store:
+        name: "/aem-opencloud/{{ stack_prefix }}/aem-keystore-password"
+        description: "Keystore value for {{ stack_prefix }} Stack. Delete using the delete job in AEM Opencloud Manager."
+        string_type: "SecureString"
+        value: "changeme"
 
     - name: Create AWS resources stack
       cloudformation:
