@@ -30,6 +30,9 @@ package: stage
 	    -czf \
 		stage/packer-aem-$(packer_aem_version).tar.gz .
 
+release:
+	rtk release
+
 publish:
 	putasset \
 	  --owner shinesolutions \
