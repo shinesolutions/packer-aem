@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade default aem.profile to aem64_sp4
+
 ## 4.3.0 - 2019-05-21
 ### Changed
 - Upgrade aem_curator to 1.22.1
