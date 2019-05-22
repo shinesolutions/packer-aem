@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade default aem.profile to aem64_sp4
 - Upgrade aem_curator to 1.25.0
+- Modify AEM license and AEM Java Keystore password to be SSM secure string parameter
 
 ## 4.3.0 - 2019-05-21
 ### Changed
