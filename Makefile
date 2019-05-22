@@ -1,11 +1,12 @@
-VAR_FILES = $(sort $(wildcard conf/packer/vars/*.json))
-VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
-
+# packer_aem_version: version of packer-aem to be packaged
+packer_aem_version ?= 4.4.0-pre.0
 # version: version of machine images to be created
 version ?= 1.0.0
-# packer_aem_version: version of packer-aem to be packaged
-packer_aem_version ?= 4.3.0-pre.0
-aem_helloworld_custom_image_provisioner_version = 0.9.0
+# custom image provisioner version for testing
+aem_helloworld_custom_image_provisioner_version = 0.9.1
+
+VAR_FILES = $(sort $(wildcard conf/packer/vars/*.json))
+VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))
 
 ci: clean deps lint package
 
@@ -29,6 +30,9 @@ package: stage
 	    --exclude='*.iml' \
 	    -czf \
 		stage/packer-aem-$(packer_aem_version).tar.gz .
+
+release:
+	rtk release
 
 publish:
 	putasset \
@@ -214,9 +218,11 @@ ami-ids-examples: stage
 	$(call ami_ids_examples,aws-rhel7-aem62)
 	$(call ami_ids_examples,aws-rhel7-aem63)
 	$(call ami_ids_examples,aws-rhel7-aem64)
+	$(call ami_ids_examples,aws-rhel7-aem65)
 	$(call ami_ids_examples,aws-amazon-linux2-aem62)
 	$(call ami_ids_examples,aws-amazon-linux2-aem63)
 	$(call ami_ids_examples,aws-amazon-linux2-aem64)
+	$(call ami_ids_examples,aws-amazon-linux2-aem65)
 
 define ami_ids_examples
 	make ami-ids config_path=../aem-helloworld-config/packer-aem/$(1)/

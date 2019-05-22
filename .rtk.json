@@ -1,0 +1,15 @@
+{
+  "resources": [
+    {
+      "path": "Makefile",
+      "type": "makefile",
+      "params": {
+        "variable": "packer_aem_version"
+      }
+    },
+    {
+      "path": "CHANGELOG.md",
+      "type": "keep-a-changelog"
+    }
+  ]
+}
