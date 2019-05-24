@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Revert hiera_ssm_paramstore setting to not enforce prefix and to not pre-load all parameters
 
+### Fixed
+- Fix SSM parameters support for name with leading slash
+
 ## 4.4.0 - 2019-05-23
 ### Changed
 - Upgrade default aem.profile to aem64_sp4
