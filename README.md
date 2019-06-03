@@ -1,4 +1,5 @@
 [![Build Status](https://img.shields.io/travis/shinesolutions/packer-aem.svg)](http://travis-ci.org/shinesolutions/packer-aem)
+[![Known Vulnerabilities](https://snyk.io/test/github/shinesolutions/packer-aem/badge.svg)](https://snyk.io/test/github/shinesolutions/packer-aem)
 
 Packer AEM
 ----------
