@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade aem_curator to 2.0.0
+- Upgrade aem_resources to 4.0.0
+- Upgrade ruby_aem to 3.2.1
+
 ## 4.4.1 - 2019-05-24
 ### Changed
 - Revert hiera_ssm_paramstore setting to not enforce prefix and to not pre-load all parameters
