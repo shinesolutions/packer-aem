@@ -77,6 +77,7 @@ class config::base (
   $python_cheetah_package,
   $awslogs_service_name,
   $awslogs_proxy_path,
+  $base_dir = '/opt/shinesolutions',
   $rhn_register = false,
   $disable_selinux = true,
   $install_aws_cli = true,
@@ -98,6 +99,11 @@ class config::base (
   file { $tmp_dir:
     ensure => directory,
     mode   => '0700',
+  }
+
+  file { $base_dir:
+    ensure => directory,
+    mode   => '0755',
   }
 
   if ($::osfamily == 'redhat') and ($::operatingsystem != 'Amazon') {
