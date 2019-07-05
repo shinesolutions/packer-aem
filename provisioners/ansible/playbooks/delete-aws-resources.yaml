@@ -10,12 +10,14 @@
     - name: "Delete AWS SSM License Secure String Parameter"
       aws_ssm_parameter_store:
         name: "/aem-opencloud/{{ stack_prefix }}/aem-license"
+        region: "{{ aws.region }}"
         string_type: "SecureString"
         state: absent
 
     - name: "Delete AWS SSM Keystore Password Secure String Parameter"
       aws_ssm_parameter_store:
         name: "/aem-opencloud/{{ stack_prefix }}/aem-keystore-password"
+        region: "{{ aws.region }}"
         string_type: "SecureString"
         state: absent
 
