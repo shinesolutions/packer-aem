@@ -47,6 +47,10 @@ aws:
     devicemap_root: /dev/sda1
     devicemap_data_b: /dev/xvdb
     devicemap_data_c: /dev/xvdc
+  rhel8:
+    devicemap_root: /dev/sda1
+    devicemap_data_b: /dev/xvdb
+    devicemap_data_c: /dev/xvdc
   centos7:
     devicemap_root: /dev/sda1
     devicemap_data_b: /dev/sdb
