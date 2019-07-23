@@ -192,17 +192,17 @@ docker-author-publish-dispatcher: stage config
 
 ################################################################################
 # Integration test targets.
-# In order to save time, integration tests will only execute aws rhel7 aem64 combination.
+# In order to save time, integration tests will only execute aws rhel7 aem65 combination.
 # The complete tests will be done on AWS CodeBuild/CodePipeline.
 ################################################################################
 
 test-integration: deps deps-test
-	make config config_path=stage/user-config/aws-rhel7-aem64
-	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem64
+	make config config_path=stage/user-config/aws-rhel7-aem65
+	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem65
 
 test-integration-local: deps-local deps-test-local
-	make config config_path=../stage/user-config/aws-rhel7-aem64
-	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem64
+	make config config_path=../stage/user-config/aws-rhel7-aem65
+	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem65
 
 ################################################################################
 # Utility targets.
