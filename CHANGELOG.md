@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Changed
-- Upgrade aem_curator to 2.5.0
+- Upgrade aem_curator to 2.6.0
 - Upgrade aem_resources to 4.1.0
 - Upgrade default aem_profile to aem65_sp1
+
+### Removed
+- Remove aem.start_opts configuration support following upgrade to puppet-aem 3.0.0
 
 ## 4.6.0 - 2019-07-02
 ### Changed

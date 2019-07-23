@@ -37,7 +37,6 @@ aem_curator::install_author::aem_jvm_opts:
 - '-XX:+PrintTenuringDistribution'
 - '-XX:+PrintGCApplicationStoppedTime'
 - '-XX:+HeapDumpOnOutOfMemoryError'
-aem_curator::install_author::aem_start_opts: "{{ aem.author.start_opts }}"
 {% if aem.author.run_modes is defined %}
 aem_curator::install_author::run_modes:
 {% for run_mode in aem.author.run_modes %}
@@ -57,7 +56,6 @@ aem_curator::install_publish::aem_jvm_opts:
 - '-XX:+PrintTenuringDistribution'
 - '-XX:+PrintGCApplicationStoppedTime'
 - '-XX:+HeapDumpOnOutOfMemoryError'
-aem_curator::install_publish::aem_start_opts: "{{ aem.publish.start_opts }}"
 {% if aem.publish.run_modes is defined %}
 aem_curator::install_publish::run_modes:
 {% for run_mode in aem.publish.run_modes %}
