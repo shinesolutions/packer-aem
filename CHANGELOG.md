@@ -10,9 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add new log resources for AWS Cloudwatch [shinesolutions/aem-aws-stack-builder#298]
 
-## 4.7.0 - 2019-07-24
 ### Changed
 - Upgrade aem_curator to 2.7.0
+
+## 4.7.0 - 2019-07-24
+### Changed
+- Upgrade aem_curator to 2.6.0
 - Upgrade aem_resources to 4.1.0
 - Upgrade default aem_profile to aem65_sp1
 
