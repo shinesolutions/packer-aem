@@ -1,6 +1,32 @@
 ---
 # Values that should only be applied to Amazon Linux 2
 
+config::package_manager_packages:
+  gcc:
+  gcc-c++:
+  ruby-devel:
+  zlib-devel:
+  autoconf:
+  automake:
+  libtool:
+  io-console:
+    provider: gem
+  bundler:
+    version: 1.17.3
+    provider: gem
+  nokogiri:
+    version: 1.8.5
+    provider: puppet_gem
+  ruby_aem:
+    version: 3.2.1
+    provider: puppet_gem
+  ruby_aem_aws:
+    version: 1.2.1
+    provider: puppet_gem
+  inspec:
+    version: 1.51.6
+    provider: puppet_gem
+
 config::base::os_package_manager_packages:
   - bind-utils
   - unzip

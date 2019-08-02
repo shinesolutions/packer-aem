@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Upgrade aem_curator to 2.7.0
+- Update config hiera data files to contain a dict of packages to install on OS
+- Updated process of config module to install packages.
 
 ## 4.7.0 - 2019-07-24
 ### Changed
