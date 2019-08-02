@@ -23,20 +23,19 @@ class config (
     host_aliases => $facts['hostname'],
   }
 
-  $package_manager_packages.each | String $package_name, $package_details| {
+  $package_manager_packages.each | Integer $index, $package_details| {
 
-    if $package_details {
-      $package_version = pick(
-        $package_details['version'],
-        'latest'
-      )
-      $package_provider = pick(
-        $package_details['provider'],
-        undef
-      )
-    } else {
-      $package_version = 'latest'
-    }
+    $package_name = $package_details['name']
+
+    $package_version = pick(
+      $package_details['version'],
+      'latest'
+    )
+
+    $package_provider = pick(
+      $package_details['provider'],
+      false
+    )
 
     if $package_provider {
       package { $package_name:
