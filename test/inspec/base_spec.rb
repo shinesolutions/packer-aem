@@ -102,10 +102,6 @@ end
 # end
 
 packages = [
-  'gcc',
-  'ruby-devel',
-  'zlib-devel',
-  'ruby',
   @hiera.lookup('base::python_cheetah_package', 'python-cheetah', @scope)
 ]
 
