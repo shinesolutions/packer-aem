@@ -2,6 +2,9 @@
 # Values that should only be applied to Amazon Linux 2
 
 config::package_manager_packages:
+  - name: autoconf
+  - name: automake
+  - name: libtool
   - name: bundler
     version: 1.17.3
     provider: puppet_gem

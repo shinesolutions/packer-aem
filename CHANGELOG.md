@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update config hiera data files to contain a list of packages to install on OS
 - Updated process of config module to install packages.
 
+### Removed
+- Remove Development Tools OS packages installation, replaced with autoconf, automake, libtool #112
+
 ### Fixed
 - Fix aws.ami_users configuration property description to describe data format #162
 
