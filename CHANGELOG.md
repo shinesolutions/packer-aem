@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update config hiera data files to contain a list of packages to install on OS
 - Updated process of config module to install packages.
 
+### Fixed
+- Fix aws.ami_users configuration property description to describe data format #162
+
 ### Removed
 - Remove old ServerSpec and nokogiri dependencies which require native compilation
 
