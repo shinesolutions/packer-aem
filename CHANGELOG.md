@@ -5,8 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
-
+## 4.8.0 - 2019-08-06
 ### Added
 - Add new log resources for AWS Cloudwatch [shinesolutions/aem-aws-stack-builder#298]
 
@@ -16,13 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated process of config module to install packages.
 
 ### Removed
-- Remove Development Tools OS packages installation, replaced with autoconf, automake, libtool #112
+- Remove Development Tools OS packages installation, replaced with autoconf, automake, libtool [#112]
+- Remove old ServerSpec and nokogiri dependencies which require native compilation
 
 ### Fixed
-- Fix aws.ami_users configuration property description to describe data format #162
-
-### Removed
-- Remove old ServerSpec and nokogiri dependencies which require native compilation
+- Fix aws.ami_users configuration property description to describe data format [#162]
 
 ## 4.7.0 - 2019-07-24
 ### Changed
