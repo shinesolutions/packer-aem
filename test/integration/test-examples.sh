@@ -14,6 +14,8 @@ components="author-publish-dispatcher author publish dispatcher java"
 integration_test_config_file=stage/user-config/aws-resources-sandpit/zzz-test.yaml
 
 # Create integration test configuration
+# Note that the AWS resources testing is specifically for testing the AWS resources creation
+# they are not yet used by the AMIs creation testing further below.
 echo "Creating integration test configuration file..."
 rm -f "${integration_test_config_file}"
 echo -e "aws:\n  resources:\n    s3_bucket: ${test_id}-res" > "${integration_test_config_file}"
