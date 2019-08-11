@@ -40,6 +40,10 @@ Resources:
     Properties:
       BucketName:
         Ref: PackerAemS3Bucket
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
 
   SecretsManagerAemCertificateKey:
     Type: AWS::SecretsManager::Secret
