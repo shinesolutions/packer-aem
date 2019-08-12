@@ -22,7 +22,8 @@
     "rubygems_bin_dir": "/opt/puppetlabs/puppet/bin",
     "instance_type": "",
     "os_type": "",
-    "aws_user": "ec2-user"
+    "aws_user": "ec2-user",
+    "packer_aem_version": ""
   },
   "provisioners": [
     {
@@ -165,7 +166,8 @@
         "Application Profile": "{{user `profile`}}",
         "Version": "{{user `version`}}",
         "OS Type": "{{user `os_type`}}",
-        "Application Role": "{{user `component`}} AMI"
+        "Application Role": "{{user `component`}} AMI",
+        "Packer AEM Version": "{{user `packer_aem_version`}}"
       },
       "subnet_id": "{{user `aws_subnet_id`}}",
       "ssh_username": "{{user `aws_user`}}",
@@ -181,7 +183,8 @@
         "Application Profile": "{{user `profile`}}",
         "Version": "{{user `version`}}",
         "OS Type": "{{user `os_type`}}",
-        "Application Role": "{{user `component`}} AMI"
+        "Application Role": "{{user `component`}} AMI",
+        "Packer AEM Version": "{{user `packer_aem_version`}}"
       },
       "vpc_id": "{{user `aws_vpc_id`}}",
       "run_volume_tags": {
@@ -190,7 +193,8 @@
         "Application Profile": "{{user `profile`}}",
         "Version": "{{user `version`}}",
         "OS Type": "{{user `os_type`}}",
-        "Application Role": "{{user `component`}} AMI"
+        "Application Role": "{{user `component`}} AMI",
+        "Packer AEM Version": "{{user `packer_aem_version`}}"
       },
       "communicator": "ssh",
       "launch_block_device_mappings": [

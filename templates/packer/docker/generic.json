@@ -12,7 +12,8 @@
     "instance_type": "",
     "os_type": "",
     "platform_type": "",
-    "custom_stage_run_info": "{{env `CUSTOM_STAGE_RUN_INFO`}}"
+    "custom_stage_run_info": "{{env `CUSTOM_STAGE_RUN_INFO`}}",
+    "packer_aem_version": ""
   },
   "provisioners": [
     {

@@ -10,6 +10,13 @@
     {
       "path": "CHANGELOG.md",
       "type": "keep-a-changelog"
+    },
+    {
+      "path": "conf/packer/vars/00_default.json",
+      "type": "json",
+      "params": {
+        "property": "packer_aem_version"
+      }
     }
   ]
 }
