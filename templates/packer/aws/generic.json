@@ -24,7 +24,7 @@
     "os_type": "",
     "aws_user": "ec2-user",
     "packer_aem_version": "",
-    "packer_temp_security_group_source_cidr": "0.0.0.0/0"
+    "temporary_security_group_source_cidr": ""
   },
   "provisioners": [
     {
@@ -215,7 +215,7 @@
       "ami_users": "{{user `ami_users`}}",
       "type": "amazon-ebs",
       "ssh_pty": true,
-      "temporary_security_group_source_cidr": "{{ user `packer_temp_security_group_source_cidr` }}"
+      "temporary_security_group_source_cidr": "{{ user `temporary_security_group_source_cidr` }}"
     }
   ]
 }
