@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Removed bundler gem installation
 
+### Changed
+- Changed ruby_aem_aws version from 1.2.1 to 1.3.0
+
 ## 4.8.0 - 2019-08-06
 ### Added
 - Add new log resources for AWS Cloudwatch [shinesolutions/aem-aws-stack-builder#298]
