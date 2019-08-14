@@ -2,7 +2,7 @@
 set -o nounset
 set -o errexit
 
-yum -y upgrade
+yum -y upgrade --exclude=python-urllib3-*
 
 rpm -ivh --force https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm
 yum -y install puppet-agent epel-release
