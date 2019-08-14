@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add encryption to AWS resources S3 bucket
 - Add Packer AEM version as AWS resources tag including created AMI
 
+### Removed
+- Removed bundler gem installation
+
 ## 4.8.0 - 2019-08-06
 ### Added
 - Add new log resources for AWS Cloudwatch [shinesolutions/aem-aws-stack-builder#298]
