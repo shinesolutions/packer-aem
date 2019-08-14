@@ -2,21 +2,9 @@
 # Values that should only be applied to CentOS Linux
 
 config::package_manager_packages:
-  - name: gcc
-  - name: gcc-c++
-  - name: ruby-devel
-  - name: zlib-devel
   - name: autoconf
   - name: automake
   - name: libtool
-  - name: io-console
-    provider: gem
-  - name: bundler
-    version: 1.17.3
-    provider: gem
-  - name: nokogiri
-    version: 1.8.5
-    provider: puppet_gem
   - name: ruby_aem
     version: 3.2.1
     provider: puppet_gem

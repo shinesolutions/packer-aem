@@ -2,9 +2,6 @@
 # Values that should only be applied to Amazon Linux
 
 config::package_manager_packages:
-  - name: bundler
-    version: 1.17.3
-    provider: gem
   - name: ruby_aem
     version: 3.2.1
     provider: puppet_gem
