@@ -23,7 +23,8 @@
     "instance_type": "",
     "os_type": "",
     "aws_user": "ec2-user",
-    "packer_aem_version": ""
+    "packer_aem_version": "",
+    "temporary_security_group_source_cidr": ""
   },
   "provisioners": [
     {
@@ -213,7 +214,8 @@
       ],
       "ami_users": "{{user `ami_users`}}",
       "type": "amazon-ebs",
-      "ssh_pty": true
+      "ssh_pty": true,
+      "temporary_security_group_source_cidr": "{{ user `temporary_security_group_source_cidr` }}"
     }
   ]
 }
