@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add AWS resources creation and deletion to integration testing
 - Add encryption to AWS resources S3 bucket
 - Add Packer AEM version as AWS resources tag including created AMI
+- Add config property aws.temporary_security_group_source_cidr
 
 ### Removed
 - Removed bundler gem installation

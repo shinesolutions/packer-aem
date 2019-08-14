@@ -30,6 +30,7 @@ aws:
     create_s3_bucket: true
   source_ami: overwrite-me
   ami_users: ''
+  temporary_security_group_source_cidr: '0.0.0.0/0'
   instance_profile: overwrite-me
   install_ssm_agent: true
   install_cloudwatchlogs: true
