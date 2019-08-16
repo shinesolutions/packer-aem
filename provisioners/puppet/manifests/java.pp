@@ -8,4 +8,16 @@ if $::config::base::install_cloudwatchlogs {
   config::cloudwatchlogs_java { 'Setup CloudWatch for Java': }
 }
 
+
+
+if $::config::base::install_cloudwatch_metric_agent {
+  config::cloudwatch_metric_agent { 'Setup Cloudwatch Metric Agent for Java':
+    disk_path => [
+      $::config::base::root_device_name
+    ]
+  }
+}
+
 include config::tomcat
+
+

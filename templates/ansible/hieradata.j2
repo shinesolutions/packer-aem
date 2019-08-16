@@ -8,6 +8,10 @@ config::base::http_proxy: {{ http_proxy }}
 config::base::https_proxy: {{ https_proxy }}
 config::base::no_proxy: {{ no_proxy }}
 
+config::base::install_cloudwatch_metric_agent: {{ aws.install_cloudwatch_metric_agent }}
+config::base::root_device_name: '{{ ami_device[os_type].root_name }}'
+config::base::data_device_name: '{{ ami_device[os_type].data_name }}'
+
 config::certs::certs_base: {{ aws.aem_certs_base }}
 config::certs::certificate_key_arn: {{ aws.certificate_key_arn }}
 config::certs::certificate_arn: {{ aws.certificate_arn }}
