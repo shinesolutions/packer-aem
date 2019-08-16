@@ -5,18 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 4.9.0 - 2019-08-16
 ### Added
 - Add AWS resources creation and deletion to integration testing
 - Add encryption to AWS resources S3 bucket
 - Add Packer AEM version as AWS resources tag including created AMI
 - Add config property aws.temporary_security_group_source_cidr
 
-### Removed
-- Removed bundler gem installation
-
 ### Changed
 - Upgrade ruby_aem_aws version to 1.4.0
+
+### Removed
+- Removed bundler gem installation
 
 ## 4.8.0 - 2019-08-06
 ### Added
