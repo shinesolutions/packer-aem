@@ -10,6 +10,7 @@ aem_base ||= '/opt'
 aem_port = @hiera.lookup('publish::aem_port', nil, @scope)
 aem_port ||= '4503'
 
+### SSM paramter store lookup is only supported for hiera5
 # aem_keystore_password = @hiera.lookup('aem_curator::install_publish::aem_keystore_password', nil, @scope)
 
 describe file("#{aem_base}/aem") do
@@ -56,6 +57,10 @@ describe service('aem-publish') do
   it { should_not be_enabled }
   it { should_not be_running }
 end
+
+# describe aem_keystore_password do
+#   it { should_not match(/changeit/) }
+# end
 
 # describe command("keytool -list -keystore #{aem_base}/aem/publish/crx-quickstart/ssl/aem.ks -alias cqse -storepass #{aem_keystore_password}") do
 #   its('exit_status') { should eq 0 }
