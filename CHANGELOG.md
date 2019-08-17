@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade ruby_aem_aws version to 1.4.0
 
+### Fixed
+- Fixed hiera SSM Parameterstore lookup for keystore password
+
 ### Removed
 - Removed bundler gem installation
 
