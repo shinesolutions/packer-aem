@@ -10,6 +10,9 @@ aem_base ||= '/opt'
 aem_port = @hiera.lookup('publish::aem_port', nil, @scope)
 aem_port ||= '4503'
 
+data_volume_mount_point = @hiera.lookup('aem_curator::install_publish::data_volume_mount_point', nil, @scope)
+data_volume_mount_point ||= '/mnt/ebs1'
+
 ### SSM paramter store lookup is only supported for hiera5
 # aem_keystore_password = @hiera.lookup('aem_curator::install_publish::aem_keystore_password', nil, @scope)
 
@@ -62,9 +65,10 @@ end
 #   it { should_not match(/changeit/) }
 # end
 
-# describe command("keytool -list -keystore #{aem_base}/aem/publish/crx-quickstart/ssl/aem.ks -alias cqse -storepass #{aem_keystore_password}") do
-#   its('exit_status') { should eq 0 }
-# end
+# Test if default keystore password is not changeit
+describe command("keytool -list -keystore #{data_volume_mount_point}/publish/crx-quickstart/ssl/aem.ks -alias cqse -storepass changeit") do
+  its('exit_status') { should_not eq 0 }
+end
 
 if File.file?('/lib/systemd/system/aem-publish.service')
 
