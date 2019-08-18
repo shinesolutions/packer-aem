@@ -10,6 +10,9 @@ aem_base ||= '/opt'
 aem_port = @hiera.lookup('author::aem_port', nil, @scope)
 aem_port ||= '4502'
 
+author_data_volume_mount_point = @hiera.lookup('aem_curator::install_author::data_volume_mount_point', nil, @scope)
+author_data_volume_mount_point ||= '/mnt/ebs1'
+
 ### SSM paramter store lookup is only supported for hiera5
 # aem_author_keystore_password = @hiera.lookup('aem_curator::install_author::aem_keystore_password', nil, @scope)
 
@@ -54,9 +57,10 @@ end
 #   it { should_not match(/changeit/) }
 # end
 
-# describe command("keytool -list -keystore #{aem_base}/aem/author/crx-quickstart/ssl/aem.ks -alias cqse -storepass #{aem_keystore_password}") do
-#   its('exit_status') { should eq 0 }
-# end
+# Test if default keystore password is not changeit
+describe command("keytool -list -keystore #{author_data_volume_mount_point}/author/crx-quickstart/ssl/aem.ks -alias cqse -storepass changeit") do
+  its('exit_status') { should_not eq 0 }
+end
 
 if File.file?('/lib/systemd/system/aem-author.service')
 
@@ -79,6 +83,9 @@ aem_base ||= '/opt'
 
 aem_port = @hiera.lookup('publish::aem_port', nil, @scope)
 aem_port ||= '4503'
+
+publish_data_volume_mount_point = @hiera.lookup('aem_curator::install_publish::data_volume_mount_point', nil, @scope)
+publish_data_volume_mount_point ||= '/mnt/ebs2'
 
 ### SSM paramter store lookup is only supported for hiera5
 # aem_publish_keystore_password = @hiera.lookup('aem_curator::install_publish::aem_keystore_password', nil, @scope)
@@ -124,9 +131,10 @@ end
 #   it { should_not match(/changeit/) }
 # end
 
-# describe command("keytool -list -keystore #{aem_base}/aem/publish/crx-quickstart/ssl/aem.ks -alias cqse -storepass #{aem_keystore_password}") do
-#   its('exit_status') { should eq 0 }
-# end
+# Test if default keystore password is changeit
+describe command("keytool -list -keystore #{publish_data_volume_mount_point}/publish/crx-quickstart/ssl/aem.ks -alias cqse -storepass changeit") do
+  its('exit_status') { should_not eq 0 }
+end
 
 if File.file?('/lib/systemd/system/aem-publish.service')
 
