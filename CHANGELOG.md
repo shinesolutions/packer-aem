@@ -5,10 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
-
+## 4.10.0 - 2019-08-19
 ### Added
-- Add InSpec test to verify JDK keystore password is not the infamous `changeit` #131
+- Add InSpec test to verify JDK keystore password is not the infamous `changeit` [#131]
 
 ## 4.9.0 - 2019-08-16
 ### Added
@@ -20,11 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade ruby_aem_aws version to 1.4.0
 
-### Fixed
-- Fixed hiera SSM Parameterstore lookup for keystore password
-
 ### Removed
 - Removed bundler gem installation
+
+### Fixed
+- Fixed hiera SSM Parameterstore lookup for keystore password
 
 ## 4.8.0 - 2019-08-06
 ### Added
