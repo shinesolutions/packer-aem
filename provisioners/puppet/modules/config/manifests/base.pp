@@ -260,6 +260,13 @@ class config::base (
   }
 
   if $install_amazon_ssm_agent {
-    include ::amazon_ssm_agent
+    if defined('$https_proxy') {
+      class { '::amazon_ssm_agent':
+        proxy_url => $https_proxy
+      }
+    } else {
+      class { '::amazon_ssm_agent':
+      }
+    }
   }
 }

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Added configuration of proxy settings for amazon_ssm_agent [#175]
+
 ## 4.10.0 - 2019-08-19
 ### Added
 - Add InSpec test to verify JDK keystore password is not the infamous `changeit` [#131]
