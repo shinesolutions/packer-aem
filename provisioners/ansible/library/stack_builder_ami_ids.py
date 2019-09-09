@@ -11,7 +11,7 @@ import yaml
 from ansible.module_utils.basic import AnsibleModule
 from dateutil.parser import parse as parse_dt
 
-def get_most_recent_ami_id(ec2, application_name, application_role, application_profile, os_type):
+def get_most_recent_ami_id(ec2, application_name, application_role, application_profile, os_type, version):
     """
     Given a set of criteria, retrieve the latest AMI ID from AWS using EC2 service.
     """
@@ -28,7 +28,11 @@ def get_most_recent_ami_id(ec2, application_name, application_role, application_
         {
             'Name': 'tag:OS Type',
             'Values': [os_type]
-        }
+        },
+        {
+            'Name': 'tag:Version',
+            'Values': [version]
+        },
     ]
 
     most_recent_image = None
@@ -72,6 +76,7 @@ def main():
         argument_spec=dict(
             aem_profile=dict(required=True, type='str'),
             os_type=dict(required=True, type='str'),
+            version=dict(required=True, type='str'),
             out_file=dict(required=True, type='str'),
             region=dict(required=True, type='str'),
         )
@@ -79,19 +84,20 @@ def main():
 
     aem_profile = module.params['aem_profile']
     os_type = module.params['os_type']
+    version = '*' if not module.params['version'] else module.params['version']
     out_file = module.params['out_file']
     region = module.params['region']
 
     ec2 = boto3.resource('ec2', region_name=region)
 
     ami_ids = {
-        'author_dispatcher': get_most_recent_ami_id(ec2, 'Dispatcher AMI', 'dispatcher AMI', aem_profile, os_type),
-        'publish_dispatcher': get_most_recent_ami_id(ec2, 'Dispatcher AMI', 'dispatcher AMI', aem_profile, os_type),
-        'publish': get_most_recent_ami_id(ec2, 'Publish AMI', 'publish AMI', aem_profile, os_type),
-        'author': get_most_recent_ami_id(ec2, 'Author AMI', 'author AMI', aem_profile, os_type),
-        'author_publish_dispatcher': get_most_recent_ami_id(ec2, 'AuthorPublishDispatcher AMI', 'author-publish-dispatcher AMI', aem_profile, os_type),
-        'orchestrator': get_most_recent_ami_id(ec2, 'Java AMI', 'java AMI', aem_profile, os_type),
-        'chaos_monkey': get_most_recent_ami_id(ec2, 'Java AMI', 'java AMI', aem_profile, os_type),
+        'author_dispatcher': get_most_recent_ami_id(ec2, 'Dispatcher AMI', 'dispatcher AMI', aem_profile, os_type, version),
+        'publish_dispatcher': get_most_recent_ami_id(ec2, 'Dispatcher AMI', 'dispatcher AMI', aem_profile, os_type, version),
+        'publish': get_most_recent_ami_id(ec2, 'Publish AMI', 'publish AMI', aem_profile, os_type, version),
+        'author': get_most_recent_ami_id(ec2, 'Author AMI', 'author AMI', aem_profile, os_type, version),
+        'author_publish_dispatcher': get_most_recent_ami_id(ec2, 'AuthorPublishDispatcher AMI', 'author-publish-dispatcher AMI', aem_profile, os_type, version),
+        'orchestrator': get_most_recent_ami_id(ec2, 'Java AMI', 'java AMI', aem_profile, os_type, version),
+        'chaos_monkey': get_most_recent_ami_id(ec2, 'Java AMI', 'java AMI', aem_profile, os_type, version),
     }
 
     write_file(out_file, ami_ids, aem_profile, os_type)
