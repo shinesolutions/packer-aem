@@ -214,6 +214,7 @@ ami-ids: stage
 
 # retrieve latest AMI IDs for a predefined combination of environments
 # using the AEM Hello World Configuration examples
+# it is also possible to pass in version filter env var `version=ci-aws-master-* make ami-ids-examples`
 ami-ids-examples: stage
 	$(call ami_ids_examples,aws-rhel7-aem62)
 	$(call ami_ids_examples,aws-rhel7-aem63)
