@@ -7,7 +7,7 @@ define config::cloudwatch_metric_agent (
       enable_disk_space_util => true,
       enable_disk_space_used => true,
       auto_scaling           => $autoscaling,
-      cron_min               => "*",
+      cron_min               => '*',
       disk_path              => $disk_path,
     }
 
