@@ -11,10 +11,15 @@ import yaml
 from ansible.module_utils.basic import AnsibleModule
 from dateutil.parser import parse as parse_dt
 
-def get_most_recent_ami_id(ec2, application_name, application_role, application_profile, os_type, version):
+def get_most_recent_ami_id(ec2, application_name, criteria):
     """
     Given a set of criteria, retrieve the latest AMI ID from AWS using EC2 service.
     """
+
+    application_role = criteria['application_role']
+    application_profile = criteria['application_profile']
+    os_type = criteria['os_type']
+    version = criteria['version']
 
     filters = [
         {
@@ -90,14 +95,22 @@ def main():
 
     ec2 = boto3.resource('ec2', region_name=region)
 
+    author_dispatcher_criteria = {'application_role': 'dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
+    publish_dispatcher_criteria = {'application_role': 'dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
+    publish_criteria = {'application_role': 'publish AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
+    author_criteria = {'application_role': 'author AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
+    author_publish_disp_criteria = {'application_role': 'AuthorPublishDispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
+    orchestrator_criteria = {'application_role': 'java AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
+    chaos_monkey_criteria = {'application_role': 'java AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
+
     ami_ids = {
-        'author_dispatcher': get_most_recent_ami_id(ec2, 'Dispatcher AMI', 'dispatcher AMI', aem_profile, os_type, version),
-        'publish_dispatcher': get_most_recent_ami_id(ec2, 'Dispatcher AMI', 'dispatcher AMI', aem_profile, os_type, version),
-        'publish': get_most_recent_ami_id(ec2, 'Publish AMI', 'publish AMI', aem_profile, os_type, version),
-        'author': get_most_recent_ami_id(ec2, 'Author AMI', 'author AMI', aem_profile, os_type, version),
-        'author_publish_dispatcher': get_most_recent_ami_id(ec2, 'AuthorPublishDispatcher AMI', 'author-publish-dispatcher AMI', aem_profile, os_type, version),
-        'orchestrator': get_most_recent_ami_id(ec2, 'Java AMI', 'java AMI', aem_profile, os_type, version),
-        'chaos_monkey': get_most_recent_ami_id(ec2, 'Java AMI', 'java AMI', aem_profile, os_type, version),
+        'author_dispatcher': get_most_recent_ami_id(ec2, 'Dispatcher AMI', author_dispatcher_criteria),
+        'publish_dispatcher': get_most_recent_ami_id(ec2, 'Dispatcher AMI', publish_dispatcher_criteria),
+        'publish': get_most_recent_ami_id(ec2, 'Publish AMI', publish_criteria),
+        'author': get_most_recent_ami_id(ec2, 'Author AMI', author_criteria),
+        'author_publish_dispatcher': get_most_recent_ami_id(ec2, 'AuthorPublishDispatcher AMI', author_publish_disp_criteria),
+        'orchestrator': get_most_recent_ami_id(ec2, 'Java AMI', orchestrator_criteria),
+        'chaos_monkey': get_most_recent_ami_id(ec2, 'Java AMI', chaos_monkey_criteria),
     }
 
     write_file(out_file, ami_ids, aem_profile, os_type)
