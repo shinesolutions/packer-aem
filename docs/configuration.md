@@ -51,6 +51,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.iam_instance_profile | IAM Instance Profile name as set up in [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) | Mandatory | |
 | aws.install_ssm_agent | Set to `true` when SSM agent must be installed | Optional | `true` |
 | aws.install_cloudwatchlogs | Set to `true` when CloudWatch logs agent must be installed | Optional | `true` |
+| aws.install_cloudwatch_metric_agent | Set to `true` when [CloudWatch metric agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html) must be installed. If this is enabled, you must set your root device name to `/dev/xvda2` | Optional | `false` |
 | aws.root_volume_size | The size of root volume in Gb, this is where the operating system and AEM installation reside | Optional | `20` |
 | aws.data_volume_size | The size of data volume in Gb, this is where AEM repository resides | Optional | `75` |
 | aws.tags | An array of `Key` and `Value` pairs for tagging AWS resources (e.g. EC2 instance, AMI, EBS volume) created by Packer AEM following your organisation's tagging standard | Optional | None |

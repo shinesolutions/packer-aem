@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - Add version filter env var support to make ami-ids target
+- Add CloudWatch metric agent installation support
 
 ## 4.10.0 - 2019-08-19
 ### Added
