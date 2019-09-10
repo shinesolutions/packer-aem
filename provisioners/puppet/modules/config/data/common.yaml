@@ -6,6 +6,9 @@ config::base::tmp_dir: /tmp/shinesolutions/packer-aem
 config::base::awslogs_service_name: awslogs
 config::base::awslogs_proxy_path: /var/awslogs/etc/proxy.conf
 
+config::base::metric_root_disk_path: '/'
+config::base::metric_data_disk_path: '/mnt/ebs1'
+
 config::certs::tmp_dir: "%{lookup('tmp_dir')}"
 config::license::tmp_dir: "%{lookup('tmp_dir')}"
 
