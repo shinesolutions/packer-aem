@@ -37,7 +37,7 @@ GEM
     multipart-post (2.1.1)
     oj (2.18.5)
     parallel (1.17.0)
-    parser (2.6.4.0)
+    parser (2.6.4.1)
       ast (~> 2.4.0)
     puppet-lint (2.3.6)
     puppet_forge (2.2.9)
