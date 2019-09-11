@@ -99,7 +99,7 @@ def main():
     publish_dispatcher_criteria = {'application_role': 'dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
     publish_criteria = {'application_role': 'publish AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
     author_criteria = {'application_role': 'author AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
-    author_publish_disp_criteria = {'application_role': 'AuthorPublishDispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
+    author_publish_disp_criteria = {'application_role': 'author-publish-dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
     orchestrator_criteria = {'application_role': 'java AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
     chaos_monkey_criteria = {'application_role': 'java AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
 

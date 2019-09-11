@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Fix Author-Publish-Dispatcher application role criteria
+
 ## 4.11.0 - 2019-09-10
 ### Added
 - Add version filter env var support to make ami-ids target
