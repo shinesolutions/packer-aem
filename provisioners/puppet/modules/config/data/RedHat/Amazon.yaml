@@ -16,6 +16,7 @@ config::base::os_package_manager_packages:
   - bind-utils
   - unzip
   - jq
+  - iptables-services
 
 config::base::python_package: python27
 config::base::python_pip_package: python27-pip

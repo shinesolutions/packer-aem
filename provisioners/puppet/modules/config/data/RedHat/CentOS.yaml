@@ -18,4 +18,5 @@ config::package_manager_packages:
 config::base::os_package_manager_packages:
   - bind-utils
   - unzip
-  - jq
+  - jqjq
+  - iptables-services

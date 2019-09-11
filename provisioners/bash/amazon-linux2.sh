@@ -22,8 +22,3 @@ yum-config-manager --enable rhui-REGION-rhel-server-optional
 
 # AEM and Apache httpd provisioning will create users with certain sudo access
 yum install -y sudo
-
-# Install Iptables and enable it
-yum install -y iptables-services
-systemctl start iptables
-systemctl enable iptables

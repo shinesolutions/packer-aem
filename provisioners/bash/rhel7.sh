@@ -13,8 +13,3 @@ yum -y install puppet-agent epel-release
 # Enable the rhui-REGION-rhel-server-optional to install ruby-devel
 rpm -ivh --force https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 yum-config-manager --enable rhui-REGION-rhel-server-optional
-
-# Install Iptables and enable it
-yum install -y iptables-services
-systemctl start iptables
-systemctl enable iptables

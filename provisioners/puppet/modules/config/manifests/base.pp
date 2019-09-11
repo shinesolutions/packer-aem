@@ -94,6 +94,7 @@ class config::base (
   $http_proxy = undef,
   $https_proxy = undef,
   $no_proxy = undef,
+  $iptables_services,
 ){
   require ::config
 
@@ -132,6 +133,11 @@ class config::base (
 
   package { $os_package_manager_packages:
     ensure => installed,
+  }
+
+  service { $iptables_services:
+    ensure => 'running',
+    enable => true,
   }
 
   package { [ $python_package, $python_pip_package, $python_cheetah_package ]:
