@@ -89,7 +89,7 @@ class config::certs (
 
   case $certificate_key_arn {
     /^arn:aws:secretsmanager/: {
-      exec { "Download Certificate key from AWS Secrets Manager using cli":
+      exec { 'Download Certificate key from AWS Secrets Manager using cli':
         creates => "${tmp_dir}/certs/aem.key",
         command => "aws secretsmanager get-secret-value --region ${region} --secret-id ${certificate_key_arn} --output text --query SecretString > ${tmp_dir}/certs/aem.key",
         path    => '/usr/local/bin/:/bin/',
