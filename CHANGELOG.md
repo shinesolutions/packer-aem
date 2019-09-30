@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### changed
+- Update private certificate key handling to use same logic as done for the public certificate
+
+### Removed
+- Removed configuration parameter `aws.aem_certs_base`
+
 ## 4.12.0 - 2019-09-20
 ### Added
 - Add new `cloudwatch log to s3` cronjob logfile to Cloudwatch config

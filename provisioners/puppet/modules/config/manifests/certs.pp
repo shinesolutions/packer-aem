@@ -87,21 +87,30 @@ class config::certs (
     mode   => '0600',
   }
 
-  # Get certificate private key from Secrets Manager
-  if ! ($certificate_key_arn in [ '', 'overwrite-me' ]) {
-    exec { 'Download Secret from AWS Secrets Manager using cli':
-      creates => "${tmp_dir}/certs/aem.key",
-      command => "aws secretsmanager get-secret-value --region ${region} --secret-id ${certificate_key_arn} --output text --query SecretString > ${tmp_dir}/certs/aem.key",
-      path    => '/usr/local/bin/:/bin/',
+  case $certificate_key_arn {
+    /^arn:aws:secretsmanager/: {
+      exec { "${aem_id}: Download Certificate key from AWS Secrets Manager using cli":
+        creates => "${tmp_dir}/certs/aem.key",
+        command => "aws secretsmanager get-secret-value --region ${aws_region} --secret-id ${certificate_key_arn} --output text --query SecretString > ${tmp_dir}/certs/aem.key",
+        path    => '/usr/local/bin/:/bin/',
+        require => File["${tmp_dir}/certs"],
+        before  => [
+          File["${tmp_dir}/certs/aem.key"]
+        ],
+      }
     }
-  }
-  elsif ! ($certs_base in [ '', 'overwrite-me' ]) {
-    # S3 is the fallback as AWS Secrets Manager isn't currently SOC2 compliant
-    # The support for S3 as a fallback can be removed as soon as AWS Secrets Manager is SOC2 compliant and listed on [ASM Compliance with Standards](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html#asm_compliance)
-    archive { "${tmp_dir}/certs/aem.key":
-      ensure  => present,
-      source  => "${certs_base}/aem.key",
-      require => File["${tmp_dir}/certs"],
+    /^s3:/, /^http:/, /^https:/, /^file:/ : {
+      archive { "${tmp_dir}/certs/aem.key":
+        ensure  => present,
+        source  => "${$certificate_key_arn}",
+        require => File["${tmp_dir}/certs"],
+        before  => [
+          File["${tmp_dir}/certs/aem.key"]
+        ],
+      }
+    }
+    default: {
+      fail('Certificate Key ARN can only be of types: ( arn:aws:secretsmanager | s3: | http: | https: | file: )')
     }
   }
 
