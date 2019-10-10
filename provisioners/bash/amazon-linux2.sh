@@ -19,6 +19,7 @@ yum -y install puppet-agent
 # Enable the rhui-REGION-rhel-server-optional to install ruby-devel
 rpm -ivh --force https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 yum-config-manager --enable rhui-REGION-rhel-server-optional
+yum-config-manager --enable rhel-7-server-rhui-optional-rpms
 
 # AEM and Apache httpd provisioning will create users with certain sudo access
 yum install -y sudo

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add new RHEL7 repository to support the change of the RHEL7 repository names #182
+
 ## 4.12.0 - 2019-09-20
 ### Added
 - Add new `cloudwatch log to s3` cronjob logfile to Cloudwatch config
