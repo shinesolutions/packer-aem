@@ -69,7 +69,7 @@ class config::certs (
         require => File["${tmp_dir}/certs"],
       }
     }
-    /^s3:/: {
+    /^s3:/, /^http:/, /^https:/, /^file:/ : {
       archive { "${tmp_dir}/certs/aem.cert":
         ensure  => present,
         source  => "${$certificate_arn}",

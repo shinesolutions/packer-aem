@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Added http, https and file support for archiving certificates
+
 ### changed
 - Update private certificate key handling to use same logic as done for the public certificate
 
