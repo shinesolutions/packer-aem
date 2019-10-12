@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- Add new RHEL7 repository to support the change of the RHEL7 repository names #182
+- Add new RedHat repos rhui-REGION-rhel-server-extras and rhel-7-server-rhui-optional-rpms to support the latest package availability changes #182
 
 ## 4.12.0 - 2019-09-20
 ### Added
