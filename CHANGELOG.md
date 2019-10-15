@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 4.13.0 - 2019-10-13
+### Added
+- Add new RedHat repos rhui-REGION-rhel-server-extras and rhel-7-server-rhui-optional-rpms to support the latest package availability changes [#182]
+
+## 4.12.0 - 2019-09-20
+### Added
+- Add new `cloudwatch log to s3` cronjob logfile to Cloudwatch config
+
+## 4.11.1 - 2019-09-12
+### Fixed
+- Fix Author-Publish-Dispatcher application role criteria
+
 ## 4.11.0 - 2019-09-10
 ### Added
 - Add version filter env var support to make ami-ids target
