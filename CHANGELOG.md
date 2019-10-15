@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Changed
-- Disabled CloudWatch Swap metrics to limit number of metric which been sent to Cloud Watch API
+- Disabled CloudWatch swap metrics to reduce the number of API calls for putting metrics
 
 ## 4.13.0 - 2019-10-13
 ### Added
