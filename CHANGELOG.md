@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Disabled CloudWatch swap metrics to reduce the metrics in the CW payload
 - Remove dispatchers `data-disk` volume from CloudWatch metrics
 
+### Fixed
+- Fix missing python-cheetah package for Amazon Linux 2
+
 ## 4.13.0 - 2019-10-13
 ### Added
 - Add new RedHat repos rhui-REGION-rhel-server-extras and rhel-7-server-rhui-optional-rpms to support the latest package availability changes [#182]
