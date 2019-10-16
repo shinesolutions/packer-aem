@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Changed
 - Disabled CloudWatch swap metrics to reduce the metrics in the CW payload
+- Remove dispatchers `data-disk` volume from CloudWatch metrics
 
 ## 4.13.0 - 2019-10-13
 ### Added
