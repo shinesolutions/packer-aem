@@ -33,7 +33,7 @@ GEM
     locale (2.1.2)
     log4r (1.1.10)
     minitar (0.9)
-    multi_json (1.13.1)
+    multi_json (1.14.1)
     multipart-post (2.1.1)
     oj (2.18.5)
     parallel (1.18.0)
