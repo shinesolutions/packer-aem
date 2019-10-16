@@ -6,10 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+### Added
+- Added http, https and file support for archiving certificates
+
 ### Changed
+- Update private certificate key handling to use same logic as done for the public certificate
 - Upgrade aem_curator to 3.0.0
 - Upgrade aem_resources to 5.0.0
 - Upgrade ruby_aem to 3.4.0
+
+### Removed
+- Removed configuration parameter `aws.aem_certs_base`
 
 ## 4.14.0 - 2019-10-16
 ### Changed
@@ -22,15 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 4.13.0 - 2019-10-13
 ### Added
 - Add new RedHat repos rhui-REGION-rhel-server-extras and rhel-7-server-rhui-optional-rpms to support the latest package availability changes [#182]
-
-### Added
-- Added http, https and file support for archiving certificates
-
-### changed
-- Update private certificate key handling to use same logic as done for the public certificate
-
-### Removed
-- Removed configuration parameter `aws.aem_certs_base`
 
 ## 4.12.0 - 2019-09-20
 ### Added
