@@ -13,6 +13,7 @@ define config::cloudwatch_metric_agent (
       auto_scaling            => $autoscaling,
       cron_min                => '*',
       disk_path               => $disk_path,
+      zip_url                 => 'https://github.com/hoomaan-kh/aws-scripts-mon/raw/master/CloudWatchMonitoringScripts-1.2.2.zip',
     }
 
 }
