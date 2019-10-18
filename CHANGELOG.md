@@ -17,7 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix missing python-cheetah package for Amazon Linux 2
 
-
 ## 4.13.0 - 2019-10-13
 ### Added
 - Add new RedHat repos rhui-REGION-rhel-server-extras and rhel-7-server-rhui-optional-rpms to support the latest package availability changes [#182]
