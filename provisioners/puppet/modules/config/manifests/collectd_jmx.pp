@@ -1,6 +1,6 @@
 define config::collectd_jmx (
-  $jdk_version = lookup('aem_curator::install_java::jdk_version')
-  $jdk_version_update = lookup('aem_curator::install_java::jdk_version_update')
+  $jdk_version = lookup('aem_curator::install_java::jdk_version'),
+  $jdk_version_update = lookup('aem_curator::install_java::jdk_version_update'),
 ) {
 
   # collectd::plugin::genericjmx also installs collectd-java plugin, which in
