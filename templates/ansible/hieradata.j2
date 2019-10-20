@@ -67,7 +67,7 @@ aem_curator::install_publish::run_modes:
 aem_curator::install_publish::data_volume_device: "{{ aws[os_type].devicemap_data_b }}"
 
 aem_curator::install_dispatcher::apache_module_base_url: {{ aem.dispatcher.apache_module_base_url }}
-aem_curator::install_dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86_64-ssl-{{ aem.dispatcher.version }}.tar.gz
+aem_curator::install_dispatcher::apache_module_tarball: dispatcher-apache2.4-linux-x86_64-ssl{{ aem.dispatcher.ssl_version }}-{{ aem.dispatcher.version }}.tar.gz
 aem_curator::install_dispatcher::apache_module_filename: dispatcher-apache2.4-{{ aem.dispatcher.version }}.so
 
 aem_curator::install_author::aem_healthcheck_version: "{{ library.aem_healthcheck_version }}"
