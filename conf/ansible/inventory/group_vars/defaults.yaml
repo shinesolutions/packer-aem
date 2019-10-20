@@ -68,6 +68,7 @@ docker:
 aem:
   profile: aem65_sp1
   keystore_password_parameter: overwrite-me
+  jdk_base_url: overwrite-me
   author:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
     run_modes: []
@@ -79,6 +80,10 @@ aem:
     apache_module_base_url: http://download.macromedia.com/dispatcher/download
   artifacts_base: overwrite-me
   enable_custom_image_provisioner: false
+  jdk:
+    filename: jdk-8u221-linux-x64.rpm
+    version: 8
+    version_update: 221
 
 library:
   aem_healthcheck_version: 1.3.3

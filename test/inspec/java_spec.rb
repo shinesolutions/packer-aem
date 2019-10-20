@@ -4,8 +4,8 @@ require './spec_helper'
 
 init_conf
 
-version = @hiera.lookup('oracle_java::version', nil, @scope)
-version_update = @hiera.lookup('oracle_java::version_update', nil, @scope)
+version = @hiera.lookup('aem_curator::install_java::jdk_version', nil, @scope)
+version_update = @hiera.lookup('aem_curator::install_java::jdk_version_update', nil, @scope)
 java_version = "1.#{version}.0_#{version_update}"
 
 # TO-DO: the describe package needs to be replaced with a package variable

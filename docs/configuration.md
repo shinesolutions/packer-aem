@@ -36,6 +36,10 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aem.dispatcher.apache_module_base_url | AEM Dispatcher Apache library base URL.  Source URL can be: `s3://...`, `http://...`, `https://...`, or `file://...`  | Optional | `http://download.macromedia.com/dispatcher/download` |
 | aem.artifacts_base | Source URL path of AEM artifacts, it could be `s3://...`, `http://...`, `https://...`, or `file://...`. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/artifacts/.  Object name must be: `aem.key` | Mandatory | |
 | aem.enable_custom_image_provisioner | Set to `true` when Custom Image Provisioner pre and post steps will be executed , note: place `aem-custom-image-provisioner.tar.gz` artifact in `stage/custom/` directory | Optional | `false` |
+| aem.jdk.base_url | Base URL (just the path, not the file name) where JDK RPM file would be located. URL can be: `s3://...`, `http://...`, `https://...`, or `file://...` | Mandatory | |
+| aem.jdk.filename | JDK RPM file name, this file must be located at `aem.jdk.base_url` | Optional | jdk-8u221-linux-x64.rpm |
+| aem.jdk.version | JDK version number | Optional | 8 |
+| aem.jdk.version_update | JDK update version number | Optional | 221 |
 
 ### AWS platform type configuration properties:
 

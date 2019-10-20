@@ -18,7 +18,7 @@ mod 'luizvasconceloss-hiera_ssm_paramstore', '0.2.2'
 mod 'MasterRoot24-cloudwatch', '0.6.0'
 
 # puppet-aem-curator dependencies, TODO: resolve sub-dependencies without declaring deps in packer-aem
-mod 'aco-oracle_java', '2.8.3'
+mod 'aco/oracle_java', '2.9.4'
 mod 'bstopp/aem', '3.0.0'
 mod 'puppet-healthcheck', '0.4.0'
 mod 'puppetlabs/apache', :git => 'https://github.com/shinesolutions/puppetlabs-apache', :commit => 'd4f89389faae77e8ef5618069085e429ce50e427'
