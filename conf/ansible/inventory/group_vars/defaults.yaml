@@ -77,7 +77,7 @@ aem:
     run_modes: []
   dispatcher:
     version: 4.3.3
-    ssl_version: 1.1
+    ssl_version: 1.0
     apache_module_base_url: http://download.macromedia.com/dispatcher/download
   artifacts_base: overwrite-me
   enable_custom_image_provisioner: false
