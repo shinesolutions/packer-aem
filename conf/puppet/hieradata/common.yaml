@@ -1,12 +1,13 @@
 ---
 tmp_dir: /tmp/shinesolutions/packer-aem
 
-oracle_java::version: '8'
-oracle_java::version_update: '141'
-oracle_java::version_build: '12'
-
 aem_curator::install_java::cert_base_url: "file://%{lookup('tmp_dir')}/certs"
 aem_curator::install_java::tmp_dir: "%{lookup('tmp_dir')}"
+# version_build is set to empty in order to bypass aco/oracle_java module's
+# predefined supported java version list check, which only allows certain list
+# of Java versions
+aem_curator::install_java::version_build: ""
+aem_curator::install_java::format: rpm
 
 aem_curator::install_author::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_author::aem_host: localhost
