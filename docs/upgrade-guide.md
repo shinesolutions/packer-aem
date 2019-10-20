@@ -8,6 +8,7 @@ This upgrade guide covers the changes required when you already use Packer AEM a
 ### To 4.1.0
 
 * Add new `aem.jdk.*` configuration properties
+* Add new `aem.dispatcher.ssl_version` configuration property
 
 ### To 4.0.0
 

@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added "zip_url" parameter to CloudWatch Metric in order to customise the `aws-scripts-mon` repository and fix FileSystem value which been passed by it to CloudWatch dashboard.
 - Add new configuration properties `aem.jdk.base_url`, `aem.jdk.filename`, `aem.jdk.version`, `aem.jdk.version_update`
+- Add new configuration property `aem.dispatcher.ssl_version`
 
 ### Changed
 - Upgrade aem_curator to 2.12.0
 - Upgrade default JDK to version 8u221
+- Upgrade AEM Dispatcher to 4.3.3 using SSL 1.1
 
 ## 4.15.0 - 2019-10-16
 ### Added
