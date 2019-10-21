@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - Add new configuration property `aem.dispatcher.ssl_version`
+- Add new RedHat repos rhui-REGION-rhel-server-extras and rhel-7-server-rhui-optional-rpms to support the latest package availability changes #182
 
 ### Changed
 - Upgrade AEM Dispatcher to 4.3.3 using SSL 1.0
