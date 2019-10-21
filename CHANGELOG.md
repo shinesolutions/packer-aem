@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Upgrade AEM Dispatcher to 4.3.3 using SSL 1.0
+- Updates puppet-cheetah package for Amazon Linux 2; previous package no longer available
 
 ## 4.4.2 - 2019-08-29
 ### Changed
