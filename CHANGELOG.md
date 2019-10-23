@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fix missing value for 'aem_healthcheck_version' in hieradata template
+- Fix jdk installation path for java alternatives setting
 
 ## 4.14.2 - 2019-10-21
 
