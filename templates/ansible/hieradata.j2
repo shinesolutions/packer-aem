@@ -76,5 +76,5 @@ aem_curator::install_java::jdk_filename: "{{ aem.jdk.filename }}"
 aem_curator::install_java::jdk_version: "{{ aem.jdk.version }}"
 aem_curator::install_java::jdk_version_update: "{{ aem.jdk.version_update }}"
 
-aem_curator::install_author::aem_healthcheck_version:
+aem_curator::install_author::aem_healthcheck_version: "{{ library.aem_healthcheck_version }}"
 aem_curator::install_publish::aem_healthcheck_version:  "{{ library.aem_healthcheck_version }}"
