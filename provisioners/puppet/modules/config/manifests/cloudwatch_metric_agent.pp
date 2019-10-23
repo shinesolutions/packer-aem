@@ -13,6 +13,7 @@ define config::cloudwatch_metric_agent (
       auto_scaling            => $autoscaling,
       cron_min                => '*',
       disk_path               => $disk_path,
+      zip_url                 => 'https://github.com/shinesolutions/aws-scripts-mon/releases/download/1.3.0/shinesolutions-aws-scripts-mon-1.3.0.zip',
     }
 
 }
