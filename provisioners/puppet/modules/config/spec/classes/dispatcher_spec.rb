@@ -19,6 +19,9 @@ describe 'config::dispatcher' do
     it { is_expected.to contain_class('apache') }
     it { is_expected.to contain_class('apache::mod::ssl') }
     it { is_expected.to contain_class('apache::mod::headers') }
+    it { is_expected.to contain_class('apache::mod::proxy') }
+    it { is_expected.to contain_class('apache::mod::proxy_http') }
+    it { is_expected.to contain_class('apache::mod::proxy_connect') }
 
     it { is_expected.to contain_archive('dispatcher-apache2.4-linux-x86-64-ssl-4.2.2.tar.gz') }
     it { is_expected.to contain_class('aem::dispatcher') }
