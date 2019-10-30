@@ -66,7 +66,7 @@ docker:
   source: overwrite-me
 
 aem:
-  profile: aem65_sp1
+  profile: aem65_sp2
   keystore_password_parameter: overwrite-me
   jdk_base_url: overwrite-me
   author:

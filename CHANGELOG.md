@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Changed
 - Upgrade aem_curator to 2.13.0
+- Upgrade default aem_profile to aem65_sp2
 
 ### Fixed
 - Fix missing value for 'aem_healthcheck_version' in hieradata template
