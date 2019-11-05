@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new configuration property `aem.dispatcher.ssl_version`
 
 ### Changed
-- Upgrade aem_curator to 3.1.0
+- Upgrade aem_curator to 3.2.0
 - Upgrade default JDK to version 8u221
 - Upgrade AEM Dispatcher to 4.3.3 using SSL 1.0
 
