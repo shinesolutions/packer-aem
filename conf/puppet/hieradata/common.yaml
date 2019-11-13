@@ -32,6 +32,9 @@ aem_curator::install_publish::aem_license_base: "%{lookup('tmp_dir')}/license"
 aem_curator::install_dispatcher::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_dispatcher::cert_base_url: "file://%{lookup('tmp_dir')}/certs"
 aem_curator::install_dispatcher::cert_filename: /etc/ssl/aem.unified-dispatcher.cert
+aem_curator::install_dispatcher::data_volume_mount_point: /mnt/ebs1
+aem_curator::install_dispatcher::setup_repository_volume: true
+aem_curator::install_dispatcher::post_stop_sleep_secs: 300
 
 aem_curator::install_dispatcher::apache_module_temp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_dispatcher::apache_http_port: "80"
