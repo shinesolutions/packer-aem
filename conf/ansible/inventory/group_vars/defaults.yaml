@@ -49,18 +49,22 @@ aws:
     devicemap_root: /dev/sda1
     devicemap_data_b: /dev/xvdb
     devicemap_data_c: /dev/xvdc
+    devicemap_data_e: /dev/xvde
   rhel8:
     devicemap_root: /dev/sda1
     devicemap_data_b: /dev/xvdb
     devicemap_data_c: /dev/xvdc
+    devicemap_data_e: /dev/xvde
   centos7:
     devicemap_root: /dev/sda1
     devicemap_data_b: /dev/sdb
     devicemap_data_c: /dev/sdc
+    devicemap_data_e: /dev/sde
   amazon-linux2:
     devicemap_root: /dev/xvda
     devicemap_data_b: /dev/xvdb
     devicemap_data_c: /dev/xvdc
+    devicemap_data_e: /dev/xvde
 
 docker:
   source: overwrite-me

@@ -1,3 +1,4 @@
 ---
 aem_curator::install_author::setup_repository_volume: false
 aem_curator::install_publish::setup_repository_volume: false
+aem_curator::install_dispatcher::setup_repository_volume: false

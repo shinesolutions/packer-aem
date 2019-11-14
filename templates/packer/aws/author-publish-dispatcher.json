@@ -163,6 +163,12 @@
           "delete_on_termination": true,
           "volume_type": "gp2",
           "device_name": "{{user `devicemap_data_c`}}"
+        },
+        {
+          "volume_size": "{{user `data_volume_size`}}",
+          "delete_on_termination": true,
+          "volume_type": "gp2",
+          "device_name": "{{user `devicemap_data_e`}}"
         }
       ],
       "communicator": "ssh",
@@ -222,6 +228,12 @@
           "delete_on_termination": true,
           "volume_type": "gp2",
           "device_name": "{{user `devicemap_data_c`}}"
+        },
+        {
+          "volume_size": "{{user `data_volume_size`}}",
+          "delete_on_termination": true,
+          "volume_type": "gp2",
+          "device_name": "{{user `devicemap_data_e`}}"
         }
       ],
       "ami_users": "{{user `ami_users`}}",
