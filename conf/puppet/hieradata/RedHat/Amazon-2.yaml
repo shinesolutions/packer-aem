@@ -3,4 +3,5 @@
 base::python_cheetah_package: python2-cheetah
 
 base::awslogs_service_name: 'awslogsd'
-base::awslogs_proxy_path: /etc/awslogs/proxy.conf
+base::awslogs_path: /etc/awslogs
+base::awslogs_proxy_path: "%{hiera('base::awslogs_path')}/proxy.conf"

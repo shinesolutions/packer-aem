@@ -77,6 +77,7 @@ class config::base (
   $python_cheetah_package,
   $awslogs_service_name,
   $awslogs_proxy_path,
+  $awslogs_path,
   $base_dir = '/opt/shinesolutions',
   $rhn_register = false,
   $disable_selinux = true,
