@@ -83,7 +83,7 @@ if install_cloudwatchlogs == true
 
   # On RHEL or CentOS we are removing the AWSLOGS PID file during the baking.
   # This test is to ensure the file does not exists
-  if %w[RedHat].include?(os[:name]) || %w[CentOS].include?(os[:name]) or
+  if %w[RedHat].include?(os[:name]) || %w[CentOS].include?(os[:name])
     describe file("#{cloudwatchlogs_base_path}/state/awslogs.pid") do
       it { should_not exist }
     end
