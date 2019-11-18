@@ -19,11 +19,11 @@ if $::config::base::install_cloudwatchlogs {
         before  =>  File["${::config::base::awslogs_path}/state/awslogs.pid"],
         require => Service[$::config::base::awslogs_service_name]
       } -> file {"${::config::base::awslogs_path}/state/awslogs.pid":
-        ensure => absent,
+        ensure  => absent,
         require => Exec['Stop Cloudwatchlogs agent']
       }
     }
-    default: { notify("Skipping awslogs stop and pid file removal") }
+    default: { notify('Skipping awslogs stop and pid file removal') }
   }
 }
 
