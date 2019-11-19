@@ -31,4 +31,5 @@ config::tomcat::pkg_name: tomcat
 config::tomcat::srv_name: tomcat
 
 config::base::awslogs_service_name: awslogsd
-config::base::awslogs_proxy_path: /etc/awslogs/proxy.conf
+config::base::awslogs_path: /etc/awslogs
+config::base::awslogs_proxy_path: "%{hiera('config::base::awslogs_path')}/proxy.conf"
