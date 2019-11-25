@@ -41,4 +41,5 @@ aem_curator::install_dispatcher::apache_http_port: "80"
 aem_curator::install_dispatcher::apache_https_port: "443"
 
 base::awslogs_service_name: 'awslogs'
-base::awslogs_proxy_path: /var/awslogs/etc/proxy.conf
+base::awslogs_path: /var/awslogs
+base::awslogs_proxy_path: "%{hiera('base::awslogs_path')}/etc/proxy.conf"

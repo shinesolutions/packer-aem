@@ -13,6 +13,9 @@ install_aws_cli ||= 'true'
 install_cloudwatchlogs = @hiera.lookup('config::base::install_cloudwatchlogs', nil, @scope)
 install_cloudwatchlogs ||= 'true'
 
+cloudwatchlogs_base_path = @hiera.lookup('config::base::awslogs_path', nil, @scope)
+cloudwatchlogs_base_path ||= '/var/awslogs'
+
 # install_aws_agents = @hiera.lookup('config::base::install_aws_agents', nil, @scope)
 # install_aws_agents ||= 'true'
 
@@ -66,16 +69,24 @@ if install_cloudwatchlogs == true
 
     describe systemd_service(@hiera.lookup('base::awslogs_service_name', nil, @scope)) do
       it { should be_enabled }
-      it { should be_running }
+      it { should_not be_running }
     end
 
   else
 
     describe service(@hiera.lookup('base::awslogs_service_name', nil, @scope)) do
       it { should be_enabled }
-      it { should be_running }
+      it { should_not be_running }
     end
 
+  end
+
+  # On RHEL or CentOS we are removing the AWSLOGS PID file during the baking.
+  # This test is to ensure the file does not exists
+  if %w[RedHat].include?(os[:name]) || %w[CentOS].include?(os[:name])
+    describe file("#{cloudwatchlogs_base_path}/state/awslogs.pid") do
+      it { should_not exist }
+    end
   end
 
   describe file('/etc/awslogs/awslogs.conf') do

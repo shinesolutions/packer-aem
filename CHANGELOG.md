@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new configuration properties `aem.jdk.base_url`, `aem.jdk.filename`, `aem.jdk.version`, `aem.jdk.version_update`
 - Add new configuration property `aem.dispatcher.ssl_version`
 - Add new Data Volume for Author-Dispatcher and Publish-Dispatcher
+- Add removal of awslogs service PID file for RHEL & CentOS #192
 
 ### Changed
 - Upgrade aem_curator to 3.2.0
