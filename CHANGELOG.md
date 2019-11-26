@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add removal of awslogs service PID file for RHEL & CentOS #192
 
 ### Changed
-- Upgrade aem_curator to 3.2.0
+- Upgrade aem_curator to 3.3.0, aem_resources to 5.1.0
 - Upgrade default JDK to version 8u221
 - Upgrade AEM Dispatcher to 4.3.3 using SSL 1.0
 
