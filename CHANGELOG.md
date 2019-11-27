@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade default JDK to version 8u221
 - Upgrade AEM Dispatcher to 4.3.3 using SSL 1.0
 - Change default devicemap_root config for rhel7 to xvda
+- Increase default root volume size from 20Gb to 30Gb due to more disk space required from adding more tools/software
 
 ### Fixed
 - Fix missing value for 'aem_healthcheck_version' in hieradata template

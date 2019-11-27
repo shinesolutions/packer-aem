@@ -5,7 +5,7 @@
     "source_ami": "",
     "instance_type": "",
     "no_proxy": "",
-    "root_volume_size": "20",
+    "root_volume_size": "30",
     "iam_instance_profile": "",
     "ami_users": "",
     "https_proxy": "",
