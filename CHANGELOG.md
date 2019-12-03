@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix missing value for 'aem_healthcheck_version' in hieradata template
 - Fix jdk installation path for java alternatives setting
+- Fixed dependency for stopping awslogs service #192
 
 ## 4.15.0 - 2019-10-16
 ### Added
