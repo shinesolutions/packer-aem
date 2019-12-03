@@ -21,11 +21,11 @@ if $::config::base::install_cloudwatchlogs {
   case $::os['name'] {
     /^(CentOS|RedHat)$/: {
       exec { 'Give awslogs time to stop':
-       command => 'sleep 60',
-       path    => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
-       before  => Exec['Stop Cloudwatchlogs agent'],
-       require => Service[$::config::base::awslogs_service_name],
-     } -> exec { 'Stop Cloudwatchlogs agent':
+        command => 'sleep 60',
+        path    => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
+        before  => Exec['Stop Cloudwatchlogs agent'],
+        require => Service[$::config::base::awslogs_service_name],
+      } -> exec { 'Stop Cloudwatchlogs agent':
         command => "systemctl stop ${::config::base::awslogs_service_name}",
         path    => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
         before  => File["${::config::base::awslogs_path}/state/awslogs.pid"],
