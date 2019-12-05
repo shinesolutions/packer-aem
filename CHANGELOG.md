@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- awslogs service is now both disabled and stopped at the end of AMI baking [#192]
+
+### Fixed
+- Fix AMI baking failure on Amazon Linux 2 due to missing Puppet notify
+
 ## 4.16.0 - 2019-12-03
 ### Added
 - Added "zip_url" parameter to CloudWatch Metric in order to customise the `aws-scripts-mon` repository and fix FileSystem value which been passed by it to CloudWatch dashboard.

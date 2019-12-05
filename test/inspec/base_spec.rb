@@ -68,14 +68,14 @@ if install_cloudwatchlogs == true
   if %w[amazon].include?(os[:name]) && !os[:release].start_with?('20\d\d')
 
     describe systemd_service(@hiera.lookup('base::awslogs_service_name', nil, @scope)) do
-      it { should be_enabled }
+      it { should_not be_enabled }
       it { should_not be_running }
     end
 
   else
 
     describe service(@hiera.lookup('base::awslogs_service_name', nil, @scope)) do
-      it { should be_enabled }
+      it { should_not be_enabled }
       it { should_not be_running }
     end
 
