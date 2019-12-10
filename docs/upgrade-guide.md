@@ -3,7 +3,10 @@ Upgrade Guide
 
 This upgrade guide covers the changes required when you already use Packer AEM and you need to upgrade it to a higher version.
 
-### [Unreleased]
+### To 4.2.0
+
+* Automated downloading of any JDK from Oracle Technology Network is no longer supported. You have to manually download [JDK 8 RPM](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) from OTN, upload it to a storage location (e.g. S3 bucket path specified in `aem.jdk.base_url`), and then configure the exact RPM file name in `aem.jdk.filename` configuration property. An example RPM file name is `jdk-8u221-linux-x64.rpm`
+* If you want to use a custom Dispatcher tarball file, you have to download it from [Macromedia](http://download.macromedia.com/dispatcher/download), upload it to a storage location (e.g. S3 bucket path specified in `aem.dispatcher.apache_module_base_url`). An example file name is `dispatcher-apache2.4-linux-x86_64-ssl-4.3.3.tar.gz`
 
 ### To 4.1.0
 
