@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - awslogs service is now both disabled and stopped at the end of AMI baking [#192]
+- Upgrade aem_curator to 3.5.0, aem_resources to 5.3.0
 
 ### Fixed
 - Fix AMI baking failure on Amazon Linux 2 due to missing Puppet notify
