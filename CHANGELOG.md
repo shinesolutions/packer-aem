@@ -5,8 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
-
+## 4.17.0 - 2019-12-17
 ### Changed
 - awslogs service is now both disabled and stopped at the end of AMI baking [#192]
 - Upgrade aem_curator to 3.5.0, aem_resources to 5.3.0
@@ -32,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix missing value for 'aem_healthcheck_version' in hieradata template
 - Fix jdk installation path for java alternatives setting
-- Fixed dependency for stopping awslogs service #192
+- Fixed dependency for stopping awslogs service [#192]
 
 ## 4.15.0 - 2019-10-16
 ### Added
