@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added Dispatcher data volume to CW Metric agent configuration
 
+### Changed
+- Upgrade aem_curator to 3.6.0
+
 ## 4.17.0 - 2019-12-17
 ### Changed
 - awslogs service is now both disabled and stopped at the end of AMI baking [#192]
