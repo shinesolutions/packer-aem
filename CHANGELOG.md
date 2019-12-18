@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Added
-- Added data volume configuration to dispatchers.
+- Added Dispatcher data volume to CW Metric agent configuration
 
 ### Changed
 - awslogs service is now both disabled and stopped at the end of AMI baking [#192]
