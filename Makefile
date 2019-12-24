@@ -55,9 +55,6 @@ deps:
 	bundle install --binstubs -j4
 	bundle exec r10k puppetfile install --verbose --moduledir modules
 	pip install -r requirements.txt
-	# TODO: remove when switching back to bstopp/puppet-aem
-	# only needed while using shinesolutions/puppet-aem fork
-	rm -rf modules/aem/.git
 
 # resolve AEM OpenCloud's Puppet module dependencies from local directories
 deps-local:
