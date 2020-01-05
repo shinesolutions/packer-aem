@@ -35,12 +35,12 @@ Installation
 
 - Either clone Packer AEM `git clone https://github.com/shinesolutions/packer-aem.git` or download one of the [released versions](https://github.com/shinesolutions/packer-aem/releases)
 - Install the following required tools:
-  * [Packer](https://www.packer.io/) version 1.0.0 or later
+  * [Packer](https://www.packer.io/) version 1.5.1 or later
   * [Ruby](https://www.ruby-lang.org/en/) version 2.3.0 or later
   * [Python](https://www.python.org/downloads/) version 2.7.x
   * [GNU Make](https://www.gnu.org/software/make/)<br/>
 
-  Alternatively, you can use [AEM Platform BuildEnv](https://github.com/shinesolutions/aem-platform-buildenv) Docker container to run Packer AEM build targets.
+  Alternatively, you can use [AEM Platform BuildEnv](https://github.com/shinesolutions/aem-platform-buildenv) Docker image version 1.3.0 or later to run Packer AEM build targets.
 - Resolve the [Puppet modules](https://github.com/shinesolutions/packer-aem/blob/master/Puppetfile), [Ruby gems](https://github.com/shinesolutions/packer-aem/blob/master/Gemfile), and [Python packages](https://github.com/shinesolutions/packer-aem/blob/master/requirements.txt) dependencies by running `make deps`
 
 Usage

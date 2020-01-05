@@ -239,7 +239,7 @@
       "ami_users": "{{user `ami_users`}}",
       "type": "amazon-ebs",
       "ssh_pty": true,
-      "temporary_security_group_source_cidr": "{{ user `temporary_security_group_source_cidr` }}"
+      "temporary_security_group_source_cidrs": "{{ user `temporary_security_group_source_cidr` }}"
     }
   ]
 }
