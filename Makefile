@@ -19,8 +19,8 @@ stage:
 package: stage
 	tar \
 	    --exclude='stage*' \
-			--exclude='.bundle' \
-			--exclude='bin' \
+	    --exclude='.bundle' \
+	    --exclude='bin' \
 	    --exclude='.git*' \
 	    --exclude='.tmp*' \
 	    --exclude='.idea*' \
@@ -29,7 +29,7 @@ package: stage
 	    --exclude='*.retry' \
 	    --exclude='*.iml' \
 	    -czf \
-		stage/packer-aem-$(packer_aem_version).tar.gz .
+	    stage/packer-aem-$(packer_aem_version).tar.gz .
 
 release:
 	rtk release
