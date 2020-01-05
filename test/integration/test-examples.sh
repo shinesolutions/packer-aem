@@ -33,3 +33,5 @@ for component in $components
 do
 	CUSTOM_STAGE_RUN_INFO="aem-helloworld-${component}" make "${platform_type}-${component}" "config_path=stage/user-config/${platform_type}-${os_type}-${aem_version}" "version=${test_id}"
 done
+
+make ami-ids "config_path=stage/user-config/${platform_type}-${os_type}-${aem_version}"
