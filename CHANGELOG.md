@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade aem_curator to 1.25.3
+
 ## 4.4.3 - 2019-10-21
 ### Added
 - Add new configuration property `aem.dispatcher.ssl_version`
