@@ -75,13 +75,16 @@ class config::base (
   $python_package,
   $python_pip_package,
   $python_cheetah_package,
+  $python_alt_package,
   $awslogs_service_name,
   $awslogs_proxy_path,
   $awslogs_path,
   $base_dir = '/opt/shinesolutions',
+  $virtualenv_dir = '/home/.virtualenvs',
   $rhn_register = false,
   $disable_selinux = true,
   $install_aws_cli = true,
+  $install_virtualenvs = true,
   $install_cloudwatchlogs = true,
   $install_collectd = true,
   $install_amazon_ssm_agent = true,
@@ -137,6 +140,43 @@ class config::base (
 
   package { [ $python_package, $python_pip_package, $python_cheetah_package ]:
     ensure => latest,
+  }
+
+  package { [ $python_alt_package]:
+    ensure => latest,
+  }
+
+  if $install_virtualenvs {
+    class { '::python':
+      ensure     => 'present',
+      dev        => 'present',
+      pip        => 'absent',
+      virtualenv => 'present',
+    }
+
+    file { $virtualenv_dir:
+      ensure => 'directory',
+      owner  => 'root',
+      mode   => '0755',
+    }
+
+    # virtualenv is used for building python virtualenvs
+    # it can be awaken by activate command
+    python::virtualenv { '/home/.virtualenvs/py34':
+      ensure  => present,
+      version => '3.4',
+      owner   => 'root',
+      group   => 'root',
+      timeout => 0,
+    }
+
+    python::virtualenv { '/home/.virtualenvs/py27':
+      ensure  => present,
+      version => '2.7',
+      owner   => 'root',
+      group   => 'root',
+      timeout => 0,
+    }
   }
 
   package { [ 'requests', 'retrying', 'sh' ]:

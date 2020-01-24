@@ -27,3 +27,6 @@ mod 'shinesolutions/aem_resources', '5.3.0'
 
 # puppet-amazon-ssm-agent dependency, TODO: resolve sub-dependencies without declaring deps in packer-aem
 mod 'puppetlabs-inifile', '2.2.0'
+
+mod 'puppet-python', '4.0.0'
+mod 'stahnma-epel', '1.3.1'
