@@ -1,5 +1,5 @@
-### 2.7.5
-*
+### Unreleased
+* Upgrade puppet-aem-curator to 0.10.7
 
 ### 2.7.4
 * Lock down bundler on host gem to version 1.17.3 in order to support Ruby older than 2.3.0
