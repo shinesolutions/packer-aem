@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add feature to enable EBS Volume encryption when Baking #198
+- Add feature to define CMK for enabling EBS Volume encryption #198
+
 ### Changed
 - Upgrade aem_curator to 3.8.0
 

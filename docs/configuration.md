@@ -20,6 +20,8 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | custom_image_provisioner.post.timeout | The maximum duration (in seconds) allowed for Custom Image Provisioner post step to run. | Optional | `3600` |
 | library.aem_healthcheck_version | The version number of [AEM Health Check](https://github.com/shinesolutions/aem-healthcheck/) library. | Optional | 1.3.3 |
 
+
+
 ### AEM configuration properties:
 
 | Name | Description | Required? | Default |
@@ -62,6 +64,8 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.tags | An array of `Key` and `Value` pairs for tagging AWS resources (e.g. EC2 instance, AMI, EBS volume) created by Packer AEM following your organisation's tagging standard | Optional | None |
 | aws.certificate_arn | The ARN of the Certificate in either the [AWS Certificate Manager (ACM)](https://console.aws.amazon.com/acm/home) or IAM Server Certificate or an S3 key path to the certificate object.  Valid values are either `arn:aws:acm:...` or `arn:aws:iam:...`, `s3://...`, `http://...`, `https://...` or `file://...`| Mandatory | |
 | aws.certificate_key_arn | The ARN of the secret containing TLS certificate's secret key in the [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) or an S3 key path, http url, https url or file path to the certificate object. Valid values are either `arn:aws:secretsmanager:...`, `s3://...`, `http://...`, `https://...` or `file://...`| Optional | |
+| aws.encryption.ebs_volume.enable | Boolean wether if EBS Volume encryption should be enabled or not. | Optional | `false`|
+| aws.encryption.ebs_volume.kms_key_id | The user can define a KMS CMK id to encrypt the EBS Volume with a custom key rather than the default key. | Optional | `None`|
 | aws.resources.stack_name | Appended string for Packer AEM Resources stack-name created by `make create-aws-resources`| Optional | `packer-aem-resources-stack`|
 | aws.resources.s3_bucket | Name of bucket used by packer-aem to store artifacts, created by `make create-aws-resources` or the name of an existing bucket | Mandatory | `overwrite-me` |
 | aws.resources.enable_secrets_manager | A `true` or `false` string value to indicate if AEM OpenCloud can provision AWS Secrets Manager resource, which is currently supported for storing TLS certificate's private key  | Optional | `true` |
