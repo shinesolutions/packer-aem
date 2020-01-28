@@ -1,4 +1,4 @@
-### Unreleased
+### 2.7.6
 * Upgrade puppet-aem-resources to 2.3.1
 
 ### 2.7.5
