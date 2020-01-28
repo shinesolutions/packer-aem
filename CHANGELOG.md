@@ -1,3 +1,6 @@
+### Unreleased
+* Upgrade puppet-aem-resources to 2.3.1
+
 ### 2.7.5
 * Upgrade puppet-aem-curator to 0.10.7
 
