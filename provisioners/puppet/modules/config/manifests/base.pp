@@ -75,7 +75,7 @@ class config::base (
   $python_package,
   $python_pip_package,
   $python_cheetah_package,
-  $python_alt_package,
+  $python_alt_package = 'python34',
   $awslogs_service_name,
   $awslogs_proxy_path,
   $awslogs_path,
@@ -138,16 +138,13 @@ class config::base (
     ensure => installed,
   }
 
-  package { [ $python_package, $python_pip_package, $python_cheetah_package ]:
-    ensure => latest,
-  }
-
-  package { [ $python_alt_package]:
+  package { [ $python_package, $python_pip_package, $python_cheetah_package, $python_alt_package, ]:
     ensure => latest,
   }
 
   if $install_virtualenvs {
     class { '::python':
+      version    => 'system',
       ensure     => 'present',
       dev        => 'present',
       pip        => 'absent',
@@ -162,7 +159,7 @@ class config::base (
 
     # virtualenv is used for building python virtualenvs
     # it can be awaken by activate command
-    python::virtualenv { '/home/.virtualenvs/py34':
+    python::virtualenv { "$virtualenv_dir/py34":
       ensure  => present,
       version => '3.4',
       owner   => 'root',
@@ -170,7 +167,7 @@ class config::base (
       timeout => 0,
     }
 
-    python::virtualenv { '/home/.virtualenvs/py27':
+    python::virtualenv { "$virtualenv_dir/py27":
       ensure  => present,
       version => '2.7',
       owner   => 'root',
