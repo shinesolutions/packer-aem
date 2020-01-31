@@ -10,7 +10,8 @@
 # [*python_package*]
 # [*python_pip_package*]
 # [*python_cheetah_package*]
-#   System package manager names for the Python, pip and cheetah packages.
+# [*python_alt_package*]
+#   System package manager names for the Python, pip and cheetah packages and an alternaltive package.
 #
 # [*rhn_register*]
 #   Boolean that determines whether the instance should be registered with the RedHat Network.
@@ -142,13 +143,41 @@ class config::base (
     ensure => latest,
   }
 
+  package { [ 'requests', 'retrying', 'sh' ]:
+    ensure   => latest,
+    provider => 'pip',
+  }
+
+  if $install_aws_cli {
+    package { 'awscli':
+      ensure   => '1.16.10',
+      provider => 'pip',
+    }
+  }
+  # allow awscli to control boto version if it's enabled, otherwise install, python3.4 and python2.7
+  package { 'boto':
+    ensure   => present,
+    provider => 'pip',
+  }
+
+  package { 'boto3':
+    ensure   => '1.8.5',
+    provider => 'pip',
+  }
+
+
   if $install_virtualenvs {
+    # allow the system have two python virtual environments
+    include pip
+    pip::install { 'virtualenv':
+      ensure         => present,
+      version        => '16.7.9',
+    }
+
     class { '::python':
       version    => 'system',
       ensure     => 'present',
       dev        => 'present',
-      pip        => 'absent',
-      virtualenv => 'present',
     }
 
     file { $virtualenv_dir:
@@ -157,8 +186,6 @@ class config::base (
       mode   => '0755',
     }
 
-    # virtualenv is used for building python virtualenvs
-    # it can be awaken by activate command
     python::virtualenv { "$virtualenv_dir/py34":
       ensure  => present,
       version => '3.4',
@@ -174,28 +201,6 @@ class config::base (
       group   => 'root',
       timeout => 0,
     }
-  }
-
-  package { [ 'requests', 'retrying', 'sh' ]:
-    ensure   => latest,
-    provider => 'pip',
-  }
-
-  if $install_aws_cli {
-    package { 'awscli':
-      ensure   => '1.16.10',
-      provider => 'pip',
-    }
-  }
-  # allow awscli to control boto version if it's enabled, otherwise install
-  package { 'boto':
-    ensure   => present,
-    provider => 'pip',
-  }
-
-  package { 'boto3':
-    ensure   => '1.8.5',
-    provider => 'pip',
   }
 
   if $install_cloudwatchlogs {
