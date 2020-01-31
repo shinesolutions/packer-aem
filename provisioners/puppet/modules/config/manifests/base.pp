@@ -154,7 +154,7 @@ class config::base (
       provider => 'pip',
     }
   }
-  # allow awscli to control boto version if it's enabled, otherwise install, python3.4 and python2.7
+  # allow awscli to control boto version if it's enabled, otherwise install
   package { 'boto':
     ensure   => present,
     provider => 'pip',
