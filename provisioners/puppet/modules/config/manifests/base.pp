@@ -165,7 +165,6 @@ class config::base (
     provider => 'pip',
   }
 
-
   if $install_virtualenvs {
     # allow the system have two python virtual environments
     include pip
