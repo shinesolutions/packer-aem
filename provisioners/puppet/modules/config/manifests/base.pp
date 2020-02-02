@@ -76,10 +76,10 @@ class config::base (
   $python_package,
   $python_pip_package,
   $python_cheetah_package,
-  $python_alt_package = 'python34',
   $awslogs_service_name,
   $awslogs_proxy_path,
   $awslogs_path,
+  $python_alt_package = 'python34',
   $base_dir = '/opt/shinesolutions',
   $virtualenv_dir = '/home/.virtualenvs',
   $rhn_register = false,
@@ -169,14 +169,14 @@ class config::base (
     # allow the system have two python virtual environments
     include pip
     pip::install { 'virtualenv':
-      ensure         => present,
-      version        => '16.7.9',
+      ensure  => present,
+      version => '16.7.9',
     }
 
     class { '::python':
-      version    => 'system',
-      ensure     => 'present',
-      dev        => 'present',
+      version => 'system',
+      ensure  => 'present',
+      dev     => 'present',
     }
 
     file { $virtualenv_dir:
@@ -185,7 +185,7 @@ class config::base (
       mode   => '0755',
     }
 
-    python::virtualenv { "$virtualenv_dir/py34":
+    python::virtualenv { "${virtualenv_dir}/py34":
       ensure  => present,
       version => '3.4',
       owner   => 'root',
@@ -193,7 +193,7 @@ class config::base (
       timeout => 0,
     }
 
-    python::virtualenv { "$virtualenv_dir/py27":
+    python::virtualenv { "${virtualenv_dir}/py27":
       ensure  => present,
       version => '2.7',
       owner   => 'root',
