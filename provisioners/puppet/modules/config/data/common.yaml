@@ -2,7 +2,7 @@
 config::base::python_package: python2
 config::base::python_pip_package: python-pip
 config::base::python_cheetah_package: python-cheetah
-config::base::python_alt_package: python34.x86_64
+config::base::python_alt_package: python36.x86_64
 config::base::tmp_dir: /tmp/shinesolutions/packer-aem
 config::base::awslogs_service_name: awslogs
 config::base::awslogs_path: /var/awslogs
