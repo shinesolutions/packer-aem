@@ -8,8 +8,8 @@ The YAML file is designed to be dropped directly in AEM AWS Stack Builder config
 import sys
 import boto3
 import yaml
-from ansible.module_utils.basic import AnsibleModule
 from dateutil.parser import parse as parse_dt
+from ansible.module_utils.basic import AnsibleModule
 
 def get_most_recent_ami_id(ec2, application_name, criteria):
     """
