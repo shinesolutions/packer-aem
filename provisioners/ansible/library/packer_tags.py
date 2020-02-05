@@ -8,28 +8,10 @@ wouldn't know in advance how many additional vars need to be declared.
 
 #!/usr/bin/python
 
-import json
 import glob
 from ansible.module_utils.basic import AnsibleModule
-
-
-def read_template(file_name):
-    """
-    Read the original Packer template files from filesystem.
-    """
-    file_read = open(file_name, 'r')
-    template = json.load(file_read)
-    file_read.close()
-    return template
-
-
-def write_template(file_name, template):
-    """
-    Write the Packer template files decorated with the additional tags.
-    """
-    file_write = open(file_name, 'w')
-    json.dump(template, file_write, indent=2)
-    file_write.close()
+from ansible.module_utils.template_utils import read_json_template
+from ansible.module_utils.template_utils import write_json_template
 
 
 def add_tags(tags, template, tag_key):
@@ -59,11 +41,11 @@ def main():
 
     template_files = glob.glob(template_dir + "*.json")
     for template_file in template_files:
-        template = read_template(template_file)
+        template = read_json_template(template_file)
         for tag_key in tag_keys:
             if tag_key in template['builders'][0]:
                 add_tags(tags, template, tag_key)
-        write_template(template_file, template)
+        write_json_template(template_file, template)
 
     module.exit_json(changed=True)
 

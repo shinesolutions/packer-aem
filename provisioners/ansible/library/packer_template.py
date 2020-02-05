@@ -24,26 +24,11 @@ This will update the Key 'kms_key_id' in the packer template
 
 #!/usr/bin/python
 
-import json
 import glob
 from ansible.module_utils.basic import AnsibleModule
+from ansible.module_utils.template_utils import read_json_template
+from ansible.module_utils.template_utils import write_json_template
 
-def read_template(file_name):
-    """
-    Read the original Packer template files from filesystem.
-    """
-    file_read = open(file_name, 'r')
-    template = json.load(file_read)
-    file_read.close()
-    return template
-
-def write_template(file_name, template):
-    """
-    Write the Packer template files decorated with the additional tags.
-    """
-    file_write = open(file_name, 'w')
-    json.dump(template, file_write, indent=2)
-    file_write.close()
 
 def add_key_to_builders(module, template, packer_key, add_key, add_value):
     """
@@ -63,6 +48,8 @@ def add_key_to_builders(module, template, packer_key, add_key, add_value):
                 builder.update({add_key: add_value})
         else:
             module.fail_json(msg="Provided packer_key \"" + packer_key + "\" not found in template at builders.")
+
+
 def main():
     """
     Run packer_tags custom module.
@@ -84,9 +71,9 @@ def main():
 
     template_files = glob.glob(template_dir + "*.json")
     for template_file in template_files:
-        template = read_template(template_file)
+        template = read_json_template(template_file)
         add_key_to_builders(module, template, packer_key, add_key, add_value)
-        write_template(template_file, template)
+        write_json_template(template_file, template)
 
     module.exit_json(changed=True)
 
