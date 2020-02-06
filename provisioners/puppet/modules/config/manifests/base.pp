@@ -185,12 +185,16 @@ class config::base (
       mode   => '0755',
     }
 
-    python::virtualenv { "${virtualenv_dir}/py36":
-      ensure  => present,
-      version => '3.6',
-      owner   => 'root',
-      group   => 'root',
-      timeout => 0,
+    # it will load system python3 to a virtualenv,
+    # which is 3.7 for Amazon linux2, 3.6.8 for Centos7,
+    # and 3.6.8 for rhel7
+    python::virtualenv { "${virtualenv_dir}/py3":
+      ensure     => present,
+      version    => '3',
+      owner      => 'root',
+      group      => 'root',
+      distribute => false,
+      timeout    => 0,
     }
 
     python::virtualenv { "${virtualenv_dir}/py27":
