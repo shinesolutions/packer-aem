@@ -22,7 +22,6 @@ This will update the Key 'kms_key_id' in the packer template
 
 #!/usr/bin/python
 
-import json
 import glob
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.template_utils import read_json_template
