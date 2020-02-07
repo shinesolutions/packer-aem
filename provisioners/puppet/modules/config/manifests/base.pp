@@ -80,26 +80,26 @@ class config::base (
   $awslogs_proxy_path,
   $awslogs_path,
   $python_alt_package,
-  $base_dir = '/opt/shinesolutions',
-  $virtualenv_dir = '/home/.virtualenvs',
-  $rhn_register = false,
-  $disable_selinux = true,
-  $install_aws_cli = true,
-  $install_virtualenvs = true,
-  $install_cloudwatchlogs = true,
-  $install_collectd = true,
-  $install_amazon_ssm_agent = true,
-  $install_cloudwatch_metric_agent = true,
-  $metric_root_disk_path = '',
-  $metric_data_disk_path = '',
-  $collectd_cloudwatch_source_url = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
+  $base_dir                         = '/opt/shinesolutions',
+  $virtualenv_dir                   = '/home/.virtualenvs',
+  $rhn_register                     = false,
+  $disable_selinux                  = true,
+  $install_aws_cli                  = true,
+  $install_virtualenvs              = true,
+  $install_cloudwatchlogs           = true,
+  $install_collectd                 = true,
+  $install_amazon_ssm_agent         = true,
+  $install_cloudwatch_metric_agent  = true,
+  $metric_root_disk_path            = '',
+  $metric_data_disk_path            = '',
+  $collectd_cloudwatch_source_url   = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
   $cloudwatchlogs_logfiles          = {},
   $cloudwatchlogs_logfiles_defaults = {},
-  $collectd_packages = [],
-  $http_proxy = undef,
-  $https_proxy = undef,
-  $no_proxy = undef,
-){
+  $collectd_packages                = [],
+  $http_proxy                       = undef,
+  $https_proxy                      = undef,
+  $no_proxy                         = undef,
+) {
   require ::config
 
   class { '::timezone': }
@@ -166,43 +166,8 @@ class config::base (
   }
 
   if $install_virtualenvs {
-    # allow the system have two python virtual environments
-    include pip
-    pip::install { 'virtualenv':
-      ensure  => present,
-      version => '16.7.9',
-    }
-
-    class { '::python':
-      version => 'system',
-      ensure  => 'present',
-      dev     => 'present',
-    }
-
-    file { $virtualenv_dir:
-      ensure => 'directory',
-      owner  => 'root',
-      mode   => '0755',
-    }
-
-    # it will load system python3 to a virtualenv,
-    # which is 3.7 for Amazon linux2, 3.6.8 for Centos7,
-    # and 3.6.8 for rhel7
-    python::virtualenv { "${virtualenv_dir}/py3":
-      ensure     => present,
-      version    => '3',
-      owner      => 'root',
-      group      => 'root',
-      distribute => false,
-      timeout    => 0,
-    }
-
-    python::virtualenv { "${virtualenv_dir}/py27":
-      ensure  => present,
-      version => '2.7',
-      owner   => 'root',
-      group   => 'root',
-      timeout => 0,
+    config::python_virtualenv { 'Config base python virtualenvs installation':
+      virtualenv_dir => $virtualenv_dir,
     }
   }
 
@@ -291,7 +256,7 @@ class config::base (
       ],
       logtraces   => true,
     }
-    collectd::plugin::python::module {'cloudwatch_writer':
+    collectd::plugin::python::module { 'cloudwatch_writer':
       modulepath    => "${collectd_cloudwatch_base_dir}/src",
       script_source => 'puppet:///modules/config/cloudwatch_writer.py',
     }
