@@ -24,7 +24,9 @@
     "os_type": "",
     "aws_user": "ec2-user",
     "packer_aem_version": "",
-    "temporary_security_group_source_cidr": ""
+    "temporary_security_group_source_cidr": "",
+    "kms_key_id": "",
+    "enable_ebs_volume_encryption": ""
   },
   "provisioners": [
     {
@@ -156,7 +158,8 @@
           "volume_size": "{{user `data_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "{{user `devicemap_data_b`}}"
+          "device_name": "{{user `devicemap_data_b`}}",
+          "encrypted": "{{user `enable_ebs_volume_encryption`}}"
         }
       ],
       "source_ami": "{{user `source_ami`}}",
@@ -203,13 +206,15 @@
           "volume_size": "{{user `root_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "{{user `devicemap_root`}}"
+          "device_name": "{{user `devicemap_root`}}",
+          "encrypted": "{{user `enable_ebs_volume_encryption`}}"
         },
         {
           "volume_size": "{{user `data_volume_size`}}",
           "delete_on_termination": true,
           "volume_type": "gp2",
-          "device_name": "{{user `devicemap_data_b`}}"
+          "device_name": "{{user `devicemap_data_b`}}",
+          "encrypted": "{{user `enable_ebs_volume_encryption`}}"
         }
       ],
       "ami_users": "{{user `ami_users`}}",

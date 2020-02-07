@@ -1,2 +1,5 @@
 [MESSAGES CONTROL]
 disable=C0301, W1306
+
+[TYPECHECK]
+ignored-modules=ansible.module_utils

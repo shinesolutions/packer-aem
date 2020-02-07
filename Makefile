@@ -106,7 +106,7 @@ lint:
 		--no-selector_inside_resource-check \
 		provisioners/puppet/manifests/*.pp \
 		provisioners/puppet/modules/*/manifests/*.pp
-	pylint provisioners/ansible/library/*.py
+	pylint provisioners/ansible/library_utils/*.py provisioners/ansible/library/*.py
 	shellcheck $$(find provisioners scripts -name '*.sh')
 	puppet parser validate \
 		provisioners/puppet/manifests/*.pp \
