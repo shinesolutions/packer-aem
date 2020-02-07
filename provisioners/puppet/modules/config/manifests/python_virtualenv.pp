@@ -1,4 +1,4 @@
-define config::pythin_virtualenv (
+define config::python_virtualenv (
   $virtualenv_dir,
 ) {
 
