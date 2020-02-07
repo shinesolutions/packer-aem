@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Added 
-- Add python3.6 and python2.7 virtualenv
+- Add python3 and python2.7 virtualenv
 
 ## 4.21.0 - 2020-01-30
 ### Changed
