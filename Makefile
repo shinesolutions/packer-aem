@@ -198,7 +198,7 @@ test-integration: deps deps-test
 	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem65
 
 test-integration-local: deps-local deps-test-local
-	make config config_path=./stage/user-config/aws-rhel7-aem65
+	make config config_path=../stage/user-config/aws-rhel7-aem65
 	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem65
 
 ################################################################################
