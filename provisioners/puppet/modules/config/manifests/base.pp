@@ -256,7 +256,7 @@ class config::base (
       ],
       logtraces   => true,
     }
-    collectd::plugin::python::module { 'cloudwatch_writer':
+    collectd::plugin::python::module {'cloudwatch_writer':
       modulepath    => "${collectd_cloudwatch_base_dir}/src",
       script_source => 'puppet:///modules/config/cloudwatch_writer.py',
     }
