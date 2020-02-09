@@ -27,14 +27,16 @@ define config::python_virtualenv (
     owner      => 'root',
     group      => 'root',
     distribute => false,
+    systempkgs => true,
     timeout    => 0,
   }
 
   python::virtualenv { "${virtualenv_dir}/py27":
-    ensure  => present,
-    version => '2.7',
-    owner   => 'root',
-    group   => 'root',
-    timeout => 0,
+    ensure     => present,
+    version    => '2.7',
+    owner      => 'root',
+    group      => 'root',
+    systempkgs => true,
+    timeout    => 0,
   }
 }
