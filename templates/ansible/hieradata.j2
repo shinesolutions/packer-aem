@@ -34,6 +34,11 @@ aem_curator::install_author::aem_keystore_password: "%{lookup('{{ aem.keystore_p
 aem_curator::install_author::aem_artifacts_base: {{ aem.artifacts_base }}
 aem_curator::install_author::aem_jvm_mem_opts: "{{ aem.author.jvm_mem_opts }}"
 aem_curator::install_author::aem_jvm_opts:
+{% if aem.author.jvm_opts is defined and (aem.author.jvm_opts | length>0) %}
+{% for jvm_opt in aem.author.jvm_opts %}
+- '{{ jvm_opt }}'
+{% endfor %}
+{% endif %}
 - '-XX:+PrintGCDetails'
 - '-XX:+PrintGCTimeStamps'
 - '-XX:+PrintGCDateStamps'
@@ -53,6 +58,11 @@ aem_curator::install_publish::aem_keystore_password: "%{lookup('{{ aem.keystore_
 aem_curator::install_publish::aem_artifacts_base: {{ aem.artifacts_base }}
 aem_curator::install_publish::aem_jvm_mem_opts: "{{ aem.publish.jvm_mem_opts }}"
 aem_curator::install_publish::aem_jvm_opts:
+{% if aem.publish.jvm_opts is defined and (aem.publish.jvm_opts | length>0) %}
+{% for jvm_opt in aem.publish.jvm_opts %}
+- '{{ jvm_opt }}'
+{% endfor %}
+{% endif %}
 - '-XX:+PrintGCDetails'
 - '-XX:+PrintGCTimeStamps'
 - '-XX:+PrintGCDateStamps'

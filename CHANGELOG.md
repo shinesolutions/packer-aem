@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add new configuration parameters to configure jvm_opts
+
 ## 4.22.0 - 2020-02-09
 ### Added
 - Add feature to enable EBS Volume encryption when baking [#198]

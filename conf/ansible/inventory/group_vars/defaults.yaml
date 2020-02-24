@@ -79,9 +79,11 @@ aem:
   jdk_base_url: overwrite-me
   author:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
+    jvm_opts: []
     run_modes: []
   publish:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
+    jvm_opts: []
     run_modes: []
   dispatcher:
     version: 4.3.3
