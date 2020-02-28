@@ -11,13 +11,18 @@ include aem_curator::install_author
 include aem_curator::install_publish
 
 if $::config::base::install_cloudwatchlogs {
-  config::cloudwatchlogs_aem { 'author: Setup CloudWatch for AEM Author':
-    aem_id => 'author',
+  if $::config::base::install_cloudwatchlogs_aem {
+    config::cloudwatchlogs_aem { 'author: Setup CloudWatch for AEM Author':
+      aem_id => 'author',
+    }
+    config::cloudwatchlogs_aem { 'publish: Setup CloudWatch for AEM Publish':
+      aem_id => 'publish',
+    }
   }
-  config::cloudwatchlogs_aem { 'publish: Setup CloudWatch for AEM Publish':
-    aem_id => 'publish',
+
+  if $::config::base::install_cloudwatchlogs_httpd {
+    config::cloudwatchlogs_httpd { 'Setup CloudWatch for Dispatcher': }
   }
-  config::cloudwatchlogs_httpd { 'Setup CloudWatch for Dispatcher': }
 
   # At the end of doing all Cloudwatch actions we are disabling and stopping the
   # CloudWatch agent, and removing the awslogs pid file.

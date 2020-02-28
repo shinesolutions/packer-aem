@@ -5,7 +5,10 @@ include ::config::certs
 include aem_curator::install_java
 
 if $::config::base::install_cloudwatchlogs {
-  config::cloudwatchlogs_java { 'Setup CloudWatch for Java': }
+
+  if $::config::base::install_cloudwatchlogs_java {
+    config::cloudwatchlogs_java { 'Setup CloudWatch for Java': }
+  }
 
   # At the end of doing all Cloudwatch actions we are disabling and stopping the
   # CloudWatch agent, and removing the awslogs pid file.
