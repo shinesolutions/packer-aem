@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add new configuration parameter to enable/disable log configuration for Cloudwatch Agent
 
+### Changed
+- Upgrade ruby_aem_aws version to 1.5.0
+
 ## 4.22.0 - 2020-02-09
 ### Added
 - Add feature to enable EBS Volume encryption when baking [#198]
