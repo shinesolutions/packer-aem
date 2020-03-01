@@ -7,5 +7,5 @@
   "aws_vpc_id": "",
   "iam_instance_profile": "overwrite-me",
   "puppet_bin_dir": "/opt/puppetlabs/bin",
-  "packer_aem_version": "4.22.1-pre.0"
+  "packer_aem_version": "4.23.0"
 }
