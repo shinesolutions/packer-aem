@@ -164,9 +164,11 @@ dispatcher_id = @hiera.lookup('aem_curator::install_dispatcher::aem_id', 'dispat
 
 setup_data_volume = @hiera.lookup('aem_curator::install_dispatcher::setup_data_volume', nil, @scope)
 
-data_volume_device = @hiera.lookup('aem_curator::install_dispatcher::data_volume_device', nil, @scope)
+# data_volume_device = @hiera.lookup('aem_curator::install_dispatcher::data_volume_device', nil, @scope)
+data_volume_device = '/dev/xvdd'
 
-data_volume_mount_point = @hiera.lookup('aem_curator::install_dispatcher::data_volume_mount_point', nil, @scope)
+# data_volume_mount_point = @hiera.lookup('aem_curator::install_dispatcher::data_volume_mount_point', nil, @scope)
+data_volume_mount_point = '/mnt/ebs3'
 
 docroot_dir = @hiera.lookup('aem_curator::install_dispatcher::docroot_dir', '/var/www/html', @scope)
 
