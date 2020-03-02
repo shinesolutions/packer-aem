@@ -27,7 +27,7 @@ apache_user = @hiera.lookup('aem_curator::install_dispatcher::apache_user', 'apa
 apache_group = @hiera.lookup('aem_curator::install_dispatcher::apache_group', 'apache', @scope)
 
 if setup_data_volume
-  describe mount("#{data_volume_mount_point}") do
+  describe mount(data_volume_mount_point) do
     it { should be_mounted }
     its('device') { should eq data_volume_device }
   end
@@ -38,12 +38,12 @@ if setup_data_volume
     its('link_path') { should eq "#{data_volume_mount_point}/#{aem_id}" }
   end
 else
-    describe file(docroot_dir) do
-      it { should exist }
-      it { should be_directory }
-      its('owner') { should eq apache_user }
-      its('group') { should eq apache_group }
-    end
+  describe file(docroot_dir) do
+    it { should exist }
+    it { should be_directory }
+    its('owner') { should eq apache_user }
+    its('group') { should eq apache_group }
+  end
 end
 
 describe package(apache_package) do
