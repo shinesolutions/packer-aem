@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Move AEM SSL Keystore from `crx-quickstart/ssl` to `/etc/ssl` [#209]
+
 ## 4.23.0 - 2020-03-01
 ### Added
 - Add new configuration parameter to enable/disable log configuration for Cloudwatch Agent

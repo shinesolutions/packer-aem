@@ -18,6 +18,7 @@ aem_curator::install_author::setup_repository_volume: true
 aem_curator::install_author::data_volume_mount_point: /mnt/ebs1
 aem_curator::install_author::post_stop_sleep_secs: 300
 aem_curator::install_author::aem_license_base: "%{lookup('tmp_dir')}/license"
+aem_curator::install_author::aem_keystore_path: /etc/ssl/aem-author/author.ks
 
 aem_curator::install_publish::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_publish::aem_host: localhost
@@ -28,6 +29,7 @@ aem_curator::install_publish::setup_repository_volume: true
 aem_curator::install_publish::data_volume_mount_point: /mnt/ebs1
 aem_curator::install_publish::post_stop_sleep_secs: 300
 aem_curator::install_publish::aem_license_base: "%{lookup('tmp_dir')}/license"
+aem_curator::install_publish::aem_keystore_path: /etc/ssl/aem-publish/publish.ks
 
 aem_curator::install_dispatcher::tmp_dir: "%{lookup('tmp_dir')}"
 aem_curator::install_dispatcher::cert_base_url: "file://%{lookup('tmp_dir')}/certs"
