@@ -1,5 +1,6 @@
 {
   "ami_users": "",
+  "snapshot_users": "",
   "aws_region": "ap-southeast-2",
   "aws_security_group_id": "",
   "aws_subnet_id": "",

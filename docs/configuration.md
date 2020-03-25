@@ -54,6 +54,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.subnet_id | [Subnet](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html) ID where Packer creation will run from | Mandatory | |
 | aws.source_ami | ID of the AMI used as the base of all component AMIs  | Mandatory | |
 | aws.ami_users | A comma-separated-value string of AWS account IDs to share the created AMIs with. Empty or undefined indicates the created AMIs won't be shared. | Optional | |
+| aws.snapshot_users | A comma-separated-value string of AWS account IDs to copy volumes from the shared AMI(s). Empty or undefined indicates the shared AMIs are not allow to be copied in any destination accounts. | Optional | |
 | aws.temporary_security_group_source_cidr | A comma-separated-value string of IPv4 CIDR blocks to be authorised access to the instance, when packer is creating a temporary security group. | Optional | `0.0.0.0/0` |
 | aws.iam_instance_profile | IAM Instance Profile name as set up in [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) | Mandatory | |
 | aws.install_ssm_agent | Set to `true` when SSM agent must be installed | Optional | `true` |
