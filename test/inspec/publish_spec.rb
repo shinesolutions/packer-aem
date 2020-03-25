@@ -10,9 +10,6 @@ aem_base ||= '/opt'
 aem_port = @hiera.lookup('publish::aem_port', nil, @scope)
 aem_port ||= '4503'
 
-data_volume_mount_point = @hiera.lookup('aem_curator::install_publish::data_volume_mount_point', nil, @scope)
-data_volume_mount_point ||= '/mnt/ebs1'
-
 aem_keystore_path = @hiera.lookup('aem_curator::install_publish::aem_keystore_path', nil, @scope)
 aem_keystore_path ||= '/etc/ssl/aem-publish/publish.ks'
 
@@ -51,7 +48,7 @@ describe file("#{aem_base}/aem/publish/aem-publish-#{aem_port}.jar") do
   it { should be_grouped_into 'aem-publish' }
 end
 
-describe file("#{aem_keystore_path}") do
+describe file(aem_keystore_path) do
   it { should be_file }
   it { should exist }
   its('mode') { should cmp '00640' }
