@@ -20,8 +20,8 @@ config::base::os_package_manager_packages:
   - unzip
   - jq
 
-config::base::python_package: python
-config::base::python_pip_package: python2-pip
+config::base::python_package: python2
+config::base::python_pip_package: python-pip
 config::base::python_cheetah_package: python-cheetah
 
 config::base::install_collectd: true
