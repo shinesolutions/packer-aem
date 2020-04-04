@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add InSpec tests for checking Dispatcher Data Volume
+- Add python3 and python2.7 virtualenv
+- Add snapshot_users in order to allow destination accounts to copy shared AMIs
 
 ## 4.23.0 - 2020-03-01
 ### Added

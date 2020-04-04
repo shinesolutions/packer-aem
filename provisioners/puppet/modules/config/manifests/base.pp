@@ -10,7 +10,8 @@
 # [*python_package*]
 # [*python_pip_package*]
 # [*python_cheetah_package*]
-#   System package manager names for the Python, pip and cheetah packages.
+# [*python_alt_package*]
+#   System package manager names for the Python, pip and cheetah packages and an alternaltive package.
 #
 # [*rhn_register*]
 #   Boolean that determines whether the instance should be registered with the RedHat Network.
@@ -78,27 +79,30 @@ class config::base (
   $awslogs_service_name,
   $awslogs_proxy_path,
   $awslogs_path,
-  $base_dir = '/opt/shinesolutions',
-  $rhn_register = false,
-  $disable_selinux = true,
-  $install_aws_cli = true,
-  $install_cloudwatchlogs = true,
-  $install_cloudwatchlogs_aem = true,
-  $install_cloudwatchlogs_httpd = true,
-  $install_cloudwatchlogs_java = true,
-  $install_collectd = true,
-  $install_amazon_ssm_agent = true,
-  $install_cloudwatch_metric_agent = true,
-  $metric_root_disk_path = '',
-  $metric_data_disk_path = '',
-  $collectd_cloudwatch_source_url = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
+  $python_alt_package,
+  $base_dir                         = '/opt/shinesolutions',
+  $virtualenv_dir                   = '/home/.virtualenvs',
+  $rhn_register                     = false,
+  $disable_selinux                  = true,
+  $install_aws_cli                  = true,
+  $install_virtualenvs              = true,
+  $install_cloudwatchlogs           = true,
+  $install_cloudwatchlogs_aem       = true,
+  $install_cloudwatchlogs_httpd     = true,
+  $install_cloudwatchlogs_java      = true,
+  $install_collectd                 = true,
+  $install_amazon_ssm_agent         = true,
+  $install_cloudwatch_metric_agent  = true,
+  $metric_root_disk_path            = '',
+  $metric_data_disk_path            = '',
+  $collectd_cloudwatch_source_url   = 'https://github.com/awslabs/collectd-cloudwatch/archive/master.tar.gz',
   $cloudwatchlogs_logfiles          = {},
   $cloudwatchlogs_logfiles_defaults = {},
-  $collectd_packages = [],
-  $http_proxy = undef,
-  $https_proxy = undef,
-  $no_proxy = undef,
-){
+  $collectd_packages                = [],
+  $http_proxy                       = undef,
+  $https_proxy                      = undef,
+  $no_proxy                         = undef,
+) {
   require ::config
 
   class { '::timezone': }
@@ -138,7 +142,7 @@ class config::base (
     ensure => installed,
   }
 
-  package { [ $python_package, $python_pip_package, $python_cheetah_package ]:
+  package { [ $python_package, $python_pip_package, $python_cheetah_package, $python_alt_package, ]:
     ensure => latest,
   }
 
@@ -162,6 +166,12 @@ class config::base (
   package { 'boto3':
     ensure   => '1.8.5',
     provider => 'pip',
+  }
+
+  if $install_virtualenvs {
+    config::python_virtualenv { 'Config base python virtualenvs installation':
+      virtualenv_dir => $virtualenv_dir,
+    }
   }
 
   if $install_cloudwatchlogs {
