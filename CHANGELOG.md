@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Added
-- Add snapshot_users to allow destionation accounts copying shared AMIs
+- Add snapshot_users in order to allow destination accounts to copy shared AMIs
 
 ## 4.23.0 - 2020-03-01
 ### Added
