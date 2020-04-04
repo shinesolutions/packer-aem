@@ -1,5 +1,6 @@
 {
   "ami_users": "",
+  "snapshot_users": "",
   "aws_region": "ap-southeast-2",
   "aws_security_group_id": "",
   "aws_subnet_id": "",
@@ -7,5 +8,5 @@
   "aws_vpc_id": "",
   "iam_instance_profile": "overwrite-me",
   "puppet_bin_dir": "/opt/puppetlabs/bin",
-  "packer_aem_version": "4.21.1-pre.0"
+  "packer_aem_version": "4.23.1-pre.0"
 }

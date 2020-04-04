@@ -30,10 +30,14 @@ aws:
     create_s3_bucket: true
   source_ami: overwrite-me
   ami_users: ''
+  snapshot_users: ''
   temporary_security_group_source_cidr: '0.0.0.0/0'
   instance_profile: overwrite-me
   install_ssm_agent: true
   install_cloudwatchlogs: true
+  install_cloudwatchlogs_aem: true
+  install_cloudwatchlogs_httpd: true
+  install_cloudwatchlogs_java: true
   install_cloudwatch_metric_agent: false
   root_volume_size: 30
   data_volume_size: 75
@@ -76,7 +80,6 @@ docker:
 aem:
   profile: aem65_sp1
   keystore_password_parameter: overwrite-me
-  jdk_base_url: overwrite-me
   author:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
     run_modes: []
@@ -93,6 +96,7 @@ aem:
     filename: jdk-8u221-linux-x64.rpm
     version: 8
     version_update: 221
+    base_url: overwrite-me
 
 library:
   aem_healthcheck_version: 1.3.3

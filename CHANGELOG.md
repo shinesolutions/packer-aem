@@ -6,15 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
 ### Added 
 - Add python3 and python2.7 virtualenv
+- Add snapshot_users in order to allow destination accounts to copy shared AMIs
 
+## 4.23.0 - 2020-03-01
 ### Added
-- Add feature to enable EBS Volume encryption when baking #198
-- Add feature to define CMK for enabling EBS Volume encryption #198
+- Add new configuration parameter to enable/disable log configuration for Cloudwatch Agent
+
+### Changed
+- Upgrade ruby_aem_aws version to 1.5.0
+- Upgrade aem_curator to 3.9.0
+
+## 4.22.0 - 2020-02-09
+### Added
+- Add feature to enable EBS Volume encryption when baking [#198]
+- Add feature to define CMK for enabling EBS Volume encryption [#198]
 
 ## 4.21.0 - 2020-01-30
-
 ### Changed
 - Upgrade aem_curator to 3.8.0
 

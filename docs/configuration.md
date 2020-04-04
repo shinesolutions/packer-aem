@@ -39,7 +39,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aem.dispatcher.apache_module_base_url | AEM Dispatcher Apache library base URL.  Source URL can be: `s3://...`, `http://...`, `https://...`, or `file://...`  | Optional | `http://download.macromedia.com/dispatcher/download` |
 | aem.artifacts_base | Source URL path of AEM artifacts, it could be `s3://...`, `http://...`, `https://...`, or `file://...`. In [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) case, it could be an S3 Bucket path, e.g. s3://somebucket/artifacts/.  Object name must be: `aem.key` | Mandatory | |
 | aem.enable_custom_image_provisioner | Set to `true` when Custom Image Provisioner pre and post steps will be executed , note: place `aem-custom-image-provisioner.tar.gz` artifact in `stage/custom/` directory | Optional | `false` |
-| aem.jdk.base_url | Base URL (just the path, not the file name) where JDK RPM file would be located. URL can be: `s3://...`, `http://...`, `https://...`, or `file://...` | Mandatory | |
+| aem.jdk.base_url | Base URL (just the path, not the file name) where JDK RPM file would be located. URL can be: `s3://...`, `http://...`, `https://...`, or `file://...`. **The download URL `download.oracle.com` is not supported anymore.** | Mandatory | |
 | aem.jdk.filename | JDK RPM file name, this file must be located at `aem.jdk.base_url` | Optional | jdk-8u221-linux-x64.rpm |
 | aem.jdk.version | JDK version number | Optional | 8 |
 | aem.jdk.version_update | JDK update version number | Optional | 221 |
@@ -54,10 +54,14 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.subnet_id | [Subnet](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html) ID where Packer creation will run from | Mandatory | |
 | aws.source_ami | ID of the AMI used as the base of all component AMIs  | Mandatory | |
 | aws.ami_users | A comma-separated-value string of AWS account IDs to share the created AMIs with. Empty or undefined indicates the created AMIs won't be shared. | Optional | |
+| aws.snapshot_users | A comma-separated-value string of AWS account IDs to copy volumes from the shared AMI(s). Empty or undefined indicates the shared AMIs are not allow to be copied in any destination accounts. | Optional | |
 | aws.temporary_security_group_source_cidr | A comma-separated-value string of IPv4 CIDR blocks to be authorised access to the instance, when packer is creating a temporary security group. | Optional | `0.0.0.0/0` |
 | aws.iam_instance_profile | IAM Instance Profile name as set up in [AWS Resources](https://github.com/shinesolutions/packer-aem/blob/master/docs/aws-resources.md) | Mandatory | |
 | aws.install_ssm_agent | Set to `true` when SSM agent must be installed | Optional | `true` |
 | aws.install_cloudwatchlogs | Set to `true` when CloudWatch logs agent must be installed | Optional | `true` |
+| aws.install_cloudwatchlogs_aem | Set to `true` when CloudWatch logs agent should be configured to stream AEM Author & Publish component logs to Cloudwatch | Optional | `true` |
+| aws.install_cloudwatchlogs_httpd | Set to `true` when CloudWatch logs agent should be configured to stream AEM Dispatcher component logs to Cloudwatch | Optional | `true` |
+| aws.install_cloudwatchlogs_java | Set to `true` when CloudWatch logs agent should be configured to stream AOC Java component logs to Cloudwatch | Optional | `true` |
 | aws.install_cloudwatch_metric_agent | Set to `true` when [CloudWatch metric agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html) must be installed. If this is enabled, you must set your root device name to `/dev/xvda2` | Optional | `false` |
 | aws.root_volume_size | The size of root volume in Gb, this is where the operating system and AEM installation reside | Optional | `20` |
 | aws.data_volume_size | The size of data volume in Gb, this is where AEM repository resides | Optional | `75` |
