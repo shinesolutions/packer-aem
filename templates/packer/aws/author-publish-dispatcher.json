@@ -8,6 +8,7 @@
     "root_volume_size": "30",
     "iam_instance_profile": "",
     "ami_users": "",
+    "snapshot_users": "",
     "https_proxy": "",
     "version": "x.x.x",
     "aws_vpc_id": "",
@@ -246,6 +247,7 @@
         }
       ],
       "ami_users": "{{user `ami_users`}}",
+      "snapshot_users": "{{ user `snapshot_users` }}",
       "type": "amazon-ebs",
       "ssh_pty": true,
       "temporary_security_group_source_cidrs": "{{ user `temporary_security_group_source_cidr` }}"
