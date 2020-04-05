@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add python3 and python2.7 virtualenv
 - Add snapshot_users in order to allow destination accounts to copy shared AMIs
 
+### Changed
+- Upgrade aem_curator to 3.11.0, aem_resources to 5.5.0
+
 ## 4.23.0 - 2020-03-01
 ### Added
 - Add new configuration parameter to enable/disable log configuration for Cloudwatch Agent
