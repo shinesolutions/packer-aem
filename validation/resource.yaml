@@ -1,5 +1,5 @@
 ---
-aem:
+aws:
     type: dict
     required: True
     allow_unknown: False
