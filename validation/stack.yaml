@@ -1,0 +1,79 @@
+---
+platform_type:
+    type: string
+    required: True
+    allowed:
+        - aws
+
+os_type:
+    type: string
+    required: True
+    allowed:
+        - rhel7
+        - amazon-linux2
+        - centos7
+
+http_proxy:
+    type: string
+    required: True
+
+https_proxy:
+    type: string
+    required: True
+
+no_proxy:
+    type: string
+    required: True
+
+timezone:
+    type: dict
+    required: True
+    allow_unknown: False
+    empty: False
+    schema:
+        region:
+            type: string
+        locality:
+            type: string
+
+custom_image_provisioner:
+    type: dict
+    required: True
+    allow_unknown: False
+    empty: False
+    schema:
+        pre:
+            type: dict
+            required: True
+            schema:
+                timeout:
+                    type: integer
+        post:
+            type: dict
+            required: True
+            schema:
+                timeout:
+                    type: integer
+
+library:
+    type: dict
+    required: True
+    allow_unknown: False
+    empty: False
+    schema:
+        aem_healthcheck_version: 
+            type: string
+
+aws:
+    type: dict
+    required: True
+    allow_unknown: False
+    empty: False
+    schema: !include aws.yaml
+
+aem:
+    type: dict
+    required: True
+    allow_unknown: False
+    empty: False
+    schema: !include aem.yaml

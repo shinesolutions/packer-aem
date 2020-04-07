@@ -5,6 +5,11 @@
   gather_facts: no
   connection: local
 
+  roles:
+    - role: '../../../../ansible-vars-schema-validator/roles/validator'
+      vars:
+        schema: '../../../validation/resource.yaml'
+
   tasks:
 
     - name: "Create AWS SSM License Secure String Parameter"

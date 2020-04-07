@@ -4,6 +4,11 @@
   gather_facts: no
   connection: local
 
+  roles:
+    - role: '../../../../ansible-vars-schema-validator/roles/validator'
+      vars:
+        schema: '../../../validation/stack.yaml'
+
   tasks:
 
     - name: Generate Hieradata configuration

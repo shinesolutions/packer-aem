@@ -1,0 +1,62 @@
+---
+profile:
+    type: string
+    allowed:
+        - aem62
+        - aem65_sp1
+        - aem65_sp2
+
+keystore_password_parameter:
+    type: string
+    forbidden: 
+        - overwrite-me
+
+author:
+    type: dict
+    schema:
+        jvm_mem_opts:
+            type: string
+        run_modes:
+            type: list
+
+publish:
+    type: dict
+    schema:
+        jvm_mem_opts:
+            type: string
+        run_modes:
+            type: list
+
+dispatcher:
+    type: dict
+    schema:
+        version:
+            type: string
+        ssl_version:
+            empty: False
+        apache_module_base_url:
+            type: string
+            regex: (s3://|http://|https://|file://)(.+)
+
+artifacts_base: 
+    type: string
+    forbidden: 
+        - overwrite-me
+
+enable_custom_image_provisioner: 
+    type: boolean
+
+jdk:
+    type: dict
+    schema:
+        filename: 
+            type: string
+        version:
+            empty: False
+        version_update:
+            empty: False
+        base_url:
+            type: string
+            regex: (s3://|http://|https://|file://)(.+)
+            forbidden: 
+                - overwrite-me

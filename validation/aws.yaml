@@ -1,0 +1,162 @@
+user: 
+    type: string
+
+region:
+    type: string
+    allowed:
+        - us-east-1
+        - us-east-2
+        - us-west-1
+        - us-west-2
+        - ap-east-1
+        - ap-south-1
+        - ap-northeast-1
+        - ap-northeast-2
+        - ap-northeast-3
+        - ap-southeast-1
+        - ap-southeast-2
+        - ca-central-1
+        - cn-north-1
+        - cn-northwest-1
+        - eu-central-1
+        - eu-west-1
+        - eu-west-2
+        - eu-west-3
+        - eu-north-1
+        - me-south-1
+        - sa-east-1
+        - us-gov-east-1
+        - us-gov-west-1
+
+vpc_id:
+    type: string
+    forbidden: 
+        - overwrite-me
+
+subnet_id:
+    type: string
+    forbidden: 
+        - overwrite-me
+
+source_ami:
+    type: string
+    forbidden: 
+        - overwrite-me
+
+ami_users:
+    type: string
+
+snapshot_users:
+    type: string
+
+temporary_security_group_source_cidr:
+    type: string
+
+instance_profile:
+    type: string
+    forbidden: 
+        - overwrite-me
+
+install_ssm_agent:
+    type: boolean
+
+install_cloudwatchlogs:
+    type: boolean
+
+install_cloudwatchlogs_aem:
+    type: boolean
+
+install_cloudwatchlogs_httpd:
+    type: boolean
+
+install_cloudwatchlogs_java:
+    type: boolean
+
+install_cloudwatch_metric_agent:
+    type: boolean
+
+root_volume_size:
+    type: integer
+
+data_volume_size:
+    type: integer
+
+certificate_arn:
+    type: string
+    forbidden: 
+        - overwrite-me
+
+certificate_key_arn:
+    type: string
+    forbidden: 
+        - overwrite-me
+
+aem_license:
+    type: string
+    forbidden: 
+        - overwrite-me
+
+tags:
+    type: list
+
+encryption:
+    type: dict
+    schema:
+        ebs_volume:
+            type: dict
+            schema:
+                enable:
+                    type: boolean
+                kms_key_id:
+                    type: string
+
+resources:
+    type: dict
+
+rhel7:
+    type: dict
+    schema:
+        devicemap_root:
+            type: string
+        devicemap_data_b:
+            type: string
+        devicemap_data_c:
+            type: string
+        devicemap_data_e:
+            type: string
+
+rhel8:
+    type: dict
+    schema:
+        devicemap_root:
+            type: string
+        devicemap_data_b:
+            type: string
+        devicemap_data_c:
+            type: string
+        devicemap_data_e:
+            type: string
+
+centos7:
+    type: dict
+    schema:
+        devicemap_root:
+            type: string
+        devicemap_data_b:
+            type: string
+        devicemap_data_c:
+            type: string
+        devicemap_data_e:
+            type: string
+
+amazon-linux2:
+    type: dict
+    schema:
+        devicemap_root:
+            type: string
+        devicemap_data_b:
+            type: string
+        devicemap_data_c:
+            type: string
+        devicemap_data_e:
+            type: string

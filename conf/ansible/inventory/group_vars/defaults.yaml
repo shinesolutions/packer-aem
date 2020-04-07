@@ -50,9 +50,7 @@ aws:
       Value: overwrite-me
   certificate_arn: overwrite-me
   certificate_key_arn: overwrite-me
-  aem_certs_base: overwrite-me
   aem_license: overwrite-me
-  aem_license_base: overwrite-me
   rhel7:
     devicemap_root: /dev/xvda
     devicemap_data_b: /dev/xvdb
@@ -73,9 +71,6 @@ aws:
     devicemap_data_b: /dev/xvdb
     devicemap_data_c: /dev/xvdc
     devicemap_data_e: /dev/xvdd
-
-docker:
-  source: overwrite-me
 
 aem:
   profile: aem65_sp1

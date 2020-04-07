@@ -1,0 +1,48 @@
+---
+aem:
+    type: dict
+    required: True
+    allow_unknown: False
+    empty: False
+    schema:
+        region:
+            type: string
+            allowed:
+                - us-east-1
+                - us-east-2
+                - us-west-1
+                - us-west-2
+                - ap-east-1
+                - ap-south-1
+                - ap-northeast-1
+                - ap-northeast-2
+                - ap-northeast-3
+                - ap-southeast-1
+                - ap-southeast-2
+                - ca-central-1
+                - cn-north-1
+                - cn-northwest-1
+                - eu-central-1
+                - eu-west-1
+                - eu-west-2
+                - eu-west-3
+                - eu-north-1
+                - me-south-1
+                - sa-east-1
+                - us-gov-east-1
+                - us-gov-west-1
+        resources:
+            type: dict
+            schema:
+                stack_name:
+                    type: string
+                s3_bucket:
+                    type: string
+                    forbidden: 
+                        - overwrite-me
+                enable_secrets_manager:
+                    type: boolean
+                create_iam_packer_role:
+                    type: boolean
+                create_s3_bucket:
+                    type: boolean
