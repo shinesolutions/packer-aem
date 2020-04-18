@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade ruby_aem to 3.6.0
+
 ## 4.24.0 - 2020-04-15
 ### Added
 - Add InSpec tests for checking Dispatcher Data Volume
