@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Upgrade ruby_aem to 3.6.0
-- Upgrade aem_curator to 3.12.0, aem_resources to 6.0.0
+- Upgrade aem_curator to 3.13.1, aem_resources to 7.0.0
 
 ## 4.24.0 - 2020-04-15
 ### Added
