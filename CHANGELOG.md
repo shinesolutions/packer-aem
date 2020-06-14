@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Move AEM SSL Keystore from `crx-quickstart/ssl` to `/etc/ssl` [#209]
+- Upgrade ruby_aem to 3.7.0
+
+## 4.25.0 - 2020-05-14
+### Changed
+- Upgrade ruby_aem to 3.6.0
+- Upgrade aem_curator to 3.13.2, aem_resources to 7.0.1
+
+## 4.24.0 - 2020-04-15
+### Added
+- Add InSpec tests for checking Dispatcher Data Volume
+- Add python3 and python2.7 virtualenv
+- Add snapshot_users in order to allow destination accounts to copy shared AMIs
+
+### Changed
+- Upgrade aem_curator to 3.11.0, aem_resources to 5.5.0
 
 ## 4.23.0 - 2020-03-01
 ### Added
