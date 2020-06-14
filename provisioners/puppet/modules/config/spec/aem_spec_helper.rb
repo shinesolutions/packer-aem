@@ -86,7 +86,7 @@ shared_examples "aem" do |role, port|
   it { is_expected.to contain_archive('/tmp/aem_certs/aem.key') }
   it { is_expected.to contain_archive('/tmp/aem_certs/aem.cert') }
   it {
-    is_expected.to contain_java_ks("cqse:/opt/aem/#{role}/crx-quickstart/ssl/aem.ks")
+    is_expected.to contain_java_ks("cqse:/etc/ssl/aem-#{role}/#{role}.ks")
     .that_requires([
       'Archive[/tmp/aem_certs/aem.key]',
       'Archive[/tmp/aem_certs/aem.cert]',

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Changed
+- Move AEM SSL Keystore from `crx-quickstart/ssl` to `/etc/ssl` [#209]
 - Upgrade ruby_aem to 3.7.0
 
 ## 4.25.0 - 2020-05-14
