@@ -5,8 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
-
+## 4.26.0 - 2020-06-15
 ### Changed
 - Move AEM SSL Keystore from `crx-quickstart/ssl` to `/etc/ssl` [#209]
 - Upgrade ruby_aem to 3.7.0
