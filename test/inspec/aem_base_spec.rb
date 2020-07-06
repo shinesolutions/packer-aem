@@ -14,7 +14,7 @@ describe gem('ruby_aem', '/opt/puppetlabs/puppet/bin/gem') do
   end
 
   it { should be_installed }
-  its('version') { should eq '3.4.0' }
+  its('version') { should eq '3.8.0' }
 end
 
 describe gem('ruby_aem_aws', '/opt/puppetlabs/puppet/bin/gem') do

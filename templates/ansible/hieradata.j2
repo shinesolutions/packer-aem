@@ -33,15 +33,15 @@ amazon_ssm_agent::proxy_url: {{ http_proxy }}
 
 aem_curator::install_author::aem_profile: {{ aem.profile }}
 aem_curator::install_author::aem_keystore_password: "%{lookup('{{ aem.keystore_password_parameter }}')}"
+aem_curator::install_author::aem_ssl_keystore_path: {{ aem.ssl_keystore_path }}
+aem_curator::install_author::aem_ssl_keystore_password: {{ aem.ssl_keystore_password }}
+aem_curator::install_author::aem_ssl_certificate_path: {{ aem.ssl_certificate_path }}
+aem_curator::install_author::aem_ssl_certificate_password: {{ aem.ssl_certificate_password }}
 
 aem_curator::install_author::aem_artifacts_base: {{ aem.artifacts_base }}
 aem_curator::install_author::aem_jvm_mem_opts: "{{ aem.author.jvm_mem_opts }}"
 aem_curator::install_author::aem_jvm_opts:
 - '-XX:+PrintGCDetails'
-- '-XX:+PrintGCTimeStamps'
-- '-XX:+PrintGCDateStamps'
-- '-XX:+PrintTenuringDistribution'
-- '-XX:+PrintGCApplicationStoppedTime'
 - '-XX:+HeapDumpOnOutOfMemoryError'
 {% if aem.author.run_modes is defined %}
 aem_curator::install_author::run_modes:
@@ -53,14 +53,14 @@ aem_curator::install_author::data_volume_device: "{{ aws[os_type].devicemap_data
 
 aem_curator::install_publish::aem_profile: {{ aem.profile }}
 aem_curator::install_publish::aem_keystore_password: "%{lookup('{{ aem.keystore_password_parameter }}')}"
+aem_curator::install_publish::aem_ssl_keystore_path: {{ aem.ssl_keystore_path }}
+aem_curator::install_publish::aem_ssl_keystore_password: {{ aem.ssl_keystore_password }}
+aem_curator::install_publish::aem_ssl_certificate_path: {{ aem.ssl_certificate_path }}
+aem_curator::install_publish::aem_ssl_certificate_password: {{ aem.ssl_certificate_password }}
 aem_curator::install_publish::aem_artifacts_base: {{ aem.artifacts_base }}
 aem_curator::install_publish::aem_jvm_mem_opts: "{{ aem.publish.jvm_mem_opts }}"
 aem_curator::install_publish::aem_jvm_opts:
 - '-XX:+PrintGCDetails'
-- '-XX:+PrintGCTimeStamps'
-- '-XX:+PrintGCDateStamps'
-- '-XX:+PrintTenuringDistribution'
-- '-XX:+PrintGCApplicationStoppedTime'
 - '-XX:+HeapDumpOnOutOfMemoryError'
 {% if aem.publish.run_modes is defined %}
 aem_curator::install_publish::run_modes:

@@ -6,7 +6,7 @@ config::package_manager_packages:
   - name: automake
   - name: libtool
   - name: ruby_aem
-    version: 3.4.0
+    version: 3.8.0
     provider: puppet_gem
   - name: ruby_aem_aws
     version: 1.5.0

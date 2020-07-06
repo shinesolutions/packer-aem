@@ -8,8 +8,5 @@ define config::collectd_jmx (
   # to set the default back to Oracle JDK
   class { 'collectd::plugin::genericjmx':
     manage_package => true,
-  } -> exec { "alternatives --set java /usr/java/jdk1.${jdk_version}.0_${jdk_version_update}-amd64/jre/bin/java":
-    path => [ '/bin', '/sbin', '/usr/bin', '/usr/sbin' ],
   }
-
 }
