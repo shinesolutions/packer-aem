@@ -10,8 +10,11 @@ aem_base ||= '/opt'
 aem_port = @hiera.lookup('publish::aem_port', nil, @scope)
 aem_port ||= '4503'
 
-aem_keystore_path = @hiera.lookup('aem_curator::install_publish::aem_keystore_path', nil, @scope)
-aem_keystore_path ||= '/etc/ssl/aem-publish/publish.ks'
+data_volume_mount_point = @hiera.lookup('aem_curator::install_publish::data_volume_mount_point', nil, @scope)
+data_volume_mount_point ||= '/mnt/ebs1'
+
+aem_publish_ssl_method = @hiera.lookup('aem_curator::install_publish::aem_ssl_method', nil, @scope)
+aem_publish_ssl_method ||= 'jetty'
 
 ### SSM paramter store lookup is only supported for hiera5
 # aem_keystore_password = @hiera.lookup('aem_curator::install_publish::aem_keystore_password', nil, @scope)
@@ -24,6 +27,7 @@ describe file("#{aem_base}/aem") do
   it { should be_grouped_into 'root' }
 end
 
+only_if { aem_publish_ssl_method != 'jetty' }
 describe file("#{aem_base}/aem/publish") do
   it { should be_directory }
   it { should exist }
@@ -48,13 +52,13 @@ describe file("#{aem_base}/aem/publish/aem-publish-#{aem_port}.jar") do
   it { should be_grouped_into 'aem-publish' }
 end
 
-describe file(aem_keystore_path) do
-  it { should be_file }
-  it { should exist }
-  its('mode') { should cmp '00640' }
-  it { should be_owned_by 'aem-publish' }
-  it { should be_grouped_into 'aem-publish' }
-end
+# describe file("#{aem_base}/aem/publish/crx-quickstart/ssl/aem.ks") do
+#   it { should be_file }
+#   it { should exist }
+#   its('mode') { should cmp '00640' }
+#   it { should be_owned_by 'aem-publish' }
+#   it { should be_grouped_into 'aem-publish' }
+# end
 
 describe service('aem-publish') do
   it { should_not be_enabled }
@@ -66,7 +70,7 @@ end
 # end
 
 # Test if default keystore password is not changeit
-describe command("keytool -list -keystore #{aem_keystore_path} -alias cqse -storepass changeit") do
+describe command("keytool -list -keystore #{data_volume_mount_point}/publish/crx-quickstart/ssl/aem.ks -alias cqse -storepass changeit") do
   its('exit_status') { should_not eq 0 }
 end
 

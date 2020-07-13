@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade ruby_aem to 3.8.0
 
+### Added
+- Added Granite SSL method [shinesolutions/puppet-aem-curator#220]
+- Added JDK11 support [shinesolutions/puppet-aem-curator#220]
+
 ## 4.26.0 - 2020-06-15
 ### Changed
 - Move AEM SSL Keystore from `crx-quickstart/ssl` to `/etc/ssl` [#209]

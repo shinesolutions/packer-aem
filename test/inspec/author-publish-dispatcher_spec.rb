@@ -13,6 +13,9 @@ aem_port ||= '4502'
 aem_author_keystore_path = @hiera.lookup('aem_curator::install_author::aem_keystore_path', nil, @scope)
 aem_author_keystore_path ||= '/etc/ssl/aem-author/author.ks'
 
+aem_author_ssl_method = @hiera.lookup('aem_curator::install_author::aem_ssl_method', nil, @scope)
+aem_author_ssl_method ||= 'jetty'
+
 ### SSM paramter store lookup is only supported for hiera5
 # aem_author_keystore_password = @hiera.lookup('aem_curator::install_author::aem_keystore_password', nil, @scope)
 
@@ -57,6 +60,7 @@ end
 #   it { should_not match(/changeit/) }
 # end
 
+only_if { aem_author_ssl_method != 'jetty' }
 describe file(aem_author_keystore_path) do
   it { should be_file }
   it { should exist }
@@ -95,6 +99,9 @@ aem_port ||= '4503'
 aem_publish_keystore_path = @hiera.lookup('aem_curator::install_publish::aem_keystore_path', nil, @scope)
 aem_publish_keystore_path ||= '/etc/ssl/aem-publish/publish.ks'
 
+aem_publish_ssl_method = @hiera.lookup('aem_curator::install_publish::aem_ssl_method', nil, @scope)
+aem_publish_ssl_method ||= 'jetty'
+
 ### SSM paramter store lookup is only supported for hiera5
 # aem_publish_keystore_password = @hiera.lookup('aem_curator::install_publish::aem_keystore_password', nil, @scope)
 
@@ -106,6 +113,7 @@ describe file("#{aem_base}/aem") do
   it { should be_grouped_into 'root' }
 end
 
+only_if { aem_publish_ssl_method != 'jetty' }
 describe file("#{aem_base}/aem/publish") do
   it { should be_directory }
   it { should exist }
