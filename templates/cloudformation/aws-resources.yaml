@@ -121,6 +121,7 @@ Resources:
                   - ec2:RunInstances
                   - ec2:StopInstances
                   - ec2:TerminateInstances
+                  - iam:GetServerCertificate
                   - iam:PassRole
                   - kms:Decrypt
                   - secretsmanager:GetSecretValue
