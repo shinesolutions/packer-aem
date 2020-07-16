@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Changed
 - Upgrade ruby_aem to 3.8.0
+- Lockdown puppet-agent version to 5.5.20 [#218]
 
 ## 4.26.0 - 2020-06-15
 ### Changed
