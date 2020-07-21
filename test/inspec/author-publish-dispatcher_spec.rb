@@ -4,17 +4,17 @@ require './spec_helper'
 
 init_conf
 
-aem_base = @hiera.lookup('author::aem_base', nil, @scope)
-aem_base ||= '/opt'
+aem_base = @hiera.lookup('author::aem_base', '/opt', @scope)
+# aem_base ||= '/opt'
 
-aem_port = @hiera.lookup('author::aem_port', nil, @scope)
-aem_port ||= '4502'
+aem_port = @hiera.lookup('author::aem_port', '4502', @scope)
+# aem_port ||= '4502'
 
-aem_author_keystore_path = @hiera.lookup('aem_curator::install_author::aem_keystore_path', nil, @scope)
-aem_author_keystore_path ||= '/etc/ssl/aem-author/author.ks'
+aem_author_keystore_path = @hiera.lookup('aem_curator::install_author::aem_keystore_path', '/etc/ssl/aem-author/author.ks', @scope)
+# aem_author_keystore_path ||= '/etc/ssl/aem-author/author.ks'
 
-aem_author_ssl_method = @hiera.lookup('aem_curator::install_author::aem_ssl_method', nil, @scope)
-aem_author_ssl_method ||= 'jetty'
+aem_author_ssl_method = @hiera.lookup('aem_curator::install_author::aem_ssl_method', 'jetty', @scope)
+# aem_author_ssl_method ||= 'jetty'
 
 ### SSM paramter store lookup is only supported for hiera5
 # aem_author_keystore_password = @hiera.lookup('aem_curator::install_author::aem_keystore_password', nil, @scope)
@@ -60,13 +60,16 @@ end
 #   it { should_not match(/changeit/) }
 # end
 
-only_if { aem_author_ssl_method != 'jetty' }
-describe file(aem_author_keystore_path) do
-  it { should be_file }
-  it { should exist }
-  its('mode') { should cmp '00640' }
-  it { should be_owned_by 'aem-author' }
-  it { should be_grouped_into 'aem-author' }
+if aem_author_ssl_method == 'jetty'
+
+  describe file(aem_author_keystore_path) do
+    it { should be_file }
+    it { should exist }
+    its('mode') { should cmp '00640' }
+    it { should be_owned_by 'aem-author' }
+    it { should be_grouped_into 'aem-author' }
+  end
+
 end
 
 # Test if default keystore password is changeit
@@ -90,17 +93,17 @@ describe file('/etc/puppetlabs/puppet/author.yaml') do
   it { should be_grouped_into 'root' }
 end
 
-aem_base = @hiera.lookup('publish::aem_base', nil, @scope)
-aem_base ||= '/opt'
+aem_base = @hiera.lookup('publish::aem_base', '/opt', @scope)
+# aem_base ||= '/opt'
 
-aem_port = @hiera.lookup('publish::aem_port', nil, @scope)
-aem_port ||= '4503'
+aem_port = @hiera.lookup('publish::aem_port', '4503', @scope)
+# aem_port ||= '4503'
 
-aem_publish_keystore_path = @hiera.lookup('aem_curator::install_publish::aem_keystore_path', nil, @scope)
-aem_publish_keystore_path ||= '/etc/ssl/aem-publish/publish.ks'
+aem_publish_keystore_path = @hiera.lookup('aem_curator::install_publish::aem_keystore_path', '/etc/ssl/aem-publish/publish.ks', @scope)
+# aem_publish_keystore_path ||= '/etc/ssl/aem-publish/publish.ks'
 
-aem_publish_ssl_method = @hiera.lookup('aem_curator::install_publish::aem_ssl_method', nil, @scope)
-aem_publish_ssl_method ||= 'jetty'
+aem_publish_ssl_method = @hiera.lookup('aem_curator::install_publish::aem_ssl_method', 'jetty', @scope)
+# aem_publish_ssl_method ||= 'jetty'
 
 ### SSM paramter store lookup is only supported for hiera5
 # aem_publish_keystore_password = @hiera.lookup('aem_curator::install_publish::aem_keystore_password', nil, @scope)
@@ -113,13 +116,16 @@ describe file("#{aem_base}/aem") do
   it { should be_grouped_into 'root' }
 end
 
-only_if { aem_publish_ssl_method != 'jetty' }
-describe file("#{aem_base}/aem/publish") do
-  it { should be_directory }
-  it { should exist }
-  its('mode') { should cmp '00775' }
-  it { should be_owned_by 'aem-publish' }
-  it { should be_grouped_into 'aem-publish' }
+if aem_publish_ssl_method == 'jetty'
+
+  describe file("#{aem_base}/aem/publish") do
+    it { should be_directory }
+    it { should exist }
+    its('mode') { should cmp '00775' }
+    it { should be_owned_by 'aem-publish' }
+    it { should be_grouped_into 'aem-publish' }
+  end
+
 end
 
 describe file("#{aem_base}/aem/publish/license.properties") do

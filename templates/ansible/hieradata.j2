@@ -38,8 +38,8 @@ aem_curator::install_author::aem_ssl_method: {{ aem.ssl_method }}
 aem_curator::install_author::aem_artifacts_base: {{ aem.artifacts_base }}
 aem_curator::install_author::aem_jvm_mem_opts: "{{ aem.author.jvm_mem_opts }}"
 aem_curator::install_author::aem_jvm_opts:
-- '-XX:+PrintGCDetails'
-- '-XX:+HeapDumpOnOutOfMemoryError'
+{{ aem.author.jvm_opts | to_nice_yaml | indent(width=2, first=True) }}
+
 {% if aem.author.run_modes is defined %}
 aem_curator::install_author::run_modes:
 {% for run_mode in aem.author.run_modes %}
@@ -54,8 +54,8 @@ aem_curator::install_publish::aem_ssl_method: {{ aem.ssl_method }}
 aem_curator::install_publish::aem_artifacts_base: {{ aem.artifacts_base }}
 aem_curator::install_publish::aem_jvm_mem_opts: "{{ aem.publish.jvm_mem_opts }}"
 aem_curator::install_publish::aem_jvm_opts:
-- '-XX:+PrintGCDetails'
-- '-XX:+HeapDumpOnOutOfMemoryError'
+{{ aem.publish.jvm_opts | to_nice_yaml | indent(width=2, first=True) }}
+
 {% if aem.publish.run_modes is defined %}
 aem_curator::install_publish::run_modes:
 {% for run_mode in aem.publish.run_modes %}

@@ -79,13 +79,28 @@ docker:
 
 aem:
   profile: aem65_sp1
+  ssl_method: jetty
   keystore_password_parameter: overwrite-me
   author:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
     run_modes: []
+    jvm_opts:
+      - '-XX:+PrintGCDetails'
+      - '-XX:+PrintGCTimeStamps'
+      - '-XX:+PrintGCDateStamps'
+      - '-XX:+PrintTenuringDistribution'
+      - '-XX:+PrintGCApplicationStoppedTime'
+      - '-XX:+HeapDumpOnOutOfMemoryError'
   publish:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"
     run_modes: []
+    jvm_opts:
+      - '-XX:+PrintGCDetails'
+      - '-XX:+PrintGCTimeStamps'
+      - '-XX:+PrintGCDateStamps'
+      - '-XX:+PrintTenuringDistribution'
+      - '-XX:+PrintGCApplicationStoppedTime'
+      - '-XX:+HeapDumpOnOutOfMemoryError'
   dispatcher:
     version: 4.3.3
     ssl_version: 1.0
@@ -97,6 +112,10 @@ aem:
     version: 8
     version_update: 221
     base_url: overwrite-me
-
+java:
+  filename: jdk-8u221-linux-x64.rpm
+  version: 8
+  version_update: 221
+  base_url: overwrite-me
 library:
   aem_healthcheck_version: 1.3.3

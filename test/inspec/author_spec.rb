@@ -4,17 +4,17 @@ require './spec_helper'
 
 init_conf
 
-aem_base = @hiera.lookup('author::aem_base', nil, @scope)
-aem_base ||= '/opt'
+aem_base = @hiera.lookup('author::aem_base', '/opt', @scope)
+# aem_base ||= '/opt'
 
-aem_port = @hiera.lookup('author::aem_port', nil, @scope)
-aem_port ||= '4502'
+aem_port = @hiera.lookup('author::aem_port', '4502', @scope)
+# aem_port ||= '4502'
 
-data_volume_mount_point = @hiera.lookup('aem_curator::install_author::data_volume_mount_point', nil, @scope)
-data_volume_mount_point ||= '/mnt/ebs1'
+aem_keystore_path = @hiera.lookup('aem_curator::install_author::aem_keystore_path', '/etc/ssl/aem-author/author.ks', @scope)
+# aem_keystore_path ||= '/etc/ssl/aem-author/author.ks'
 
-aem_author_ssl_method = @hiera.lookup('aem_curator::install_author::aem_ssl_method', nil, @scope)
-aem_author_ssl_method ||= 'jetty'
+aem_author_ssl_method = @hiera.lookup('aem_curator::install_author::aem_ssl_method', 'jetty', @scope)
+# aem_author_ssl_method ||= 'jetty'
 
 ### SSM paramter store lookup is only supported for hiera5
 # aem_keystore_password = @hiera.lookup('aem_curator::install_author::aem_keystore_password', nil, @scope)
@@ -27,7 +27,6 @@ describe file("#{aem_base}/aem") do
   it { should be_grouped_into 'root' }
 end
 
-only_if { aem_author_ssl_method != 'jetty' }
 describe file("#{aem_base}/aem/author") do
   it { should be_directory }
   it { should exist }
@@ -52,13 +51,21 @@ describe file("#{aem_base}/aem/author/aem-author-#{aem_port}.jar") do
   it { should be_grouped_into 'aem-author' }
 end
 
-# describe file("#{aem_base}/aem/author/crx-quickstart/ssl/aem.ks") do
-#   it { should be_file }
-#   it { should exist }
-#   its('mode') { should cmp '00640' }
-#   it { should be_owned_by 'aem-author' }
-#   it { should be_grouped_into 'aem-author' }
-# end
+if aem_author_ssl_method == 'jetty'
+
+  describe file(aem_keystore_path) do
+    it { should be_file }
+    it { should exist }
+    its('mode') { should cmp '00640' }
+    it { should be_owned_by 'aem-author' }
+    it { should be_grouped_into 'aem-author' }
+  end
+  # Test if default keystore password is not changeit
+  describe command("keytool -list -keystore #{aem_keystore_path} -alias cqse -storepass changeit") do
+    its('exit_status') { should_not eq 0 }
+  end
+
+end
 
 describe service('aem-author') do
   it { should_not be_enabled }
@@ -68,11 +75,6 @@ end
 # describe aem_keystore_password do
 #   it { should_not match(/changeit/) }
 # end
-
-# Test if default keystore password is not changeit
-describe command("keytool -list -keystore #{data_volume_mount_point}/author/crx-quickstart/ssl/aem.ks -alias cqse -storepass changeit") do
-  its('exit_status') { should_not eq 0 }
-end
 
 if File.file?('/lib/systemd/system/aem-author.service')
 
