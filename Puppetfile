@@ -20,9 +20,10 @@ mod 'bstopp/aem', '3.0.0'
 mod 'puppet-healthcheck', '0.4.0'
 mod 'puppetlabs/apache', :git => 'https://github.com/shinesolutions/puppetlabs-apache', :commit => 'd4f89389faae77e8ef5618069085e429ce50e427'
 mod 'puppetlabs/java_ks', '1.6.0'
-mod 'shinesolutions/aem_resources', '7.0.1'
+mod 'shinesolutions/aem_resources', '7.1.0'
 mod 'puppetlabs-java', '6.2.0'
 mod 'puppet-archive', '4.4.0'
+
 # puppet-amazon-ssm-agent dependency, TODO: resolve sub-dependencies without declaring deps in packer-aem
 mod 'puppetlabs-inifile', '2.2.0'
 
