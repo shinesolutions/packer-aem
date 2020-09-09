@@ -8,15 +8,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - Add support to retrieve SSL Certificate from IAM to support 4096-bit RSA keys or EC keys
+- Add JDK11 support for AEM 6.5 [shinesolutions/puppet-aem-curator#220]
+- Add new configuration parameter `java.[base_url|filename|version|version_update]` for Java Component
+- Add new configuration parameter `aem.[author|publish].jvm_opts` for configuring AEM JVM options
+- Add new configuration parameter `aem.ssl_method` for configuring AEM SSL setings [shinesolutions/puppet-aem-curator#220]
 
 ### Changed
-- Upgrade ruby_aem to 3.8.0
+- Author, Publish & Consolidated installations are now calling the new AEM Java installation manifest in puppet-aem-curator
+- Configuration parameter `aem.jdk` defines the Java version for the AEM Components
+- Configuration parameter `java.*` defines the Java version for the Java Components
+- Configuration parameters `aem.jdk.[version|version_update]` are deprecated
 - Lockdown puppet-agent version to 5.5.20 [#218]
-- Upgrade aem_resources to 7.1.0
+- Replaced `aco/oracle_java` module with `puppetlabs/java`
+- Upgrade `ruby_aem` to 3.8.0
+- Upgrade `aem_resources` to 7.1.0
+- Update InSpec tests
 
-### Added
-- Added Granite SSL method [shinesolutions/puppet-aem-curator#220]
-- Added JDK11 support [shinesolutions/puppet-aem-curator#220]
+### Fixed
+- Fixed RHEL7 Bash installation script
+
+### Removed
+- Removed alternative command execution from `collectd_jmx` manifest
 
 ## 4.26.0 - 2020-06-15
 ### Changed

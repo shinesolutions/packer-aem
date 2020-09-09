@@ -27,12 +27,13 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | Name | Description | Required? | Default |
 |------|-------------|-----------|---------|
 | aem.profile | AEM Profile, check out the [list of available profiles](https://github.com/shinesolutions/puppet-aem-curator/blob/master/docs/aem-profiles-artifacts.md) | Optional | `aem62_sp1_cfp9` |
+| aem.ssl_method | Method to activate SSL on AEM. Allowed vlaues are `jetty` & `granite`. JDK11 for AEM 6.5 only supports `granite`. | Optional | `jetty` |
 | aem.keystore_password_parameter | Parameter store object which contains the [Java Keystore](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores) password used in AEM Author and Publish. Each / represents a subkey in Hiera. This is expected to exist under the root "/" so you must ommit it from the start. For example aem-opencloud/stack_prefix/aem-keystore-password is what goes in the config but becomes /aem-opencloud/stack_prefix/aem-keystore-password on consumption. Note: The Parameter name cannot contain dots/periods. For more information please see: https://puppet.com/docs/puppet/5.4/hiera_automatic.html#hiera-dotted-notation and https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html | Mandatory | |
 | aem.author.jvm_mem_opts | AEM Author's memory-specific [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) | Optional | `-Xss4m -Xms4096m -Xmx8192m` |
-| aem.author.jvm_opts | AEM Author's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) | Optional | |
+| aem.author.jvm_opts | AEM Author's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) | Optional | -XX:+PrintGCDetails, -XX:+PrintGCTimeStamps, -XX:+PrintGCDateStamps, -XX:+PrintTenuringDistribution, -XX:+PrintGCApplicationStoppedTime, -XX:+HeapDumpOnOutOfMemoryError |
 | aem.author.run_modes | A list of AEM Author's feature [run modes](https://helpx.adobe.com/experience-manager/6-5/sites/deploying/using/configure-runmodes.html), e.g. `dynamicmedia_scene7`. There is no need to specify `author` run mode here, it will automatically be added. | Optional | Empty list |
 | aem.publish.jvm_mem_opts | AEM Publish's memory-specific [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) | Optional | `-Xss4m -Xms4096m -Xmx8192m` |
-| aem.publish.jvm_opts | AEM Publish's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) | Optional |
+| aem.publish.jvm_opts | AEM Publish's [JVM arguments](https://docs.oracle.com/cd/E22289_01/html/821-1274/configuring-the-default-jvm-and-java-arguments.html) | Optional | -XX:+PrintGCDetails, -XX:+PrintGCTimeStamps, -XX:+PrintGCDateStamps, -XX:+PrintTenuringDistribution, -XX:+PrintGCApplicationStoppedTime, -XX:+HeapDumpOnOutOfMemoryError |
 | aem.publish.run_modes | A list of AEM Publish's feature run modes, e.g. `dynamicmedia_scene7`. There is no need to specify `publish` run mode here, it will automatically be added. | Optional | Empty list |
 | aem.dispatcher.version | AEM Dispatcher version, available version is documented on [Download Dispatcher Web Server Modules](https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher.html) page | Mandatory | `4.2.3` |
 | aem.dispatcher.ssl_version | AEM Dispatcher SSL version, available version depends on what's provided by Adobe on [AEM Dispatcher Release Notes](https://docs.adobe.com/content/help/en/experience-manager-dispatcher/using/getting-started/release-notes.html#apache) page | Optional | `1.0` |
@@ -41,8 +42,8 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aem.enable_custom_image_provisioner | Set to `true` when Custom Image Provisioner pre and post steps will be executed , note: place `aem-custom-image-provisioner.tar.gz` artifact in `stage/custom/` directory | Optional | `false` |
 | aem.jdk.base_url | Base URL (just the path, not the file name) where JDK RPM file would be located. URL can be: `s3://...`, `http://...`, `https://...`, or `file://...`. **The download URL `download.oracle.com` is not supported anymore.** | Mandatory | |
 | aem.jdk.filename | JDK RPM file name, this file must be located at `aem.jdk.base_url` | Optional | jdk-8u221-linux-x64.rpm |
-| aem.jdk.version | JDK version number | Optional | 8 |
-| aem.jdk.version_update | JDK update version number | Optional | 221 |
+| aem.jdk.version | JDK version number | Deprecated. See java.version | |
+| aem.jdk.version_update | JDK update version number | Deprecated. See java.version_update | |
 
 ### AWS platform type configuration properties:
 
@@ -76,3 +77,12 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.resources.create_s3_bucket | A `true` or `false` boolean value to indicate if Packer-AEM create-aws-resources should provision an S3 Bucket for packer when baking AMIs | Optional | `true` |
 | aws.resources.create_iam_packer_role | A `true` or `false` boolean value to indicate if Packer-AEM create-aws-resources should provision an IAM Role/InstanceProfile for packer when baking AMIs  | Optional | `true` |
 | aws.aem_license | AWS Systems Manager parameter containing the multi-line AEM license content. Like the aem.keystore_password_parameter it is prefixed with / automatically meaning it becomes /aem-opencloud/stack_prefix/aem-license on consumption. Like Above it cannot have dots/periods in the parameter name. For more information please see the linked documentation in aem.keystore_password_parameter | Mandatory | |
+
+### Java Component configuration parameters:
+
+| Name | Description | Required? | Default |
+|------|-------------|-----------|---------|
+| java.base_url | Base URL (just the path, not the file name) where JDK RPM file would be located. URL can be: `s3://...`, `http://...`, `https://...`, or `file://...`. **The download URL `download.oracle.com` is not supported anymore.** | Mandatory | |
+| java.filename | JDK RPM file name, this file must be located at `aem.base_url` | Optional | jdk-8u221-linux-x64.rpm |
+| java.version | JDK version number | Optional | 8 |
+| java.version_update | JDK update version number | Optional | 221 |
