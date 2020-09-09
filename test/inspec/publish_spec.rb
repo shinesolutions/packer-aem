@@ -4,7 +4,7 @@ require './spec_helper'
 
 init_conf
 
-aem_base = @hiera.lookup('publish::aem_base', 'opt', @scope)
+aem_base = @hiera.lookup('publish::aem_base', '/opt', @scope)
 # aem_base ||= '/opt'
 
 aem_port = @hiera.lookup('publish::aem_port', '4503', @scope)

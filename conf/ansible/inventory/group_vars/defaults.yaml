@@ -113,9 +113,9 @@ aem:
     version_update: 221
     base_url: overwrite-me
 java:
-  filename: jdk-8u221-linux-x64.rpm
-  version: 8
-  version_update: 221
-  base_url: overwrite-me
+  base_url: "{{ aem.jdk.base_url }}"
+  filename: "{{aem.jdk.filename}}"
+  version: "{{aem.jdk.version}}"
+  version_update: "{{aem.jdk.version_update}}"
 library:
   aem_healthcheck_version: 1.3.3

@@ -10,7 +10,7 @@ mod 'shinesolutions/aem_curator', '3.13.2'
 mod 'shinesolutions/amazon_ssm_agent', '0.9.4'
 mod 'saz/limits', '2.5.0'
 mod 'puppetlabs/concat', '4.1.0'
-mod 'puppetlabs/stdlib', '6.3.0'
+mod 'puppetlabs/stdlib', '4.25.1'
 mod 'thias/sysctl', '1.0.6'
 mod 'MiamiOH/tcpwrappers', '1.1.0'
 mod 'luizvasconceloss-hiera_ssm_paramstore', '0.2.2'
@@ -22,7 +22,7 @@ mod 'puppetlabs/apache', :git => 'https://github.com/shinesolutions/puppetlabs-a
 mod 'puppetlabs/java_ks', '1.6.0'
 mod 'shinesolutions/aem_resources', '7.1.0'
 mod 'puppetlabs-java', '6.2.0'
-mod 'puppet-archive', '4.4.0'
+mod 'puppet/archive', '1.3.0'
 
 # puppet-amazon-ssm-agent dependency, TODO: resolve sub-dependencies without declaring deps in packer-aem
 mod 'puppetlabs-inifile', '2.2.0'

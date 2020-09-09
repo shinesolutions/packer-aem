@@ -69,12 +69,10 @@ if aem_author_ssl_method == 'jetty'
     it { should be_owned_by 'aem-author' }
     it { should be_grouped_into 'aem-author' }
   end
-
-end
-
-# Test if default keystore password is changeit
-describe command("keytool -list -keystore #{aem_author_keystore_path} -alias cqse -storepass changeit") do
-  its('exit_status') { should_not eq 0 }
+  # Test if default keystore password is changeit
+  describe command("keytool -list -keystore #{aem_author_keystore_path} -alias cqse -storepass changeit") do
+    its('exit_status') { should_not eq 0 }
+  end
 end
 
 if File.file?('/lib/systemd/system/aem-author.service')
@@ -152,18 +150,19 @@ end
 # describe aem_publish_keystore_password do
 #   it { should_not match(/changeit/) }
 # end
+if aem_author_ssl_method == 'jetty'
+  describe file(aem_publish_keystore_path) do
+    it { should be_file }
+    it { should exist }
+    its('mode') { should cmp '00640' }
+    it { should be_owned_by 'aem-publish' }
+    it { should be_grouped_into 'aem-publish' }
+  end
 
-describe file(aem_publish_keystore_path) do
-  it { should be_file }
-  it { should exist }
-  its('mode') { should cmp '00640' }
-  it { should be_owned_by 'aem-publish' }
-  it { should be_grouped_into 'aem-publish' }
-end
-
-# Test if default keystore password is changeit
-describe command("keytool -list -keystore #{aem_publish_keystore_path} -alias cqse -storepass changeit") do
-  its('exit_status') { should_not eq 0 }
+  # Test if default keystore password is changeit
+  describe command("keytool -list -keystore #{aem_publish_keystore_path} -alias cqse -storepass changeit") do
+    its('exit_status') { should_not eq 0 }
+  end
 end
 
 if File.file?('/lib/systemd/system/aem-publish.service')
