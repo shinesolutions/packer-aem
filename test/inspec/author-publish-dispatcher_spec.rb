@@ -146,7 +146,7 @@ end
 # describe aem_publish_keystore_password do
 #   it { should_not match(/changeit/) }
 # end
-if aem_author_ssl_method == 'jetty'
+if aem_publish_ssl_method == 'jetty'
   describe file(aem_publish_keystore_path) do
     it { should be_file }
     it { should exist }
