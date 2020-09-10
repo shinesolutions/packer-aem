@@ -13,6 +13,9 @@ aem_port ||= '4503'
 aem_keystore_path = @hiera.lookup('aem_curator::install_publish::aem_keystore_path', nil, @scope)
 aem_keystore_path ||= '/etc/ssl/aem-publish/publish.ks'
 
+aem_publish_ssl_method = @hiera.lookup('aem_curator::install_publish::aem_ssl_method', nil, @scope)
+aem_publish_ssl_method ||= 'jetty'
+
 ### SSM paramter store lookup is only supported for hiera5
 # aem_keystore_password = @hiera.lookup('aem_curator::install_publish::aem_keystore_password', nil, @scope)
 
@@ -48,12 +51,20 @@ describe file("#{aem_base}/aem/publish/aem-publish-#{aem_port}.jar") do
   it { should be_grouped_into 'aem-publish' }
 end
 
-describe file(aem_keystore_path) do
-  it { should be_file }
-  it { should exist }
-  its('mode') { should cmp '00640' }
-  it { should be_owned_by 'aem-publish' }
-  it { should be_grouped_into 'aem-publish' }
+if aem_publish_ssl_method == 'jetty'
+
+  describe file(aem_keystore_path) do
+    it { should be_file }
+    it { should exist }
+    its('mode') { should cmp '00640' }
+    it { should be_owned_by 'aem-publish' }
+    it { should be_grouped_into 'aem-publish' }
+  end
+  # Test if default keystore password is not changeit
+  describe command("keytool -list -keystore #{aem_keystore_path} -alias cqse -storepass changeit") do
+    its('exit_status') { should_not eq 0 }
+  end
+
 end
 
 describe service('aem-publish') do
@@ -64,11 +75,6 @@ end
 # describe aem_keystore_password do
 #   it { should_not match(/changeit/) }
 # end
-
-# Test if default keystore password is not changeit
-describe command("keytool -list -keystore #{aem_keystore_path} -alias cqse -storepass changeit") do
-  its('exit_status') { should_not eq 0 }
-end
 
 if File.file?('/lib/systemd/system/aem-publish.service')
 

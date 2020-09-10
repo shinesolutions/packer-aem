@@ -79,6 +79,7 @@ docker:
 
 aem:
   profile: aem65_sp1
+  ssl_method: jetty
   keystore_password_parameter: overwrite-me
   author:
     jvm_mem_opts: "-Xss4m -Xms4096m -Xmx8192m"

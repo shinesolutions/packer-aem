@@ -13,6 +13,9 @@ aem_port ||= '4502'
 aem_author_keystore_path = @hiera.lookup('aem_curator::install_author::aem_keystore_path', nil, @scope)
 aem_author_keystore_path ||= '/etc/ssl/aem-author/author.ks'
 
+aem_author_ssl_method = @hiera.lookup('aem_curator::install_author::aem_ssl_method', nil, @scope)
+aem_author_ssl_method ||= 'jetty'
+
 ### SSM paramter store lookup is only supported for hiera5
 # aem_author_keystore_password = @hiera.lookup('aem_curator::install_author::aem_keystore_password', nil, @scope)
 
@@ -57,17 +60,19 @@ end
 #   it { should_not match(/changeit/) }
 # end
 
-describe file(aem_author_keystore_path) do
-  it { should be_file }
-  it { should exist }
-  its('mode') { should cmp '00640' }
-  it { should be_owned_by 'aem-author' }
-  it { should be_grouped_into 'aem-author' }
-end
+if aem_author_ssl_method == 'jetty'
 
-# Test if default keystore password is changeit
-describe command("keytool -list -keystore #{aem_author_keystore_path} -alias cqse -storepass changeit") do
-  its('exit_status') { should_not eq 0 }
+  describe file(aem_author_keystore_path) do
+    it { should be_file }
+    it { should exist }
+    its('mode') { should cmp '00640' }
+    it { should be_owned_by 'aem-author' }
+    it { should be_grouped_into 'aem-author' }
+  end
+  # Test if default keystore password is changeit
+  describe command("keytool -list -keystore #{aem_author_keystore_path} -alias cqse -storepass changeit") do
+    its('exit_status') { should_not eq 0 }
+  end
 end
 
 if File.file?('/lib/systemd/system/aem-author.service')
@@ -94,6 +99,9 @@ aem_port ||= '4503'
 
 aem_publish_keystore_path = @hiera.lookup('aem_curator::install_publish::aem_keystore_path', nil, @scope)
 aem_publish_keystore_path ||= '/etc/ssl/aem-publish/publish.ks'
+
+aem_publish_ssl_method = @hiera.lookup('aem_curator::install_publish::aem_ssl_method', nil, @scope)
+aem_publish_ssl_method ||= 'jetty'
 
 ### SSM paramter store lookup is only supported for hiera5
 # aem_publish_keystore_password = @hiera.lookup('aem_curator::install_publish::aem_keystore_password', nil, @scope)
@@ -138,18 +146,19 @@ end
 # describe aem_publish_keystore_password do
 #   it { should_not match(/changeit/) }
 # end
+if aem_author_ssl_method == 'jetty'
+  describe file(aem_publish_keystore_path) do
+    it { should be_file }
+    it { should exist }
+    its('mode') { should cmp '00640' }
+    it { should be_owned_by 'aem-publish' }
+    it { should be_grouped_into 'aem-publish' }
+  end
 
-describe file(aem_publish_keystore_path) do
-  it { should be_file }
-  it { should exist }
-  its('mode') { should cmp '00640' }
-  it { should be_owned_by 'aem-publish' }
-  it { should be_grouped_into 'aem-publish' }
-end
-
-# Test if default keystore password is changeit
-describe command("keytool -list -keystore #{aem_publish_keystore_path} -alias cqse -storepass changeit") do
-  its('exit_status') { should_not eq 0 }
+  # Test if default keystore password is changeit
+  describe command("keytool -list -keystore #{aem_publish_keystore_path} -alias cqse -storepass changeit") do
+    its('exit_status') { should_not eq 0 }
+  end
 end
 
 if File.file?('/lib/systemd/system/aem-publish.service')
