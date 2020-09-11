@@ -8,12 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - Add support to retrieve SSL Certificate from IAM to support 4096-bit RSA keys or EC keys
+- Add new configuration parameter `aem.ssl_method` for configuring AEM SSL setings [shinesolutions/puppet-aem-curator#220]
 
 ### Changed
 - Upgrade ruby_aem to 3.8.0
 - Lockdown puppet-agent version to 5.5.20 [#218]
 - Upgrade aem_resources to 7.1.0
 - Upgrade aem_curator to 3.14.0
+
+### Fixed
+- Fixed RHEL7 Bash installation script
 
 ## 4.26.0 - 2020-06-15
 ### Changed
