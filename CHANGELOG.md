@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade ruby_aem to 3.8.0
 - Lockdown puppet-agent version to 5.5.20 [#218]
 - Upgrade aem_resources to 7.1.0
-- Upgrade aem_curator to 3.14.0
+- Upgrade aem_curator to 3.15.0
 
 ### Fixed
 - Fixed RHEL7 Bash installation script
