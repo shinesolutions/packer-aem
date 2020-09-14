@@ -194,12 +194,12 @@ docker-author-publish-dispatcher: stage config
 ################################################################################
 
 test-integration: deps deps-test
-	make config config_path=stage/user-config/aws-rhel7-aem65
-	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem65
+	make config config_path=stage/user-config/aws-rhel7-aem65-jdk8
+	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem65 jdk8
 
 test-integration-local: deps-local deps-test-local
-	make config config_path=../stage/user-config/aws-rhel7-aem65
-	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem65
+	make config config_path=../stage/user-config/aws-rhel7-aem65-jdk8
+	./test/integration/test-examples.sh "$(test_id)" aws rhel7 aem65 jdk8
 
 ################################################################################
 # Utility targets.
