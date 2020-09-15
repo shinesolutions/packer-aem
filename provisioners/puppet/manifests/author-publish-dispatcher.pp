@@ -1,14 +1,77 @@
-include ::config::base
+# include ::config::base
+class { 'config::base':
+  before => [
+    Class['config::certs'],
+    Class['config::license'],
+    Class['aem_curator::install_aem_java'],
+    Class['aem_curator::install_author'],
+    Class['aem_curator::install_publish'],
+    Class['Aem_curator::Install_dispatcher']
+  ]
+}
 
-include ::config::certs
+class { 'config::certs':
+  require => [
+    Class['config::base']
+  ],
+  before  => [
+    Class['aem_curator::install_aem_java'],
+    Class['aem_curator::install_author'],
+    Class['aem_curator::install_publish'],
+    Class['Aem_curator::Install_dispatcher']
+  ]
+}
 
-include ::config::license
+class {'config::license':
+  require => [
+    Class['config::base']
+  ],
+  before  => [
+    Class['aem_curator::install_aem_java'],
+    Class['aem_curator::install_author'],
+    Class['aem_curator::install_publish'],
+    Class['Aem_curator::Install_dispatcher']
+  ]
+}
 
-include aem_curator::install_aem_java
+class {'aem_curator::install_aem_java':
+  require => [
+    Class['config::base'],
+    Class['config::certs'],
+    Class['config::license']
+  ],
+  before  => [
+    Class['aem_curator::install_author'],
+    Class['aem_curator::install_publish'],
+    Class['Aem_curator::Install_dispatcher']
+  ]
+}
 
-include aem_curator::install_author
+class {'aem_curator::install_author':
+  require => [
+    Class['config::base'],
+    Class['config::certs'],
+    Class['config::license'],
+    Class['aem_curator::install_aem_java']
+  ],
+  before  => [
+    Class['aem_curator::install_publish'],
+    Class['Aem_curator::Install_dispatcher']
+  ]
+}
 
-include aem_curator::install_publish
+class {'aem_curator::install_publish':
+  require => [
+    Class['config::base'],
+    Class['config::certs'],
+    Class['config::license'],
+    Class['aem_curator::install_aem_java'],
+    Class['aem_curator::install_author']
+  ],
+  before  => [
+    Class['Aem_curator::Install_dispatcher']
+  ]
+}
 
 if $::config::base::install_cloudwatchlogs {
   if $::config::base::install_cloudwatchlogs_aem {
@@ -21,7 +84,8 @@ if $::config::base::install_cloudwatchlogs {
   }
 
   if $::config::base::install_cloudwatchlogs_httpd {
-    config::cloudwatchlogs_httpd { 'Setup CloudWatch for Dispatcher': }
+    config::cloudwatchlogs_httpd { 'Setup CloudWatch for Dispatcher':
+    }
   }
 
   # At the end of doing all Cloudwatch actions we are disabling and stopping the

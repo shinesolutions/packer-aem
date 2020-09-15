@@ -22,6 +22,7 @@ aws:
   region: 'ap-southeast-2'
   vpc_id: overwrite-me
   subnet_id: overwrite-me
+  instance_type: m5.2xlarge
   resources:
     stack_name: packer-aem-resources-stack
     s3_bucket: overwrite-me

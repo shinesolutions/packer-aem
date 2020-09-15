@@ -1,4 +1,3 @@
 {
-    "component": "java",
-    "instance_type": "t2.large"
+    "component": "java"
 }

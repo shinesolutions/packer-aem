@@ -1,8 +1,25 @@
-include ::config::base
+class { 'config::base':
+  before => [
+    Class['config::certs'],
+    Class['aem_curator::install_java']
+  ]
+}
 
-include ::config::certs
+class { 'config::certs':
+  require => [
+    Class['config::base']
+  ],
+  before  => [
+    Class['aem_curator::install_java']
+  ]
+}
 
-include aem_curator::install_java
+class {'aem_curator::install_java':
+  require => [
+    Class['config::base'],
+    Class['config::certs']
+  ]
+}
 
 if $::config::base::install_cloudwatchlogs {
 

@@ -54,6 +54,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.region | [AWS region name](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) | Optional | `ap-southeast-2` |
 | aws.vpc_id | [VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html) ID where Packer creation will run from | Mandatory | |
 | aws.subnet_id | [Subnet](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html) ID where Packer creation will run from | Mandatory | |
+| aws.instance_type | The [EC2 instance type](https://aws.amazon.com/ec2/instance-types/) to use for the AMI baking  | optional | `m5.2xlarge` |
 | aws.source_ami | ID of the AMI used as the base of all component AMIs  | Mandatory | |
 | aws.ami_users | A comma-separated-value string of AWS account IDs to share the created AMIs with. Empty or undefined indicates the created AMIs won't be shared. | Optional | |
 | aws.snapshot_users | A comma-separated-value string of AWS account IDs to copy volumes from the shared AMI(s). Empty or undefined indicates the shared AMIs are not allow to be copied in any destination accounts. | Optional | |

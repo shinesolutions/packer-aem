@@ -15,6 +15,7 @@ mod 'thias/sysctl', '1.0.6'
 mod 'MiamiOH/tcpwrappers', '1.1.0'
 mod 'luizvasconceloss-hiera_ssm_paramstore', '0.2.2'
 mod 'MasterRoot24-cloudwatch', '0.6.0'
+mod 'jhoblitt/udev', '2.3.0'
 # puppet-aem-curator dependencies, TODO: resolve sub-dependencies without declaring deps in packer-aem
 mod 'bstopp/aem', '3.0.0'
 mod 'puppet-healthcheck', '0.4.0'

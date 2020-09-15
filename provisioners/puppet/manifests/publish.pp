@@ -1,10 +1,45 @@
-include ::config::base
+# include ::config::base
+class { 'config::base':
+  before => [
+    Class['config::certs'],
+    Class['config::license'],
+    Class['aem_curator::install_aem_java'],
+    Class['aem_curator::install_author'],
+    Class['aem_curator::install_publish'],
+    Class['Aem_curator::Install_dispatcher']
+  ]
+}
 
-include ::config::certs
+class { 'config::certs':
+  require => [
+    Class['config::base']
+  ],
+  before  => [
+    Class['aem_curator::install_aem_java'],
+    Class['aem_curator::install_publish']
+  ]
+}
 
-include ::config::license
+class {'config::license':
+  require => [
+    Class['config::base']
+  ],
+  before  => [
+    Class['aem_curator::install_aem_java'],
+    Class['aem_curator::install_publish']
+  ]
+}
 
-include aem_curator::install_aem_java
+class {'aem_curator::install_aem_java':
+  require => [
+    Class['config::base'],
+    Class['config::certs'],
+    Class['config::license']
+  ],
+  before  => [
+    Class['aem_curator::install_publish']
+  ]
+}
 
 include aem_curator::install_publish
 

@@ -1,4 +1,3 @@
 {
-    "component": "dispatcher",
-    "instance_type": "t2.large"
+    "component": "dispatcher"
 }
