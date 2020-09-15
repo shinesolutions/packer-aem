@@ -189,9 +189,6 @@ dispatcher_id = @hiera.lookup('aem_curator::install_dispatcher::aem_id', 'dispat
 
 setup_data_volume = @hiera.lookup('aem_curator::install_dispatcher::setup_data_volume', nil, @scope)
 
-# data_volume_device = @hiera.lookup('aem_curator::install_dispatcher::data_volume_device', nil, @scope)
-data_volume_device = '/dev/xvdd'
-
 # data_volume_mount_point = @hiera.lookup('aem_curator::install_dispatcher::data_volume_mount_point', nil, @scope)
 data_volume_mount_point = '/mnt/ebs3'
 
@@ -204,7 +201,6 @@ apache_group = @hiera.lookup('aem_curator::install_dispatcher::apache_group', 'a
 if setup_data_volume
   describe mount(data_volume_mount_point) do
     it { should be_mounted }
-    its('device') { should eq data_volume_device }
   end
 
   describe file(docroot_dir) do
