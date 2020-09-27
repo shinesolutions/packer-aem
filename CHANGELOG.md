@@ -20,9 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configuration parameters `aem.jdk.[version|version_update]` are deprecated
 - Lockdown puppet-agent version to 5.5.20 [#218]
 - Update InSpec tests
-- Upgrade `ruby_aem` to 3.8.0
-- Upgrade `aem_resources` to 7.1.0
+- Upgrade `ruby_aem` to 3.10.0 [#218]
+- Upgrade `aem_resources` to 7.2.0 [#218]
 - Upgrade `aem_curator` to 3.15.0
+- Upgrade `puppet` to 5.5.21 [#218]
 - Replaced `aco/oracle_java` module with `puppetlabs/java`
 
 ### Fixed
