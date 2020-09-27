@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configuration parameter `aem.jdk` defines the Java version for the AEM Components
 - Configuration parameter `java.*` defines the Java version for the Java Components
 - Configuration parameters `aem.jdk.[version|version_update]` are deprecated
-- Lockdown puppet-agent version to 5.5.20 [#218]
+- Lockdown puppet-agent version to 5.5.21 [#218]
 - Update InSpec tests
 - Upgrade `ruby_aem` to 3.10.0 [#218]
 - Upgrade `aem_resources` to 7.2.0 [#218]
