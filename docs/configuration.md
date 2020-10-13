@@ -43,8 +43,6 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aem.enable_custom_image_provisioner | Set to `true` when Custom Image Provisioner pre and post steps will be executed , note: place `aem-custom-image-provisioner.tar.gz` artifact in `stage/custom/` directory | Optional | `false` |
 | aem.jdk.base_url | Base URL (just the path, not the file name) where JDK RPM file would be located. URL can be: `s3://...`, `http://...`, `https://...`, or `file://...`. **The download URL `download.oracle.com` is not supported anymore.** | Mandatory | |
 | aem.jdk.filename | JDK RPM file name, this file must be located at `aem.jdk.base_url` | Optional | jdk-8u221-linux-x64.rpm |
-| aem.jdk.version | JDK version number | Deprecated. See java.version | |
-| aem.jdk.version_update | JDK update version number | Deprecated. See java.version_update | |
 
 ### AWS platform type configuration properties:
 

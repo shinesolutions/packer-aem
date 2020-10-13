@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - Removed alternative command execution from `collectd_jmx` manifest
+- Removed deprecated configuration parameters
 
 ## 4.26.0 - 2020-06-15
 ### Changed
