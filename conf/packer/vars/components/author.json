@@ -1,4 +1,3 @@
 {
-    "component": "author",
-    "instance_type": "m4.2xlarge"
+    "component": "author"
 }

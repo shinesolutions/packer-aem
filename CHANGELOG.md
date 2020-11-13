@@ -12,9 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add JDK11 support for AEM 6.5 [shinesolutions/puppet-aem-curator#220]
 - Add new configuration parameter `java.[base_url|filename|version|version_update]` for Java Component
 - Add new configuration parameter `aem.[author|publish].jvm_opts` for configuring AEM JVM options
+- Add support for NVME Devices [#207]
+- Add new configuration parameter to configure EC2 instance type for AMI creation [#207]
 
 ### Changed
 - Author, Publish & Consolidated installations are now calling the new AEM Java installation manifest in puppet-aem-curator
+- Changed default EC2 instance type for AMI creation to `m5.2xlarge` [#207]
 - Configuration parameter `aem.jdk` defines the Java version for the AEM Components
 - Configuration parameter `java.*` defines the Java version for the Java Components
 - Configuration parameters `aem.jdk.[version|version_update]` are deprecated

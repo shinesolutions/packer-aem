@@ -4,7 +4,6 @@
 #
 # === Parameters
 #
-#
 # === Authors
 #
 # James Sinclair <james.sinclair@shinesolutions.com>
@@ -21,6 +20,32 @@ class config (
     ensure       => present,
     ip           => $facts['ipaddress'],
     host_aliases => $facts['hostname'],
+  }
+
+  if ($::osfamily == 'redhat') and ($::operatingsystem != 'Amazon') {
+    file { '/sbin/ebsnvme-id':
+      ensure => present,
+      source => 'puppet:///modules/config/nvme/ebsnvme-id.py',
+      mode   => '0755',
+      owner  => 'root',
+      group  => 'root'
+    }
+
+    file { '/usr/lib/udev/ec2nvme-nsid':
+      ensure  => present,
+      source  => 'puppet:///modules/config/nvme/ec2nvme-nsid.sh',
+      mode    => '0755',
+      owner   => 'root',
+      group   => 'root',
+      require => File['/sbin/ebsnvme-id'],
+    }
+
+    udev::rule { '70-ec2-nvme-devices.rules':
+      ensure  => present,
+      source  => "puppet:///modules/${module_name}/nvme/udev.rules",
+      notify  => Class['udev::udevadm::trigger'],
+      require => File['/usr/lib/udev/ec2nvme-nsid']
+    }
   }
 
   $package_manager_packages.each | Integer $index, $package_details| {

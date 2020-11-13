@@ -1,5 +1,18 @@
-include ::config::base
-include ::config::certs
+class { 'config::base':
+  before => [
+    Class['config::certs'],
+    Class['Aem_curator::Install_dispatcher']
+  ]
+}
+
+class { 'config::certs':
+  require => [
+    Class['config::base']
+  ],
+  before  => [
+    Class['Aem_curator::Install_dispatcher']
+  ]
+}
 
 include aem_curator::install_dispatcher
 
