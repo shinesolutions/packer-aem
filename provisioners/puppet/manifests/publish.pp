@@ -1,12 +1,9 @@
-# include ::config::base
 class { 'config::base':
   before => [
     Class['config::certs'],
     Class['config::license'],
     Class['aem_curator::install_aem_java'],
-    Class['aem_curator::install_author'],
-    Class['aem_curator::install_publish'],
-    Class['Aem_curator::Install_dispatcher']
+    Class['aem_curator::install_publish']
   ]
 }
 
