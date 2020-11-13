@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 4.27.0 - 2020-11-13
 ### Added
 - Add support to retrieve SSL Certificate from IAM to support 4096-bit RSA keys or EC keys
 - Add new configuration parameter `aem.ssl_method` for configuring AEM SSL setings [shinesolutions/puppet-aem-curator#220]
@@ -30,11 +30,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade `puppet` to 5.5.21 [#218]
 - Replaced `aco/oracle_java` module with `puppetlabs/java`
 
-### Fixed
-- Fixed RHEL7 Bash installation script
-
 ### Removed
 - Removed alternative command execution from `collectd_jmx` manifest
+
+### Fixed
+- Fixed RHEL7 Bash installation script
 
 ## 4.26.0 - 2020-06-15
 ### Changed
