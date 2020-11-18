@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Replace Travis CI with GitHub Actions
+
 ## 4.27.0 - 2020-11-13
 ### Added
 - Add support to retrieve SSL Certificate from IAM to support 4096-bit RSA keys or EC keys
