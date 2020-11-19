@@ -3,7 +3,7 @@ GEM
   specs:
     ast (2.4.1)
     aws-eventstream (1.1.0)
-    aws-partitions (1.376.0)
+    aws-partitions (1.395.0)
     aws-sdk-core (3.50.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1.0)
@@ -37,7 +37,7 @@ GEM
     multipart-post (2.1.1)
     oj (2.18.5)
     parallel (1.19.2)
-    parser (2.7.1.5)
+    parser (2.7.2.0)
       ast (~> 2.4.1)
     puppet-lint (2.3.6)
     puppet_forge (2.2.9)
