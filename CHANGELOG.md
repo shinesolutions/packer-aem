@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Replace Travis CI with GitHub Actions
+
 ## 4.28.0 - 2020-11-19
 ### Added
 - Add support for all Oracle Java JDK8 versions
