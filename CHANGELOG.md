@@ -10,6 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Replace Travis CI with GitHub Actions
 
+## 4.28.0 - 2020-11-19
+### Added
+- Add support for all Oracle Java JDK8 versions
+
+### Changed
+- Upgrade `aem_curator` to 3.17.0
+
 ## 4.27.0 - 2020-11-13
 ### Added
 - Add support to retrieve SSL Certificate from IAM to support 4096-bit RSA keys or EC keys
