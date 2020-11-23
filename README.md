@@ -1,5 +1,4 @@
 [![Build Status](https://github.com/shinesolutions/packer-aem/workflows/CI/badge.svg)](https://github.com/shinesolutions/packer-aem/actions?query=workflow%3ACI)
-
 [![Known Vulnerabilities](https://snyk.io/test/github/shinesolutions/packer-aem/badge.svg)](https://snyk.io/test/github/shinesolutions/packer-aem)
 
 Packer AEM
