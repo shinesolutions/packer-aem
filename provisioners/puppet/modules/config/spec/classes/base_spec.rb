@@ -18,7 +18,8 @@ describe 'config::base' do
     end
 
     python_modules.each do |pkg|
-      it { is_expected.to contain_package(pkg).with_provider('pip') }
+      # it { is_expected.to contain_package(pkg).with_provider('pip') }
+      it { is_expected.to contain_package(pkg).with_provider('pip3') }
     end
 
     util_packages.each do |pkg|

@@ -148,24 +148,28 @@ class config::base (
 
   package { [ 'requests', 'retrying', 'sh' ]:
     ensure   => latest,
-    provider => 'pip',
+    # provider => 'pip',
+    provider => 'pip3',
   }
 
   if $install_aws_cli {
     package { 'awscli':
       ensure   => '1.16.10',
-      provider => 'pip',
+      # provider => 'pip',
+      provider => 'pip3',
     }
   }
   # allow awscli to control boto version if it's enabled, otherwise install
   package { 'boto':
     ensure   => present,
-    provider => 'pip',
+    # provider => 'pip',    
+    provider => 'pip3',
   }
 
   package { 'boto3':
     ensure   => '1.8.5',
-    provider => 'pip',
+    # provider => 'pip',    
+    provider => 'pip3',
   }
 
   if $install_virtualenvs {
