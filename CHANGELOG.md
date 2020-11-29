@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Added
+- Add new puppet module [adobeinc/dispatcher](https://github.com/adobe/puppet-dispatcher) [shinesolutions/puppet-aem-curator#174]
+
+### Changed
+- Upgrade `aem_curator` to 3.18.1
+- Upgrade `aem_resources` to 7.2.1
 
 ## 4.28.1 - 2020-11-27
 ### Changed

@@ -21,7 +21,7 @@ describe 'config::dispatcher' do
     it { is_expected.to contain_class('apache::mod::headers') }
 
     it { is_expected.to contain_archive('dispatcher-apache2.4-linux-x86-64-ssl-4.2.2.tar.gz') }
-    it { is_expected.to contain_class('aem::dispatcher') }
+    it { is_expected.to contain_class('dispatcher') }
 
     it { is_expected.to contain_file('/var/www/html') }
 
