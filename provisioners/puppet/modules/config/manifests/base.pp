@@ -157,6 +157,11 @@ class config::base (
       ensure   => '1.16.10',
       # provider => 'pip',
       provider => 'pip3',
+    } -> file { '/bin/aws':
+      ensure => link,
+      owner  => 'root',
+      group  => 'root',
+      target => '/usr/local/bin/aws',
     }
   }
   # allow awscli to control boto version if it's enabled, otherwise install
