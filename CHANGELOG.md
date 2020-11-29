@@ -10,9 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new puppet module [adobeinc/dispatcher](https://github.com/adobe/puppet-dispatcher) [shinesolutions/puppet-aem-curator#174]
 
 ### Changed
-- Replace Travis CI with GitHub Actions
 - Upgrade `aem_curator` to 3.18.1
 - Upgrade `aem_resources` to 7.2.1
+
+## 4.28.1 - 2020-11-27
+### Changed
+- Replace Travis CI with GitHub Actions
+- Upgrade puppet-agent version to 5.5.22
 
 ## 4.28.0 - 2020-11-19
 ### Added
