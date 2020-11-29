@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - Removed alternative command execution from `collectd_jmx` manifest
+- Removed deprecated configuration parameters
 
 ### Fixed
 - Fixed RHEL7 Bash installation script
