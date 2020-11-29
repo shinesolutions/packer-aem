@@ -6,8 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Added
+- Add new puppet module [adobeinc/dispatcher](https://github.com/adobe/puppet-dispatcher) [shinesolutions/puppet-aem-curator#174]
+
 ### Changed
-- Upgrade ruby_aem_aws version to 2.0.0
+- Upgrade `aem_curator` to 3.18.1
+- Upgrade `aem_resources` to 7.2.1
+- Upgrade` ruby_aem_aws` version to 2.0.0
 
 ## 4.28.1 - 2020-11-27
 ### Changed
@@ -48,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - Removed alternative command execution from `collectd_jmx` manifest
+- Removed deprecated configuration parameters
 
 ### Fixed
 - Fixed RHEL7 Bash installation script
