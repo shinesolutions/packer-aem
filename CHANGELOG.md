@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Replace Travis CI with GitHub Actions
+- Convert python scripts to be executed using Python 3
+- Use pip3 for Python packages
+- Add /bin/aws symlink to /usr/local/aws (boto3)
+- Refactor installation of Python packages to be part of O/S
 
 ## 4.28.0 - 2020-11-19
 ### Added
