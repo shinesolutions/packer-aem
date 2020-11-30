@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgrade `aem_curator` to 3.18.1
 - Upgrade `aem_resources` to 7.2.1
+- Upgrade` ruby_aem_aws` version to 2.0.0
 
 ## 4.28.1 - 2020-11-27
 ### Changed
