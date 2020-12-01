@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade `ruby_aem` to 3.10.1
+
 ## 5.0.0 - 2020-12-01
 ### Added
 - Add new puppet module [adobeinc/dispatcher](https://github.com/adobe/puppet-dispatcher) [shinesolutions/puppet-aem-curator#174]
