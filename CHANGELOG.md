@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Fixed aem base inspec test
+
 ## 5.0.1 - 2020-12-01
 ### Changed
 - Upgrade `ruby_aem` to 3.10.1
