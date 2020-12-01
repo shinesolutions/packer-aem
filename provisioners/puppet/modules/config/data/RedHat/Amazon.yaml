@@ -3,7 +3,7 @@
 
 config::package_manager_packages:
   - name: ruby_aem
-    version: 3.10.0
+    version: 3.10.1
     provider: puppet_gem
   - name: ruby_aem_aws
     version: 2.0.0
