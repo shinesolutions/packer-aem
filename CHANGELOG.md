@@ -6,13 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
-
 ### Changed
-- Replace Travis CI with GitHub Actions
 - Convert python scripts to be executed using Python 3
 - Use pip3 for Python packages
 - Add /bin/aws symlink to /usr/local/aws (boto3)
 - Refactor installation of Python packages to be part of O/S
+
+## 5.0.2 - 2020-12-01
+### Fixed
+- Fixed aem base inspec test
+
+## 5.0.1 - 2020-12-01
+### Changed
+- Upgrade `ruby_aem` to 3.10.1
+
+## 5.0.0 - 2020-12-01
+### Added
+- Add new puppet module [adobeinc/dispatcher](https://github.com/adobe/puppet-dispatcher) [shinesolutions/puppet-aem-curator#174]
+
+### Changed
+- Upgrade `aem_curator` to 3.18.1
+- Upgrade `aem_resources` to 7.2.1
+- Upgrade` ruby_aem_aws` version to 2.0.0
+
+## 4.28.1 - 2020-11-27
+### Changed
+- Replace Travis CI with GitHub Actions
+- Upgrade puppet-agent version to 5.5.22
 
 ## 4.28.0 - 2020-11-19
 ### Added
@@ -48,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - Removed alternative command execution from `collectd_jmx` manifest
+- Removed deprecated configuration parameters
 
 ### Fixed
 - Fixed RHEL7 Bash installation script
