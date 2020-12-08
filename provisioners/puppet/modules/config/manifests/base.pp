@@ -150,12 +150,12 @@ class config::base (
   }
   # allow awscli to control boto version if it's enabled, otherwise install
   package { 'boto':
-    ensure   => present,  
+    ensure   => present,
     provider => 'pip3',
   }
 
   package { 'boto3':
-    ensure   => '1.8.5',    
+    ensure   => '1.8.5',
     provider => 'pip3',
   }
 

@@ -112,9 +112,7 @@ end
 #
 # end
 
-packages = [
-  @hiera.lookup('base::python_cheetah_package', 'python-cheetah', @scope)
-]
+packages = []
 
 packages.each do |pkg|
   describe package(pkg) do

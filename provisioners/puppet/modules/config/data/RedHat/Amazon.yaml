@@ -14,9 +14,6 @@ config::package_manager_packages:
   - name: inspec
     version: 1.51.6
     provider: puppet_gem
-  - name: python27
-  - name: python27-pip
-  - name: python27-cheetah
   - name: python3
 
 config::base::os_package_manager_packages:
