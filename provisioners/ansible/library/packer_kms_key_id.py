@@ -20,7 +20,7 @@ This will update the Key 'kms_key_id' in the packer template
 
 """
 
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import glob
 from ansible.module_utils.basic import AnsibleModule

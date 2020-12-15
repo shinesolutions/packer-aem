@@ -6,7 +6,7 @@ injecting additional tags. Passing vars one by one isn't an option because we
 wouldn't know in advance how many additional vars need to be declared.
 """
 
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import glob
 from ansible.module_utils.basic import AnsibleModule

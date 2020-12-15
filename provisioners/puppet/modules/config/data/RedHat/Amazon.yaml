@@ -14,15 +14,12 @@ config::package_manager_packages:
   - name: inspec
     version: 1.51.6
     provider: puppet_gem
+  - name: python3
 
 config::base::os_package_manager_packages:
   - bind-utils
   - unzip
   - jq
-
-config::base::python_package: python27
-config::base::python_pip_package: python27-pip
-config::base::python_cheetah_package: python27-cheetah
 
 config::tomcat::pkg_name: tomcat8
 config::tomcat::srv_name: tomcat8

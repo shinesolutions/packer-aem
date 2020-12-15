@@ -7,12 +7,6 @@
 # [*tmp_dir*]
 #   A temporary directory used for staging
 #
-# [*python_package*]
-# [*python_pip_package*]
-# [*python_cheetah_package*]
-# [*python_alt_package*]
-#   System package manager names for the Python, pip and cheetah packages and an alternaltive package.
-#
 # [*rhn_register*]
 #   Boolean that determines whether the instance should be registered with the RedHat Network.
 #
@@ -73,13 +67,9 @@
 class config::base (
   $tmp_dir,
   $os_package_manager_packages,
-  $python_package,
-  $python_pip_package,
-  $python_cheetah_package,
   $awslogs_service_name,
   $awslogs_proxy_path,
   $awslogs_path,
-  $python_alt_package,
   $base_dir                         = '/opt/shinesolutions',
   $virtualenv_dir                   = '/home/.virtualenvs',
   $rhn_register                     = false,
@@ -133,7 +123,7 @@ class config::base (
     }
   }
 
-  file_line { 'sudo_rule_keep_proxy_vairables':
+  file_line { 'sudo_rule_keep_proxy_variables':
     path => '/etc/sudoers',
     line => 'Defaults    env_keep += "ftp_proxy http_proxy https_proxy no_proxy"',
   }
@@ -142,30 +132,31 @@ class config::base (
     ensure => installed,
   }
 
-  package { [ $python_package, $python_pip_package, $python_cheetah_package, $python_alt_package, ]:
-    ensure => latest,
-  }
-
   package { [ 'requests', 'retrying', 'sh' ]:
     ensure   => latest,
-    provider => 'pip',
+    provider => 'pip3',
   }
 
   if $install_aws_cli {
     package { 'awscli':
       ensure   => '1.16.10',
-      provider => 'pip',
+      provider => 'pip3',
+    } -> file { '/bin/aws':
+      ensure => link,
+      owner  => 'root',
+      group  => 'root',
+      target => '/usr/local/bin/aws',
     }
   }
   # allow awscli to control boto version if it's enabled, otherwise install
   package { 'boto':
     ensure   => present,
-    provider => 'pip',
+    provider => 'pip3',
   }
 
   package { 'boto3':
     ensure   => '1.8.5',
-    provider => 'pip',
+    provider => 'pip3',
   }
 
   if $install_virtualenvs {

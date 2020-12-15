@@ -3,7 +3,7 @@ This module generates a YAML AEM AWS Stack Builder config file which contains th
 The AMI IDs are filtered based on AEM Profile and OS Type.
 The YAML file is designed to be dropped directly in AEM AWS Stack Builder configuration path.
 """
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import sys
 import boto3

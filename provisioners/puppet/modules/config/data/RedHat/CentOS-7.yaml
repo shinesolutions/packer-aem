@@ -17,10 +17,9 @@ config::package_manager_packages:
   - name: inspec
     version: 1.51.6
     provider: puppet_gem
+  - name: python3
 
 config::base::os_package_manager_packages:
   - bind-utils
   - unzip
   - jq
-
-config::base::python_pip_package: python-pip

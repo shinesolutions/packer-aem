@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Changed
+- Lock down pylint to 2.6.0
+- Use Python3 virtualenv for GitHub actions
+- Use pip3 for python package management
+- Convert python scripts to be executed using Python 3
+- Use pip3 for Python packages
+- Add /bin/aws symlink to /usr/local/aws (boto3)
+- Refactor installation of Python packages to be part of O/S
 
 ## 5.0.2 - 2020-12-01
 ### Fixed

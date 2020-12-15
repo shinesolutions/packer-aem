@@ -54,7 +54,7 @@ deps:
 	gem install bundler --version=1.17.3
 	bundle install --binstubs -j4
 	bundle exec r10k puppetfile install --verbose --moduledir modules
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 
 # resolve AEM OpenCloud's Puppet module dependencies from local directories
 deps-local:
