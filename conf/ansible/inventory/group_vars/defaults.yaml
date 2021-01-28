@@ -39,6 +39,7 @@ aws:
   install_cloudwatchlogs_aem: true
   install_cloudwatchlogs_httpd: true
   install_cloudwatchlogs_java: true
+  install_rng_tools: true
   install_cloudwatch_metric_agent: false
   root_volume_size: 30
   data_volume_size: 75

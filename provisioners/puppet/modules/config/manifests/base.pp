@@ -81,6 +81,7 @@ class config::base (
   $install_cloudwatchlogs_httpd     = true,
   $install_cloudwatchlogs_java      = true,
   $install_collectd                 = true,
+  $install_rng_tools                = true,
   $install_amazon_ssm_agent         = true,
   $install_cloudwatch_metric_agent  = true,
   $metric_root_disk_path            = '',
@@ -158,13 +159,20 @@ class config::base (
     ensure   => '1.8.5',
     provider => 'pip3',
   }
-
   if $install_virtualenvs {
     config::python_virtualenv { 'Config base python virtualenvs installation':
       virtualenv_dir => $virtualenv_dir,
     }
   }
-
+  if $install_rng_tools {
+      package{'rng-tools':
+        ensure   => present,
+        provider => 'yum',
+      } -> service{'rngd':
+        ensure => running,
+        enable => true,
+      }
+    }
   if $install_cloudwatchlogs {
     class { '::cloudwatchlogs': }
     Cloudwatchlogs::Log {
