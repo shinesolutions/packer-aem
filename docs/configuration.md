@@ -64,7 +64,7 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 | aws.install_cloudwatchlogs_httpd | Set to `true` when CloudWatch logs agent should be configured to stream AEM Dispatcher component logs to Cloudwatch | Optional | `true` |
 | aws.install_cloudwatchlogs_java | Set to `true` when CloudWatch logs agent should be configured to stream AOC Java component logs to Cloudwatch | Optional | `true` |
 | aws.install_cloudwatch_metric_agent | Set to `true` when [CloudWatch metric agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html) must be installed. If this is enabled, you must set your root device name to `/dev/xvda2` | Optional | `false` |
-| aws.install_rng_tools | Set to `true` when rngtools should be installed to optimise entropy size (required for M5 instances) | Optional | `true` |
+| aws.install_rng_tools | Set to `true` when rngtools should be installed to optimise entropy size (this is required [when NVMe is used, e.g. on M5 instances](https://aws.amazon.com/blogs/aws/ec2-instance-update-m5-instances-with-local-nvme-storage-m5d/) | Optional | `true` |
 | aws.root_volume_size | The size of root volume in Gb, this is where the operating system and AEM installation reside | Optional | `20` |
 | aws.data_volume_size | The size of data volume in Gb, this is where AEM repository resides | Optional | `75` |
 | aws.tags | An array of `Key` and `Value` pairs for tagging AWS resources (e.g. EC2 instance, AMI, EBS volume) created by Packer AEM following your organisation's tagging standard | Optional | None |
