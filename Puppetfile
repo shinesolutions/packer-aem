@@ -30,6 +30,5 @@ mod 'adobeinc/dispatcher', '0.2.0'
 mod 'puppetlabs-inifile', '2.2.0'
 
 # puppet-python dependencies, TODO: resolve sub-dependencies without declaring deps in packer-aem
-mod 'tracywebtech-pip', '1.3.4'
 mod 'puppet-python', '4.0.0'
 mod 'stahnma-epel', '1.3.1'

@@ -2,17 +2,13 @@ define config::python_virtualenv (
   $virtualenv_dir,
 ) {
 
-  # allow the system have two python virtual environments
-  include pip
-  pip::install { 'virtualenv':
-    ensure  => present,
-    version => '16.7.9',
-  }
+  # install virtualenv package in default python
 
   class { '::python':
-    version => 'system',
-    ensure  => 'present',
-    dev     => 'present',
+    version    => 'system',
+    ensure     => 'present',
+    dev        => 'present',
+    virtualenv => 'present',
   }
 
   file { $virtualenv_dir:
