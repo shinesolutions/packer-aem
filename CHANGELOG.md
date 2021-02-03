@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use pip3 for Python packages
 - Add /bin/aws symlink to /usr/local/aws (boto3)
 - Refactor installation of Python packages to be part of O/S
+- Use class to install virtualenv package rather than puppet module `tracywebtech-pip`
+
+### Removed
+- Remove puppet module `tracywebtech-pip`
 
 ## 5.0.2 - 2020-12-01
 ### Fixed
