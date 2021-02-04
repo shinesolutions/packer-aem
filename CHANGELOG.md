@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add /bin/aws symlink to /usr/local/aws (boto3)
 - Refactor installation of Python packages to be part of O/S
 - Use class to install virtualenv package rather than puppet module `tracywebtech-pip`
+- Set default Ansible Python interpreter to /usr/bin/python3
 
 ### Removed
 - Remove puppet module `tracywebtech-pip`
