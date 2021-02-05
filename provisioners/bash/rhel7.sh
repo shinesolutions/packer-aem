@@ -25,9 +25,9 @@ rpm -ivh --force "https://dl.fedoraproject.org/pub/epel/epel-release-latest-${OS
 
 if [[ "$(/opt/puppetlabs/puppet/bin/puppet --version)" == "${PUPPET_AGENT_VERSION}" ]]
 then
-    echo "puppet installation skipped - already installed"
+    echo "Puppet is already installed. Skipping Puppet installation..."
 else
-    echo "installing puppet"
+    echo "Installing puppet..."
     yum -y install "https://yum.puppetlabs.com/puppet${PUPPET_MAJOR_VERSION}/${OS_TYPE}/${OS_VERSION}/${ARCH_TYPE}/puppet-agent-${PUPPET_AGENT_VERSION}-1.${OS_TYPE}${OS_VERSION}.${ARCH_TYPE}.rpm"
 fi
 yum-config-manager --enable rhui-REGION-rhel-server-optional
