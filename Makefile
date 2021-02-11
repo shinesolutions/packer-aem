@@ -35,7 +35,7 @@ release:
 	rtk release
 
 publish:
-	gh release upload $(packer_aem_version) stage/packer-infra-catalog-$(packer_aem_version).tar.gz
+	gh release upload $(packer_aem_version) stage/packer-aem-$(packer_aem_version).tar.gz
 
 ################################################################################
 # Dependencies resolution targets.
