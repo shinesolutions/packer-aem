@@ -35,12 +35,7 @@ release:
 	rtk release
 
 publish:
-	putasset \
-	  --owner shinesolutions \
-	  --repo packer-aem \
-		--tag $(packer_aem_version) \
-		--file stage/packer-aem-$(packer_aem_version).tar.gz \
-		--show-url
+	gh release upload $(packer_aem_version) stage/packer-infra-catalog-$(packer_aem_version).tar.gz
 
 ################################################################################
 # Dependencies resolution targets.
