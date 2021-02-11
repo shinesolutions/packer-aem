@@ -3,6 +3,7 @@ bin/
 logs/
 modules/
 stage/
+zzz-*.*
 # End of AOC gitignore
 
 # Created by https://www.toptal.com/developers/gitignore/api/ansible,python,ruby,vscode,macos,puppet
