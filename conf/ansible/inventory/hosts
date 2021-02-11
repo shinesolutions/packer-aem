@@ -1,2 +1,2 @@
 [defaults]
-127.0.0.1 ansible_python_interpreter=python
+127.0.0.1 ansible_python_interpreter=python3
