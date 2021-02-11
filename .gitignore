@@ -1,4 +1,5 @@
 # Start of AOC gitignore
+bin/
 logs/
 modules/
 stage/
