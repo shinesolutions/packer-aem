@@ -1,5 +1,6 @@
 # Start of AOC gitignore
 logs/
+modules/
 stage/
 # End of AOC gitignore
 
