@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Changed
 - Update Ansible to 3.0.0
+- Update awscli to 1.19.8
+- update boto3 to 1.17.8
 
 ## 5.1.0 - 2021-02-11
 ### Added

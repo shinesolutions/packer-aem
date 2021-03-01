@@ -1,4 +1,4 @@
 ansible==3.0.0
-awscli==1.16.304
-boto3==1.10.41
+awscli==1.19.8
+boto3==1.17.8
 pylint==2.6.0
