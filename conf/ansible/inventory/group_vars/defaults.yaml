@@ -80,7 +80,7 @@ docker:
   source: overwrite-me
 
 aem:
-  profile: aem65_sp1
+  profile: aem65_sp8
   ssl_method: jetty
   keystore_password_parameter: overwrite-me
   truststore_password_parameter: overwrite-me
