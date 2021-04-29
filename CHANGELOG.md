@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade `aem_curator` to 3.19.0
+
 ## 5.2.1 - 2021-03-12
 ### Changed
 - Update Ansible to 3.1.0
