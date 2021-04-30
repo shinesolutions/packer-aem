@@ -1,5 +1,5 @@
 # packer_aem_version: version of packer-aem to be packaged
-packer_aem_version ?= 5.2.2-pre.0
+packer_aem_version ?= 5.3.0
 # version: version of machine images to be created
 version ?= 1.0.0
 # custom image provisioner version for testing
