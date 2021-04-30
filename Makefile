@@ -35,6 +35,7 @@ release:
 	rtk release
 
 publish:
+	gh release create $(packer_aem_version) --title $(packer_aem_version) --notes "" || echo "Release $(packer_aem_version) has been created on GitHub"
 	gh release upload $(packer_aem_version) stage/packer-aem-$(packer_aem_version).tar.gz
 
 ################################################################################
