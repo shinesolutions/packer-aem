@@ -1,5 +1,5 @@
 [MESSAGES CONTROL]
-disable=C0301, W1306
+disable=C0301, W1306, R0914
 
 [TYPECHECK]
 ignored-modules=ansible.module_utils
