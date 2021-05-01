@@ -13,6 +13,7 @@
       stack_builder_ami_ids:
         aem_profile: "{{ aem.profile }}"
         os_type: "{{ os_type }}"
+        jdk_type: "jdk{{ java.version }}"
         version: "{{ lookup('env','version') }}"
-        out_file: "../../../stage/stack-builder-configs/{{ aem.profile }}-{{ os_type }}-stack-builder-ami-ids.yaml"
+        out_file: "../../../stage/stack-builder-configs/{{ aem.profile }}-{{ os_type }}-jdk{{ java.version }}-stack-builder-ami-ids.yaml"
         region: "{{ aws.region }}"

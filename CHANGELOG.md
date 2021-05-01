@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add jdk type support to ami-ids-examples Makefile target
+
 ## 5.3.0 - 2021-04-30
 ### Changed
 - Upgrade `aem_curator` to 3.19.0
