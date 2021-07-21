@@ -230,7 +230,7 @@ define ami_ids_examples
 	make ami-ids config_path=../aem-helloworld-config/packer-aem/$(1)/
 endef
 
-# convenient target for creating self-signed certificate using OpenSSL
+# Creates self-signed certificate
 create-cert: stage
 	openssl req \
 	    -new \
@@ -242,4 +242,12 @@ create-cert: stage
 	    -keyout stage/certs/aem.key \
 	    -out stage/certs/aem.cert
 
-.PHONY: ci clean stage package publish deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher docker-author-publish-dispatcher test-integration test-integration-local ami-ids ami-ids-examples create-cert
+# Creates self-signed certificate (AEM 6.5 / JDK11)
+create-cert-aem65jdk11: stage
+	openssl genrsa -aes256 -out stage/certs/localhostprivate.key 4096
+	openssl rsa -in stage/certs/localhostprivate.key -out stage/certs/localhostprivate.key
+	openssl req -sha256 -new -key stage/certs/localhostprivate.key -out stage/certs/localhost.csr -subj '/CN=localhost'
+	openssl x509 -req -days 365 -in stage/certs/localhost.csr -signkey stage/certs/localhostprivate.key -out stage/certs/localhost.crt
+	openssl pkcs8 -topk8 -inform PEM -outform DER -in stage/certs/localhostprivate.key -out stage/certs/localhostprivate.der -nocrypt
+
+.PHONY: ci clean stage package publish deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher docker-author-publish-dispatcher test-integration test-integration-local ami-ids ami-ids-examples create-cert create-cert-aem65jdk11
