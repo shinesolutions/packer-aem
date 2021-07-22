@@ -243,6 +243,7 @@ create-cert: stage
 	    -out stage/certs/aem.cert
 
 # Creates self-signed certificate (AEM 6.5 / JDK11)
+# Please store any passphrases in secrets manager
 create-cert-aem65jdk11: stage
 	openssl genrsa -aes256 -out stage/certs/localhostprivate.key 4096
 	openssl rsa -in stage/certs/localhostprivate.key -out stage/certs/localhostprivate.key
