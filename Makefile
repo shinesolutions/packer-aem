@@ -31,8 +31,16 @@ package: stage
 	    -czf \
 	    stage/packer-aem-$(packer_aem_version).tar.gz .
 
-release:
-	rtk release
+release-major:
+	rtk release --release-increment-type major
+
+release-minor:
+	rtk release --release-increment-type minor
+
+release-patch:
+	rtk release --release-increment-type patch
+
+release: release-minor
 
 publish:
 	gh release create $(packer_aem_version) --title $(packer_aem_version) --notes "" || echo "Release $(packer_aem_version) has been created on GitHub"
@@ -250,4 +258,4 @@ create-cert-aem65jdk11: stage
 	openssl x509 -req -days 365 -in stage/certs/localhost.csr -signkey stage/certs/localhostprivate.key -out stage/certs/localhost.crt
 	openssl pkcs8 -topk8 -inform PEM -outform DER -in stage/certs/localhostprivate.key -out stage/certs/localhostprivate.der -nocrypt
 
-.PHONY: ci clean stage package publish deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher docker-author-publish-dispatcher test-integration test-integration-local ami-ids ami-ids-examples create-cert create-cert-aem65jdk11
+.PHONY: ci clean stage package publish deps deps-local deps-test deps-test-local lint config aws-java aws-author aws-publish aws-dispatcher aws-author-publish-dispatcher docker-java docker-author docker-publish docker-dispatcher docker-author-publish-dispatcher test-integration test-integration-local ami-ids ami-ids-examples create-cert create-cert-aem65jdk11 release release-major release-minor release-patch

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - Add certificate creation for AEM 6.5/JDK11 Makefile target
+- Add release-major, release-minor, release-patch, and publish Makefile targets and GitHub Actions
 
 ### Changed
 - Change default certificate domain name to *.opencloud.cms
