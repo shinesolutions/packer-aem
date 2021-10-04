@@ -4,6 +4,8 @@ logs/
 modules/
 stage/
 zzz-*.*
+conf/packer/vars/*local.json
+conf/puppet/hieradata/local*.yaml
 # End of AOC gitignore
 
 # Created by https://www.toptal.com/developers/gitignore/api/ansible,python,ruby,vscode,macos,puppet
