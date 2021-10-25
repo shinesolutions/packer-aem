@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Change default certificate domain name to *.opencloud.cms
 - Upgrade default aem_profile to aem65_sp10
+- Upgrade `aem_curator` to 3.21.0
+- Upgrade `aem_resources` to 7.4.0
 
 ## 5.5.1 - 2021-06-18
 ### Changed
