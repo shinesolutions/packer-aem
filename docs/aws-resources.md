@@ -7,7 +7,8 @@ For creating AEM AWS AMIs, a number of AWS resources must be available as prereq
 
 Due to the fact that majority of user's organisation policies requiring SSL/TLS certificate to be managed by the users and not by any external automation process, the following resources must be provisioned by the users:
 
-- [Upload your certificate](https://docs.aws.amazon.com/acm/latest/userguide/setup.html) to [AWS Certificate Manager (ACM)](https://console.aws.amazon.com/acm/home). The resulting ARN needs to be set in the `aws.certificate_arn` [configuration](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md) property.
+- [Upload your certificate](https://docs.aws.amazon.com/acm/latest/userguide/setup.html) to [AWS Certificate Manager (ACM)](https://console.aws.amazon.com/acm/home). The resulting ARN needs to be set in the `aws.certificate_arn` [configuration](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md) property. 
+- Note also that the Certificate can also be retrieved from an S3 bucket. See the `aws.certificate_arn` [configuration](https://github.com/shinesolutions/packer-aem/blob/master/docs/configuration.md) property for further details.
 
 ### CloudFormation stack
 
