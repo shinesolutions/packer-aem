@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add certificate creation for AEM 6.5/JDK11 Makefile target
 
+### Changed
+- Change default certificate domain name to *.opencloud.cms
+
 ## 5.5.1 - 2021-06-18
 ### Changed
 - Upgrade `aem_curator` to 3.20.1

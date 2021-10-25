@@ -238,7 +238,7 @@ create-cert: stage
 			-nodes \
 	    -days 365 \
 	    -x509 \
-	    -subj "/C=AU/ST=Victoria/L=Melbourne/O=AEM OpenCloud/CN=*.aemopencloud.net" \
+	    -subj "/C=AU/ST=Victoria/L=Melbourne/O=AEM OpenCloud/CN=*.aemopencloud.cms" \
 	    -keyout stage/certs/aem.key \
 	    -out stage/certs/aem.cert
 
