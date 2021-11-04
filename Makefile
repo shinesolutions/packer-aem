@@ -217,20 +217,13 @@ ami-ids: stage
 # using the AEM Hello World Configuration examples
 # it is also possible to pass in version filter env var `version=ci-aws-master-* make ami-ids-examples`
 ami-ids-examples: stage
-	$(call ami_ids_examples,aws-rhel7-aem62-jdk8)
-	$(call ami_ids_examples,aws-rhel7-aem62-jdk11)
-	$(call ami_ids_examples,aws-rhel7-aem63-jdk8)
-	$(call ami_ids_examples,aws-rhel7-aem63-jdk11)
 	$(call ami_ids_examples,aws-rhel7-aem64-jdk8)
-	$(call ami_ids_examples,aws-rhel7-aem64-jdk11)
 	$(call ami_ids_examples,aws-rhel7-aem65-jdk8)
 	$(call ami_ids_examples,aws-rhel7-aem65-jdk11)
-	$(call ami_ids_examples,aws-amazon-linux2-aem62-jdk8)
-	$(call ami_ids_examples,aws-amazon-linux2-aem62-jdk11)
-	$(call ami_ids_examples,aws-amazon-linux2-aem63-jdk8)
-	$(call ami_ids_examples,aws-amazon-linux2-aem63-jdk11)
+	$(call ami_ids_examples,aws-rhel8-aem64-jdk8)
+	$(call ami_ids_examples,aws-rhel8-aem65-jdk8)
+	$(call ami_ids_examples,aws-rhel8-aem65-jdk11)
 	$(call ami_ids_examples,aws-amazon-linux2-aem64-jdk8)
-	$(call ami_ids_examples,aws-amazon-linux2-aem64-jdk11)
 	$(call ami_ids_examples,aws-amazon-linux2-aem65-jdk8)
 	$(call ami_ids_examples,aws-amazon-linux2-aem65-jdk11)
 
