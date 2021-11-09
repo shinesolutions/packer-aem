@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Update ami-ids-examples to only include aem64jdk8, aem65jdk8, aem65jdk11
+
 ## 5.6.0 - 2021-10-26
 ### Added
 - Add certificate creation for AEM 6.5/JDK11 Makefile target
