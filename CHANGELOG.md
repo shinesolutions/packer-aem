@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Update ami-ids-examples to only include aem64jdk8, aem65jdk8, aem65jdk11
+- Update Ansible to 4.8.0
+- Update awscli to 1.22.1
+- Update boto3 to 1.20.0
 
 ## 5.6.0 - 2021-10-26
 ### Added
