@@ -103,8 +103,6 @@ def main():
 
     ec2 = boto3.resource('ec2', region_name=region)
 
-    print(jdk_version)
-
     author_dispatcher_criteria = {'application_role': 'dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
     publish_dispatcher_criteria = {'application_role': 'dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
     publish_criteria = {'application_role': 'publish AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
