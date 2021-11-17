@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade ruby_aem to 3.13.1
+
 ## 5.7.0 - 2021-11-09
 ### Changed
 - Update ami-ids-examples to only include aem64jdk8, aem65jdk8, aem65jdk11
