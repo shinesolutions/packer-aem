@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Upgrade ruby_aem to 3.13.1
+- Upgrade ruby_aem_aws to 2.0.1
 
 ## 5.7.0 - 2021-11-09
 ### Changed
