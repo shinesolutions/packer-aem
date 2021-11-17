@@ -20,7 +20,7 @@ def get_most_recent_ami_id(ec2, application_name, criteria):
     application_profile = criteria['application_profile']
     os_type = criteria['os_type']
     version = criteria['version']
-    jdk_type = criteria['jdk_type']
+    jdk_version = criteria['jdk_version']
 
     filters = [
         {
@@ -37,7 +37,7 @@ def get_most_recent_ami_id(ec2, application_name, criteria):
         },
         {
             'Name': 'tag:jdk_version',
-            'Values': [jdk_type]
+            'Values': [jdk_version]
         },
         {
             'Name': 'tag:Version',
@@ -96,19 +96,22 @@ def main():
     aem_profile = module.params['aem_profile']
     os_type = module.params['os_type']
     jdk_type = module.params['jdk_type']
+    jdk_version = jdk_type[3:]
     version = '*' if not module.params['version'] else module.params['version']
     out_file = module.params['out_file']
     region = module.params['region']
 
     ec2 = boto3.resource('ec2', region_name=region)
 
-    author_dispatcher_criteria = {'application_role': 'dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
-    publish_dispatcher_criteria = {'application_role': 'dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
-    publish_criteria = {'application_role': 'publish AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
-    author_criteria = {'application_role': 'author AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
-    author_publish_disp_criteria = {'application_role': 'author-publish-dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
-    orchestrator_criteria = {'application_role': 'java AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
-    chaos_monkey_criteria = {'application_role': 'java AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version}
+    print(jdk_version)
+
+    author_dispatcher_criteria = {'application_role': 'dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
+    publish_dispatcher_criteria = {'application_role': 'dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
+    publish_criteria = {'application_role': 'publish AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
+    author_criteria = {'application_role': 'author AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
+    author_publish_disp_criteria = {'application_role': 'author-publish-dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
+    orchestrator_criteria = {'application_role': 'java AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
+    chaos_monkey_criteria = {'application_role': 'java AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
 
     ami_ids = {
         'author_dispatcher': get_most_recent_ami_id(ec2, 'Dispatcher AMI', author_dispatcher_criteria),
