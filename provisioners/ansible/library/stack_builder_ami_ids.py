@@ -20,6 +20,7 @@ def get_most_recent_ami_id(ec2, application_name, criteria):
     application_profile = criteria['application_profile']
     os_type = criteria['os_type']
     version = criteria['version']
+    jdk_type = criteria['jdk_type']
 
     filters = [
         {
@@ -33,6 +34,10 @@ def get_most_recent_ami_id(ec2, application_name, criteria):
         {
             'Name': 'tag:OS Type',
             'Values': [os_type]
+        },
+        {
+            'Name': 'tag:jdk_version',
+            'Values': [jdk_type]
         },
         {
             'Name': 'tag:Version',
