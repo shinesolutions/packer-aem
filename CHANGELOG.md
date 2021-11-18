@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add new jdk_version parameter to Stack Builder AMI IDs generation
+
 ## 5.8.0 - 2021-11-17
 ### Changed
 - Upgrade ruby_aem to 3.13.1
