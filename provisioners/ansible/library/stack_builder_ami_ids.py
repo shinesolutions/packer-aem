@@ -108,8 +108,9 @@ def main():
     publish_criteria = {'application_role': 'publish AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
     author_criteria = {'application_role': 'author AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
     author_publish_disp_criteria = {'application_role': 'author-publish-dispatcher AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
-    orchestrator_criteria = {'application_role': 'java AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
-    chaos_monkey_criteria = {'application_role': 'java AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': jdk_version}
+    # TODO chaos monkey and orchestrator only support JDK8 for now.
+    orchestrator_criteria = {'application_role': 'java AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': '8'}
+    chaos_monkey_criteria = {'application_role': 'java AMI', 'application_profile': aem_profile, 'os_type': os_type, 'version': version, 'jdk_version': '8'}
 
     ami_ids = {
         'author_dispatcher': get_most_recent_ami_id(ec2, 'Dispatcher AMI', author_dispatcher_criteria),
