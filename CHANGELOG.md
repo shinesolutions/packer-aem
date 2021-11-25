@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Switch puppet-cloudwatchlogs to shinesolutions fork due to awslogsd compatibility issue with kemra102's version
+
 ## 5.9.0 - 2021-11-19
 ### Added
 - Add new jdk_version parameter to Stack Builder AMI IDs generation
