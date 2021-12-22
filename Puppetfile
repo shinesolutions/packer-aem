@@ -6,7 +6,7 @@ mod 'kemra102/cloudwatchlogs', :git => 'https://github.com/shinesolutions/puppet
 mod 'pcfens/rhn_register', '1.5.0'
 mod 'puppet/yum', '2.1.0'
 mod 'puppet-collectd', '5.3.0'
-mod 'shinesolutions/aem_curator', '3.22.0'
+mod 'shinesolutions/aem_curator', '3.24.0'
 mod 'shinesolutions/amazon_ssm_agent', '0.9.4'
 mod 'saz/limits', '2.5.0'
 mod 'puppetlabs/concat', '4.1.0'

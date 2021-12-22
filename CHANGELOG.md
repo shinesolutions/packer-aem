@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade `aem_curator` to 3.24.0
+
 ## 5.10.0 - 2021-11-26
 ### Changed
 - Switch puppet-cloudwatchlogs to shinesolutions fork due to awslogsd compatibility issue with kemra102's version
