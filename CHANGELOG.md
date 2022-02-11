@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Lockdown InSpec dependency `faraday` to version `v1.9.3` [#257]
+
 ## 5.11.0 - 2021-12-22
 ### Changed
 - Upgrade `aem_curator` to 3.24.0
