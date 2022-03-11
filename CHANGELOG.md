@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Changed
 - Upgrade Puppet to 7.9.0
+- Upgrade `aem_curator` to 3.27.0
 
 ## 5.12.0 - 2022-02-11
 ### Added
