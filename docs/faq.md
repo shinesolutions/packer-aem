@@ -22,3 +22,6 @@ Frequently Asked Questions
 
 * __Q:__ Why do I get an unsupported operation related to encrypted snapshots sharing error `Error modify AMI attributes: UnsupportedOperation: The requested operation is not supported. Images associated with encrypted Snapshots can not be shared.`?
   __A:__ This error can happen when you use a source AMI with an encrypted volume and then you're trying to share it with another AWS account, and this is not supported by AWS. To fix this, you need to remove the user configuration property `aws.ami_users` so that Packer AEM wouldn't try to modify the generated AMI by sharing it with another AWS account.
+
+* __Q:__ What is the cause of `Error: /Stage[main]/Aem_curator::Config_aem_ssl[author: Configure AEM]/Java_ks[cqse:/etc/ssl/aem-author/author.ks]/ensure: change from 'absent' to 'latest' failed: Could not set 'latest' on ensure: key values mismatch file: /tmp/packer-puppet-masterless/module-0/aem_curator/manifests/config_aem_ssl.pp?` <br/>
+  __A:__ This error occurs when the certificate and key of the certificate supplied in the config does not match.
