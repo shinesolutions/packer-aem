@@ -85,5 +85,3 @@ Check out the [example configuration files](https://github.com/shinesolutions/ae
 |------|-------------|-----------|---------|
 | java.base_url | Base URL (just the path, not the file name) where JDK RPM file would be located. URL can be: `s3://...`, `http://...`, `https://...`, or `file://...`. **The download URL `download.oracle.com` is not supported anymore.** | Mandatory | |
 | java.filename | JDK RPM file name, this file must be located at `aem.base_url` | Optional | jdk-8u221-linux-x64.rpm |
-| java.version | JDK version number | Optional | 8 |
-| java.version_update | JDK update version number | Optional | 221 |

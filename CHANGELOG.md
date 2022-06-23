@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Changed
-- Upgrade `aem_curator` to 3.28.0 
+- Upgrade `aem_curator` to 3.28.0
 - Fixed java installation inspec test
+- Updated configuration doc for java
+### Removed
+- Removed java variables from the ansible 
 
 ## 5.13.0 - 2022-03-11
 ### Changed
