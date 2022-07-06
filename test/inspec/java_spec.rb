@@ -4,9 +4,19 @@ require './spec_helper'
 
 init_conf
 
-version = @hiera.lookup('aem_curator::install_java::jdk_version', nil, @scope)
-version_update = @hiera.lookup('aem_curator::install_java::jdk_version_update', nil, @scope)
-java_version = "1.#{version}.0_#{version_update}"
+jdk_filename = @hiera.lookup('aem_curator::install_java::jdk_filename', nil, @scope).split('-')
+
+if jdk_filename[1].match(/^8\w*/)
+  java = jdk_filename[1].split('u')
+  java_version = "1.#{java[0]}.0_#{java[1]}"
+
+elsif jdk_filename[1].match(/^11\S*/)
+  java = jdk_filename[1].split('_')
+  java_version = java[0]
+
+else
+  puts 'Specify the correct java filename.'
+end
 
 # TO-DO: the describe package needs to be replaced with a package variable
 # to support multiple OS

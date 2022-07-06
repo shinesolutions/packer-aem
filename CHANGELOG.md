@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Changed
+- Upgrade `aem_curator` to 3.28.0
+- Fixed java installation inspec test
+- Updated configuration doc for java
+### Removed
+- Remove java.version and java.version_update from configuration.
 
 ## 5.13.0 - 2022-03-11
 ### Changed
