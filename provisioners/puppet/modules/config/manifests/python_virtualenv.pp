@@ -5,15 +5,15 @@ define config::python_virtualenv (
   # install virtualenv package in default python
 
   class { '::python':
-    version    => 'system',
-    ensure     => 'present',
-    dev        => 'present',
+    version => 'system',
+    ensure  => 'present',
+    dev     => 'present',
   }
 
   file { $virtualenv_dir:
     ensure => 'directory',
     owner  => 'root',
-    mode   => '0755',
+    mode   => '0755'
   }
 
   python::pyvenv { "${virtualenv_dir}/py3":

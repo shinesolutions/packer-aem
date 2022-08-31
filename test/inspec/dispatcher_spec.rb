@@ -88,6 +88,6 @@ end
 
 # TODO: check disapatcher installation.
 # dispatcher module installation differs depending on os and apache version.
-if os[:family] == 'redhat'
-
-end
+# if os[:family] == 'redhat'
+#
+# end
