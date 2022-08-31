@@ -244,11 +244,31 @@ class config::base (
         $collectd_jmx_types_path,
       ],
     }
-    file { $collectd_jmx_types_path:
-      ensure  => present,
-      content => file('config/collectd_jmx_types.db'),
-      require => Package[$::collectd::install::package_name],
+    collectd::typesdb { $collectd_jmx_types_path:
+      mode => '0644'
     }
+    collectd::type { 'jmx_memory':
+      target  => $collectd_jmx_types_path,
+      ds_type => 'GAUGE',
+      min     => 0,
+      max     => 'U',
+      ds_name => 'value',
+    }
+    collectd::type { 'file_handles':
+      target  => $collectd_jmx_types_path,
+      ds_type => 'GAUGE',
+      min     => 0,
+      max     => 'U',
+      ds_name => 'value',
+    }
+    collectd::type { 'time_ms':
+      target  => $collectd_jmx_types_path,
+      ds_type => 'GAUGE',
+      min     => 0,
+      max     => 'U',
+      ds_name => 'value',
+    }
+
     collectd::plugin { $collectd_plugins:
       ensure => present,
     }
