@@ -1,5 +1,5 @@
 define config::python_virtualenv (
-  $virtualenv_dir,
+  $virtualenv_dir = '/home/.virtualenvs',
 ) {
 
   # install virtualenv package in default python
@@ -8,7 +8,6 @@ define config::python_virtualenv (
     version    => 'system',
     ensure     => 'present',
     dev        => 'present',
-    virtualenv => 'present',
   }
 
   file { $virtualenv_dir:
@@ -17,14 +16,12 @@ define config::python_virtualenv (
     mode   => '0755',
   }
 
-  python::virtualenv { "${virtualenv_dir}/py3":
+  python::pyvenv { "${virtualenv_dir}/py3":
     ensure     => present,
-    version    => '3',
+    version    => 'system',
     owner      => 'root',
     group      => 'root',
-    distribute => false,
-    systempkgs => true,
-    timeout    => 0,
+    systempkgs => true
   }
 
 }

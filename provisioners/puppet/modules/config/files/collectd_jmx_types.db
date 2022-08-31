@@ -1,3 +1,0 @@
-jmx_memory      value:GAUGE:0:U
-file_handles    value:GAUGE:0:U
-time_ms         value:GAUGE:0:U

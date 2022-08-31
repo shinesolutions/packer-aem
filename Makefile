@@ -55,7 +55,7 @@ publish:
 
 # resolve dependencies from remote artifact registries
 deps:
-	gem install bundler --version=1.17.3
+	gem install bundler --version=2.3.21
 	bundle install --binstubs -j4
 	bundle exec r10k puppetfile install --verbose --moduledir modules
 	pip3 install -r requirements.txt
