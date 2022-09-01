@@ -7,10 +7,10 @@ init_conf
 jdk_filename = @hiera.lookup('aem_curator::install_java::jdk_filename', nil, @scope).split('-')
 
 case jdk_filename[1]
-when match(/^8\w*/)
+when /^8\w*/
   java = jdk_filename[1].split('u')
   java_version = "1.#{java[0]}.0_#{java[1]}"
-when match(/^11\S*/)
+when /^11\S*/
   java = jdk_filename[1].split('_')
   java_version = java[0]
 else
