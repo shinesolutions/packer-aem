@@ -51,7 +51,7 @@ aws:
     - Key: overwrite-me
       Value: overwrite-me
   certificate_arn: overwrite-me
-  certificate_key_arn: overwrite-me
+  certificate_key_arn: overwrite-me # Secrets Manager location only supported for JDK8
   aem_certs_base: overwrite-me
   aem_license: overwrite-me
   aem_license_base: overwrite-me
