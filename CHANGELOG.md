@@ -5,15 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 5.19.0 - 2022-09-14
 ### Added
 - Add new configuration parameter `library.aem_healthcheck_source` to define the source of the AEM Content Healthcheck
 
 ### Changed
-- Disabled installation of collectd-python for Amazon Linux 2 #268
+- Disabled installation of collectd-python for Amazon Linux 2 [#268]
 
 ### Fixed
-- Fixed AMI Baking for Amazon Linux 2 #268
+- Fixed AMI Baking for Amazon Linux 2 [#268]
 
 ## 5.18.1 - 2022-09-12
 ### Added
