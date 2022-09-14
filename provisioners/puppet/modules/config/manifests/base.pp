@@ -284,7 +284,7 @@ class config::base (
       modulepaths    => [
         "${collectd_cloudwatch_base_dir}/src",
       ],
-      logtraces   => true,
+      logtraces      => true,
     }
     collectd::plugin::python::module {'cloudwatch_writer':
       modulepath    => "${collectd_cloudwatch_base_dir}/src",
