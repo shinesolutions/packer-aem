@@ -272,8 +272,16 @@ class config::base (
     collectd::plugin { $collectd_plugins:
       ensure => present,
     }
+    # Force disabling the installation of collectd-python plugin for amazon-linux 2
+    if ($facts['os']['name'] == 'Amazon' and versioncmp($facts['os']['release']['major'],'2') >= 0) {
+      $manage_package_collectd_python = false
+    } else  {
+    # Falling back to the default of the puppet-module puppet-collectd which is true for amazon-linux 1 & RHEL8
+      $manage_package_collectd_python = undef
+    }
     class { '::collectd::plugin::python':
-      modulepaths => [
+      manage_package => $manage_package_collectd_python,
+      modulepaths    => [
         "${collectd_cloudwatch_base_dir}/src",
       ],
       logtraces   => true,
