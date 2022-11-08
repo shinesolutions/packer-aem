@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Switch puppet-aem to shinesolutions' fork on 75ba81ddb53963aa2d327be85aac8370024449ce
+
 ## 5.19.0 - 2022-09-14
 ### Added
 - Add new configuration parameter `library.aem_healthcheck_source` to define the source of the AEM Content Healthcheck
