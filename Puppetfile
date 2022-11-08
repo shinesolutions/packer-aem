@@ -26,7 +26,7 @@ mod 'puppetlabs/java_ks', '4.3.1'
 mod 'puppet-logrotate', '6.1.0'
 mod 'puppetlabs/selinux_core', '1.2.0'
 mod 'adobeinc/dispatcher', '1.0.0'
-mod 'bstopp/aem', , :git => 'https://github.com/shinesolutions/puppet-aem', :commit => '75ba81ddb53963aa2d327be85aac8370024449ce'
+mod 'bstopp/aem', :git => 'https://github.com/shinesolutions/puppet-aem', :commit => '75ba81ddb53963aa2d327be85aac8370024449ce'
 mod 'shinesolutions/aem_resources', '7.6.1'
 
 # puppet-amazon-ssm-agent dependency, TODO: resolve sub-dependencies without declaring deps in packer-aem
