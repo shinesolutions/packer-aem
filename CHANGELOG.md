@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Switch puppet-aem to shinesolutions' fork on 75ba81ddb53963aa2d327be85aac8370024449ce
+- Upgrade `aem_curator` to 3.30.0
 
 ## 5.19.0 - 2022-09-14
 ### Added

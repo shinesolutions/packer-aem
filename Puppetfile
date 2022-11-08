@@ -12,7 +12,7 @@ mod 'MiamiOH/tcpwrappers', '1.3.0'
 mod 'pcfens/rhn_register', '1.6.1'
 mod 'saz/limits', '3.1.0'
 mod 'thias/sysctl', '1.0.7'
-mod 'shinesolutions/aem_curator', '3.29.0'
+mod 'shinesolutions/aem_curator', '3.30.0'
 mod 'shinesolutions/amazon_ssm_agent', '1.1.0'
 
 # puppet-aem-curator dependencies, TODO: resolve sub-dependencies without declaring deps in packer-aem
