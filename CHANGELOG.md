@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade `shinesolutions/aem_curator` to 3.31.0
+- Upgrade `shinesolutions/aem_resources` to 7.8.0
+
 ## 5.20.0 - 2022-11-09
 ### Changed
 - Switch puppet-aem to shinesolutions' fork on 75ba81ddb53963aa2d327be85aac8370024449ce
