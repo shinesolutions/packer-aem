@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Fixed
+- Fix no-package error via upgrade ruby_aem to 3.16.1
 
 ## 5.21.1 - 2022-11-29
 ### Fixed
