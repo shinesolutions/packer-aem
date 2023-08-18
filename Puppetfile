@@ -2,7 +2,7 @@ forge 'https://forgeapi.puppetlabs.com'
 
 mod 'bashtoni/timezone', '1.0.0'
 mod 'puppet/selinux', '0.7.1'
-mod 'kemra102/cloudwatchlogs', :git => 'https://github.com/shinesolutions/puppet-cloudwatchlogs', :commit => '160e49ad254a62bc55727f9050e6979568707aa9'
+mod 'kemra102/cloudwatchlogs', :git => 'https://github.com/shinesolutions/puppet-cloudwatchlogs', :commit => '117de86f3bee398b07b68dfe2678b552de1693f0'
 mod 'pcfens/rhn_register', '1.5.0'
 mod 'puppet/yum', '2.1.0'
 mod 'puppet-collectd', '5.3.0'
