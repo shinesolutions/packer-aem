@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+### Fixed
+- Fixed S3 Download URl for python3 cfn-bootstrap
+### Changed
+- Updated puppet module kemra102/cloudwatchlogs
+
 ## 6.8.0 - 2023-07-26
 ### Changed
 - Upgrade puppet-aem-curator to 3.41.0 #RS-166
