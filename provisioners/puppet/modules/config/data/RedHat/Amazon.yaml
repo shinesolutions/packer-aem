@@ -21,7 +21,7 @@ config::package_manager_packages:
     version: 1.139.0
     provider: puppet_gem
   - name: python3
-  - name: 'https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-py3-latest.tar.gz'
+  - name: 'https://cloudformation-examples.s3.amazonaws.com/aws-cfn-bootstrap-py3-latest.tar.gz'
     provider: pip3
 
 config::base::os_package_manager_packages:
