@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade puppet-aem-curator to 3.42.0 #RS-193
+
 ## 6.8.1 - 2023-08-23
 ### Changed
 - Updated puppet module kemra102/cloudwatchlogs
