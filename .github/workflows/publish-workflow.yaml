@@ -20,4 +20,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps[0]:
       with:
-        ref: 6.8.2
+        ref: main
