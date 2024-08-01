@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade puppet-aem-curator to 3.43.0 #RS-194
+- Upgrade puppet-aem-resources to 7.11.0 #RS-194
+- Upgrade ruby_aem to 3.17.0 #RS-194
+- Upgrade puppet-python to 7.3.0
+
 ## 6.8.2 - 2024-06-28
 ### Changed
 - Upgrade puppet-aem-curator to 3.42.0 #RS-193
