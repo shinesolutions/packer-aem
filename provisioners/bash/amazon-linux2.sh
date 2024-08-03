@@ -9,6 +9,7 @@ PUPPET_AGENT_VERSION="${PUPPET_MAJOR_VERSION}.${PUPPET_MINOR_VERSION}.${PUPPET_P
 ARCH_TYPE=x86_64
 OS_TYPE=el
 OS_VERSION=7
+OS_MINOR_VERSION=14
 
 # Tomcat 8.x was moved to amazon-linux-extras https://aws.amazon.com/amazon-linux-2/faqs/#Amazon_Linux_Extras
 # need to enable the package in order to access it via yum from Puppet manifest
@@ -28,7 +29,7 @@ yum -y upgrade
 # yum -y install puppet-agent
 yum -y install "https://yum.puppetlabs.com/puppet${PUPPET_MAJOR_VERSION}/${OS_TYPE}/${OS_VERSION}/${ARCH_TYPE}/puppet-agent-${PUPPET_AGENT_VERSION}-1.${OS_TYPE}${OS_VERSION}.${ARCH_TYPE}.rpm"
 
-rpm -ivh --force "https://dl.fedoraproject.org/pub/epel/epel-release-latest-${OS_VERSION}.noarch.rpm"
+rpm -ivh --force "https://archives.fedoraproject.org/pub/archive/epel/${OS_VERSION}/x86_64/Packages/e/epel-release-${OS_VERSION}-${OS_MINOR_VERSION}.noarch.rpm"
 yum-config-manager --enable rhui-REGION-rhel-server-optional
 yum-config-manager --enable rhui-REGION-rhel-server-extras
 yum-config-manager --enable "rhel-${OS_VERSION}-server-rhui-optional-rpms"

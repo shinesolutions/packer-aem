@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Switch EPEL rpm download source to Fedora Project Archives #20
+
 ## 6.9.0 - 2024-08-01
 ### Changed
 - Upgrade puppet-aem-curator to 3.43.0 #RS-194
