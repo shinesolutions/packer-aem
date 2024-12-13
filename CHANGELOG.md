@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Changed
-- Upgrade puppet-aem-curator to 3.45.0
+- Upgrade puppet-aem-curator to 3.45.2
 - Upgrade shinesolutions/aem-platform-buildenv to 4.0.1
 - Upgrade ghcr.io/shinesolutions/the-works-buildenv to 2.0.1
 
