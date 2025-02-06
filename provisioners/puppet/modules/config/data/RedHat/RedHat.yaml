@@ -17,6 +17,9 @@ config::package_manager_packages:
   - name: faraday
     version: 1.9.3
     provider: puppet_gem
+  - name: mixlib-log
+    version: 3.3.1
+    provider: puppet_gem
   - name: inspec
     version: 1.51.6
     provider: puppet_gem
