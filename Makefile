@@ -1,5 +1,5 @@
 # packer_aem_version: version of packer-aem to be packaged
-packer_aem_version ?= 6.13.2-pre.0
+packer_aem_version ?= 6.13.2
 
 package_name ?= packer-aem-internal
 # version: version of machine images to be created
