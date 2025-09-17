@@ -72,6 +72,28 @@ if $::config::base::install_cloudwatchlogs {
   }
 }
 
+package { 'perl-Digest-SHA':
+  ensure => present,
+}
+class { '::cloudwatch':
+    enable_mem_util         => true,
+    enable_mem_used         => true,
+    enable_mem_avail        => true,
+    enable_disk_space_util  => true,
+    enable_disk_space_used  => true,
+    enable_disk_space_avail => true,
+    enable_swap_util        => false,
+    enable_swap_used        => false,
+    auto_scaling            => true,
+    cron_min                => '*',
+    disk_path               => [
+      $::config::base::metric_root_disk_path,
+      $::config::base::metric_data_disk_path
+    ],
+    zip_url                 => 'https://github.com/shinesolutions/aws-scripts-mon/releases/download/1.3.0/shinesolutions-aws-scripts-mon-1.3.0.zip',
+  }
+
+
 if $::config::base::install_collectd {
   config::collectd_jmx { '[publish] Setup collectd-generic-jmx plugin':
     require           => [
@@ -86,14 +108,5 @@ if $::config::base::install_collectd {
     # we are using the same location for the JMX
     jmx_keystore_path => dirname(hiera('aem_curator::install_publish::aem_keystore_path')),
     tmp_dir           => hiera('tmp_dir'),
-  }
-}
-
-if $::config::base::install_cloudwatch_metric_agent {
-  config::cloudwatch_metric_agent { 'Setup Cloudwatch Metric Agent for AEM Publish':
-    disk_path => [
-      $::config::base::metric_root_disk_path,
-      $::config::base::metric_data_disk_path
-    ]
   }
 }

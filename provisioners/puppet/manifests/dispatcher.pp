@@ -16,6 +16,27 @@ class { 'config::certs':
 
 include aem_curator::install_dispatcher
 
+package { 'perl-Digest-SHA':
+  ensure => present,
+}
+class { '::cloudwatch':
+    enable_mem_util         => true,
+    enable_mem_used         => true,
+    enable_mem_avail        => true,
+    enable_disk_space_util  => true,
+    enable_disk_space_used  => true,
+    enable_disk_space_avail => true,
+    enable_swap_util        => false,
+    enable_swap_used        => false,
+    auto_scaling            => true,
+    cron_min                => '*',
+    disk_path               => [
+      $::config::base::metric_root_disk_path,
+      $::config::base::metric_data_disk_path
+    ],
+    zip_url                 => 'https://github.com/shinesolutions/aws-scripts-mon/releases/download/1.3.0/shinesolutions-aws-scripts-mon-1.3.0.zip',
+  }
+
 if $::config::base::install_cloudwatchlogs {
 
   if $::config::base::install_cloudwatchlogs_httpd {
@@ -47,11 +68,3 @@ if $::config::base::install_cloudwatchlogs {
   }
 }
 
-if $::config::base::install_cloudwatch_metric_agent {
-  config::cloudwatch_metric_agent { 'Setup Cloudwatch Metric Agent for Dispatcher':
-  disk_path   => [
-    $::config::base::metric_root_disk_path,
-    $::config::base::metric_data_disk_path
-  ],
-  }
-}

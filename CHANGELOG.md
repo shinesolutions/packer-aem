@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add perl-Digest-SHA package installation
+
+### Changed
+- Enforce CloudWatch metric agent (aws-scripts-mon) installation
+
 ## 6.13.3 - 2025-06-04
 ### Fixed
 - Resolves broken dependency for excon by pinning to 1.2.5 #RS-200
