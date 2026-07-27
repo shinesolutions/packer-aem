@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Simplify GitHub Actions release workflows to not use custom action
+
 ## 8.0.5 - 2025-06-05
 ### Fixed
 - Resolves broken dependency for ffi by pinning to 1.17.2 #RS-200
