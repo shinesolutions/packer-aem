@@ -5,7 +5,7 @@ package_name ?= packer-aem-internal
 # version: version of machine images to be created
 version ?= 1.0.0
 # custom image provisioner version for testing
-aem_helloworld_custom_image_provisioner_version = 0.9.1
+aem_helloworld_custom_image_provisioner_version = 1.0.0
 
 VAR_FILES = $(sort $(wildcard conf/packer/vars/*.json))
 VAR_PARAMS = $(foreach var_file,$(VAR_FILES),-var-file $(var_file))

@@ -44,7 +44,7 @@ shared_examples "aem" do |role, port|
   end
 
   it { is_expected.to contain_aem__crx__package('aem-healthcheck') }
-  it { is_expected.to contain_archive('/tmp/shinesolutions/packer-aem/aem-healthcheck-content-1.3.3.zip') }
+  it { is_expected.to contain_archive('/tmp/shinesolutions/packer-aem/aem-healthcheck-content-2.0.0.zip') }
 
   aem_packages.each do |pkg_name, pkg|
     it { is_expected.to contain_config__aem_install_package(pkg_name) }
